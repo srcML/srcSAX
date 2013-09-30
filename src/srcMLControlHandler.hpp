@@ -3,13 +3,17 @@
 
 class srcMLControlHandler {
 
+private :
+
+  xmlParserCtxtPtr ctxt;
+
 public :
 
   srcMLControlHandler() {
 
-  }
+    
 
-  
+  }
 
 };
 

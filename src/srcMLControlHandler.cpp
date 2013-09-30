@@ -1,40 +1,18 @@
-#ifndef INCLUDED_SRCMLCONTROLHANDLER_HPP
-#define INCLUDED_SRCMLCONTROLHANDLER_HPP
+#include <srcMLControlHandler.hpp>
 
 // create srcml parser with error reporting
-xmlParserCtxtPtr srcMLCreateURLParserCtxt(const char * infile) {
+static void srcMLCreateURLParserCtxt(const char * infile) {
 
-  xmlParserCtxtPtr ctxt = xmlCreateURLParserCtxt(infile, XML_PARSE_COMPACT | XML_PARSE_HUGE);
-  if (ctxt == NULL) {
+  ctxt = xmlCreateURLParserCtxt(infile, XML_PARSE_COMPACT | XML_PARSE_HUGE);
 
-    // report error                                                                                                    
-    xmlErrorPtr ep = xmlGetLastError();
-  }
-
-  return ctxt;
 }
 
 // process srcML document with error reporting
-static void srcMLParseDocument(xmlParserCtxtPtr ctxt) {
+static int srcMLParseDocument(xmlParserCtxtPtr ctxt) {
 
   // process the document                                                                                              
   int status;
-  if ((status = xmlParseDocument(ctxt)) == -1) {
+  if ((status = xmlParseDocument(ctxt)) == -1)
+    return status;
 
-    xmlErrorPtr ep = xmlCtxtGetLastError(ctxt);
-  }
 }
-
-class srcMLControlHandler {
-
-public :
-
-  srcMLControlHandler() {
-
-  }
-
-  
-
-};
-
-#endif
