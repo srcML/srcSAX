@@ -1,15 +1,15 @@
 #include <srcMLControlHandler.hpp>
 #include <SAX2srcMLHandler.hpp>
 
-srcMLControlHandler::srcMLControlHandler(std::string filename) {
+srcMLControlHandler::srcMLControlHandler(const char * filename) {
 
-  ctxt = xmlCreateURLParserCtxt(filename.c_str(), XML_PARSE_COMPACT | XML_PARSE_HUGE);
-
+  ctxt = xmlCreateURLParserCtxt(filename, XML_PARSE_COMPACT | XML_PARSE_HUGE);
+  fprintf(stderr, "HERE: %s %s %d %p\n", __FILE__, __FUNCTION__, __LINE__, ctxt);
 }
 
 srcMLControlHandler::~srcMLControlHandler() {
 
-  xmlFreeParserCtxt(ctxt);
+  if(ctxt) xmlFreeParserCtxt(ctxt);
 
 }
 
@@ -24,5 +24,6 @@ void srcMLControlHandler::parse(srcMLHandler * handler) {
   ctxt->_private = &sax2_handler;
 
   int status = xmlParseDocument(ctxt);
+  ctxt->sax = NULL;
 
 }

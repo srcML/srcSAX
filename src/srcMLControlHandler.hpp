@@ -3,8 +3,6 @@
 
 #include <srcMLHandler.hpp>
 
-#include <string>
-
 #include <libxml/parser.h>
 #include <libxml/parserInternals.h>
 
@@ -16,7 +14,7 @@ private :
 
 public :
 
-  srcMLControlHandler(std::string filename);
+  srcMLControlHandler(const char * filename);
   ~srcMLControlHandler();
 
   void parse(srcMLHandler * handler);
