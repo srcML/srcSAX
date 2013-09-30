@@ -20,18 +20,18 @@ xmlSAXHandler factory() {
 void startDocument(void * ctx) {
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-  srcMLHandler * state = (srcMLHandler *) ctxt->_private;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  state->startDocument();
+  state->process->startDocument();
 
 }
 
 void endDocument(void * ctx) {
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-  srcMLHandler * state = (srcMLHandler *) ctxt->_private;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  state->endDocument();
+  state->process->endDocument();
 
 }
 
@@ -40,25 +40,25 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
                     const xmlChar ** attributes) {
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-  srcMLHandler * state = (srcMLHandler *) ctxt->_private;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  state->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaullted, attributes);
+  state->process->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaullted, attributes);
 
 }
 
 void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-  srcMLHandler * state = (srcMLHandler *) ctxt->_private;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  state->endElementNs(localname, prefix, URI);
+  state->process->endElementNs(localname, prefix, URI);
 
 }
 
 void characters(void * ctx, const xmlChar * ch, int len) {
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-  srcMLHandler * state = (srcMLHandler *) ctxt->_private;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  state->characters(ch, len)
+  state->process->characters(ch, len)
 }

@@ -1,7 +1,15 @@
 #ifndef INCLUDED_SAX2SRCMLHANDLER_HPP
 #define INCLUDED_SAX2SRCMLHANDLER_HPP
 
+#include <srcMLHandler.hpp>
+
 #include <libxml/parser.h>
+
+struct SAX2srcMLHandler {
+
+  srcMLHandler * process;
+
+};
 
 xmlSAXHandler factory();
 

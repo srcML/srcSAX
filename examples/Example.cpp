@@ -27,7 +27,15 @@ static void srcMLParseDocument(xmlParserCtxtPtr ctxt, bool allowendearly) {
 }
 int main(int argc, char * argv[]) {
 
+  xmlParserCtxtPtr ctxt = srcMLCreateURLParserCtxt("example.xml");
+  xmlSAXHandler sax = factory();
+
+  SAX2srcMLHandler handler;
   srcMLHandlerExample example;
+  handler.process = &example;
+
+ ctxt->sax = &sax;
+ ctxt->_private = &handler;
 
   return 0;
 }
