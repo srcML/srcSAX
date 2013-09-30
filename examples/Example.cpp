@@ -1,21 +1,15 @@
 #include <srcMLHandlerExample.hpp>
 #include <SAX2srcMLHandler.hpp>
+#include <srcMLControlHandler.hpp>
 
+#include <string>
 #include <libxml/parserInternals.h>
 
 int main(int argc, char * argv[]) {
 
-  xmlParserCtxtPtr ctxt = srcMLCreateURLParserCtxt("example.xml");
-  xmlSAXHandler sax = factory();
-
-  SAX2srcMLHandler handler;
-  srcMLHandlerExample example;
-  handler.process = &example;
-
-  ctxt->sax = &sax;
-  ctxt->_private = &handler;
-
-  srcMLParseDocument(ctxt);
+  srcMLControlHandler control("example.xml");
+  srcMLHandler handler;
+  control.parse(&handler);
 
   return 0;
 }

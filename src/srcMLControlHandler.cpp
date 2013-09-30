@@ -1,8 +1,9 @@
 #include <srcMLControlHandler.hpp>
+#include <SAX2srcMLHandler.hpp>
 
 srcMLControlHandler::srcMLControlHandler(std::string filename) {
 
-  ctxt = xmlCreateURLParserCtxt(infile, XML_PARSE_COMPACT | XML_PARSE_HUGE);
+  ctxt = xmlCreateURLParserCtxt(filename.c_str(), XML_PARSE_COMPACT | XML_PARSE_HUGE);
 
 }
 
@@ -16,12 +17,11 @@ void srcMLControlHandler::parse(srcMLHandler * handler) {
 
   xmlSAXHandler sax = factory();
 
-  SAX2srcMLHandler handler;
-  srcMLHandlerExample example;
-  handler.process = &example;
+  SAX2srcMLHandler sax2_handler;
+  sax2_handler.process = handler;
 
   ctxt->sax = &sax;
-  ctxt->_private = &handler;
+  ctxt->_private = &sax2_handler;
 
   int status = xmlParseDocument(ctxt);
 
