@@ -10,6 +10,7 @@ private :
 public :
 
   srcMLControlHandler(std::string filename);
+  ~srcMLControlHandler();
 
   void parse(srcMLHandler * handler);
 

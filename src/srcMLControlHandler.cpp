@@ -6,6 +6,11 @@ srcMLControlHandler::srcMLControlHandler(std::string filename) {
 
 }
 
+srcMLControlHandler::~srcMLControlHandler() {
+
+  xmlFreeParserCtxt(ctxt);
+
+}
 
 void srcMLControlHandler::parse(srcMLHandler * handler) {
 
