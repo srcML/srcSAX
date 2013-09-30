@@ -14,6 +14,15 @@ srcMLControlHandler::~srcMLControlHandler() {
 
 void srcMLControlHandler::parse(srcMLHandler * handler) {
 
+  xmlSAXHandler sax = factory();
+
+  SAX2srcMLHandler handler;
+  srcMLHandlerExample example;
+  handler.process = &example;
+
+  ctxt->sax = &sax;
+  ctxt->_private = &handler;
+
   int status = xmlParseDocument(ctxt);
 
 }
