@@ -9,11 +9,9 @@ private :
 
 public :
 
-  srcMLControlHandler() {
+  srcMLControlHandler(std::string filename);
 
-    
-
-  }
+  parse();
 
 };
 
