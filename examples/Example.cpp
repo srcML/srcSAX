@@ -16,7 +16,7 @@ xmlParserCtxtPtr srcMLCreateURLParserCtxt(const char * infile) {
   return ctxt;
 }
 // process srcML document with error reporting                                                                         
-static void srcMLParseDocument(xmlParserCtxtPtr ctxt, bool allowendearly) {
+static void srcMLParseDocument(xmlParserCtxtPtr ctxt) {
 
   // process the document                                                                                              
   int status;
@@ -37,7 +37,7 @@ int main(int argc, char * argv[]) {
   ctxt->sax = &sax;
   ctxt->_private = &handler;
 
-  srcMLParseDocument(ctxt, false);
+  srcMLParseDocument(ctxt);
 
   return 0;
 }
