@@ -34,8 +34,10 @@ int main(int argc, char * argv[]) {
   srcMLHandlerExample example;
   handler.process = &example;
 
- ctxt->sax = &sax;
- ctxt->_private = &handler;
+  ctxt->sax = &sax;
+  ctxt->_private = &handler;
+
+  srcMLParseDocument(ctxt, false);
 
   return 0;
 }
