@@ -11,9 +11,6 @@ public :
 
   virtual void startDocument() {
 
-    xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    srcMLHandler * state = (srcMLHandler *) ctxt->_private;
-
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
     
   }
