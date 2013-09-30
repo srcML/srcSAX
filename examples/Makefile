@@ -1,4 +1,4 @@
 all : Example
 
 Example : Example.cpp srcMLHandlerExample.hpp
-	g++ -I . -I ../src Example.cpp -o Example
+	g++ -I /usr/include/libxml2 -I . -I ../src Example.cpp -o Example
