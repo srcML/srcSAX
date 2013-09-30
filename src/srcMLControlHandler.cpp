@@ -7,11 +7,8 @@ srcMLControlHandler::srcMLControlHandler(std::string filename) {
 }
 
 
-void srcMLControlHandler::parse() {
+void srcMLControlHandler::parse(srcMLHandler * handler) {
 
-  // process the document
-  int status;
-  if ((status = xmlParseDocument(ctxt)) == -1)
-    return status;
+  int status = xmlParseDocument(ctxt);
 
 }

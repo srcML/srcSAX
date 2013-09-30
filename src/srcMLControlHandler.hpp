@@ -11,7 +11,7 @@ public :
 
   srcMLControlHandler(std::string filename);
 
-  parse();
+  void parse(srcMLHandler * handler);
 
 };
 
