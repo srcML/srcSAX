@@ -1,13 +1,12 @@
-#ifndef INCLUDED_SRCMLHANDLER_HPP
-#define INCLUDED_SRCMLHANDLER_HPP
+#ifndef INCLUDED_SRCMLHANDLEREXAMPLE_HPP
+#define INCLUDED_SRCMLHANDLEREXAMPLE_HPP
 
-//#include <srcMLHandler.hpp>
-
-#include <stdio.h>
+#include "../src/srcMLHandler.hpp"
 
 #include <libxml/parser.h>
+#include <stdio.h>
 
-class srcMLHandlerExample {
+class srcMLHandlerExample : srcMLHandler {
 
 public :
 

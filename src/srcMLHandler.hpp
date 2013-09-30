@@ -4,8 +4,10 @@
 #include <libxml/parser.h>
 
 class srcMLHandler {
-
+  /*
 public :
+
+  srcMLHandler() {}
 
   virtual void startDocument() {}
 
@@ -18,7 +20,7 @@ public :
   virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
 
   virtual void characters(const xmlChar * ch, int len) {}
-
+  */
 };
 
 #endif
