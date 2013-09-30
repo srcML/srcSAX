@@ -1,7 +1,7 @@
 #ifndef INCLUDED_SRCMLHANDLEREXAMPLE_HPP
 #define INCLUDED_SRCMLHANDLEREXAMPLE_HPP
 
-#include "../src/srcMLHandler.hpp"
+#include <srcMLHandler.hpp>
 
 #include <libxml/parser.h>
 #include <stdio.h>
