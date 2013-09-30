@@ -7,6 +7,8 @@
 
 class srcMLHandlerExample : public srcMLHandler {
 
+public :
+
   virtual void startDocument() {
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;

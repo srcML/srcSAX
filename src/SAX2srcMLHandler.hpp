@@ -1,6 +1,8 @@
 #ifndef INCLUDED_SAX2SRCMLHANDLER_HPP
 #define INCLUDED_SAX2SRCMLHANDLER_HPP
 
+#include <libxml/parser.h>
+
 xmlSAXHandler factory();
 
 void startDocument(void * ctx);

@@ -1,7 +1,11 @@
 #ifndef INCLUDED_SRCMLHANDLER_HPP
 #define INCLUDED_SRCMLHANDLER_HPP
 
+#include <libxml/parser.h>
+
 class srcMLHandler {
+
+public :
 
   virtual void startDocument() {}
 
