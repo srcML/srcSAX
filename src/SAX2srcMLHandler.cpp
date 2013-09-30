@@ -42,7 +42,7 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   srcMLHandler * state = (srcMLHandler *) ctxt->_private;
 
-  state->startElementNs();
+  state->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaullted, attributes);
 
 }
 
@@ -51,7 +51,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   srcMLHandler * state = (srcMLHandler *) ctxt->_private;
 
-  state->endElementNs();
+  state->endElementNs(localname, prefix, URI);
 
 }
 
@@ -60,5 +60,5 @@ void characters(void * ctx, const xmlChar * ch, int len) {
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   srcMLHandler * state = (srcMLHandler *) ctxt->_private;
 
-  state->characters()
+  state->characters(ch, len)
 }
