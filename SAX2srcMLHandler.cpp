@@ -60,5 +60,5 @@ void characters(void * ctx, const xmlChar * ch, int len) {
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   srcMLHandler * state = (srcMLHandler *) ctxt->_private;
 
-  state->characters();
+  state->characters()
 }
