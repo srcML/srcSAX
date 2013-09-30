@@ -6,7 +6,7 @@
 #include <libxml/parser.h>
 #include <stdio.h>
 
-class srcMLHandlerExample : srcMLHandler {
+class srcMLHandlerExample : public srcMLHandler {
 
 public :
 

@@ -10,7 +10,7 @@ xmlSAXHandler factory() {
   sax.endDocument = &endDocument;
 
   sax.startElementNs = &startElementNs;
-  sax.endElementNs = &startElementNs;
+  sax.endElementNs = &endElementNs;
 
   sax.characters = &characters;
 
@@ -42,7 +42,7 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  state->process->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaullted, attributes);
+  state->process->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
 }
 
@@ -60,5 +60,5 @@ void characters(void * ctx, const xmlChar * ch, int len) {
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  state->process->characters(ch, len)
+  state->process->characters(ch, len);
 }
