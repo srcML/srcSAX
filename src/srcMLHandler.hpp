@@ -15,6 +15,6 @@ class srcMLHandler {
 
   virtual void characters(const xmlChar * ch, int len) {}
 
-}
+};
 
 #endif

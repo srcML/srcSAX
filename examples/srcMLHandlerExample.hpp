@@ -1,7 +1,11 @@
 #ifndef INCLUDED_SRCMLHANDLER_HPP
 #define INCLUDED_SRCMLHANDLER_HPP
 
-class srcMLHandlerExample : srcMLHandler {
+#include <srcMLHandler.hpp>
+
+#include <stdio.h>
+
+class srcMLHandlerExample : public srcMLHandler {
 
   virtual void startDocument() {
 
@@ -38,6 +42,6 @@ class srcMLHandlerExample : srcMLHandler {
 
   }
 
-}
+};
 
 #endif
