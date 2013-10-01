@@ -38,7 +38,6 @@ srcMLControlHandler::srcMLControlHandler(const char * filename) : sax2_handler()
 
 /**
  * ~srcMLControlHandler
- * @param filename name of a file
  *
  * Constructor
  */
