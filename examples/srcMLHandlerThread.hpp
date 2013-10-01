@@ -17,6 +17,7 @@ private :
   pthread_cond_t is_done_cond;
 
   bool is_done;
+
 public :
 
   srcMLHandlerThread() : is_done(false) {
