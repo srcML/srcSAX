@@ -14,6 +14,7 @@ private :
   pthread_mutex_t mutex;
   pthread_mutex_t is_done_mutex;
   pthread_cond_t cond;
+  pthread_cond_t is_done_cond;
 
   bool is_done;
 public :
@@ -23,22 +24,16 @@ public :
     pthread_mutex_init(&mutex, 0);
     pthread_mutex_init(&is_done_mutex, 0);
     pthread_cond_init(&cond, 0);
+    pthread_cond_init(&is_done_cond, 0);
   }
 
   void wait() {
 
-    while(true) {
-      pthread_mutex_lock(&is_done_mutex);
-      if(is_done) {
-
-        is_done = false;
-        pthread_mutex_unlock(&is_done_mutex);
-        break;
-
-      }
-      pthread_mutex_unlock(&is_done_mutex);
-
-    }
+    pthread_cond_wait(&is_done_cond, &is_done_mutex);
+    pthread_mutex_lock(&is_done_mutex);
+    is_done = false;
+    pthread_mutex_unlock(&is_done_mutex);
+    break;
 
   }
 
