@@ -27,6 +27,14 @@ public :
     pthread_cond_init(&is_done_cond, 0);
   }
 
+  ~srcMLHandlerThread() {
+
+    pthread_mutex_destroy(&mutex);
+    pthread_mutex_destroy(&is_done_mutex);
+    pthread_cond_destroy(&cond);
+    pthread_cond_destroy(&is_done_cond);
+  }
+
   void wait() {
 
     pthread_cond_wait(&is_done_cond, &is_done_mutex);
