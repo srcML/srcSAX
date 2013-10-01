@@ -21,6 +21,13 @@ public :
     pthread_cond_init(&cond, 0);
   }
 
+  void wait() {
+
+  while(pthread_mutex_trylock() == 0)
+    pthread_mutext_unlock();
+
+  }
+
   void resume() {
     pthread_cond_broadcast(&cond);
   }
