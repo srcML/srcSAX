@@ -157,17 +157,17 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
-  state->is_archive = strcmp((const char *)localname, "unit") == 0 && strcmp(URI, SRCML_SRC_NS_URI) == 0;
+  state->is_archive = strcmp((const char *)localname, "unit") == 0 && strcmp((const char *)URI, SRCML_SRC_NS_URI) == 0;
 
   if(!state->is_archive) {
-    state->process->startUnit(ctx, state->root.localname, state->root.prefix, state->root.URI,
+    state->process->startUnit(state->root.localname, state->root.prefix, state->root.URI,
                                state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
                                state->root.nb_defaulted, state->root.attributes);
-    state->process->startElementNs(ctx, localname, prefix, URI,
+    state->process->startElementNs(localname, prefix, URI,
                                nb_namespaces, namespaces, nb_attributes,
                                nb_defaulted, attributes);
   } else
-    state->process->startUnit(ctx, localname, prefix, URI,
+    state->process->startUnit(localname, prefix, URI,
                                nb_namespaces, namespaces, nb_attributes,
                                nb_defaulted, attributes);
 
@@ -243,7 +243,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  if(strcmp((const char *)localname, "unit") == 0 && strcmp(URI, SRCML_SRC_NS_URI) == 0) {
+  if(strcmp((const char *)localname, "unit") == 0 && strcmp((const char *)URI, SRCML_SRC_NS_URI) == 0) {
     state->process->endUnit(localname, prefix, URI);
     ctxt->sax->startElementNs = &startUnit;    
   } else
