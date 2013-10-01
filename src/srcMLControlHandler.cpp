@@ -22,6 +22,12 @@
 
 #include <srcMLControlHandler.hpp>
 
+/**
+ * srcMLControlHandler
+ * @param filename name of a file
+ *
+ * Constructor
+ */
 srcMLControlHandler::srcMLControlHandler(const char * filename) : sax2_handler() {
 
   ctxt = xmlCreateURLParserCtxt(filename, XML_PARSE_COMPACT | XML_PARSE_HUGE);
@@ -30,6 +36,12 @@ srcMLControlHandler::srcMLControlHandler(const char * filename) : sax2_handler()
 
 }
 
+/**
+ * ~srcMLControlHandler
+ * @param filename name of a file
+ *
+ * Constructor
+ */
 srcMLControlHandler::~srcMLControlHandler() {
 
   ctxt->sax = NULL;
@@ -37,6 +49,12 @@ srcMLControlHandler::~srcMLControlHandler() {
 
 }
 
+/**
+ * parse
+ * @param handler srcMLHandler with hooks for sax parsing
+ *
+ * Parse the xml document with the supplied hooks.
+ */
 void srcMLControlHandler::parse(srcMLHandler * handler) {
 
   sax2_handler.process = handler;

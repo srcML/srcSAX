@@ -1,5 +1,5 @@
 /*
-  srcMLControlHandler.hpp
+  @file srcMLControlHandler.hpp
 
   Copyright (C) 2004-2013  SDML (www.sdml.info)
 
@@ -29,19 +29,49 @@
 #include <libxml/parser.h>
 #include <libxml/parserInternals.h>
 
+/**
+ * srcMLControlHandler
+ *
+ * Provides execution of sax with
+ * given hooks.
+ */
 class srcMLControlHandler {
 
 private :
 
+  // xmlParserCtxt
   xmlParserCtxtPtr ctxt;
+
+  // xmlSAXHandler
   xmlSAXHandler sax;
+
+  // Process to execute call backs
   SAX2srcMLHandler sax2_handler;
 
 public :
 
+  /**
+   * srcMLControlHandler
+   * @param filename name of a file
+   *
+   * Constructor
+   */
   srcMLControlHandler(const char * filename);
+
+  /**
+   * ~srcMLControlHandler
+   * @param filename name of a file
+   *
+   * Constructor
+   */
   ~srcMLControlHandler();
 
+  /**
+   * parse
+   * @param handler srcMLHandler with hooks for sax parsing
+   *
+   * Parse the xml document with the supplied hooks.
+   */
   void parse(srcMLHandler * handler);
 
 };
