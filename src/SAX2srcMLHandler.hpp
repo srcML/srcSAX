@@ -90,6 +90,63 @@ void startDocument(void * ctx);
 void endDocument(void * ctx);
 
 /**
+ * startRoot
+ * @param ctx an xmlParserCtxtPtr
+ * @param localname the name of the element tag
+ * @param prefix the tag prefix
+ * @param URI the namespace of tag
+ * @param nb_namespaces number of namespaces definitions
+ * @param namespaces the defined namespaces
+ * @param nb_attributes the number of attributes on the tag
+ * @param nb_defaulted the number of defaulted attributes
+ * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+ *
+ * SAX handler function for start of an element.
+ * Immediately calls supplied handlers function.
+ */
+void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
+                           const xmlChar ** attributes);
+
+
+/**
+ * startElementNsFirst
+ * @param ctx an xmlParserCtxtPtr
+ * @param localname the name of the element tag
+ * @param prefix the tag prefix
+ * @param URI the namespace of tag
+ * @param nb_namespaces number of namespaces definitions
+ * @param namespaces the defined namespaces
+ * @param nb_attributes the number of attributes on the tag
+ * @param nb_defaulted the number of defaulted attributes
+ * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+ *
+ * SAX handler function for start of an element.
+ * Immediately calls supplied handlers function.
+ */
+void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
+                           const xmlChar ** attributes);
+/**
+ * startUnit
+ * @param ctx an xmlParserCtxtPtr
+ * @param localname the name of the element tag
+ * @param prefix the tag prefix
+ * @param URI the namespace of tag
+ * @param nb_namespaces number of namespaces definitions
+ * @param namespaces the defined namespaces
+ * @param nb_attributes the number of attributes on the tag
+ * @param nb_defaulted the number of defaulted attributes
+ * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+ *
+ * SAX handler function for start of an element.
+ * Immediately calls supplied handlers function.
+ */
+void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
+                           const xmlChar ** attributes);
+
+/**
  * startElementNs
  * @param ctx an xmlParserCtxtPtr
  * @param localname the name of the element tag
@@ -107,6 +164,18 @@ void endDocument(void * ctx);
 void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes);
+
+/**
+ * endUnit
+ * @param ctx an xmlParserCtxtPtr
+ * @param localname the name of the element tag
+ * @param prefix the tag prefix
+ * @param URI the namespace of tag
+ *
+ * SAX handler function for end of an element.
+ * Immediately calls supplied handlers function.
+ */
+void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI);
 
 /**
  * endElementNs

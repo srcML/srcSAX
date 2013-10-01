@@ -40,7 +40,7 @@ xmlSAXHandler factory() {
   sax.startDocument = &startDocument;
   sax.endDocument = &endDocument;
 
-  sax.startElementNs = &startElementNs;
+  sax.startElementNs = &startRoot;
   sax.endElementNs = &endElementNs;
 
   sax.characters = &characters;
