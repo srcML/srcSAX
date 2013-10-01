@@ -35,7 +35,7 @@
  */
 struct SAX2srcMLHandler {
 
-  // Hooks for processing
+  /** Hooks for processing */
   srcMLHandler * process;
 
 };
