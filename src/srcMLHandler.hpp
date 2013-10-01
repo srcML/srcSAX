@@ -36,7 +36,6 @@ public :
 
   /**
    * startDocument
-   * @param ctx an xmlParserCtxtPtr
    *
    * SAX handler function for start of document.
    * Overide for desired behaviour.
@@ -45,7 +44,6 @@ public :
 
   /**
    * endDocument
-   * @param ctx an xmlParserCtxtPtr
    *
    * SAX handler function for end of document.
    * Overide for desired behaviour.
@@ -54,7 +52,6 @@ public :
 
   /**
    * startElementNs
-   * @param ctx an xmlParserCtxtPtr
    * @param localname the name of the element tag
    * @param prefix the tag prefix
    * @param URI the namespace of tag
@@ -73,7 +70,6 @@ public :
 
   /**
    * endElementNs
-   * @param ctx an xmlParserCtxtPtr
    * @param localname the name of the element tag
    * @param prefix the tag prefix
    * @param URI the namespace of tag
@@ -85,7 +81,8 @@ public :
 
   /**
    * characers
-   * @param ctx an xmlParserCtxtPtr
+   * @param ch the characers
+   * @param len number of characters
    *
    * SAX handler function for character handling.
    * Overide for desired behaviour.
