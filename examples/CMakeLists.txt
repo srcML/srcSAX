@@ -8,8 +8,13 @@ if(LIBXML2_FOUND)
         include_directories(${LIBXML2_INCLUDE_DIR})
 endif()
 
-file(GLOB EXAMPLE_SRC *.cpp)
+set(EXAMPLE_SRC example.cpp)
 file(GLOB HANDLER_SRC ../src/*.cpp)
+
+set(THREAD_SRC thread.cpp)
 
 add_executable(example ${EXAMPLE_SRC} ${HANDLER_SRC})
 target_link_libraries(example ${LIBXML2_LIBRARIES})
+
+add_executable(thread ${THREAD_SRC} ${HANDLER_SRC})
+target_link_libraries(thread ${LIBXML2_LIBRARIES})

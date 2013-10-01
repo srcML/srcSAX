@@ -67,7 +67,7 @@ public :
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
     // pause
-
+    pthread_cond_wait(&cond, &mutex);
   }
 
   virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {

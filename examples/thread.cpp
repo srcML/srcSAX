@@ -20,7 +20,7 @@ int main(int argc, char * argv[]) {
 
 
   pthread_t thread;
-  pthread_create(&thread, 0, start_routine, &arg);
+  pthread_create(&thread, 0, start_routine, 0);
 
   return 0;
 }
