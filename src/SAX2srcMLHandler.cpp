@@ -135,6 +135,30 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
 }
 
 /**
+ * startElementNsFirst
+ * @param ctx an xmlParserCtxtPtr
+ * @param localname the name of the element tag
+ * @param prefix the tag prefix
+ * @param URI the namespace of tag
+ * @param nb_namespaces number of namespaces definitions
+ * @param namespaces the defined namespaces
+ * @param nb_attributes the number of attributes on the tag
+ * @param nb_defaulted the number of defaulted attributes
+ * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+ *
+ * SAX handler function for start of an element.
+ * Immediately calls supplied handlers function.
+ */
+void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
+                    const xmlChar ** attributes) {
+
+  xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+
+}
+
+/**
  * startElementNs
  * @param ctx an xmlParserCtxtPtr
  * @param localname the name of the element tag
