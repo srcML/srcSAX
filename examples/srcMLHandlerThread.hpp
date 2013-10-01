@@ -21,6 +21,10 @@ public :
     pthread_cond_init(&cond, 0);
   }
 
+  void resume() {
+    pthread_cond_broadcast(&cond);
+  }
+
   virtual void startDocument() {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
