@@ -97,10 +97,10 @@ public :
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
     // pause
-    pthread_cond_wait(cond, &mutex);
     pthread_mutex_lock(is_done_mutex);
     is_done = true;
     pthread_mutex_unlock(is_done_mutex);
+    pthread_cond_wait(cond, &mutex);
 
   }
 

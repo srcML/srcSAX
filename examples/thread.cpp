@@ -44,14 +44,13 @@ int main(int argc, char * argv[]) {
     pthread_mutex_unlock(&is_done_mutex);
 
   }
-}
 
   //arg.wait();
   //arg.resume();
   pthread_cond_broadcast(&cond);
 
-void * ret;
-pthread_join(thread, &ret);
+  void * ret;
+  pthread_join(thread, &ret);
 
-return 0;
+  return 0;
 }
