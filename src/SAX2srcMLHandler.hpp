@@ -54,12 +54,14 @@ struct Element {
  */
 struct SAX2srcMLHandler {
 
-  /** Hooks for processing */
+  /** hooks for processing */
   srcMLHandler * process;
 
-  /** Temporary storage for root unit */
+  /** temporary storage for root unit */
   Element root;
 
+  /** used to detect root unit */
+  bool rootonly;
 };
 
 /**
