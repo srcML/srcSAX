@@ -30,10 +30,6 @@ public :
   void wait() {
 
     pthread_cond_wait(&is_done_cond, &is_done_mutex);
-    pthread_mutex_lock(&is_done_mutex);
-    is_done = false;
-    pthread_mutex_unlock(&is_done_mutex);
-    break;
 
   }
 
@@ -88,10 +84,7 @@ public :
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
     // pause
-    pthread_mutex_lock(&is_done_mutex);
-    is_done = true;
-    pthread_mutex_unlock(&is_done_mutex);
-
+    pthread_cond_broadcast(&is_done_cond);
     pthread_cond_wait(&cond, &mutex);
 
   }
