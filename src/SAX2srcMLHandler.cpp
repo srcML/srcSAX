@@ -159,6 +159,34 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
   state->is_archive = strcmp((const char *)localname, "unit") == 0 && strcmp(URI, SRCML_SRC_NS_URI) == 0;
 
+  if(!state->is_archive)
+;
+    
+
+}
+
+/**
+ * startUnit
+ * @param ctx an xmlParserCtxtPtr
+ * @param localname the name of the element tag
+ * @param prefix the tag prefix
+ * @param URI the namespace of tag
+ * @param nb_namespaces number of namespaces definitions
+ * @param namespaces the defined namespaces
+ * @param nb_attributes the number of attributes on the tag
+ * @param nb_defaulted the number of defaulted attributes
+ * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+ *
+ * SAX handler function for start of an element.
+ * Immediately calls supplied handlers function.
+ */
+void startUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
+                    const xmlChar ** attributes) {
+
+  xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+
 }
 
 /**
@@ -184,6 +212,25 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
   state->process->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+
+}
+
+/**
+ * endUnit
+ * @param ctx an xmlParserCtxtPtr
+ * @param localname the name of the element tag
+ * @param prefix the tag prefix
+ * @param URI the namespace of tag
+ *
+ * SAX handler function for end of an element.
+ * Immediately calls supplied handlers function.
+ */
+void endUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+
+  xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+
+  state->process->endElementNs(localname, prefix, URI);
 
 }
 
