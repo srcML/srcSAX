@@ -35,13 +35,28 @@
  */
 struct Element {
 
+  /** local name of an element*/
   const xmlChar* localname;
+
+  /** prefix of an element*/
   const xmlChar* prefix;
+
+  /** URI of an element*/
   const xmlChar* URI;
+
+  /** number of namespaces on an element*/
   int nb_namespaces;
+
+  /** namespaces on an element*/
   const xmlChar** namespaces;
+
+  /** number of attributes on an element*/
   int nb_attributes;
+
+  /** number of defaulted on an element*/
   int nb_defaulted;
+
+  /** attributes of an element*/
   const xmlChar** attributes;
 
 };
