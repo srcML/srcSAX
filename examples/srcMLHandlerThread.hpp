@@ -12,8 +12,6 @@ class srcMLHandlerThread : public srcMLHandler {
 private :
 
   pthread_mutex_t mutex;
-  //pthread_mutex_t * is_done_mutex;
-  //pthread_cond_t * cond;
   pthread_mutex_t is_done_mutex;
   pthread_cond_t cond;
 

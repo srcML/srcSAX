@@ -8,8 +8,8 @@
 #include <pthread.h>
 
 void * start_routine(void * arg) {
-  srcMLHandlerThread * handler = (srcMLHandlerThread *)arg;
 
+  srcMLHandlerThread * handler = (srcMLHandlerThread *)arg;
 
   srcMLControlHandler control("thread.xml");
   control.parse(handler);
