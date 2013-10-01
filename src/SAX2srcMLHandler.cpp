@@ -129,8 +129,6 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
     state->root.attributes[index + 4] = state->root.attributes[index + 3] + vallength;
   }
 
-  //setRootAttributes(state->root.attributes, state->root.nb_attributes);
-
   // handle nested units
   ctxt->sax->startElementNs = &startElementNs;
 
