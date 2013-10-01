@@ -65,6 +65,8 @@ public :
    */
   ~srcMLControlHandler();
 
+  void enable_startDocument(bool enable);
+
   /**
    * parse
    * @param handler srcMLHandler with hooks for sax parsing

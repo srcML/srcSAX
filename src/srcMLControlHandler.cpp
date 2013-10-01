@@ -48,6 +48,13 @@ srcMLControlHandler::~srcMLControlHandler() {
 
 }
 
+void srcMLControlHandler::enable_startDocument(bool enable) {
+
+  if(enable) sax.startDocument = startDocument;
+  else sax.startDocument = 0;
+
+};
+
 /**
  * parse
  * @param handler srcMLHandler with hooks for sax parsing
