@@ -42,11 +42,14 @@ public :
     pthread_mutex_lock(&mutex);
     pthread_cond_wait(&is_done_cond, &mutex);
     pthread_mutex_unlock(&mutex);
+
   }
 
   void resume() {
 
+    pthread_mutex_lock(&mutex);
     pthread_cond_broadcast(&cond);
+    pthread_mutex_unlock(&mutex);
 
   }
 
