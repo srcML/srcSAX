@@ -12,38 +12,43 @@ class srcMLHandlerThread : public srcMLHandler {
 private :
 
   pthread_mutex_t mutex;
-  pthread_mutex_t is_done_mutex;
-  pthread_cond_t cond;
+  pthread_mutex_t * is_done_mutex;
+  pthread_cond_t * cond;
+  //pthread_mutex_t is_done_mutex;
+  //pthread_cond_t cond;
 
   bool is_done;
 public :
 
-  srcMLHandlerThread() : is_done(false) {
+    srcMLHandlerThread(pthread_mutex_t * is_done_mutex, pthread_cond_t * cond) : is_done_mutex(is_done_mutex), 
+                                                                                 cond(cond), is_done(false) {
+
+  //srcMLHandlerThread() : is_done(false) {
 
     pthread_mutex_init(&mutex, 0);
-    pthread_mutex_init(&is_done_mutex, 0);
-    pthread_cond_init(&cond, 0);
+  //pthread_mutex_init(&is_done_mutex, 0);
+  //pthread_cond_init(&cond, 0);
   }
 
   void wait() {
-    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+    /*
     while(true) {
       pthread_mutex_lock(&is_done_mutex);
       if(is_done) {
 
         is_done = false;
-        pthread_mutex_unlock(&mutex);
+        pthread_mutex_unlock(&is_done_mutex);
         break;
 
       }
-      pthread_mutex_unlock(&mutex);
+      pthread_mutex_unlock(&is_done_mutex);
 
     }
-    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+    */
   }
 
   void resume() {
-    pthread_cond_broadcast(&cond);
+    //pthread_cond_broadcast(&cond);
   }
 
   virtual void startDocument() {
@@ -92,10 +97,10 @@ public :
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
     // pause
-    pthread_cond_wait(&cond, &mutex);
-    pthread_mutex_lock(&is_done_mutex);
+    pthread_cond_wait(cond, &mutex);
+    pthread_mutex_lock(is_done_mutex);
     is_done = true;
-    pthread_mutex_unlock(&mutex);
+    pthread_mutex_unlock(is_done_mutex);
 
   }
 
