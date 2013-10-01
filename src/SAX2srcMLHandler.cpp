@@ -75,6 +75,8 @@ void endDocument(void * ctx) {
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+  if(ctxt->sax->startElementNs)
+      state->process->endRoot(state->root.localname, state->root.prefix, state->root.URI);
 
   state->process->endDocument();
 
@@ -249,6 +251,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
     if(ctxt->sax->startElementNs == &startUnit) {
 
       state->process->endRoot(localname, prefix, URI);
+      ctxt->sax->startElementNs = 0;    
 
     } else {
 
