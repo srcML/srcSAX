@@ -91,10 +91,12 @@ public :
   virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+
     // pause
     pthread_mutex_lock(&is_done_mutex);
     is_done = true;
     pthread_mutex_unlock(&is_done_mutex);
+
     pthread_cond_wait(&cond, &mutex);
 
   }
