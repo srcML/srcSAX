@@ -24,30 +24,19 @@ int main(int argc, char * argv[]) {
   pthread_t thread;
   pthread_mutex_t is_done_mutex;
   pthread_cond_t cond;
-  bool is_done = false;
-  pthread_mutex_init(&is_done_mutex, 0);
-  pthread_cond_init(&cond, 0);
-  //srcMLHandlerThread arg;
-  srcMLHandlerThread arg(&is_done_mutex, &cond, is_done);
+  //bool is_done = false;
+  //pthread_mutex_init(&is_done_mutex, 0);
+  //pthread_cond_init(&cond, 0);
+  srcMLHandlerThread arg;
+  //srcMLHandlerThread arg(&is_done_mutex, &cond, is_done);
   pthread_create(&thread, 0, start_routine, &arg);
 
 
-  while(true) {
-    pthread_mutex_lock(&is_done_mutex);
-    if(is_done) {
+  arg.wait();
+  arg.resume();
 
-      is_done = false;
-      pthread_mutex_unlock(&is_done_mutex);
-      break;
-
-    }
-    pthread_mutex_unlock(&is_done_mutex);
-
-  }
-
-  //arg.wait();
-  //arg.resume();
-  pthread_cond_broadcast(&cond);
+  arg.wait();
+  arg.resume();
 
   void * ret;
   pthread_join(thread, &ret);
