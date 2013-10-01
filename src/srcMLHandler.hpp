@@ -25,11 +25,14 @@
 
 #include <libxml/parser.h>
 
+/**
+ * srcMLHandler
+ *
+ * Base class that provides hooks for SAX processing.
+ */
 class srcMLHandler {
 
 public :
-
-  srcMLHandler() {}
 
   /**
    * startDocument
