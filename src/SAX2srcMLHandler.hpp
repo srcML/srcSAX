@@ -104,7 +104,7 @@ void endDocument(void * ctx);
  * SAX handler function for start of an element.
  * Immediately calls supplied handlers function.
  */
-void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes);
 
@@ -124,7 +124,7 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
  * SAX handler function for start of an element.
  * Immediately calls supplied handlers function.
  */
-void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes);
 /**
@@ -142,7 +142,7 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
  * SAX handler function for start of an element.
  * Immediately calls supplied handlers function.
  */
-void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+void startUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes);
 
@@ -164,18 +164,6 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
 void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes);
-
-/**
- * endUnit
- * @param ctx an xmlParserCtxtPtr
- * @param localname the name of the element tag
- * @param prefix the tag prefix
- * @param URI the namespace of tag
- *
- * SAX handler function for end of an element.
- * Immediately calls supplied handlers function.
- */
-void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI);
 
 /**
  * endElementNs
