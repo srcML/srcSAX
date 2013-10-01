@@ -23,8 +23,8 @@ public :
 
   void wait() {
 
-  while(pthread_mutex_trylock() == 0)
-    pthread_mutext_unlock();
+  while(pthread_mutex_trylock(&mutex) == 0)
+    pthread_mutex_unlock(&mutex);
 
   }
 
