@@ -7,7 +7,7 @@
 
 int main(int argc, char * argv[]) {
 
-  srcMLControlHandler control("temp.xml");
+  srcMLControlHandler control("example.xml");
   srcMLHandlerExample handler;
   control.parse(&handler);
 
