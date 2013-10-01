@@ -61,7 +61,7 @@ struct SAX2srcMLHandler {
   Element root;
 
   /** used to detect root unit */
-  bool rootonly;
+  bool is_archive;
 };
 
 /**

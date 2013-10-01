@@ -24,6 +24,8 @@
 
 #include <cstring>
 
+const char * const SRCML_SRC_NS_URI = "http://www.sdml.info/srcML/src";
+
 /**
  * factory
  *
@@ -101,7 +103,7 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
   // need to record that we actually found something besides the root element
-  state->rootonly = true;
+  //state->rootonly = true;
 
   // save all the info in case this is not a srcML archive
   state->root.localname = localname ? (xmlChar*) strdup((const char*) localname) : 0;
@@ -155,6 +157,7 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+  state->is_archive = strcmp((const char *)localname, "unit") == 0 && strcmp(URI, SRCML_SRC_NS_URI) == 0;
 
 }
 
