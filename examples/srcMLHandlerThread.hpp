@@ -17,11 +17,11 @@ private :
   //pthread_mutex_t is_done_mutex;
   //pthread_cond_t cond;
 
-  bool is_done;
+  bool & is_done;
 public :
 
-    srcMLHandlerThread(pthread_mutex_t * is_done_mutex, pthread_cond_t * cond) : is_done_mutex(is_done_mutex), 
-                                                                                 cond(cond), is_done(false) {
+  srcMLHandlerThread(pthread_mutex_t * is_done_mutex, pthread_cond_t * cond, bool & is_done) : is_done_mutex(is_done_mutex), 
+                                                                                 cond(cond), is_done(is_done) {
 
   //srcMLHandlerThread() : is_done(false) {
 
