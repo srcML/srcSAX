@@ -77,6 +77,64 @@ void endDocument(void * ctx) {
 }
 
 /**
+ * startRoot
+ * @param ctx an xmlParserCtxtPtr
+ * @param localname the name of the element tag
+ * @param prefix the tag prefix
+ * @param URI the namespace of tag
+ * @param nb_namespaces number of namespaces definitions
+ * @param namespaces the defined namespaces
+ * @param nb_attributes the number of attributes on the tag
+ * @param nb_defaulted the number of defaulted attributes
+ * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+ *
+ * SAX handler function for start of an element.
+ * Immediately calls supplied handlers function.
+ */
+void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
+                    const xmlChar ** attributes) {
+
+  xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+
+  // need to record that we actually found something besides the root element
+  pstate->rootonly = true;
+
+  // save all the info in case this is not a srcML archive
+  pstate->root.localname = localname ? (xmlChar*) strdup((const char*) localname) : 0;
+  pstate->root.prefix = prefix ? (xmlChar*) strdup((const char*) prefix) : 0;
+  pstate->root.URI = URI ? (xmlChar*) strdup((const char*) URI) : 0;
+
+  pstate->root.nb_namespaces = nb_namespaces;
+  int ns_length = nb_namespaces * 2;
+  pstate->root.namespaces = (const xmlChar**) malloc(ns_length * sizeof(namespaces[0]));
+  for (int i = 0; i < ns_length; ++i)
+    pstate->root.namespaces[i] = namespaces[i] ? (xmlChar*) strdup((const char*) namespaces[i]) : 0;
+
+  pstate->root.nb_attributes = nb_attributes;
+  pstate->root.nb_defaulted = nb_defaulted;
+
+  int nb_length = nb_attributes * 5;
+  pstate->root.attributes = (const xmlChar**) malloc(nb_length * sizeof(attributes[0]));
+  for (int i = 0, index = 0; i < nb_attributes; ++i, index += 5) {
+    pstate->root.attributes[index] = attributes[index] ? (xmlChar*) strdup((const char*) attributes[index]) : 0;
+    pstate->root.attributes[index + 1] = attributes[index + 1] ? (xmlChar*) strdup((const char*) attributes[index + 1]) : 0;
+    pstate->root.attributes[index + 2] = attributes[index + 2] ? (xmlChar*) strdup((const char*) attributes[index + 2]) : 0;
+    int vallength = attributes[index + 4] - attributes[index + 3];
+    pstate->root.attributes[index + 3] = (const xmlChar*) malloc(vallength);
+    strncpy((char *) pstate->root.attributes[index + 3], (const char*) attributes[index + 3], vallength);
+    pstate->root.attributes[index + 4] = pstate->root.attributes[index + 3] + vallength;
+  }
+
+  setRootAttributes(pstate->root.attributes, pstate->root.nb_attributes);
+
+  // handle nested units
+  ctxt->sax->startElementNs = &startElementNsFirst;
+  ctxt->sax->endElementNs = &endElementNsSkip;
+
+
+/**
  * startElementNs
  * @param ctx an xmlParserCtxtPtr
  * @param localname the name of the element tag

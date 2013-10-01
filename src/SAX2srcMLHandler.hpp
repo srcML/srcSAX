@@ -28,6 +28,25 @@
 #include <libxml/parser.h>
 
 /**
+ * Element
+ *
+ * Data structure to hold an element
+ * mainly root lement
+ */
+struct Element {
+
+  const xmlChar* localname;
+  const xmlChar* prefix;
+  const xmlChar* URI;
+  int nb_namespaces;
+  const xmlChar** namespaces;
+  int nb_attributes;
+  int nb_defaulted;
+  const xmlChar** attributes;
+
+};
+
+/**
  * SAX2srcMLHandler
  *
  * Data structure to hold process during
@@ -37,6 +56,9 @@ struct SAX2srcMLHandler {
 
   /** Hooks for processing */
   srcMLHandler * process;
+
+  /** Temporary storage for root unit */
+  Element root;
 
 };
 
