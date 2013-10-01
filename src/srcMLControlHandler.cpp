@@ -48,6 +48,12 @@ srcMLControlHandler::~srcMLControlHandler() {
 
 }
 
+/**
+ * enable_startDocument
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables startDocument parsing.
+ */
 void srcMLControlHandler::enable_startDocument(bool enable) {
 
   if(enable) sax.startDocument = startDocument;
@@ -55,33 +61,57 @@ void srcMLControlHandler::enable_startDocument(bool enable) {
 
 }
 
+/**
+ * enable_endDocument
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables endDocument parsing.
+ */
 void srcMLControlHandler::enable_endDocument(bool enable) {
 
   if(enable) sax.endDocument = endDocument;
   else sax.endDocument = 0;
 
-};
+}
 
+/**
+ * enable_startElementNs
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables startElementNs parsing.
+ */
 void srcMLControlHandler::enable_startElementNs(bool enable) {
 
   if(enable) sax.startElementNs = startElementNs;
   else sax.startElementNs = 0;
 
-};
+}
 
+/**
+ * enable_endElementNs
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables endElementNs parsing.
+ */
 void srcMLControlHandler::enable_endElementNs(bool enable) {
 
   if(enable) sax.endElementNs = endElementNs;
   else sax.endElementNs = 0;
 
-};
+}
 
+/**
+ * enable_characters
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables characters parsing.
+ */
 void srcMLControlHandler::enable_characters(bool enable) {
 
   if(enable) sax.characters = characters;
   else sax.characters = 0;
 
-};
+}
 
 /**
  * parse
