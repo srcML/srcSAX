@@ -22,6 +22,8 @@
 
 #include <SAX2srcMLHandler.hpp>
 
+#include <cstring>
+
 /**
  * factory
  *
@@ -99,7 +101,7 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
   // need to record that we actually found something besides the root element
-  pstate->rootonly = true;
+  state->rootonly = true;
 
   // save all the info in case this is not a srcML archive
   state->root.localname = localname ? (xmlChar*) strdup((const char*) localname) : 0;
@@ -127,11 +129,12 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
     state->root.attributes[index + 4] = state->root.attributes[index + 3] + vallength;
   }
 
-  setRootAttributes(state->root.attributes, state->root.nb_attributes);
+  //setRootAttributes(state->root.attributes, state->root.nb_attributes);
 
   // handle nested units
   ctxt->sax->startElementNs = &startElementNs;
 
+}
 
 /**
  * startElementNs
