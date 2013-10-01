@@ -1,5 +1,5 @@
 /*
-  SAX2srcMLHandler.hpp
+  @file SAX2srcMLHandler.hpp
 
   Copyright (C) 2004-2013  SDML (www.sdml.info)
 
@@ -27,6 +27,12 @@
 
 #include <libxml/parser.h>
 
+/**
+ * SAX2srcMLHandler
+ *
+ * Data structure to hold process during
+ * sax parsing.
+ */
 struct SAX2srcMLHandler {
 
   srcMLHandler * process;
