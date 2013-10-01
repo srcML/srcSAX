@@ -131,6 +131,7 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
     state->root.attributes[index + 4] = state->root.attributes[index + 3] + vallength;
   }
 
+  state->process->startRoot(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
   // handle nested units
   ctxt->sax->startElementNs = &startElementNsFirst;
 
