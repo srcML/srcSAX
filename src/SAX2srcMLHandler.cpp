@@ -102,6 +102,16 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
 
 }
 
+/**
+ * endElementNs
+ * @param ctx an xmlParserCtxtPtr
+ * @param localname the name of the element tag
+ * @param prefix the tag prefix
+ * @param URI the namespace of tag
+ *
+ * SAX handler function for end of an element.
+ * Immediately calls supplied handlers function.
+ */
 void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
@@ -111,6 +121,13 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 
 }
 
+/**
+ * characers
+ * @param ctx an xmlParserCtxtPtr
+ *
+ * SAX handler function for character handling.
+ * Immediately calls supplied handlers function.
+ */
 void characters(void * ctx, const xmlChar * ch, int len) {
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
