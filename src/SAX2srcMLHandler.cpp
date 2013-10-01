@@ -160,7 +160,10 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
   state->is_archive = strcmp((const char *)localname, "unit") == 0 && strcmp(URI, SRCML_SRC_NS_URI) == 0;
 
   if(!state->is_archive)
-;
+    state->process->startUnit(ctx, state->root.localname, state->root.prefix, state->root.URI,
+                               state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
+                               state->root.nb_defaulted, state->root.attributes);
+
     
 
 }
