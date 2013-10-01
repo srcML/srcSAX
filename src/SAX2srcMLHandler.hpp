@@ -31,7 +31,7 @@
  * Element
  *
  * Data structure to hold an element
- * mainly root lement
+ * mainly root element
  */
 struct Element {
 
