@@ -65,10 +65,45 @@ public :
    */
   ~srcMLControlHandler();
 
+
+  /**
+   * enable_startDocument
+   * @param enable bool indicate enable or disable SAX parsing.
+   *
+   * Enables or disables startDocument parsing.
+   */
   void enable_startDocument(bool enable);
+
+  /**
+   * enable_endDocument
+   * @param enable bool indicate enable or disable SAX parsing.
+   *
+   * Enables or disables endDocument parsing.
+   */
   void enable_endDocument(bool enable);
+
+  /**
+   * enable_startElementNs
+   * @param enable bool indicate enable or disable SAX parsing.
+   *
+   * Enables or disables startElementNs parsing.
+   */
   void enable_startElementNs(bool enable);
+
+  /**
+   * enable_endElementNs
+   * @param enable bool indicate enable or disable SAX parsing.
+   *
+   * Enables or disables endElementNs parsing.
+   */
   void enable_endElementNs(bool enable);
+
+  /**
+   * enable_characters
+   * @param enable bool indicate enable or disable SAX parsing.
+   *
+   * Enables or disables characters parsing.
+   */
   void enable_characters(bool enable);
 
   /**
