@@ -25,6 +25,7 @@ public :
     pthread_mutex_init(&is_done_mutex, 0);
     pthread_cond_init(&cond, 0);
     pthread_cond_init(&is_done_cond, 0);
+
   }
 
   ~srcMLHandlerThread() {
@@ -33,16 +34,20 @@ public :
     pthread_mutex_destroy(&is_done_mutex);
     pthread_cond_destroy(&cond);
     pthread_cond_destroy(&is_done_cond);
+
   }
 
   void wait() {
 
-    pthread_cond_wait(&is_done_cond, &is_done_mutex);
-
+    pthread_mutex_lock(&mutex);
+    pthread_cond_wait(&is_done_cond, &mutex);
+    pthread_mutex_unlock(&mutex);
   }
 
   void resume() {
+
     pthread_cond_broadcast(&cond);
+
   }
 
   virtual void startDocument() {
@@ -92,8 +97,10 @@ public :
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
     // pause
+    pthread_mutex_lock(&mutex);
     pthread_cond_broadcast(&is_done_cond);
     pthread_cond_wait(&cond, &mutex);
+    pthread_mutex_unlock(&mutex);
 
   }
 
