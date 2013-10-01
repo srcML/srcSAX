@@ -11,7 +11,7 @@ void * start_routine(void * arg) {
   srcMLHandlerThread * handler = (srcMLHandlerThread *)arg;
 
 
-  srcMLControlHandler control("test.xml");
+  srcMLControlHandler control("thread.xml");
   control.parse(handler);
 
   return 0;
@@ -22,13 +22,7 @@ int main(int argc, char * argv[]) {
 
 
   pthread_t thread;
-  pthread_mutex_t is_done_mutex;
-  pthread_cond_t cond;
-  //bool is_done = false;
-  //pthread_mutex_init(&is_done_mutex, 0);
-  //pthread_cond_init(&cond, 0);
   srcMLHandlerThread arg;
-  //srcMLHandlerThread arg(&is_done_mutex, &cond, is_done);
   pthread_create(&thread, 0, start_routine, &arg);
 
 
