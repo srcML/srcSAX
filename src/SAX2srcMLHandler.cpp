@@ -170,6 +170,7 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
     state->process->startUnit(ctx, localname, prefix, URI,
                                nb_namespaces, namespaces, nb_attributes,
                                nb_defaulted, attributes);
+
   ctxt->sax->startElementNs = &startElementNs;    
 
 }
@@ -228,25 +229,6 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
 }
 
 /**
- * endUnit
- * @param ctx an xmlParserCtxtPtr
- * @param localname the name of the element tag
- * @param prefix the tag prefix
- * @param URI the namespace of tag
- *
- * SAX handler function for end of an element.
- * Immediately calls supplied handlers function.
- */
-void endUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
-
-  xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
-
-  state->process->endElementNs(localname, prefix, URI);
-
-}
-
-/**
  * endElementNs
  * @param ctx an xmlParserCtxtPtr
  * @param localname the name of the element tag
@@ -261,7 +243,11 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  state->process->endElementNs(localname, prefix, URI);
+  if(strcmp((const char *)localname, "unit") == 0 && strcmp(URI, SRCML_SRC_NS_URI) == 0) {
+    state->process->endUnit(localname, prefix, URI);
+    ctxt->sax->startElementNs = &startUnit;    
+  } else
+    state->process->endElementNs(localname, prefix, URI);
 
 }
 
