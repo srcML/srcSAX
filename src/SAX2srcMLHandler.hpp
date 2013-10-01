@@ -97,7 +97,7 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
 void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI);
 
 /**
- * characers
+ * characters
  * @param ctx an xmlParserCtxtPtr
  * @param ch the characers
  * @param len number of characters

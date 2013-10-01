@@ -80,7 +80,7 @@ public :
   virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
 
   /**
-   * characers
+   * characters
    * @param ch the characers
    * @param len number of characters
    *

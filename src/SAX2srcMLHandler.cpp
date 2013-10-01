@@ -122,7 +122,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 }
 
 /**
- * characers
+ * characters
  * @param ctx an xmlParserCtxtPtr
  * @param ch the characers
  * @param len number of characters
