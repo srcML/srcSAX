@@ -106,6 +106,17 @@ public :
                               const xmlChar ** attributes) {}
 
   /**
+   * endRoot
+   * @param localname the name of the element tag
+   * @param prefix the tag prefix
+   * @param URI the namespace of tag
+   *
+   * SAX handler function for end of an element.
+   * Overide for desired behaviour.
+   */
+  virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
+
+  /**
    * endUnit
    * @param localname the name of the element tag
    * @param prefix the tag prefix

@@ -245,8 +245,18 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
   if(strcmp((const char *)localname, "unit") == 0 && strcmp((const char *)URI, SRCML_SRC_NS_URI) == 0) {
-    state->process->endUnit(localname, prefix, URI);
-    ctxt->sax->startElementNs = &startUnit;    
+
+    if(ctxt->sax->startElementNs == &startUnit) {
+
+      state->process->endRoot(localname, prefix, URI);
+
+    } else {
+
+      state->process->endUnit(localname, prefix, URI);
+      ctxt->sax->startElementNs = &startUnit;    
+
+    }
+
   } else
     state->process->endElementNs(localname, prefix, URI);
 

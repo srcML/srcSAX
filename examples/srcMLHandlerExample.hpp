@@ -46,6 +46,12 @@ public :
 
   }
 
+  virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+
+    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+
+  }
+
   virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
