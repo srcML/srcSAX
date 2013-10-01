@@ -69,7 +69,8 @@ void startDocument(void * ctx) {
  * @param ctx an xmlParserCtxtPtr
  *
  * SAX handler function for end of document.
- * Immediately calls supplied handlers function.
+ * Calls endRoot if needed then
+ * immediately calls supplied handlers function.
  */
 void endDocument(void * ctx) {
 
@@ -94,8 +95,8 @@ void endDocument(void * ctx) {
  * @param nb_defaulted the number of defaulted attributes
  * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
  *
- * SAX handler function for start of an element.
- * Immediately calls supplied handlers function.
+ * SAX handler function for start of root element.
+ * Caches root info and immediately calls supplied handlers function.
  */
 void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
@@ -151,8 +152,8 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
  * @param nb_defaulted the number of defaulted attributes
  * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
  *
- * SAX handler function for start of an element.
- * Immediately calls supplied handlers function.
+ * SAX handler function for start of first element after root
+ * Detects archive and acts accordingly.
  */
 void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
@@ -190,7 +191,7 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
  * @param nb_defaulted the number of defaulted attributes
  * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
  *
- * SAX handler function for start of an element.
+ * SAX handler function for start of an unit.
  * Immediately calls supplied handlers function.
  */
 void startUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
@@ -239,7 +240,8 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
  * @param URI the namespace of tag
  *
  * SAX handler function for end of an element.
- * Immediately calls supplied handlers function.
+ * Detects end of unit and calls correct functions
+ * for either endRoot endUnit or endElementNs.
  */
 void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
