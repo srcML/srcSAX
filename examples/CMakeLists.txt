@@ -12,3 +12,4 @@ file(GLOB EXAMPLE_SRC *.cpp)
 file(GLOB HANDLER_SRC ../src/*.cpp)
 
 add_executable(example ${EXAMPLE_SRC} ${HANDLER_SRC})
+target_link_libraries(example ${LIBXML2_LIBRARIES})
