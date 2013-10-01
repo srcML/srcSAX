@@ -60,7 +60,6 @@ public :
 
   /**
    * ~srcMLControlHandler
-   * @param filename name of a file
    *
    * Constructor
    */
