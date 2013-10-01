@@ -62,7 +62,7 @@ public :
    * @param nb_defaulted the number of defaulted attributes
    * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
    *
-   * SAX handler function for start of an element.
+   * SAX handler function for start of the root element.
    * Overide for desired behaviour.
    */
   virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
@@ -70,7 +70,7 @@ public :
                               const xmlChar ** attributes) {}
 
   /**
-   * startRoot
+   * startUnit
    * @param localname the name of the element tag
    * @param prefix the tag prefix
    * @param URI the namespace of tag
@@ -80,7 +80,7 @@ public :
    * @param nb_defaulted the number of defaulted attributes
    * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
    *
-   * SAX handler function for start of an element.
+   * SAX handler function for start of an unit.
    * Overide for desired behaviour.
    */
   virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
@@ -111,7 +111,7 @@ public :
    * @param prefix the tag prefix
    * @param URI the namespace of tag
    *
-   * SAX handler function for end of an element.
+   * SAX handler function for end of the root element.
    * Overide for desired behaviour.
    */
   virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
@@ -122,7 +122,7 @@ public :
    * @param prefix the tag prefix
    * @param URI the namespace of tag
    *
-   * SAX handler function for end of an element.
+   * SAX handler function for end of an unit.
    * Overide for desired behaviour.
    */
   virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
