@@ -53,6 +53,34 @@ void srcMLControlHandler::enable_startDocument(bool enable) {
   if(enable) sax.startDocument = startDocument;
   else sax.startDocument = 0;
 
+}
+
+void srcMLControlHandler::enable_endDocument(bool enable) {
+
+  if(enable) sax.endDocument = endDocument;
+  else sax.endDocument = 0;
+
+};
+
+void srcMLControlHandler::enable_startElementNs(bool enable) {
+
+  if(enable) sax.startElementNs = startElementNs;
+  else sax.startElementNs = 0;
+
+};
+
+void srcMLControlHandler::enable_endElementNs(bool enable) {
+
+  if(enable) sax.endElementNs = endElementNs;
+  else sax.endElementNs = 0;
+
+};
+
+void srcMLControlHandler::enable_characters(bool enable) {
+
+  if(enable) sax.characters = characters;
+  else sax.characters = 0;
+
 };
 
 /**

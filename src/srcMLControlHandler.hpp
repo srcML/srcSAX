@@ -66,6 +66,10 @@ public :
   ~srcMLControlHandler();
 
   void enable_startDocument(bool enable);
+  void enable_endDocument(bool enable);
+  void enable_startElementNs(bool enable);
+  void enable_endElementNs(bool enable);
+  void enable_characters(bool enable);
 
   /**
    * parse
