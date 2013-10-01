@@ -1,5 +1,5 @@
 /*
-  srcMLParser.g
+  SAX2srcMLHandler.cpp
 
   Copyright (C) 2004-2013  SDML (www.sdml.info)
 
