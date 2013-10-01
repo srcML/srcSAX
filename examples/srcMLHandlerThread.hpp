@@ -5,10 +5,21 @@
 
 #include <libxml/parser.h>
 #include <stdio.h>
+#include <pthread.h>
 
-class srcMLHandlerExample : public srcMLHandler {
+class srcMLHandlerThread : public srcMLHandler {
 
+private :
+
+  pthread_mutex_t mutex;
+  pthread_cond_t cond;
 public :
+
+  srcMLHandlerThread() {
+    
+    pthread_mutex_init(&mutex, 0);
+    pthread_cond_init(&cond, 0);
+  }
 
   virtual void startDocument() {
 
@@ -55,6 +66,7 @@ public :
   virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+    // pause
 
   }
 
