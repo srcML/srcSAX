@@ -17,7 +17,6 @@ srcMLControlHandler::~srcMLControlHandler() {
 
 void srcMLControlHandler::parse(srcMLHandler * handler) {
 
-
   sax2_handler.process = handler;
 
   ctxt->sax = &sax;
