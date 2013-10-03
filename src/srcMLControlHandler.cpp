@@ -30,6 +30,8 @@
  */
 srcMLControlHandler::srcMLControlHandler(const char * filename) : sax2_handler() {
 
+
+  /** @todo handle errors */
   ctxt = xmlCreateURLParserCtxt(filename, XML_PARSE_COMPACT | XML_PARSE_HUGE);
   sax = factory();
   ctxt->sax = &sax;
