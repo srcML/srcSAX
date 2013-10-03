@@ -325,3 +325,29 @@ void charactersUnit(void * ctx, const xmlChar * ch, int len) {
 
   state->process->charactersUnit(ch, len);
 }
+
+void ignorableWhitespace(void * ctx, const xmlChar * ch, int len) {
+
+  xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+
+  state->process->ignorableWhitespace(ch, len);
+
+}
+void comment(void * ctx, const xmlChar * value) {
+
+  xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+
+  state->process->comment(ch, len);
+
+}
+
+void cdataBlock(void * ctx, const xmlChar * value, int len) {
+
+  xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+
+  state->process->cdataBlock(ch, len);
+
+}
