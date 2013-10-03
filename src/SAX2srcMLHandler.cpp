@@ -45,6 +45,9 @@ xmlSAXHandler factory() {
 
   sax.characters = &charactersFirst;
 
+  sax.comment = &comment;
+  sax.cdataBlock = &cdataBlock;
+
   return sax;
 }
 
@@ -339,7 +342,7 @@ void comment(void * ctx, const xmlChar * value) {
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  state->process->comment(ch, len);
+  state->process->comment(value);
 
 }
 
@@ -357,6 +360,6 @@ void cdataBlock(void * ctx, const xmlChar * value, int len) {
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  state->process->cdataBlock(ch, len);
+  state->process->cdataBlock(value, len);
 
 }

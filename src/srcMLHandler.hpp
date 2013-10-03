@@ -66,8 +66,8 @@ public :
    * Overide for desired behaviour.
    */
   virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                              int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                              const xmlChar ** attributes) {}
+                         int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
+                         const xmlChar ** attributes) {}
 
   /**
    * startUnit
@@ -84,8 +84,8 @@ public :
    * Overide for desired behaviour.
    */
   virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                              int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                              const xmlChar ** attributes) {}
+                         int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
+                         const xmlChar ** attributes) {}
 
   /**
    * startElementNs
@@ -157,6 +157,25 @@ public :
    * Overide for desired behaviour.
    */
   virtual void charactersUnit(const xmlChar * ch, int len) {}
+
+  /**
+   * comment
+   * @param value the comment content
+   *
+   * A comment has been parsed.
+   * Overide for desired behaviour.
+   */
+  virtual void comment(const xmlChar * value) {}
+
+  /**
+   * cdataBlock
+   * @param value the pcdata content
+   * @param len the block length
+   *
+   * Called when a pcdata block has been parsed.
+   * Overide for desired behaviour.
+   */
+  virtual void cdataBlock(const xmlChar * value, int len) {}
 
 };
 
