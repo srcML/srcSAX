@@ -87,18 +87,18 @@ int main(int argc, char * argv[]) {
     assert((const char *)sax2_handler.root.attributes[0] == std::string("filename"));
     assert((const char *)sax2_handler.root.attributes[1] == std::string("src"));
     assert((const char *)sax2_handler.root.attributes[2] == std::string("http://www.sdml.info/srcML/src"));
-    assert(const char *)sax2_handler.root.attributes[3] == values);
-    assert(const char *)sax2_handler.root.attributes[4] == values + 1);
+    assert(sax2_handler.root.attributes[4] - sax2_handler.root.attributes[3] == 1);
+    assert((char)sax2_handler.root.attributes[3][0] == 'a');
     assert((const char *)sax2_handler.root.attributes[5] == std::string("dir"));
     assert((const char *)sax2_handler.root.attributes[6] == std::string("src"));
     assert((const char *)sax2_handler.root.attributes[7] == std::string("http://www.sdml.info/srcML/src"));
-    assert(const char *)sax2_handler.root.attributes[8] == values + 1);
-    assert(const char *)sax2_handler.root.attributes[9] == values + 2);
+    assert(sax2_handler.root.attributes[9] - sax2_handler.root.attributes[8] == 1);
+    assert((char)sax2_handler.root.attributes[8][0] == 'b');
     assert((const char *)sax2_handler.root.attributes[10] == std::string("language"));
     assert((const char *)sax2_handler.root.attributes[11] == std::string("src"));
     assert((const char *)sax2_handler.root.attributes[12] == std::string("http://www.sdml.info/srcML/src"));
-    assert(const char *)sax2_handler.root.attributes[13] == values + 2);
-    assert(const char *)sax2_handler.root.attributes[14] == values + 3);
+    assert(sax2_handler.root.attributes[14] - sax2_handler.root.attributes[13] == 1);
+    assert((char)sax2_handler.root.attributes[13][0] == 'c');
 
   }
 
