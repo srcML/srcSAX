@@ -176,6 +176,7 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
                                nb_defaulted, attributes);
 
   ctxt->sax->startElementNs = &startElementNs;    
+  ctxt->sax->characters = &charactersUnit;
 
 }
 
