@@ -24,5 +24,18 @@ int main(int argc, char * argv[]) {
 
   }
 
+  /*
+    startDocument
+   */
+  {
+
+    srcMLHandler handler;
+
+    xmlParserCtxt ctxt;
+    ctxt._private = &handler;
+    
+
+  }
+
   return 0;
 }
