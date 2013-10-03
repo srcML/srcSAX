@@ -203,7 +203,7 @@ void startUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
 
   state->process->startUnit(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
   ctxt->sax->startElementNs = &startElementNs;    
-  ctxt->sax->characters = &characersUnit;
+  ctxt->sax->characters = &charactersUnit;
 
 }
 
@@ -260,7 +260,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 
       state->process->endUnit(localname, prefix, URI);
       ctxt->sax->startElementNs = &startUnit;    
-      ctxt->sax->characters = &characersRoot;
+      ctxt->sax->characters = &charactersRoot;
 
     }
 

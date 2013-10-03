@@ -156,7 +156,7 @@ public :
    * SAX handler function for character handling within a unit.
    * Overide for desired behaviour.
    */
-  void charactersUnit(void * ctx, const xmlChar * ch, int len) {}
+  void charactersUnit(const xmlChar * ch, int len) {}
 
 };
 
