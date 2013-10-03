@@ -114,7 +114,13 @@ public :
 
   }
 
-  virtual void characters(const xmlChar * ch, int len) {
+  virtual void charactersRoot(const xmlChar * ch, int len) {
+
+    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+
+  }
+
+  virtual void charactersUnit(const xmlChar * ch, int len) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
