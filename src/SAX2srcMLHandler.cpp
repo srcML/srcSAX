@@ -271,6 +271,24 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 }
 
 /**
+ * charactersFirst
+ * @param ctx an xmlParserCtxtPtr
+ * @param ch the characers
+ * @param len number of characters
+ *
+ * SAX handler function for character handling before we
+ * know if we have an archive or not.
+ * Immediately calls supplied handlers function.
+ */
+void charactersFirst(void * ctx, const xmlChar * ch, int len) {
+
+  xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+
+  state->root.characters.append((const char *)ch, len);
+}
+
+/**
  * charactersRoot
  * @param ctx an xmlParserCtxtPtr
  * @param ch the characers

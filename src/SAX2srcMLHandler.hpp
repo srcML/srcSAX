@@ -27,6 +27,8 @@
 
 #include <libxml/parser.h>
 
+#include <string>
+
 /**
  * Element
  *
@@ -58,6 +60,8 @@ struct Element {
 
   /** attributes of an element*/
   const xmlChar** attributes;
+
+  std::string characters;
 
 };
 
