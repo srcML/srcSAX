@@ -126,6 +126,18 @@ public :
 
   }
 
+  virtual void comment(const xmlChar * value) {
+
+    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+
+  }
+
+  virtual void cdataBlock(const xmlChar * value, int len) {
+
+    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+
+  }
+
 };
 
 #endif
