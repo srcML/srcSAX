@@ -45,7 +45,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler;
+    SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -60,7 +60,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler;
+    SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -99,6 +99,7 @@ int main(int argc, char * argv[]) {
     assert((const char *)sax2_handler.root.attributes[12] == std::string("http://www.sdml.info/srcML/src"));
     assert(sax2_handler.root.attributes[14] - sax2_handler.root.attributes[13] == 1);
     assert((char)sax2_handler.root.attributes[13][0] == 'c');
+    endDocument(&ctxt);
 
   }
 
