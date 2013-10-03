@@ -108,8 +108,34 @@ void srcMLControlHandler::enable_endElementNs(bool enable) {
  */
 void srcMLControlHandler::enable_characters(bool enable) {
 
-  if(enable) sax.characters = characters;
+  if(enable) sax.characters = charactersRoot;
   else sax.characters = 0;
+
+}
+
+/**
+ * enable_comment
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables comment parsing.
+ */
+void srcMLControlHandler::enable_comment(bool enable) {
+
+  if(enable) sax.comment = comment;
+  else sax.comment = 0;
+
+}
+
+/**
+ * enable_cdataBlock
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables cdataBlock parsing.
+ */
+void srcMLControlHandler::enable_cdataBlock(bool enable) {
+
+  if(enable) sax.cdataBlock = cdataBlock;
+  else sax.cdataBlock = 0;
 
 }
 

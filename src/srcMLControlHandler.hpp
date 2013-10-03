@@ -107,6 +107,22 @@ public :
   void enable_characters(bool enable);
 
   /**
+   * enable_comment
+   * @param enable bool indicate enable or disable SAX parsing.
+   *
+   * Enables or disables comment parsing.
+   */
+  void enable_comment(bool enable);
+
+  /**
+   * enable_cdataBlock
+   * @param enable bool indicate enable or disable SAX parsing.
+   *
+   * Enables or disables cdataBlock parsing.
+   */
+  void enable_cdataBlock(bool enable);
+
+  /**
    * parse
    * @param handler srcMLHandler with hooks for sax parsing
    *
