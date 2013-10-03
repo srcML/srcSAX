@@ -64,6 +64,8 @@ int main(int argc, char * argv[]) {
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
+    xmlSAXHandler sax = factory();
+    ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
     const char * values = "abc";
@@ -99,7 +101,35 @@ int main(int argc, char * argv[]) {
     assert((const char *)sax2_handler.root.attributes[12] == std::string("http://www.sdml.info/srcML/src"));
     assert(sax2_handler.root.attributes[14] - sax2_handler.root.attributes[13] == 1);
     assert((char)sax2_handler.root.attributes[13][0] == 'c');
+    assert(ctxt.sax->startElementNs == startElementNsFirst);
     endDocument(&ctxt);
+
+  }
+
+  /*
+    startElementNsFirst
+   */
+  {
+
+    srcMLHandler handler;
+    SAX2srcMLHandler sax2_handler = { 0 };
+    sax2_handler.process = &handler;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                   "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+
+    startElementNsFirst(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+    assert(ctxt.sax->startElementNs == startElementNs);
+    assert(ctxt.sax->characters = &charactersUnit);
 
   }
 

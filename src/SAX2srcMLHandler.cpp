@@ -189,6 +189,7 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
   state->is_archive = strcmp((const char *)localname, "unit") == 0 && strcmp((const char *)URI, SRCML_SRC_NS_URI) == 0;
 
   if(!state->is_archive) {
+
     state->process->startUnit(state->root.localname, state->root.prefix, state->root.URI,
                                state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
                                state->root.nb_defaulted, state->root.attributes);
@@ -197,10 +198,12 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
                                nb_namespaces, namespaces, nb_attributes,
                                nb_defaulted, attributes);
   } else {
+
     state->process->charactersRoot((const xmlChar *)state->root.characters.c_str(), state->root.characters.size());
     state->process->startUnit(localname, prefix, URI,
                                nb_namespaces, namespaces, nb_attributes,
                                nb_defaulted, attributes);
+
 
   }
 
