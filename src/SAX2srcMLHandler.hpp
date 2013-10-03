@@ -232,4 +232,25 @@ void charactersRoot(void * ctx, const xmlChar * ch, int len);
  */
 void charactersUnit(void * ctx, const xmlChar * ch, int len);
 
+/**
+ * comment
+ * @param ctx an xmlParserCtxtPtr
+ * @param value the comment content
+ *
+ * A comment has been parsed.
+ * Immediately calls supplied handlers function.
+ */
+void comment(void * ctx, const xmlChar * value);
+
+/**
+ * cdataBlock
+ * @param ctx an xmlParserCtxtPtr
+ * @param value the pcdata content
+ * @param len the block length
+ *
+ * Called when a pcdata block has been parsed.
+ * Immediately calls supplied handlers function.
+ */
+void cdataBlock(void * ctx, const xmlChar * value, int len);
+
 #endif
