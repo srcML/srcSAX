@@ -30,10 +30,12 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandler handler;
+    SAX2srcMLHandler sax2_handler;
+    sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
-    ctxt._private = &handler;
-    
+    ctxt._private = &sax2_handler;
+    startDocument(&ctxt);
 
   }
 
