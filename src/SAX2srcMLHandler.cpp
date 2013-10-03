@@ -43,7 +43,7 @@ xmlSAXHandler factory() {
   sax.startElementNs = &startRoot;
   sax.endElementNs = &endElementNs;
 
-  sax.characters = &characters;
+  sax.characters = &charactersRoot;
 
   return sax;
 }
@@ -203,6 +203,7 @@ void startUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
 
   state->process->startUnit(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
   ctxt->sax->startElementNs = &startElementNs;    
+  ctxt->sax->characters = &characersUnit;
 
 }
 
@@ -259,6 +260,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 
       state->process->endUnit(localname, prefix, URI);
       ctxt->sax->startElementNs = &startUnit;    
+      ctxt->sax->characters = &characersRoot;
 
     }
 
@@ -268,12 +270,12 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 }
 
 /**
- * characters
+ * charactersRoot
  * @param ctx an xmlParserCtxtPtr
  * @param ch the characers
  * @param len number of characters
  *
- * SAX handler function for character handling.
+ * SAX handler function for character handling at the root level.
  * Immediately calls supplied handlers function.
  */
 void characters(void * ctx, const xmlChar * ch, int len) {
@@ -281,5 +283,22 @@ void characters(void * ctx, const xmlChar * ch, int len) {
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  state->process->characters(ch, len);
+  state->process->charactersRoot(ch, len);
+}
+
+/**
+ * charactersUnit
+ * @param ctx an xmlParserCtxtPtr
+ * @param ch the characers
+ * @param len number of characters
+ *
+ * SAX handler function for character handling within a unit.
+ * Immediately calls supplied handlers function.
+ */
+void charactersUnit(void * ctx, const xmlChar * ch, int len) {
+
+  xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
+  SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+
+  state->process->charactersUnit(ch, len);
 }
