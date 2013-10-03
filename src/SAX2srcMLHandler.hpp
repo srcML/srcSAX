@@ -195,14 +195,25 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
 void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI);
 
 /**
- * characters
+ * charactersRoot
  * @param ctx an xmlParserCtxtPtr
  * @param ch the characers
  * @param len number of characters
  *
- * SAX handler function for character handling.
+ * SAX handler function for character handling at the root level.
  * Immediately calls supplied handlers function.
  */
-void characters(void * ctx, const xmlChar * ch, int len);
+void charactersRoot(void * ctx, const xmlChar * ch, int len);
+
+/**
+ * charactersUnit
+ * @param ctx an xmlParserCtxtPtr
+ * @param ch the characers
+ * @param len number of characters
+ *
+ * SAX handler function for character handling within a unit.
+ * Immediately calls supplied handlers function.
+ */
+void charactersUnit(void * ctx, const xmlChar * ch, int len);
 
 #endif

@@ -139,14 +139,24 @@ public :
   virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
 
   /**
-   * characters
+   * charactersRoot
    * @param ch the characers
    * @param len number of characters
    *
-   * SAX handler function for character handling.
+   * SAX handler function for character handling at the root level.
    * Overide for desired behaviour.
    */
-  virtual void characters(const xmlChar * ch, int len) {}
+  virtual void charactersRoot(const xmlChar * ch, int len) {}
+
+  /**
+   * charactersUnit
+   * @param ch the characers
+   * @param len number of characters
+   *
+   * SAX handler function for character handling within a unit.
+   * Overide for desired behaviour.
+   */
+  void charactersUnit(void * ctx, const xmlChar * ch, int len) {}
 
 };
 

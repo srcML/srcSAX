@@ -278,7 +278,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
  * SAX handler function for character handling at the root level.
  * Immediately calls supplied handlers function.
  */
-void characters(void * ctx, const xmlChar * ch, int len) {
+void charactersRoot(void * ctx, const xmlChar * ch, int len) {
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
