@@ -43,7 +43,7 @@ xmlSAXHandler factory() {
   sax.startElementNs = &startRoot;
   sax.endElementNs = &endElementNs;
 
-  sax.characters = &charactersRoot;
+  sax.characters = &charactersFirst;
 
   return sax;
 }
@@ -167,13 +167,17 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
     state->process->startUnit(state->root.localname, state->root.prefix, state->root.URI,
                                state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
                                state->root.nb_defaulted, state->root.attributes);
+    state->process->charactersUnit((const xmlChar *)state->root.characters.c_str(), state->root.characters.size());
     state->process->startElementNs(localname, prefix, URI,
                                nb_namespaces, namespaces, nb_attributes,
                                nb_defaulted, attributes);
-  } else
+  } else {
+    state->process->charactersRoot((const xmlChar *)state->root.characters.c_str(), state->root.characters.size());
     state->process->startUnit(localname, prefix, URI,
                                nb_namespaces, namespaces, nb_attributes,
                                nb_defaulted, attributes);
+
+  }
 
   ctxt->sax->startElementNs = &startElementNs;    
   ctxt->sax->characters = &charactersUnit;
