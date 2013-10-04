@@ -85,8 +85,8 @@ void endDocument(void * ctx) {
   state->process->endDocument();
 
   if(state->root.localname) free((void *)state->root.localname);
-  if(state->root.localname) free((void *)state->root.prefix);
-  if(state->root.localname) free((void *)state->root.URI);
+  if(state->root.prefix) free((void *)state->root.prefix);
+  if(state->root.URI) free((void *)state->root.URI);
 
   int ns_length = state->root.nb_namespaces * 2;
 
