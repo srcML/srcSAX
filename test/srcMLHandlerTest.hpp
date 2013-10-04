@@ -37,27 +37,29 @@ class srcMLHandlerTest : public srcMLHandler {
 
 public :
 
-  bool start_document;
-  bool end_document;
+  int start_document;
+  int end_document;
 
-  bool start_root;
-  bool start_unit;
-  bool start_element_ns;
+  int start_root;
+  int start_unit;
+  int start_element_ns;
 
-  bool end_root;
-  bool end_unit;
-  bool end_element_ns;
+  int end_root;
+  int end_unit;
+  int end_element_ns;
 
-  bool characters_root;
-  bool characters_unit;
+  int characters_root;
+  int characters_unit;
 
-  bool comment_;
-  bool cdata_block;
+  int comment_;
+  int cdata_block;
+
+  int call_count;
 
   srcMLHandlerTest() 
-    : start_document(false), end_document(false), start_root(false), start_unit(false), start_element_ns(false),
-      end_root(false), end_unit(false), end_element_ns(false), characters_root(false), characters_unit(false),
-      comment_(false), cdata_block(false) {}
+    : start_document(0), end_document(0), start_root(0), start_unit(0), start_element_ns(0),
+      end_root(0), end_unit(0), end_element_ns(0), characters_root(0), characters_unit(0),
+      comment_(0), cdata_block(0), call_count(0) {}
 
   /**
    * startDocument
@@ -67,7 +69,7 @@ public :
    */
   virtual void startDocument() { 
 
-    start_document = true;
+    start_document = ++call_count;
 
   }
 
@@ -79,7 +81,7 @@ public :
    */
   virtual void endDocument() {
 
-    end_document = true;
+    end_document = ++call_count;
 
   }
 
@@ -101,7 +103,7 @@ public :
                          int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                          const xmlChar ** attributes) {
 
-    start_root = true;
+    start_root = ++call_count;
 
   }
 
@@ -123,7 +125,7 @@ public :
                          int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                          const xmlChar ** attributes) {
 
-    start_unit = true;
+    start_unit = ++call_count;
 
   }
 
@@ -144,7 +146,7 @@ public :
   virtual void startElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                               int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                               const xmlChar ** attributes) {
-    start_element_ns = true;
+    start_element_ns = ++call_count;
 
   }
 
@@ -159,7 +161,7 @@ public :
    */
   virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
-    end_root = true;
+    end_root = ++call_count;
 
   }
 
@@ -174,7 +176,7 @@ public :
    */
   virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
-    end_unit = true;
+    end_unit = ++call_count;
 
   }
 
@@ -189,7 +191,7 @@ public :
    */
   virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
-    end_element_ns = true;
+    end_element_ns = ++call_count;
 
   }
 
@@ -203,7 +205,7 @@ public :
    */
   virtual void charactersRoot(const xmlChar * ch, int len) {
 
-    characters_root = true;
+    characters_root = ++call_count;
 
   }
 
@@ -217,7 +219,7 @@ public :
    */
   virtual void charactersUnit(const xmlChar * ch, int len) {
 
-    characters_unit = true;
+    characters_unit = ++call_count;
 
   }
 
@@ -230,7 +232,7 @@ public :
    */
   virtual void comment(const xmlChar * value) {
 
-    comment_ = true;
+    comment_ = ++call_count;
 
   }
 
@@ -244,7 +246,7 @@ public :
    */
   virtual void cdataBlock(const xmlChar * value, int len) {
 
-    cdata_block = true;
+    cdata_block = ++call_count;
 
   }
 

@@ -21,18 +21,18 @@ int main(int argc, char * argv[]) {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     startDocument(&ctxt);
-    assert(handler.start_document == true);
-    assert(handler.end_document == false);
-    assert(handler.start_root == false);
-    assert(handler.start_unit == false);
-    assert(handler.start_element_ns == false);
-    assert(handler.end_root == false);
-    assert(handler.end_unit == false);
-    assert(handler.end_element_ns == false);
-    assert(handler.characters_root == false);
-    assert(handler.characters_unit == false);
-    assert(handler.comment_ == false);
-    assert(handler.cdata_block == false);
+    assert(handler.start_document == 1);
+    assert(handler.end_document == 0);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 0);
+    assert(handler.start_element_ns == 0);
+    assert(handler.end_root == 0);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 0);
+    assert(handler.characters_unit == 0);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 0);
 
   }
 
@@ -50,18 +50,18 @@ int main(int argc, char * argv[]) {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     endDocument(&ctxt);
-    assert(handler.start_document == false);
-    assert(handler.end_document == true);
-    assert(handler.start_root == false);
-    assert(handler.start_unit == false);
-    assert(handler.start_element_ns == false);
-    assert(handler.end_root == true);
-    assert(handler.end_unit == false);
-    assert(handler.end_element_ns == false);
-    assert(handler.characters_root == false);
-    assert(handler.characters_unit == false);
-    assert(handler.comment_ == false);
-    assert(handler.cdata_block == false);
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 2);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 0);
+    assert(handler.start_element_ns == 0);
+    assert(handler.end_root == 1);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 0);
+    assert(handler.characters_unit == 0);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 0);
 
   }
 
@@ -77,18 +77,18 @@ int main(int argc, char * argv[]) {
     sax.startElementNs = 0;
     ctxt._private = &sax2_handler;
     endDocument(&ctxt);
-    assert(handler.start_document == false);
-    assert(handler.end_document == true);
-    assert(handler.start_root == false);
-    assert(handler.start_unit == false);
-    assert(handler.start_element_ns == false);
-    assert(handler.end_root == false);
-    assert(handler.end_unit == false);
-    assert(handler.end_element_ns == false);
-    assert(handler.characters_root == false);
-    assert(handler.characters_unit == false);
-    assert(handler.comment_ == false);
-    assert(handler.cdata_block == false);
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 1);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 0);
+    assert(handler.start_element_ns == 0);
+    assert(handler.end_root == 0);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 0);
+    assert(handler.characters_unit == 0);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 0);
 
   }
 
@@ -113,18 +113,18 @@ int main(int argc, char * argv[]) {
     startRoot(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
-    assert(handler.start_document == false);
-    assert(handler.end_document == false);
-    assert(handler.start_root == true);
-    assert(handler.start_unit == false);
-    assert(handler.start_element_ns == false);
-    assert(handler.end_root == false);
-    assert(handler.end_unit == false);
-    assert(handler.end_element_ns == false);
-    assert(handler.characters_root == false);
-    assert(handler.characters_unit == false);
-    assert(handler.comment_ == false);
-    assert(handler.cdata_block == false);
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 0);
+    assert(handler.start_root == 1);
+    assert(handler.start_unit == 0);
+    assert(handler.start_element_ns == 0);
+    assert(handler.end_root == 0);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 0);
+    assert(handler.characters_unit == 0);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 0);
     endDocument(&ctxt);
 
   }
@@ -151,18 +151,18 @@ int main(int argc, char * argv[]) {
     startElementNsFirst(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
-    assert(handler.start_document == false);
-    assert(handler.end_document == false);
-    assert(handler.start_root == false);
-    assert(handler.start_unit == true);
-    assert(handler.start_element_ns == false);
-    assert(handler.end_root == false);
-    assert(handler.end_unit == false);
-    assert(handler.end_element_ns == false);
-    assert(handler.characters_root == true);
-    assert(handler.characters_unit == false);
-    assert(handler.comment_ == false);
-    assert(handler.cdata_block == false);
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 0);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 2);
+    assert(handler.start_element_ns == 0);
+    assert(handler.end_root == 0);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 1);
+    assert(handler.characters_unit == 0);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 0);
     endDocument(&ctxt);
 
   }
@@ -186,18 +186,18 @@ int main(int argc, char * argv[]) {
     startElementNsFirst(&ctxt, (const xmlChar *)"name", (const xmlChar *)"src",
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
-    assert(handler.start_document == false);
-    assert(handler.end_document == false);
-    assert(handler.start_root == false);
-    assert(handler.start_unit == true);
-    assert(handler.start_element_ns == true);
-    assert(handler.end_root == false);
-    assert(handler.end_unit == false);
-    assert(handler.end_element_ns == false);
-    assert(handler.characters_root == false);
-    assert(handler.characters_unit == true);
-    assert(handler.comment_ == false);
-    assert(handler.cdata_block == false);
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 0);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 1);
+    assert(handler.start_element_ns == 3);
+    assert(handler.end_root == 0);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 0);
+    assert(handler.characters_unit == 2);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 0);
     endDocument(&ctxt);
 
   }
@@ -224,18 +224,18 @@ int main(int argc, char * argv[]) {
     startUnit(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
-    assert(handler.start_document == false);
-    assert(handler.end_document == false);
-    assert(handler.start_root == true);
-    assert(handler.start_unit == false);
-    assert(handler.start_element_ns == false);
-    assert(handler.end_root == false);
-    assert(handler.end_unit == false);
-    assert(handler.end_element_ns == false);
-    assert(handler.characters_root == false);
-    assert(handler.characters_unit == false);
-    assert(handler.comment_ == false);
-    assert(handler.cdata_block == false);
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 0);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 1);
+    assert(handler.start_element_ns == 0);
+    assert(handler.end_root == 0);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 0);
+    assert(handler.characters_unit == 0);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 0);
     endDocument(&ctxt);
 
   }
