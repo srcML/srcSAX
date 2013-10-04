@@ -60,6 +60,8 @@ xmlSAXHandler factory() {
  */
 void startDocument(void * ctx) {
 
+  if(ctx == NULL) return;
+
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
@@ -76,6 +78,8 @@ void startDocument(void * ctx) {
  * immediately calls supplied handlers function.
  */
 void endDocument(void * ctx) {
+
+  if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
@@ -126,6 +130,8 @@ void endDocument(void * ctx) {
 void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                     const xmlChar ** attributes) {
+
+  if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
@@ -184,6 +190,8 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                     const xmlChar ** attributes) {
 
+  if(ctx == NULL) return;
+
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
   state->is_archive = strcmp((const char *)localname, "unit") == 0 && strcmp((const char *)URI, SRCML_SRC_NS_URI) == 0;
@@ -231,6 +239,8 @@ void startUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                     const xmlChar ** attributes) {
 
+  if(ctx == NULL) return;
+
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
@@ -259,6 +269,8 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                     const xmlChar ** attributes) {
 
+  if(ctx == NULL) return;
+
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
@@ -278,6 +290,8 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
  * for either endRoot endUnit or endElementNs.
  */
 void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+
+  if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
@@ -314,6 +328,8 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
  */
 void charactersFirst(void * ctx, const xmlChar * ch, int len) {
 
+  if(ctx == NULL) return;
+
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
@@ -330,6 +346,8 @@ void charactersFirst(void * ctx, const xmlChar * ch, int len) {
  * Immediately calls supplied handlers function.
  */
 void charactersRoot(void * ctx, const xmlChar * ch, int len) {
+
+  if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
@@ -348,6 +366,8 @@ void charactersRoot(void * ctx, const xmlChar * ch, int len) {
  */
 void charactersUnit(void * ctx, const xmlChar * ch, int len) {
 
+  if(ctx == NULL) return;
+
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
@@ -363,6 +383,8 @@ void charactersUnit(void * ctx, const xmlChar * ch, int len) {
  * Immediately calls supplied handlers function.
  */
 void comment(void * ctx, const xmlChar * value) {
+
+  if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
@@ -381,6 +403,8 @@ void comment(void * ctx, const xmlChar * value) {
  * Immediately calls supplied handlers function.
  */
 void cdataBlock(void * ctx, const xmlChar * value, int len) {
+
+  if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
