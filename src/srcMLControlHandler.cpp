@@ -55,7 +55,7 @@ srcMLControlHandler::~srcMLControlHandler() {
  *
  * Return the used sax handler.
  */
-xmlSAXHandler & srcMLControlHandler::getSAX() const {
+const xmlSAXHandler & srcMLControlHandler::getSAX() const {
 
   return sax;
 

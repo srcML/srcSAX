@@ -63,7 +63,7 @@ public :
    *
    * Return the used sax handler.
    */
-  xmlSAXHandler & getSAX() const;
+  const xmlSAXHandler & getSAX() const;
 
   /**
    * ~srcMLControlHandler
