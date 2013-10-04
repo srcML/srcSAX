@@ -279,7 +279,7 @@ int main(int argc, char * argv[]) {
 
 
   /*
-    endRoot
+    endElementNs
   */
   {
 
@@ -317,18 +317,22 @@ int main(int argc, char * argv[]) {
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = factory();
-    sax.startElementNs = &startUnit;
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     endElementNs(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
                  (const xmlChar *)"http://www.sdml.info/srcML/src");
-    assert(ctxt.sax->startDocument == startDocument);
-    assert(ctxt.sax->endDocument == endDocument);
-    assert(ctxt.sax->startElementNs == 0);
-    assert(ctxt.sax->endElementNs == endElementNs);
-    assert(ctxt.sax->characters == charactersFirst);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdataBlock == cdataBlock);
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 0);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 0);
+    assert(handler.start_element_ns == 0);
+    assert(handler.end_root == 0);
+    assert(handler.end_unit == 1);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 0);
+    assert(handler.characters_unit == 0);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 0);
 
   }
 
@@ -344,69 +348,18 @@ int main(int argc, char * argv[]) {
     ctxt._private = &sax2_handler;
     endElementNs(&ctxt, (const xmlChar *)"name", (const xmlChar *)"src",
                  (const xmlChar *)"http://www.sdml.info/srcML/src");
-    assert(ctxt.sax->startDocument == startDocument);
-    assert(ctxt.sax->endDocument == endDocument);
-    assert(ctxt.sax->startElementNs == startRoot);
-    assert(ctxt.sax->endElementNs == endElementNs);
-    assert(ctxt.sax->characters == charactersFirst);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdataBlock == cdataBlock);
-
-  }
-
-  {
-
-    endElementNs(NULL, (const xmlChar *)"unit", (const xmlChar *)"src",
-                 (const xmlChar *)"http://www.sdml.info/srcML/src");
-  }
-
-  /*
-    endUnit
-  */
-  {
-
-    srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
-    sax2_handler.process = &handler;
-
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
-    endElementNs(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
-                 (const xmlChar *)"http://www.sdml.info/srcML/src");
-    assert(ctxt.sax->startDocument == startDocument);
-    assert(ctxt.sax->endDocument == endDocument);
-    assert(ctxt.sax->startElementNs == startUnit);
-    assert(ctxt.sax->endElementNs == endElementNs);
-    assert(ctxt.sax->characters == charactersRoot);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdataBlock == cdataBlock);
-
-  }
-
-  /*
-    endElementNs
-  */
-  {
-
-    srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
-    sax2_handler.process = &handler;
-
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
-    endElementNs(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
-                 (const xmlChar *)"http://www.sdml.info/srcML/src");
-    assert(ctxt.sax->startDocument == startDocument);
-    assert(ctxt.sax->endDocument == endDocument);
-    assert(ctxt.sax->startElementNs == startUnit);
-    assert(ctxt.sax->endElementNs == endElementNs);
-    assert(ctxt.sax->characters == charactersRoot);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdataBlock == cdataBlock);
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 0);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 0);
+    assert(handler.start_element_ns == 0);
+    assert(handler.end_root == 0);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 1);
+    assert(handler.characters_root == 0);
+    assert(handler.characters_unit == 0);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 0);
 
   }
 
