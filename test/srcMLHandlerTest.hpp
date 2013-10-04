@@ -24,16 +24,40 @@
 #ifndef INCLUDED_SRCMLHANDLER_HPP
 #define INCLUDED_SRCMLHANDLER_HPP
 
+#include <srcMLHandler.hpp>
+
 #include <libxml/parser.h>
 
 /**
- * srcMLHandler
+ * srcMLHandlerTest
  *
  * Base class that provides hooks for SAX processing.
  */
-class srcMLHandler {
+class srcMLHandlerTest : srcMLHandler {
 
 public :
+
+  bool start_document;
+  bool end_document;
+
+  bool start_root;
+  bool start_unit;
+  bool start_element_ns;
+
+  bool end_root;
+  bool end_unit;
+  bool end_element_ns;
+
+  bool characters_root;
+  bool characters_unit;
+
+  bool comment_;
+  bool cdata_block;
+
+  srcMLHandlerTest() 
+    : start_document(false), end_document(false), start_root(false), start_unit(false), start_element_ns(false),
+      end_root(false), end_unit(false), end_element_ns(false), characters_root(false), characters_unit(false),
+      comment_(false), cdata_block(false) {}
 
   /**
    * startDocument
