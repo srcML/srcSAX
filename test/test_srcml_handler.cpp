@@ -19,6 +19,18 @@ int main(int argc, char * argv[]) {
     xmlParserCtxt ctxt;
     ctxt._private = &sax2_handler;
     startDocument(&ctxt);
+    assert(handler.start_document == true);
+    assert(handler.end_document == false);
+    assert(handler.start_root == false);
+    assert(handler.start_unit == false);
+    assert(handler.start_element_ns == false);
+    assert(handler.end_root == false);
+    assert(handler.end_unit == false);
+    assert(handler.end_element_ns == false);
+    assert(handler.characters_root == false);
+    assert(handler.characters_unit == false);
+    assert(handler.comment_ == false);
+    assert(handler.cdata_block == false);
 
   }
 
