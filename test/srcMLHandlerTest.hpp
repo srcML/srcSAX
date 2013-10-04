@@ -21,8 +21,8 @@
   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-#ifndef INCLUDED_SRCMLHANDLER_HPP
-#define INCLUDED_SRCMLHANDLER_HPP
+#ifndef INCLUDED_SRCML_HANDLER_TEST_HPP
+#define INCLUDED_SRCML_HANDLER_TEST_HPP
 
 #include <srcMLHandler.hpp>
 
@@ -33,7 +33,7 @@
  *
  * Base class that provides hooks for SAX processing.
  */
-class srcMLHandlerTest : srcMLHandler {
+class srcMLHandlerTest : public srcMLHandler {
 
 public :
 

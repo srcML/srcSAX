@@ -1,3 +1,4 @@
+#include <srcMLHandlerTest.hpp>
 #include <SAX2srcMLHandler.hpp>
 
 #include <stdio.h>
@@ -11,7 +12,7 @@ int main(int argc, char * argv[]) {
    */
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -32,7 +33,7 @@ int main(int argc, char * argv[]) {
    */
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
@@ -53,7 +54,7 @@ int main(int argc, char * argv[]) {
    */
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
@@ -124,7 +125,7 @@ int main(int argc, char * argv[]) {
    */
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
@@ -169,7 +170,7 @@ int main(int argc, char * argv[]) {
    */
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
@@ -213,7 +214,7 @@ int main(int argc, char * argv[]) {
    */
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
@@ -235,7 +236,7 @@ int main(int argc, char * argv[]) {
 
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
@@ -258,7 +259,7 @@ int main(int argc, char * argv[]) {
 
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
@@ -289,7 +290,7 @@ int main(int argc, char * argv[]) {
    */
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
@@ -314,7 +315,7 @@ int main(int argc, char * argv[]) {
    */
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
@@ -339,7 +340,7 @@ int main(int argc, char * argv[]) {
    */
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
@@ -368,7 +369,7 @@ int main(int argc, char * argv[]) {
    */
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
@@ -397,7 +398,7 @@ int main(int argc, char * argv[]) {
    */
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
@@ -426,7 +427,7 @@ int main(int argc, char * argv[]) {
    */
   {
 
-    srcMLHandler handler;
+    srcMLHandlerTest handler;
     SAX2srcMLHandler sax2_handler = { 0 };
     sax2_handler.process = &handler;
 
