@@ -51,6 +51,17 @@ srcMLControlHandler::~srcMLControlHandler() {
 }
 
 /**
+ * getSAX
+ *
+ * Return the used sax handler.
+ */
+xmlSAXHandler & srcMLControlHandler::getSAX() const {
+
+  return sax;
+
+}
+
+/**
  * enable_startDocument
  * @param enable bool indicate enable or disable SAX parsing.
  *

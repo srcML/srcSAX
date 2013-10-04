@@ -59,9 +59,16 @@ public :
   srcMLControlHandler(const char * filename);
 
   /**
+   * getSAX
+   *
+   * Return the used sax handler.
+   */
+  xmlSAXHandler & getSAX() const;
+
+  /**
    * ~srcMLControlHandler
    *
-   * Constructor
+   * Destructor
    */
   ~srcMLControlHandler();
 
