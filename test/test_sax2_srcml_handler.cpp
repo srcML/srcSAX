@@ -101,7 +101,13 @@ int main(int argc, char * argv[]) {
     assert((const char *)sax2_handler.root.attributes[12] == std::string("http://www.sdml.info/srcML/src"));
     assert(sax2_handler.root.attributes[14] - sax2_handler.root.attributes[13] == 1);
     assert((char)sax2_handler.root.attributes[13][0] == 'c');
+    assert(ctxt.sax->startDocument == startDocument);
+    assert(ctxt.sax->endDocument == endDocument);
     assert(ctxt.sax->startElementNs == startElementNsFirst);
+    assert(ctxt.sax->endElementNs == endElementNs);
+    assert(ctxt.sax->characters == charactersFirst);
+    assert(ctxt.sax->comment == comment);
+    assert(ctxt.sax->cdataBlock == cdataBlock);
     endDocument(&ctxt);
 
   }
@@ -128,8 +134,13 @@ int main(int argc, char * argv[]) {
     startElementNsFirst(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
+    assert(ctxt.sax->startDocument == startDocument);
+    assert(ctxt.sax->endDocument == endDocument);
     assert(ctxt.sax->startElementNs == startElementNs);
-    assert(ctxt.sax->characters = &charactersUnit);
+    assert(ctxt.sax->endElementNs == endElementNs);
+    assert(ctxt.sax->characters == charactersUnit);
+    assert(ctxt.sax->comment == comment);
+    assert(ctxt.sax->cdataBlock == cdataBlock);
 
   }
 
@@ -155,8 +166,13 @@ int main(int argc, char * argv[]) {
     startUnit(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
+    assert(ctxt.sax->startDocument == startDocument);
+    assert(ctxt.sax->endDocument == endDocument);
     assert(ctxt.sax->startElementNs == startElementNs);
-    assert(ctxt.sax->characters = &charactersUnit);
+    assert(ctxt.sax->endElementNs == endElementNs);
+    assert(ctxt.sax->characters == charactersUnit);
+    assert(ctxt.sax->comment == comment);
+    assert(ctxt.sax->cdataBlock == cdataBlock);
 
   }
 
@@ -182,6 +198,13 @@ int main(int argc, char * argv[]) {
     startElementNs(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
+    assert(ctxt.sax->startDocument == startDocument);
+    assert(ctxt.sax->endDocument == endDocument);
+    assert(ctxt.sax->startElementNs == startRoot);
+    assert(ctxt.sax->endElementNs == endElementNs);
+    assert(ctxt.sax->characters == charactersFirst);
+    assert(ctxt.sax->comment == comment);
+    assert(ctxt.sax->cdataBlock == cdataBlock);
 
   }
 
@@ -200,6 +223,13 @@ int main(int argc, char * argv[]) {
     ctxt._private = &sax2_handler;
     endElementNs(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
                    (const xmlChar *)"http://www.sdml.info/srcML/src");
+    assert(ctxt.sax->startDocument == startDocument);
+    assert(ctxt.sax->endDocument == endDocument);
+    assert(ctxt.sax->startElementNs == 0);
+    assert(ctxt.sax->endElementNs == endElementNs);
+    assert(ctxt.sax->characters == charactersFirst);
+    assert(ctxt.sax->comment == comment);
+    assert(ctxt.sax->cdataBlock == cdataBlock);
 
   }
 
