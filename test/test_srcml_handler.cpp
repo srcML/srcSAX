@@ -240,19 +240,6 @@ int main(int argc, char * argv[]) {
 
   }
 
-  {
-
-    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
-    const char * values = "abc";
-    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
-    startUnit(NULL, (const xmlChar *)"unit", (const xmlChar *)"src",
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
-              (const xmlChar **) attributes);
-
-  }
-
   /*
     startElementNs
   */
@@ -275,27 +262,21 @@ int main(int argc, char * argv[]) {
     startElementNs(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
                    (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
                    (const xmlChar **) attributes);
-    assert(ctxt.sax->startDocument == startDocument);
-    assert(ctxt.sax->endDocument == endDocument);
-    assert(ctxt.sax->startElementNs == startRoot);
-    assert(ctxt.sax->endElementNs == endElementNs);
-    assert(ctxt.sax->characters == charactersFirst);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdataBlock == cdataBlock);
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 0);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 0);
+    assert(handler.start_element_ns == 1);
+    assert(handler.end_root == 0);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 0);
+    assert(handler.characters_unit == 0);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 0);
 
   }
 
-  {
-    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
-    const char * values = "abc";
-    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
-    startElementNs(NULL, (const xmlChar *)"unit", (const xmlChar *)"src",
-                   (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
-                   (const xmlChar **) attributes);
-
-  }
 
   /*
     endRoot
@@ -309,16 +290,22 @@ int main(int argc, char * argv[]) {
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = factory();
     ctxt.sax = &sax;
+    sax.startElementNs = startUnit;
     ctxt._private = &sax2_handler;
     endElementNs(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
                  (const xmlChar *)"http://www.sdml.info/srcML/src");
-    assert(ctxt.sax->startDocument == startDocument);
-    assert(ctxt.sax->endDocument == endDocument);
-    assert(ctxt.sax->startElementNs == startUnit);
-    assert(ctxt.sax->endElementNs == endElementNs);
-    assert(ctxt.sax->characters == charactersRoot);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdataBlock == cdataBlock);
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 0);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 0);
+    assert(handler.start_element_ns == 0);
+    assert(handler.end_root == 1);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 0);
+    assert(handler.characters_unit == 0);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 0);
 
   }
 
