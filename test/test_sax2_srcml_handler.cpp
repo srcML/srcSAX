@@ -203,6 +203,37 @@ int main(int argc, char * argv[]) {
 
   }
 
+  {
+
+    srcMLHandler handler;
+    SAX2srcMLHandler sax2_handler = { 0 };
+    sax2_handler.process = &handler;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = factory();
+    sax.startElement = 0;
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    endElementNs(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
+                   (const xmlChar *)"http://www.sdml.info/srcML/src");
+
+  }
+
+  {
+
+    srcMLHandler handler;
+    SAX2srcMLHandler sax2_handler = { 0 };
+    sax2_handler.process = &handler;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    endElementNs(&ctxt, (const xmlChar *)"name", (const xmlChar *)"src", 
+                   (const xmlChar *)"http://www.sdml.info/srcML/src");
+
+  }
+
   /*
     endElementNs
    */
