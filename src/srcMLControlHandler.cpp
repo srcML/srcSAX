@@ -30,7 +30,6 @@
  */
 srcMLControlHandler::srcMLControlHandler(const char * filename) : sax2_handler() {
 
-
   /** @todo handle errors */
   ctxt = xmlCreateURLParserCtxt(filename, XML_PARSE_COMPACT | XML_PARSE_HUGE);
   sax = factory();
@@ -44,7 +43,6 @@ srcMLControlHandler::srcMLControlHandler(const char * filename) : sax2_handler()
  */
 srcMLControlHandler::~srcMLControlHandler() {
 
-  ctxt->sax = NULL;
   if(ctxt) xmlFreeParserCtxt(ctxt);
 
 }
