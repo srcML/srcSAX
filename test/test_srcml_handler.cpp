@@ -130,6 +130,79 @@ int main(int argc, char * argv[]) {
   }
 
   /*
+    startElementNsFirst
+  */
+  {
+
+    srcMLHandlerTest handler;
+    SAX2srcMLHandler sax2_handler = { 0 };
+    sax2_handler.process = &handler;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+
+    startElementNsFirst(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+    assert(handler.start_document == false);
+    assert(handler.end_document == false);
+    assert(handler.start_root == false);
+    assert(handler.start_unit == true);
+    assert(handler.start_element_ns == false);
+    assert(handler.end_root == false);
+    assert(handler.end_unit == false);
+    assert(handler.end_element_ns == false);
+    assert(handler.characters_root == true);
+    assert(handler.characters_unit == false);
+    assert(handler.comment_ == false);
+    assert(handler.cdata_block == false);
+    endDocument(&ctxt);
+
+  }
+
+  {
+
+    srcMLHandlerTest handler;
+    SAX2srcMLHandler sax2_handler = { 0 };
+    sax2_handler.process = &handler;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+
+    startElementNsFirst(&ctxt, (const xmlChar *)"name", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+    assert(handler.start_document == false);
+    assert(handler.end_document == false);
+    assert(handler.start_root == false);
+    assert(handler.start_unit == true);
+    assert(handler.start_element_ns == true);
+    assert(handler.end_root == false);
+    assert(handler.end_unit == false);
+    assert(handler.end_element_ns == false);
+    assert(handler.characters_root == false);
+    assert(handler.characters_unit == true);
+    assert(handler.comment_ == false);
+    assert(handler.cdata_block == false);
+    endDocument(&ctxt);
+
+  }
+
+  /*
     startUnit
   */
   {
