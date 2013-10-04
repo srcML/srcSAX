@@ -377,18 +377,18 @@ int main(int argc, char * argv[]) {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     charactersRoot(&ctxt, (const xmlChar *)"unit", 4);
-    assert(ctxt.sax->startDocument == startDocument);
-    assert(ctxt.sax->endDocument == endDocument);
-    assert(ctxt.sax->startElementNs == startRoot);
-    assert(ctxt.sax->endElementNs == endElementNs);
-    assert(ctxt.sax->characters == charactersFirst);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdataBlock == cdataBlock);
-  }
-
-  {
-
-    charactersRoot(NULL, (const xmlChar *)"unit", 4);
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 0);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 0);
+    assert(handler.start_element_ns == 0);
+    assert(handler.end_root == 0);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 1);
+    assert(handler.characters_unit == 0);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 0);
 
   }
 
@@ -406,18 +406,18 @@ int main(int argc, char * argv[]) {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     charactersUnit(&ctxt, (const xmlChar *)"unit", 4);
-    assert(ctxt.sax->startDocument == startDocument);
-    assert(ctxt.sax->endDocument == endDocument);
-    assert(ctxt.sax->startElementNs == startRoot);
-    assert(ctxt.sax->endElementNs == endElementNs);
-    assert(ctxt.sax->characters == charactersFirst);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdataBlock == cdataBlock);
-  }
-
-  {
-
-    charactersUnit(NULL, (const xmlChar *)"unit", 4);
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 0);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 0);
+    assert(handler.start_element_ns == 0);
+    assert(handler.end_root == 0);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 0);
+    assert(handler.characters_unit == 1);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 0);
 
   }
 
@@ -435,18 +435,18 @@ int main(int argc, char * argv[]) {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     comment(&ctxt, (const xmlChar *)"unit");
-    assert(ctxt.sax->startDocument == startDocument);
-    assert(ctxt.sax->endDocument == endDocument);
-    assert(ctxt.sax->startElementNs == startRoot);
-    assert(ctxt.sax->endElementNs == endElementNs);
-    assert(ctxt.sax->characters == charactersFirst);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdataBlock == cdataBlock);
-  }
-
-  {
-
-    comment(NULL, (const xmlChar *)"unit");
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 0);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 0);
+    assert(handler.start_element_ns == 0);
+    assert(handler.end_root == 0);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 0);
+    assert(handler.characters_unit == 0);
+    assert(handler.comment_ == 1);
+    assert(handler.cdata_block == 0);
 
   }
 
@@ -464,18 +464,18 @@ int main(int argc, char * argv[]) {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     cdataBlock(&ctxt, (const xmlChar *)"unit", 4);
-    assert(ctxt.sax->startDocument == startDocument);
-    assert(ctxt.sax->endDocument == endDocument);
-    assert(ctxt.sax->startElementNs == startRoot);
-    assert(ctxt.sax->endElementNs == endElementNs);
-    assert(ctxt.sax->characters == charactersFirst);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdataBlock == cdataBlock);
-  }
-
-  {
-
-    cdataBlock(NULL, (const xmlChar *)"unit", 4);
+    assert(handler.start_document == 0);
+    assert(handler.end_document == 0);
+    assert(handler.start_root == 0);
+    assert(handler.start_unit == 0);
+    assert(handler.start_element_ns == 0);
+    assert(handler.end_root == 0);
+    assert(handler.end_unit == 0);
+    assert(handler.end_element_ns == 0);
+    assert(handler.characters_root == 0);
+    assert(handler.characters_unit == 0);
+    assert(handler.comment_ == 0);
+    assert(handler.cdata_block == 1);
 
   }
 
