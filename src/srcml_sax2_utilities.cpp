@@ -20,6 +20,7 @@
  */
 
 #include <srcml_sax2_utilities.hpp>
+#if 0
 #include <srcml.h>
 
 #include <ExtractUnitsSrc.hpp>
@@ -301,7 +302,6 @@ int srcml_relaxng(xmlParserInputBufferPtr input_buffer, const char** xslts, int 
   return status;
 }
 
-
 /** 
  * srcMLParseDocument
  * @param ctxt an XML parser ctxt
@@ -328,7 +328,7 @@ int srcMLParseDocument(xmlParserCtxtPtr ctxt, bool allowendearly) {
 
   return SRCML_STATUS_OK;
 }
-
+#endif
 /**
  * srcMLCreateMemoryParserCtxt
  * @param buffer a buffer in memory to read from

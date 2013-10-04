@@ -22,6 +22,8 @@
 
 #include <srcMLControlHandler.hpp>
 
+#include <srcml_sax2_utilities.hpp>
+
 #include <string>
 
 /**
@@ -47,8 +49,8 @@ srcMLControlHandler::srcMLControlHandler(const char * filename) : sax2_handler()
  */
 srcMLControlHandler::srcMLControlHandler(xmlParserInputBufferPtr input) : sax2_handler() {
 
-  //ctxt = xmlCreateURLParserCtxt(filename, XML_PARSE_COMPACT | XML_PARSE_HUGE);
-  //if(ctxt == NULL) throw std::string("File does not exist");
+  ctxt = srcMLCreateParserCtxt(input);
+  if(ctxt == NULL) throw std::string("File does not exist");
   sax = factory();
 
 }
