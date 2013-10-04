@@ -95,7 +95,7 @@ void srcMLControlHandler::enable_endDocument(bool enable) {
  */
 void srcMLControlHandler::enable_startElementNs(bool enable) {
 
-  if(enable) sax.startElementNs = startElementNs;
+  if(enable) sax.startElementNs = startRoot;
   else sax.startElementNs = 0;
 
 }
@@ -121,7 +121,7 @@ void srcMLControlHandler::enable_endElementNs(bool enable) {
  */
 void srcMLControlHandler::enable_characters(bool enable) {
 
-  if(enable) sax.characters = charactersRoot;
+  if(enable) sax.characters = charactersFirst;
   else sax.characters = 0;
 
 }
