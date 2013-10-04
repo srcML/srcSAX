@@ -57,6 +57,7 @@ public :
    * Constructor
    */
   srcMLControlHandler(const char * filename);
+  srcMLControlHandler(xmlParserInputBufferPtr input);
 
   /**
    * getSAX
