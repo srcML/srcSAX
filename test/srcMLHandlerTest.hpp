@@ -65,7 +65,11 @@ public :
    * SAX handler function for start of document.
    * Overide for desired behaviour.
    */
-  virtual void startDocument() {}
+  virtual void startDocument() { 
+
+    start_document = true;
+
+  }
 
   /**
    * endDocument
@@ -73,7 +77,11 @@ public :
    * SAX handler function for end of document.
    * Overide for desired behaviour.
    */
-  virtual void endDocument() {}
+  virtual void endDocument() {
+
+    end_document = true;
+
+  }
 
   /**
    * startRoot
@@ -91,7 +99,11 @@ public :
    */
   virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                          int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                         const xmlChar ** attributes) {}
+                         const xmlChar ** attributes) {
+
+    start_root = true;
+
+  }
 
   /**
    * startUnit
@@ -109,7 +121,11 @@ public :
    */
   virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                          int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                         const xmlChar ** attributes) {}
+                         const xmlChar ** attributes) {
+
+    start_unit = true;
+
+  }
 
   /**
    * startElementNs
@@ -127,7 +143,10 @@ public :
    */
   virtual void startElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                               int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                              const xmlChar ** attributes) {}
+                              const xmlChar ** attributes) {
+    start_element_ns = true;
+
+  }
 
   /**
    * endRoot
@@ -138,7 +157,11 @@ public :
    * SAX handler function for end of the root element.
    * Overide for desired behaviour.
    */
-  virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
+  virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+
+    end_root = true;
+
+  }
 
   /**
    * endUnit
@@ -149,7 +172,11 @@ public :
    * SAX handler function for end of an unit.
    * Overide for desired behaviour.
    */
-  virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
+  virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+
+    end_unit = true;
+
+  }
 
   /**
    * endElementNs
@@ -160,7 +187,11 @@ public :
    * SAX handler function for end of an element.
    * Overide for desired behaviour.
    */
-  virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
+  virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+
+    end_element_ns = true;
+
+  }
 
   /**
    * charactersRoot
@@ -170,7 +201,11 @@ public :
    * SAX handler function for character handling at the root level.
    * Overide for desired behaviour.
    */
-  virtual void charactersRoot(const xmlChar * ch, int len) {}
+  virtual void charactersRoot(const xmlChar * ch, int len) {
+
+    characters_root = true;
+
+  }
 
   /**
    * charactersUnit
@@ -180,7 +215,11 @@ public :
    * SAX handler function for character handling within a unit.
    * Overide for desired behaviour.
    */
-  virtual void charactersUnit(const xmlChar * ch, int len) {}
+  virtual void charactersUnit(const xmlChar * ch, int len) {
+
+    characters_unit = true;
+
+  }
 
   /**
    * comment
@@ -189,7 +228,11 @@ public :
    * A comment has been parsed.
    * Overide for desired behaviour.
    */
-  virtual void comment(const xmlChar * value) {}
+  virtual void comment(const xmlChar * value) {
+
+    comment_ = true;
+
+  }
 
   /**
    * cdataBlock
@@ -199,7 +242,11 @@ public :
    * Called when a pcdata block has been parsed.
    * Overide for desired behaviour.
    */
-  virtual void cdataBlock(const xmlChar * value, int len) {}
+  virtual void cdataBlock(const xmlChar * value, int len) {
+
+    cdata_block = true;
+
+  }
 
 };
 
