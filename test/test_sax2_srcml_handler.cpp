@@ -39,6 +39,12 @@ int main(int argc, char * argv[]) {
 
   }
 
+  {
+
+    startDocument(NULL);
+
+  }
+
   /*
     endDocument
    */
@@ -51,6 +57,12 @@ int main(int argc, char * argv[]) {
     xmlParserCtxt ctxt;
     ctxt._private = &sax2_handler;
     endDocument(&ctxt);
+
+  }
+
+  {
+
+    endDocument(NULL);
 
   }
 
@@ -112,6 +124,13 @@ int main(int argc, char * argv[]) {
 
   }
 
+  {
+
+    startRoot(NULL);
+
+  }
+
+
   /*
     startElementNsFirst
    */
@@ -141,6 +160,12 @@ int main(int argc, char * argv[]) {
     assert(ctxt.sax->characters == charactersUnit);
     assert(ctxt.sax->comment == comment);
     assert(ctxt.sax->cdataBlock == cdataBlock);
+
+  }
+
+  {
+
+    startElementNsFirst(NULL);
 
   }
 
@@ -176,6 +201,12 @@ int main(int argc, char * argv[]) {
 
   }
 
+  {
+
+    startUnit(NULL);
+
+  }
+
   /*
     startElementNs
    */
@@ -205,6 +236,12 @@ int main(int argc, char * argv[]) {
     assert(ctxt.sax->characters == charactersFirst);
     assert(ctxt.sax->comment == comment);
     assert(ctxt.sax->cdataBlock == cdataBlock);
+
+  }
+
+  {
+
+    startElementNs(NULL);
 
   }
 
@@ -278,6 +315,12 @@ int main(int argc, char * argv[]) {
 
   }
 
+  {
+
+    endElementNs(NULL);
+
+  }
+
   /*
     charactersFirst
    */
@@ -300,6 +343,12 @@ int main(int argc, char * argv[]) {
     assert(ctxt.sax->characters == charactersFirst);
     assert(ctxt.sax->comment == comment);
     assert(ctxt.sax->cdataBlock == cdataBlock);
+
+  }
+
+  {
+
+    charactersFirst(NULL);
 
   }
 
@@ -326,6 +375,12 @@ int main(int argc, char * argv[]) {
     assert(ctxt.sax->cdataBlock == cdataBlock);
   }
 
+  {
+
+    charactersRoot(NULL);
+
+  }
+
   /*
     charactersUnit
    */
@@ -347,6 +402,12 @@ int main(int argc, char * argv[]) {
     assert(ctxt.sax->characters == charactersFirst);
     assert(ctxt.sax->comment == comment);
     assert(ctxt.sax->cdataBlock == cdataBlock);
+  }
+
+  {
+
+    charactersUnit(NULL);
+
   }
 
   /*
@@ -372,6 +433,12 @@ int main(int argc, char * argv[]) {
     assert(ctxt.sax->cdataBlock == cdataBlock);
   }
 
+  {
+
+    comment(NULL);
+
+  }
+
   /*
     cdataBlock
    */
@@ -393,6 +460,12 @@ int main(int argc, char * argv[]) {
     assert(ctxt.sax->characters == charactersFirst);
     assert(ctxt.sax->comment == comment);
     assert(ctxt.sax->cdataBlock == cdataBlock);
+  }
+
+  {
+
+    cdataBlock(NULL);
+
   }
 
   return 0;
