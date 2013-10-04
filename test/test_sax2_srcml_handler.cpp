@@ -202,6 +202,7 @@ int main(int argc, char * argv[]) {
                    (const xmlChar *)"http://www.sdml.info/srcML/src");
 
   }
+
   /*
     endElementNs
    */
@@ -219,6 +220,87 @@ int main(int argc, char * argv[]) {
                    (const xmlChar *)"http://www.sdml.info/srcML/src");
     assert(ctxt.sax->startElementNs == &startUnit);
     assert(ctxt.sax->characters == &charactersRoot);
+  }
+
+  /*
+    charactersFirst
+   */
+  {
+
+    srcMLHandler handler;
+    SAX2srcMLHandler sax2_handler = { 0 };
+    sax2_handler.process = &handler;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    charactersFirst(&ctxt, (const xmlChar *)"unit", 4);
+    assert(sax2_handler.root.characters == "unit");
+  }
+
+  /*
+    charactersRoot
+   */
+  {
+
+    srcMLHandler handler;
+    SAX2srcMLHandler sax2_handler = { 0 };
+    sax2_handler.process = &handler;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    charactersRoot(&ctxt, (const xmlChar *)"unit", 4);
+  }
+
+  /*
+    charactersUnit
+   */
+  {
+
+    srcMLHandler handler;
+    SAX2srcMLHandler sax2_handler = { 0 };
+    sax2_handler.process = &handler;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    charactersUnit(&ctxt, (const xmlChar *)"unit", 4);
+  }
+
+  /*
+    comment
+   */
+  {
+
+    srcMLHandler handler;
+    SAX2srcMLHandler sax2_handler = { 0 };
+    sax2_handler.process = &handler;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    comment(&ctxt, (const xmlChar *)"unit");
+  }
+
+  /*
+    cdataBlock
+   */
+  {
+
+    srcMLHandler handler;
+    SAX2srcMLHandler sax2_handler = { 0 };
+    sax2_handler.process = &handler;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    cdataBlock(&ctxt, (const xmlChar *)"unit", 4);
   }
 
   return 0;
