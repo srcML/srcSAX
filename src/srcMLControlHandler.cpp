@@ -22,6 +22,8 @@
 
 #include <srcMLControlHandler.hpp>
 
+#include <string>
+
 /**
  * srcMLControlHandler
  * @param filename name of a file
@@ -32,6 +34,7 @@ srcMLControlHandler::srcMLControlHandler(const char * filename) : sax2_handler()
 
   /** @todo handle errors */
   ctxt = xmlCreateURLParserCtxt(filename, XML_PARSE_COMPACT | XML_PARSE_HUGE);
+  if(ctxt == NULL) throw std::string("File does not exist");
   sax = factory();
 
 }
