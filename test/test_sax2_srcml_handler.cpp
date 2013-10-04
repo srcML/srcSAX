@@ -126,7 +126,14 @@ int main(int argc, char * argv[]) {
 
   {
 
-    startRoot(NULL);
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    startRoot(NULL, (const xmlChar *)"unit", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
 
   }
 
@@ -164,8 +171,14 @@ int main(int argc, char * argv[]) {
   }
 
   {
-
-    startElementNsFirst(NULL);
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    startElementNsFirst(NULL, (const xmlChar *)"unit", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
 
   }
 
@@ -203,7 +216,14 @@ int main(int argc, char * argv[]) {
 
   {
 
-    startUnit(NULL);
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    startUnit(NULL, (const xmlChar *)"unit", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
 
   }
 
@@ -240,8 +260,14 @@ int main(int argc, char * argv[]) {
   }
 
   {
-
-    startElementNs(NULL);
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    startElementNs(NULL, (const xmlChar *)"unit", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
 
   }
 
@@ -317,8 +343,8 @@ int main(int argc, char * argv[]) {
 
   {
 
-    endElementNs(NULL);
-
+    endElementNs(NULL, (const xmlChar *)"unit", (const xmlChar *)"src",
+                 (const xmlChar *)"http://www.sdml.info/srcML/src");
   }
 
   /*
@@ -348,7 +374,7 @@ int main(int argc, char * argv[]) {
 
   {
 
-    charactersFirst(NULL);
+    charactersFirst(NULL, (const xmlChar *)"unit", 4);
 
   }
 
@@ -377,7 +403,7 @@ int main(int argc, char * argv[]) {
 
   {
 
-    charactersRoot(NULL);
+    charactersRoot(NULL, (const xmlChar *)"unit", 4);
 
   }
 
@@ -406,7 +432,7 @@ int main(int argc, char * argv[]) {
 
   {
 
-    charactersUnit(NULL);
+    charactersUnit(NULL, (const xmlChar *)"unit", 4);
 
   }
 
@@ -435,7 +461,7 @@ int main(int argc, char * argv[]) {
 
   {
 
-    comment(NULL);
+    comment(NULL, (const xmlChar *)"unit");
 
   }
 
@@ -464,7 +490,7 @@ int main(int argc, char * argv[]) {
 
   {
 
-    cdataBlock(NULL);
+    cdataBlock(NULL, (const xmlChar *)"unit", 4);
 
   }
 
