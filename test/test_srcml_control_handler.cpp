@@ -1,4 +1,5 @@
 #include <srcMLControlHandler.hpp>
+#include <srcMLHandler.hpp>
 
 #include <stdio.h>
 #include <string.h>
@@ -530,6 +531,31 @@ int main(int argc, char * argv[]) {
     assert(sax.characters == charactersFirst);
     assert(sax.comment == comment);
     assert(sax.cdataBlock == cdataBlock);
+  }
+
+  /*
+    parse
+   */
+
+  {
+
+    srcMLControlHandler control("test.xml");
+    srcMLHandler handler;
+    try {
+      control.parse(&handler);
+    } catch(...) { assert(false); }
+
+  }
+
+  {
+
+    srcMLControlHandler control(__FILE__);
+    srcMLHandler handler;
+    try {
+      control.parse(&handler);
+      assert(false);
+    } catch(...) {}
+
   }
 
   return 0;

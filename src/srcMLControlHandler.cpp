@@ -169,4 +169,8 @@ void srcMLControlHandler::parse(srcMLHandler * handler) {
   int status = xmlParseDocument(ctxt);
   ctxt->sax = save_sax;
 
+  if(status != 0)
+    throw std::string("Error parsing document");
+  ctxt->sax = save_sax;
+
 }
