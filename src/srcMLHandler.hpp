@@ -33,7 +33,17 @@
  */
 class srcMLHandler {
 
+private :
+
+  xmlParserCtxtPtr ctxt;
+
 public :
+
+  void init(xmlParserCtxtPtr ctxt) {
+
+    this->ctxt = ctxt;
+
+  }
 
   /**
    * startDocument

@@ -60,6 +60,8 @@ xmlSAXHandler factory() {
  */
 void startDocument(void * ctx) {
 
+  init(ctx);
+
 #ifdef DEBUG
   fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 #endif
