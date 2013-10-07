@@ -22,4 +22,4 @@ add_executable(thread ${THREAD_SRC} ${HANDLER_SRC})
 target_link_libraries(thread ${LIBXML2_LIBRARIES})
 
 add_executable(thread_stop ${THREAD_STOP_SRC} ${HANDLER_SRC})
-target_link_libraries(thread ${LIBXML2_LIBRARIES})
+target_link_libraries(thread_stop ${LIBXML2_LIBRARIES})
