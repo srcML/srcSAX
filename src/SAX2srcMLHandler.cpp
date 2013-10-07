@@ -96,9 +96,11 @@ void endDocument(void * ctx) {
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+  fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+  fprintf(stderr, "HERE: %s %s %d %p\n", __FILE__, __FUNCTION__, __LINE__, ctxt->sax->startElementNs);
   if(ctxt->sax->startElementNs)
       state->process->endRoot(state->root.localname, state->root.prefix, state->root.URI);
-
+  fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
   state->process->endDocument();
 
   if(state->root.localname) free((void *)state->root.localname);
