@@ -253,6 +253,4 @@ void comment(void * ctx, const xmlChar * value);
  */
 void cdataBlock(void * ctx, const xmlChar * value, int len);
 
-void stop_parser();
-
 #endif
