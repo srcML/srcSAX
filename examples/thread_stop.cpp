@@ -1,4 +1,4 @@
-#include <srcMLHandlerThread.hpp>
+#include <srcMLHandlerThreadStop.hpp>
 #include <SAX2srcMLHandler.hpp>
 #include <srcMLControlHandler.hpp>
 
@@ -9,7 +9,7 @@
 
 void * start_routine(void * arg) {
 
-  srcMLHandlerThread * handler = (srcMLHandlerThread *)arg;
+  srcMLHandlerThreadStop * handler = (srcMLHandlerThreadStop *)arg;
 
   srcMLControlHandler control("thread.xml");
   control.parse(handler);
