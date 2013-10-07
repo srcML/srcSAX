@@ -191,8 +191,8 @@ void srcMLControlHandler::parse(srcMLHandler * handler) {
   ctxt->sax = save_sax;
 
 }
-stop_parser()
-void stop_parser() {
+
+void srcMLControlHandler::stop_parser() {
 
   ctxt->sax->startElementNs = 0;
   ctxt->sax->characters = 0;
