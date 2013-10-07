@@ -30,7 +30,6 @@ int main(int argc, char * argv[]) {
   arg.resume();
 
   arg.wait();
-  arg.resume();
 
   void * ret;
   pthread_join(thread, &ret);
