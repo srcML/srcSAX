@@ -60,12 +60,20 @@ xmlSAXHandler factory() {
  */
 void startDocument(void * ctx) {
 
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+#endif
+
   if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
   state->process->startDocument();
+
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+#endif
 
 }
 
@@ -78,6 +86,10 @@ void startDocument(void * ctx) {
  * immediately calls supplied handlers function.
  */
 void endDocument(void * ctx) {
+
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+#endif
 
   if(ctx == NULL) return;
 
@@ -110,6 +122,10 @@ void endDocument(void * ctx) {
   }
   free((void *)state->root.attributes);
 
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+#endif
+
 }
 
 /**
@@ -130,6 +146,10 @@ void endDocument(void * ctx) {
 void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                     const xmlChar ** attributes) {
+
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
+#endif
 
   if(ctx == NULL) return;
 
@@ -169,6 +189,10 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
   // handle nested units
   ctxt->sax->startElementNs = &startElementNsFirst;
 
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
+#endif
+
 }
 
 /**
@@ -189,6 +213,10 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
 void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                     const xmlChar ** attributes) {
+
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
+#endif
 
   if(ctx == NULL) return;
 
@@ -218,6 +246,10 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
   ctxt->sax->startElementNs = &startElementNs;    
   ctxt->sax->characters = &charactersUnit;
 
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
+#endif
+
 }
 
 /**
@@ -239,6 +271,10 @@ void startUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                     const xmlChar ** attributes) {
 
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
+#endif
+
   if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
@@ -247,6 +283,10 @@ void startUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
   state->process->startUnit(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
   ctxt->sax->startElementNs = &startElementNs;    
   ctxt->sax->characters = &charactersUnit;
+
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
+#endif
 
 }
 
@@ -269,12 +309,20 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                     const xmlChar ** attributes) {
 
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
+#endif
+
   if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
   state->process->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
+#endif
 
 }
 
@@ -290,6 +338,10 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
  * for either endRoot endUnit or endElementNs.
  */
 void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
+#endif
 
   if(ctx == NULL) return;
 
@@ -314,6 +366,10 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
   } else
     state->process->endElementNs(localname, prefix, URI);
 
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
+#endif
+
 }
 
 /**
@@ -328,12 +384,25 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
  */
 void charactersFirst(void * ctx, const xmlChar * ch, int len) {
 
+#ifdef DEBUG
+  std::string chars;
+  chars.append((const char *)ch, len);
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, chars.c_str());
+#endif
+
   if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
   state->root.characters.append((const char *)ch, len);
+
+#ifdef DEBUG
+  std::string chars;
+  chars.append((const char *)ch, len);
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, chars.c_str());
+#endif
+
 }
 
 /**
@@ -347,12 +416,25 @@ void charactersFirst(void * ctx, const xmlChar * ch, int len) {
  */
 void charactersRoot(void * ctx, const xmlChar * ch, int len) {
 
+#ifdef DEBUG
+  std::string chars;
+  chars.append((const char *)ch, len);
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, chars.c_str());
+#endif
+
   if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
   state->process->charactersRoot(ch, len);
+
+#ifdef DEBUG
+  std::string chars;
+  chars.append((const char *)ch, len);
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, chars.c_str());
+#endif
+
 }
 
 /**
@@ -366,12 +448,25 @@ void charactersRoot(void * ctx, const xmlChar * ch, int len) {
  */
 void charactersUnit(void * ctx, const xmlChar * ch, int len) {
 
+#ifdef DEBUG
+  std::string chars;
+  chars.append((const char *)ch, len);
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, chars.c_str());
+#endif
+
   if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
   state->process->charactersUnit(ch, len);
+
+#ifdef DEBUG
+  std::string chars;
+  chars.append((const char *)ch, len);
+  fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, chars.c_str());
+#endif
+
 }
 
 /**
@@ -384,12 +479,20 @@ void charactersUnit(void * ctx, const xmlChar * ch, int len) {
  */
 void comment(void * ctx, const xmlChar * value) {
 
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+#endif
+
   if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
   state->process->comment(value);
+
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+#endif
 
 }
 
@@ -404,11 +507,19 @@ void comment(void * ctx, const xmlChar * value) {
  */
 void cdataBlock(void * ctx, const xmlChar * value, int len) {
 
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+#endif
+
   if(ctx == NULL) return;
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
   state->process->cdataBlock(value, len);
+
+#ifdef DEBUG
+  fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+#endif
 
 }
