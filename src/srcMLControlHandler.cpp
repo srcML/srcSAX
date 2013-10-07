@@ -32,7 +32,7 @@
  *
  * Constructor
  */
-srcMLControlHandler::srcMLControlHandler(const char * filename) : sax2_handler() {
+srcMLControlHandler::srcMLControlHandler(const char * filename) : sax2_handler(), pop_input(false) {
 
   ctxt = xmlCreateURLParserCtxt(filename, XML_PARSE_COMPACT | XML_PARSE_HUGE);
   if(ctxt == NULL) throw std::string("File does not exist");
@@ -47,7 +47,7 @@ srcMLControlHandler::srcMLControlHandler(const char * filename) : sax2_handler()
  *
  * Constructor
  */
-srcMLControlHandler::srcMLControlHandler(xmlParserInputBufferPtr input) : sax2_handler() {
+srcMLControlHandler::srcMLControlHandler(xmlParserInputBufferPtr input) : sax2_handler(), pop_input(true) {
 
   ctxt = srcMLCreateParserCtxt(input);
   if(ctxt == NULL) throw std::string("File does not exist");
@@ -62,6 +62,7 @@ srcMLControlHandler::srcMLControlHandler(xmlParserInputBufferPtr input) : sax2_h
  */
 srcMLControlHandler::~srcMLControlHandler() {
 
+  if(pop_input) inputPop(ctxt)
   if(ctxt) xmlFreeParserCtxt(ctxt);
 
 }

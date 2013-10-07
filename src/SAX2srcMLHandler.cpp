@@ -398,8 +398,6 @@ void charactersFirst(void * ctx, const xmlChar * ch, int len) {
   state->root.characters.append((const char *)ch, len);
 
 #ifdef DEBUG
-  std::string chars;
-  chars.append((const char *)ch, len);
   fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, chars.c_str());
 #endif
 
@@ -430,8 +428,6 @@ void charactersRoot(void * ctx, const xmlChar * ch, int len) {
   state->process->charactersRoot(ch, len);
 
 #ifdef DEBUG
-  std::string chars;
-  chars.append((const char *)ch, len);
   fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, chars.c_str());
 #endif
 
@@ -462,8 +458,6 @@ void charactersUnit(void * ctx, const xmlChar * ch, int len) {
   state->process->charactersUnit(ch, len);
 
 #ifdef DEBUG
-  std::string chars;
-  chars.append((const char *)ch, len);
   fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, chars.c_str());
 #endif
 
