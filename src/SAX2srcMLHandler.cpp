@@ -518,7 +518,7 @@ void cdataBlock(void * ctx, const xmlChar * value, int len) {
 
 }
 
-void stop_parser() {
+void stop_parser(void * ctxt) {
 
   ctxt->sax->startElementNs = 0;
   ctxt->sax->characters = 0;
