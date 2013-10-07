@@ -13,8 +13,13 @@ file(GLOB HANDLER_SRC ../src/*.cpp)
 
 set(THREAD_SRC thread.cpp)
 
+set(THREAD_SRC thread_stop.cpp)
+
 add_executable(example ${EXAMPLE_SRC} ${HANDLER_SRC})
 target_link_libraries(example ${LIBXML2_LIBRARIES})
+
+add_executable(thread ${THREAD_SRC} ${HANDLER_SRC})
+target_link_libraries(thread ${LIBXML2_LIBRARIES})
 
 add_executable(thread ${THREAD_SRC} ${HANDLER_SRC})
 target_link_libraries(thread ${LIBXML2_LIBRARIES})
