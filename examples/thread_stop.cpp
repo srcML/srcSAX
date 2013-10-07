@@ -22,7 +22,7 @@ int main(int argc, char * argv[]) {
 
 
   pthread_t thread;
-  srcMLHandlerThread arg;
+  srcMLHandlerThreadStop arg;
   pthread_create(&thread, 0, start_routine, &arg);
 
 
