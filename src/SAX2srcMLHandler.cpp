@@ -60,8 +60,6 @@ xmlSAXHandler factory() {
  */
 void startDocument(void * ctx) {
 
-  init(ctx);
-
 #ifdef DEBUG
   fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 #endif
@@ -71,6 +69,7 @@ void startDocument(void * ctx) {
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
+  state->process->init(ctx);
   state->process->startDocument();
 
 #ifdef DEBUG
