@@ -140,6 +140,7 @@ public :
    */
   void parse(srcMLHandler * handler);
 
+  void stop_parser();
 };
 
 #endif
