@@ -26,6 +26,19 @@
 
 #include <string>
 
+void libxml_error(void *ctx, const char *msg, ...) {}
+
+void init() {
+
+  static bool initialized = false;
+
+  if(initialized) return;
+
+  xmlGenericErrorFunc error_handler = (xmlGenericErrorFunc) libxml_error;
+  initGenericErrorDefaultFunc(&error_handler);
+
+}
+
 /**
  * srcMLControlHandler
  * @param filename name of a file
@@ -33,6 +46,8 @@
  * Constructor
  */
 srcMLControlHandler::srcMLControlHandler(const char * filename) : sax2_handler(), pop_input(false) {
+
+  init();
 
   ctxt = xmlCreateURLParserCtxt(filename, XML_PARSE_COMPACT | XML_PARSE_HUGE);
   if(ctxt == NULL) throw std::string("File does not exist");
@@ -48,6 +63,8 @@ srcMLControlHandler::srcMLControlHandler(const char * filename) : sax2_handler()
  * Constructor
  */
 srcMLControlHandler::srcMLControlHandler(xmlParserInputBufferPtr input) : sax2_handler(), pop_input(true) {
+
+  init();
 
   ctxt = srcMLCreateParserCtxt(input);
   if(ctxt == NULL) throw std::string("File does not exist");
