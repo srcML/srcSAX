@@ -24,8 +24,6 @@
 
 #include <cstring>
 
-const char * const SRCML_SRC_NS_URI = "http://www.sdml.info/srcML/src";
-
 /**
  * factory
  *
@@ -225,7 +223,7 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
-  state->is_archive = strcmp((const char *)localname, "unit") == 0 && strcmp((const char *)URI, SRCML_SRC_NS_URI) == 0;
+  state->is_archive = strcmp((const char *)localname, "unit") == 0;
 
   if(!state->is_archive) {
 
@@ -351,7 +349,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  if(strcmp((const char *)localname, "unit") == 0 && strcmp((const char *)URI, SRCML_SRC_NS_URI) == 0) {
+  if(strcmp((const char *)localname, "unit") == 0) {
 
     if(ctxt->sax->startElementNs == &startUnit) {
 
