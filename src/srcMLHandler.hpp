@@ -47,6 +47,8 @@ public :
 
   void stop_parser() {
 
+    ctxt->sax->startDocument = 0;
+    ctxt->sax->endDocument = 0;
     ctxt->sax->startElementNs = 0;
     ctxt->sax->characters = 0;
     ctxt->sax->cdataBlock = 0;
