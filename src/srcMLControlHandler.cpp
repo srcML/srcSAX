@@ -36,6 +36,7 @@ void init() {
 
   xmlGenericErrorFunc error_handler = (xmlGenericErrorFunc) libxml_error;
   initGenericErrorDefaultFunc(&error_handler);
+  initialized = true;
 
 }
 
