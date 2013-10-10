@@ -8,6 +8,8 @@ if(LIBXML2_FOUND)
         include_directories(${LIBXML2_INCLUDE_DIR})
 endif()
 
+enable_testing()
+
 set(EXAMPLE_SRC example.cpp)
 file(GLOB HANDLER_SRC ../src/*.cpp)
 
@@ -23,3 +25,7 @@ target_link_libraries(thread ${LIBXML2_LIBRARIES})
 
 add_executable(thread_stop ${THREAD_STOP_SRC} ${HANDLER_SRC})
 target_link_libraries(thread_stop ${LIBXML2_LIBRARIES})
+
+add_test(NAME example COMMAND example)
+add_test(NAME thread COMMAND thread)
+add_test(NAME thread_stop COMMAND thread_stop)
