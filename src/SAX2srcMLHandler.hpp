@@ -37,6 +37,13 @@
  */
 struct Element {
 
+  /** Default constructor to Zero out Element */
+  Element() : localname(0), prefix(0), URI(0),
+              nb_namespaces(0), namespaces(0),
+              nb_attributes(0), nb_defaulted(0),
+              attributes(0) 
+  {}
+
   /** local name of an element*/
   const xmlChar* localname;
 
