@@ -8,5 +8,11 @@ inwhich to setup and parse a srcML file. User specific
 handling is specified through inheriting from the
 srcMLHandler which is supplied to the parse method.
 
-
+SAX2srcMLHandler implements the actual libxml2 parts and calls
+the necessary handler functions from srcMLHandler.  startDocument
+and endDocument are called exactly once.  startRoot and endRoot
+are also called exactly once for the begining and ending of the 
+root element.  startUnit and endUnit are called once each for
+each inner unit. All other open and closing tags are handled
+by startElementNs and endElementNs.
 
