@@ -1,0 +1,12 @@
+srcML SAX2Framework
+
+Framework provides a simplified sax2 interface built
+off of libxml2 library for srcML documents.
+
+srcMLControlHandler provides the control mechanism
+inwhich to setup and parse a srcML file. User specific
+handling is specified through inheriting from the
+srcMLHandler which is supplied to the parse method.
+
+
+
