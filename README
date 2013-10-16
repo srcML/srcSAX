@@ -1,7 +1,9 @@
 srcML SAX2Framework
 
 Framework provides a simplified sax2 interface built
-off of libxml2 library for srcML documents.
+off of libxml2 library for srcML documents.  The
+framework automatically handles srcML archives and
+non-archives.
 
 srcMLControlHandler provides the control mechanism
 inwhich to setup and parse a srcML file. User specific
@@ -14,5 +16,15 @@ and endDocument are called exactly once.  startRoot and endRoot
 are also called exactly once for the begining and ending of the 
 root element.  startUnit and endUnit are called once each for
 each inner unit. All other open and closing tags are handled
-by startElementNs and endElementNs.
+by startElementNs and endElementNs. Character data is handled
+by charactersRoot called for characters that occur directly within
+a root tag between units, and charactersUnit which is called
+for all character data occuring within a unit.  Two additional
+function comment and cdataBlock are called when their XML
+equivalents are encountered, however, these are not generally
+included in srcML documents.  Overide methods to get the
+intended behaviour.
 
+Parsing can be stopped at any point by calling stop_parser.
+
+For usage examples, including running in a separate thread see examples.
