@@ -28,3 +28,6 @@ intended behaviour.
 Parsing can be stopped at any point by calling stop_parser.
 
 For usage examples, including running in a separate thread see examples.
+
+Author: Michael John Decker
+Email:  mdecker6@kent.edu
