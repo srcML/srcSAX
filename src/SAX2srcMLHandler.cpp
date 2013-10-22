@@ -350,6 +350,15 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 
   if(strcmp((const char *)localname, "unit") == 0) {
 
+    if(ctxt->sax->startElementNs == &startElementNsFirst) {
+
+      state->process->startUnit(state->root.localname, state->root.prefix, state->root.URI,
+                                state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
+                                state->root.nb_defaulted, state->root.attributes);
+      
+
+    } 
+
     if(ctxt->sax->startElementNs == &startUnit) {
 
       state->process->endRoot(localname, prefix, URI);
