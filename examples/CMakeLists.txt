@@ -1,3 +1,5 @@
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY examples)
+
 set(EXAMPLE_SRC examples/example.cpp)
 
 set(THREAD_SRC examples/thread.cpp)
