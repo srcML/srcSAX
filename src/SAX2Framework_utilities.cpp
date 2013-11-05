@@ -33,7 +33,8 @@ struct _xmlBuf {
   xmlBufferPtr buffer;        /* wrapper for an old buffer */
   int error;                  /* an error code if a failure occured */
 };
-#define CHECK_COMPAT(buf)                                   \
+
+#define _CHECK_COMPAT(buf)                                   \
   if (buf->size != (size_t) buf->compat_size)            \
     if (buf->compat_size < INT_MAX)                    \
       buf->size = buf->compat_size;                  \
@@ -51,10 +52,10 @@ struct _xmlBuf {
  * @returns 0 on success and -1 on error.
  */
 int
-xmlBufResetInput(xmlBuf * buf, xmlParserInputPtr input) {
+_xmlBufResetInput(xmlBuf * buf, xmlParserInputPtr input) {
   if ((input == NULL) || (buf == NULL) || (buf->error))
     return(-1);
-    CHECK_COMPAT(buf)
+    _CHECK_COMPAT(buf)
     input->base = input->cur = buf->content;
     input->end = &buf->content[buf->use];
     return(0);
@@ -71,7 +72,7 @@ xmlBufResetInput(xmlBuf * buf, xmlParserInputPtr input) {
  * @returns 0 
  */
 int
-xmlBufResetInput(xmlBuffer * buf, xmlParserInputPtr input) {
+_xmlBufResetInput(xmlBuffer * buf, xmlParserInputPtr input) {
   input->base = input->buf->buffer->content;
   input->cur = input->buf->buffer->content;
   input->end = &input->buf->buffer->content[input->buf->buffer->use];
@@ -113,7 +114,7 @@ SAX2FrameworkCreateParserCtxt(xmlParserInputBufferPtr buffer_input) {
 
   input->filename = NULL;
   input->buf = buf;
-  xmlBufResetInput(input->buf->buffer, input);
+  _xmlBufResetInput(input->buf->buffer, input);
 
   inputPush(ctxt, input);
   return(ctxt);
