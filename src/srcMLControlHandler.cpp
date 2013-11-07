@@ -22,7 +22,7 @@
 
 #include <srcMLControlHandler.hpp>
 
-#include <srcml_sax2_utilities.hpp>
+#include <SAX2Framework_utilities.hpp>
 
 #include <string>
 
@@ -67,7 +67,7 @@ srcMLControlHandler::srcMLControlHandler(xmlParserInputBufferPtr input) : sax2_h
 
   srcml_control_handler_init();
 
-  ctxt = srcMLCreateParserCtxt(input);
+  ctxt = SAX2FrameworkCreateParserCtxt(input);
   if(ctxt == NULL) throw std::string("File does not exist");
   sax = factory();
 
