@@ -26,6 +26,8 @@
 
 xmlParserCtxtPtr SAX2FrameworkCreateParserCtxt(xmlParserInputBufferPtr buffer_input);
 
-#define CHECK_COPY(ORIGINAL, COPY) if(ORIGINAL && !COPY) { fprintf(stderr, "ERROR allocating memory"); return; }
+void internal_stop_parser(xmlParserCtxtPtr ctxt);
+
+#define CHECK_COPY(ORIGINAL, COPY) if(ORIGINAL && !COPY) { fprintf(stderr, "ERROR allocating memory"); internal_stop_parser(ctxt); return; }
 
 #endif
