@@ -100,28 +100,6 @@ void endDocument(void * ctx) {
 
   state->process->endDocument();
 
-  if(state->root.localname) free((void *)state->root.localname);
-  if(state->root.prefix) free((void *)state->root.prefix);
-  if(state->root.URI) free((void *)state->root.URI);
-
-  int ns_length = state->root.nb_namespaces * 2;
-
-  for (int i = 0; i < ns_length; ++i)
-    if(state->root.namespaces[i])
-      free((void *)state->root.namespaces[i]);
-  free((void *)state->root.namespaces);
-
-  for (int i = 0, index = 0; i < state->root.nb_attributes; ++i, index += 5) {
-    if(state->root.attributes[index])
-      free((void *)state->root.attributes[index]);
-    if(state->root.attributes[index + 1])
-      free((void *)state->root.attributes[index + 1]);
-    if(state->root.attributes[index + 2])
-      free((void *)state->root.attributes[index + 2]);
-    free((void *)state->root.attributes[index + 3]);
-  }
-  free((void *)state->root.attributes);
-
 #ifdef DEBUG
   fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 #endif
