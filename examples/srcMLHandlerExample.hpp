@@ -10,6 +10,9 @@ class srcMLHandlerExample : public srcMLHandler {
 
 public :
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+
   virtual void startDocument() {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -87,6 +90,8 @@ public :
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
+
+#pragma GCC diagnostic pop
 
 };
 
