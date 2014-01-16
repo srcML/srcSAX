@@ -5,6 +5,7 @@
 
 #include <libxml/parser.h>
 #include <stdio.h>
+#include <boost/thread/mutex.hpp>
 #include <pthread.h>
 
 class srcMLHandlerThread : public srcMLHandler {
