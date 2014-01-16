@@ -50,6 +50,9 @@ xmlSAXHandler factory() {
   return sax;
 }
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+
 /**
  * startDocument
  * @param ctx an xmlParserCtxtPtr
@@ -556,3 +559,4 @@ void cdataBlock(void * ctx, const xmlChar * value, int len) {
 
 }
 
+#pragma GCC diagnostic pop
