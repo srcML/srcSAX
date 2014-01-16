@@ -18,23 +18,18 @@ void * start_routine(void * arg) {
 
 }
 
-int main(int argc, char * argv[]) {
+int main() {
 
-
-  //pthread_t thread;
   srcMLHandlerThread arg;
-  //pthread_create(&thread, 0, start_routine, &arg);
+
   boost::thread thread = boost::thread(start_routine, &arg);
-  fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   arg.wait();
   arg.resume();
-  fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+
   arg.wait();
   arg.resume();
-  fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
-  void * ret;
-  //pthread_join(thread, &ret);
+
   thread.join();
 
   return 0;
