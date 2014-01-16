@@ -9,7 +9,6 @@
 #include <boost/thread/condition_variable.hpp>
 #include <boost/thread/locks.hpp>
 #include <boost/thread/lock_types.hpp> 
-//#include <pthread.h>
 
 class srcMLHandlerThread : public srcMLHandler {
 
@@ -20,7 +19,7 @@ private :
 
 public :
 
-  srcMLHandlerThread() : is_done(false) {
+  srcMLHandlerThread() {
 
   }
 

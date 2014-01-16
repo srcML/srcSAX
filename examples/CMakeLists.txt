@@ -16,5 +16,5 @@ add_executable(thread ${THREAD_SRC})
 target_link_libraries(thread sax2framework ${LIBXML2_LIBRARIES} ${Boost_SYSTEM_LIBRARY_DEBUG} ${Boost_THREAD_LIBRARY_DEBUG})
 
 add_executable(thread_stop ${THREAD_STOP_SRC})
-target_link_libraries(thread_stop sax2framework ${LIBXML2_LIBRARIES})
+target_link_libraries(thread_stop sax2framework ${LIBXML2_LIBRARIES} ${Boost_SYSTEM_LIBRARY_DEBUG} ${Boost_THREAD_LIBRARY_DEBUG})
 

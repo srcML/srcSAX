@@ -5,7 +5,7 @@
 #include <string>
 #include <libxml/parserInternals.h>
 
-#include <pthread.h>
+#include <boost/thread/thread.hpp>
 
 void * start_routine(void * arg) {
 
