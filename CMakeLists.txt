@@ -9,7 +9,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY bin)
 find_package(LibXml2 REQUIRED)
 include_directories(${LIBXML2_INCLUDE_DIR} ${Boost_INCLUDE_DIR} examples test src)
 
-set(CMAKE_CXX_FLAGS_RELEASE "-fPIC -O3 -DNDEBUG -Wno-long-long -Wall -Wextra -Wshorten-64-to-32")
+set(CMAKE_CXX_FLAGS "-fPIC -O3 -DNDEBUG -Wno-long-long -Wall -Wextra -Wshorten-64-to-32")
 
 enable_testing()
 
