@@ -61,6 +61,9 @@ public :
       end_root(0), end_unit(0), end_element_ns(0), characters_root(0), characters_unit(0),
       comment_(0), cdata_block(0), call_count(0) {}
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+
   /**
    * startDocument
    *
@@ -249,6 +252,8 @@ public :
     cdata_block = ++call_count;
 
   }
+
+#pragma GCC diagnostic pop
 
 };
 

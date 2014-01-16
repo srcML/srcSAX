@@ -5,7 +5,7 @@
 #include <string.h>
 #include <cassert>
 
-int main(int argc, char * argv[]) {
+int main() {
 
   /*
     startDocument
@@ -42,7 +42,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -68,7 +68,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -98,7 +98,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -135,7 +135,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -170,7 +170,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -208,7 +208,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -246,7 +246,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -284,7 +284,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -312,7 +312,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -339,7 +339,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -369,7 +369,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -398,7 +398,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -427,7 +427,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -456,7 +456,7 @@ int main(int argc, char * argv[]) {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = { 0 };
+    SAX2srcMLHandler sax2_handler = {/* 0 */};
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;

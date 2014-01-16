@@ -7,14 +7,14 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY bin)
 
 find_package(LibXml2 REQUIRED)
-include_directories(${LIBXML2_INCLUDE_DIR})
+include_directories(${LIBXML2_INCLUDE_DIR} ${Boost_INCLUDE_DIR} examples test src)
+
+set(CMAKE_CXX_FLAGS "-fPIC -O3 -DNDEBUG -Wno-long-long -Wall -Wextra -Wshorten-64-to-32")
 
 enable_testing()
 
-include_directories(src)
 file(GLOB HANDLER_SRC src/*.cpp)
 add_library(sax2framework ${HANDLER_SRC})
 
-include(examples/CMakeLists.txt)
-include(test/CMakeLists.txt)
+subdirs(examples test)
 

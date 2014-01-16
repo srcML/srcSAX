@@ -19,14 +19,6 @@ private :
 
 public :
 
-  srcMLHandlerThread() {
-
-  }
-
-  ~srcMLHandlerThread() {
-
-  }
-
   void wait() {
 
     boost::unique_lock<boost::mutex> lock(mutex);
@@ -35,11 +27,14 @@ public :
   }
 
   void resume() {
-    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+
     boost::unique_lock<boost::mutex> lock(mutex);
     cond.notify_all();
 
   }
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 
   virtual void startDocument() {
 
@@ -123,6 +118,8 @@ public :
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
+
+#pragma GCC diagnostic pop
 
 };
 
