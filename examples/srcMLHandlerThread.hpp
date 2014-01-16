@@ -121,4 +121,6 @@ public :
 
 #pragma GCC diagnostic pop
 
+};
+
 #endif
