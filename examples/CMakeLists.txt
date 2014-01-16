@@ -1,13 +1,12 @@
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY examples)
 
 find_package(Boost COMPONENTS system thread REQUIRED)
-include_directories(examples ${Boost_INCLUDE_DIR})
 
-set(EXAMPLE_SRC examples/example.cpp)
+set(EXAMPLE_SRC example.cpp)
 
-set(THREAD_SRC examples/thread.cpp)
+set(THREAD_SRC thread.cpp)
 
-set(THREAD_STOP_SRC examples/thread_stop.cpp)
+set(THREAD_STOP_SRC thread_stop.cpp)
 
 add_executable(example ${EXAMPLE_SRC})
 target_link_libraries(example sax2framework ${LIBXML2_LIBRARIES})
