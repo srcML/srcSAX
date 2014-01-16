@@ -5,7 +5,7 @@
 #include <string>
 #include <libxml/parserInternals.h>
 
-int main(int argc, char * argv[]) {
+int main() {
 
   srcMLControlHandler control("example.xml");
   srcMLHandlerExample handler;

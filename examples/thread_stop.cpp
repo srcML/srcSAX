@@ -18,7 +18,7 @@ void * start_routine(void * arg) {
 
 }
 
-int main(int argc, char * argv[]) {
+int main() {
 
 
   pthread_t thread;

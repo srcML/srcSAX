@@ -5,7 +5,7 @@
 #include <string.h>
 #include <cassert>
 
-int main(int argc, char * argv[]) {
+int main() {
 
   /*
     srcMLControlHandler
@@ -29,6 +29,9 @@ int main(int argc, char * argv[]) {
   /*
     getSAX
    */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-variable"
+
   {
 
     srcMLControlHandler control(__FILE__);
@@ -532,6 +535,8 @@ int main(int argc, char * argv[]) {
     assert(sax.comment == comment);
     assert(sax.cdataBlock == cdataBlock);
   }
+
+#pragma GCC diagnostic pop
 
   /*
     parse
