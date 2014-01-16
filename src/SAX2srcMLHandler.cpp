@@ -234,7 +234,7 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
   state->is_archive = strcmp((const char *)localname, "unit") == 0;
 
   if(!state->is_archive) {
-    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+
     state->process->startUnit(state->root.localname, state->root.prefix, state->root.URI,
                                state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
                                state->root.nb_defaulted, state->root.attributes);
