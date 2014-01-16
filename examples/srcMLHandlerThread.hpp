@@ -5,52 +5,39 @@
 
 #include <libxml/parser.h>
 #include <stdio.h>
-#include <pthread.h>
+#include <boost/thread/mutex.hpp>
+#include <boost/thread/condition_variable.hpp>
+#include <boost/thread/locks.hpp>
+#include <boost/thread/lock_types.hpp> 
 
 class srcMLHandlerThread : public srcMLHandler {
 
 private :
 
-  pthread_mutex_t mutex;
-  pthread_mutex_t is_done_mutex;
-  pthread_cond_t cond;
-  pthread_cond_t is_done_cond;
-
-  bool is_done;
+  boost::mutex mutex;
+  boost::condition_variable cond;
 
 public :
 
-  srcMLHandlerThread() : is_done(false) {
-
-    pthread_mutex_init(&mutex, 0);
-    pthread_mutex_init(&is_done_mutex, 0);
-    pthread_cond_init(&cond, 0);
-    pthread_cond_init(&is_done_cond, 0);
+  srcMLHandlerThread() {
 
   }
 
   ~srcMLHandlerThread() {
 
-    pthread_mutex_destroy(&mutex);
-    pthread_mutex_destroy(&is_done_mutex);
-    pthread_cond_destroy(&cond);
-    pthread_cond_destroy(&is_done_cond);
-
   }
 
   void wait() {
 
-    pthread_mutex_lock(&mutex);
-    pthread_cond_wait(&is_done_cond, &mutex);
-    pthread_mutex_unlock(&mutex);
+    boost::unique_lock<boost::mutex> lock(mutex);
+    cond.wait(lock);
 
   }
 
   void resume() {
-
-    pthread_mutex_lock(&mutex);
-    pthread_cond_broadcast(&cond);
-    pthread_mutex_unlock(&mutex);
+    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+    boost::unique_lock<boost::mutex> lock(mutex);
+    cond.notify_all();
 
   }
 
@@ -101,10 +88,9 @@ public :
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
     // pause
-    pthread_mutex_lock(&mutex);
-    pthread_cond_broadcast(&is_done_cond);
-    pthread_cond_wait(&cond, &mutex);
-    pthread_mutex_unlock(&mutex);
+    boost::unique_lock<boost::mutex> lock(mutex);
+    cond.notify_all();
+    cond.wait(lock);
 
   }
 
