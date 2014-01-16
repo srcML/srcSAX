@@ -32,7 +32,7 @@
  */
 xmlSAXHandler factory() {
 
-  xmlSAXHandler sax = { 0 };
+  xmlSAXHandler sax = {/* 0 */};
 
   sax.initialized    = XML_SAX2_MAGIC;
 
