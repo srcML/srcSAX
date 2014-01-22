@@ -36,6 +36,7 @@ class srcMLHandler {
 private :
 
   xmlParserCtxtPtr ctxt;
+  bool is_archive;
 
 public :
 
@@ -57,6 +58,12 @@ public :
     ctxt->sax->ignorableWhitespace = 0;
 
     xmlStopParser(ctxt);
+
+  }
+
+  void set_is_archive(bool is_archive) {
+
+    this->is_archive = is_archive;
 
   }
 
