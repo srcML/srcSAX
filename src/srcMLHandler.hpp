@@ -36,6 +36,8 @@ class srcMLHandler {
 private :
 
   xmlParserCtxtPtr ctxt;
+
+protected:
   bool is_archive;
 
 public :
