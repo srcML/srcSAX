@@ -1,5 +1,3 @@
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY examples)
-
 find_package(Boost COMPONENTS system thread REQUIRED)
 
 set(EXAMPLE_SRC example.cpp)
