@@ -73,6 +73,8 @@ _xmlBufResetInput(xmlBuf * buf, xmlParserInputPtr input) {
  */
 int
 _xmlBufResetInput(xmlBuffer * buf, xmlParserInputPtr input) {
+  if ((input == NULL) || (buf == NULL))
+    return -1;
   input->base = input->buf->buffer->content;
   input->cur = input->buf->buffer->content;
   input->end = &input->buf->buffer->content[input->buf->buffer->use];
