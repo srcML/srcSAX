@@ -69,7 +69,7 @@ _xmlBufResetInput(xmlBuf * buf, xmlParserInputPtr input) {
  *
  * Function is taken fro libxml2.
  *
- * @returns 0 
+ * @returns 0  on success and -1 on error.
  */
 int
 _xmlBufResetInput(xmlBuffer * buf, xmlParserInputPtr input) {
