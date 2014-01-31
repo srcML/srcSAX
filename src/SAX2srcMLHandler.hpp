@@ -98,6 +98,19 @@ struct Element {
     
   }
 
+  Element(const Element & element) {
+
+
+  }
+
+  Element & operator=(Element element) {
+
+  }
+
+  void swap(Element & element) {
+
+  }
+
   ~Element() {
 
     if(namespaces) {
