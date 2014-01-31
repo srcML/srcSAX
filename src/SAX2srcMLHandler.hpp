@@ -105,9 +105,22 @@ struct Element {
 
   Element & operator=(Element element) {
 
+    swap(element);
+    return *this;
+
   }
 
   void swap(Element & element) {
+
+    std::swap(localname, element.localname);
+    std::swap(prefix, element.prefix);
+    std::swap(URI, element.URI);
+    std::swap(nb_namespaces, element.nb_namespaces);
+    std::swap(namespaces, element.namespaces);
+    std::swap(nb_attributes, element.nb_attributes);
+    std::swap(nb_defaulted, element.nb_defaulted);
+    std::swap(attributes, element.attributes);
+    std::swap(characters, element.characters);
 
   }
 
