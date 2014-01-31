@@ -109,18 +109,18 @@ struct Element {
       attributes(0) {
     
     // save all the info in case this is not a srcML archive
-    this->localname = element.localname ? (xmlChar*) strdup((const char*) localname) : 0;
+    this->localname = element.localname ? (xmlChar*) strdup((const char*) element.localname) : 0;
     CHECK_COPY(element.localname, this->localname);
 
-    this->prefix = element.prefix ? (xmlChar*) strdup((const char*) prefix) : 0;
+    this->prefix = element.prefix ? (xmlChar*) strdup((const char*) element.prefix) : 0;
     CHECK_COPY(element.prefix, this->prefix);
 
-    this->URI = element.URI ? (xmlChar*) strdup((const char*) URI) : 0;
+    this->URI = element.URI ? (xmlChar*) strdup((const char*) element.URI) : 0;
     CHECK_COPY(element.URI, this->URI);
 
     this->nb_namespaces = element.nb_namespaces;
     int ns_length = element.nb_namespaces * 2;
-    this->namespaces = (const xmlChar**) malloc(ns_length * sizeof(namespaces[0]));
+    this->namespaces = (const xmlChar**) malloc(ns_length * sizeof(element.namespaces[0]));
     CHECK_COPY(element.namespaces, this->namespaces);
     memset(this->namespaces, 0, ns_length);
 
