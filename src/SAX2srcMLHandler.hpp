@@ -39,7 +39,7 @@
 struct Element {
 
   /** Default constructor to Zero out Element */
-  Element() : localname(0), prefix(0), URI(0),
+  Element() : ctxt(0), localname(0), prefix(0), URI(0),
               nb_namespaces(0), namespaces(0),
               nb_attributes(0), nb_defaulted(0),
               attributes(0) 
@@ -47,7 +47,11 @@ struct Element {
 
   Element(xmlParserCtxtPtr ctxt, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
 	  int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-	  const xmlChar ** attributes) {
+	  const xmlChar ** attributes)
+    : ctxt(ctxt), localname(0), prefix(0), URI(0),
+      nb_namespaces(0), namespaces(0),
+      nb_attributes(0), nb_defaulted(0),
+      attributes(0) {
 
     // save all the info in case this is not a srcML archive
     this->localname = localname ? (xmlChar*) strdup((const char*) localname) : 0;
@@ -98,9 +102,59 @@ struct Element {
     
   }
 
-  Element(const Element & element) {
+  Element(const Element & element)
+    : ctxt(element.ctxt), localname(0), prefix(0), URI(0),
+      nb_namespaces(0), namespaces(0),
+      nb_attributes(0), nb_defaulted(0),
+      attributes(0) {
+    
+    // save all the info in case this is not a srcML archive
+    this->localname = element.localname ? (xmlChar*) strdup((const char*) localname) : 0;
+    CHECK_COPY(element.localname, this->localname);
 
+    this->prefix = element.prefix ? (xmlChar*) strdup((const char*) prefix) : 0;
+    CHECK_COPY(element.prefix, this->prefix);
 
+    this->URI = element.URI ? (xmlChar*) strdup((const char*) URI) : 0;
+    CHECK_COPY(element.URI, this->URI);
+
+    this->nb_namespaces = element.nb_namespaces;
+    int ns_length = element.nb_namespaces * 2;
+    this->namespaces = (const xmlChar**) malloc(ns_length * sizeof(namespaces[0]));
+    CHECK_COPY(element.namespaces, this->namespaces);
+    memset(this->namespaces, 0, ns_length);
+
+    for (int i = 0; i < ns_length; ++i) {
+      this->namespaces[i] = element.namespaces[i] ? (xmlChar*) strdup((const char*) element.namespaces[i]) : 0;
+      CHECK_COPY(element.namespaces[i], this->namespaces[i]);
+    }
+
+    this->nb_attributes = element.nb_attributes;
+    this->nb_defaulted = element.nb_defaulted;
+
+    int nb_length = element.nb_attributes * 5;
+    this->attributes = (const xmlChar**) malloc(nb_length * sizeof(element.attributes[0]));
+    CHECK_COPY(element.attributes, this->attributes);
+
+    memset(this->attributes, 0, nb_length);
+
+    for (int i = 0, index = 0; i < element.nb_attributes; ++i, index += 5) {
+      this->attributes[index] = element.attributes[index] ? (xmlChar*) strdup((const char*) element.attributes[index]) : 0;
+      CHECK_COPY(element.attributes[index], this->attributes[index]);
+      this->attributes[index + 1] = element.attributes[index + 1] ? (xmlChar*) strdup((const char*) element.attributes[index + 1]) : 0;
+      CHECK_COPY(element.attributes[index + 1], this->attributes[index + 1]);
+      this->attributes[index + 2] = element.attributes[index + 2] ? (xmlChar*) strdup((const char*) element.attributes[index + 2]) : 0;
+      CHECK_COPY(element.attributes[index + 2], this->attributes[index + 2]);
+
+      int vallength = (int)(element.attributes[index + 4] - element.attributes[index + 3]);
+      this->attributes[index + 3] = (const xmlChar*) malloc(vallength);
+      CHECK_COPY(element.attributes[index + 3], this->attributes[index + 3]);
+
+      strncpy((char *) this->attributes[index + 3], (const char*) element.attributes[index + 3], vallength);
+      this->attributes[index + 4] = this->attributes[index + 3] + vallength;
+      
+    }
+      
   }
 
   Element & operator=(Element element) {
@@ -156,6 +210,9 @@ struct Element {
     }
 
   }
+
+  /* parser context */
+  xmlParserCtxtPtr ctxt;
 
   /** local name of an element*/
   const xmlChar* localname;
