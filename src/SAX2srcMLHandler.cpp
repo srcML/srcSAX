@@ -21,7 +21,6 @@
 */
 
 #include <SAX2srcMLHandler.hpp>
-#include <SAX2Framework_utilities.hpp>
 
 #include <cstring>
 

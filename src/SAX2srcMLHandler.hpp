@@ -24,6 +24,7 @@
 #define INCLUDED_SAX2SRCMLHANDLER_HPP
 
 #include <srcMLHandler.hpp>
+#include <SAX2Framework_utilities.hpp>
 
 #include <libxml/parser.h>
 
@@ -43,6 +44,59 @@ struct Element {
               nb_attributes(0), nb_defaulted(0),
               attributes(0) 
   {}
+
+  Element(xmlParserCtxtPtr ctxt, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+	  int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
+	  const xmlChar ** attributes) {
+
+    // save all the info in case this is not a srcML archive
+    this->localname = localname ? (xmlChar*) strdup((const char*) localname) : 0;
+    CHECK_COPY(localname, this->localname);
+
+    this->prefix = prefix ? (xmlChar*) strdup((const char*) prefix) : 0;
+    CHECK_COPY(prefix, this->prefix);
+
+    this->URI = URI ? (xmlChar*) strdup((const char*) URI) : 0;
+    CHECK_COPY(URI, this->URI);
+
+    this->nb_namespaces = nb_namespaces;
+    int ns_length = nb_namespaces * 2;
+    this->namespaces = (const xmlChar**) malloc(ns_length * sizeof(namespaces[0]));
+    CHECK_COPY(namespaces, this->namespaces);
+    memset(this->namespaces, 0, ns_length);
+
+    for (int i = 0; i < ns_length; ++i) {
+      this->namespaces[i] = namespaces[i] ? (xmlChar*) strdup((const char*) namespaces[i]) : 0;
+      CHECK_COPY(namespaces[i], this->namespaces[i]);
+    }
+
+    this->nb_attributes = nb_attributes;
+    this->nb_defaulted = nb_defaulted;
+
+    int nb_length = nb_attributes * 5;
+    this->attributes = (const xmlChar**) malloc(nb_length * sizeof(attributes[0]));
+    CHECK_COPY(attributes, this->attributes);
+
+    memset(this->attributes, 0, nb_length);
+
+    for (int i = 0, index = 0; i < nb_attributes; ++i, index += 5) {
+      this->attributes[index] = attributes[index] ? (xmlChar*) strdup((const char*) attributes[index]) : 0;
+      CHECK_COPY(attributes[index], this->attributes[index]);
+      this->attributes[index + 1] = attributes[index + 1] ? (xmlChar*) strdup((const char*) attributes[index + 1]) : 0;
+      CHECK_COPY(attributes[index + 1], this->attributes[index + 1]);
+      this->attributes[index + 2] = attributes[index + 2] ? (xmlChar*) strdup((const char*) attributes[index + 2]) : 0;
+      CHECK_COPY(attributes[index + 2], this->attributes[index + 2]);
+
+      int vallength = (int)(attributes[index + 4] - attributes[index + 3]);
+      this->attributes[index + 3] = (const xmlChar*) malloc(vallength);
+      CHECK_COPY(attributes[index + 3], this->attributes[index + 3]);
+
+      strncpy((char *) this->attributes[index + 3], (const char*) attributes[index + 3], vallength);
+      this->attributes[index + 4] = this->attributes[index + 3] + vallength;
+
+    }
+    
+  }
 
   ~Element() {
 
