@@ -128,8 +128,8 @@ void endDocument(void * ctx) {
  * Caches root info and immediately calls supplied handlers function.
  */
 void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                    const xmlChar ** attributes) {
+	       int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
+	       const xmlChar ** attributes) {
 
 #ifdef DEBUG
   fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
@@ -140,54 +140,7 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  // need to record that we actually found something besides the root element
-  //state->rootonly = true;
-
-  // save all the info in case this is not a srcML archive
-  state->root.localname = localname ? (xmlChar*) strdup((const char*) localname) : 0;
-  CHECK_COPY(localname, state->root.localname);
-
-  state->root.prefix = prefix ? (xmlChar*) strdup((const char*) prefix) : 0;
-  CHECK_COPY(prefix, state->root.prefix);
-
-  state->root.URI = URI ? (xmlChar*) strdup((const char*) URI) : 0;
-  CHECK_COPY(URI, state->root.URI);
-
-  state->root.nb_namespaces = nb_namespaces;
-  int ns_length = nb_namespaces * 2;
-  state->root.namespaces = (const xmlChar**) malloc(ns_length * sizeof(namespaces[0]));
-  CHECK_COPY(namespaces, state->root.namespaces);
-  memset(state->root.namespaces, 0, ns_length);
-
-  for (int i = 0; i < ns_length; ++i) {
-    state->root.namespaces[i] = namespaces[i] ? (xmlChar*) strdup((const char*) namespaces[i]) : 0;
-    CHECK_COPY(namespaces[i], state->root.namespaces[i]);
-  }
-
-  state->root.nb_attributes = nb_attributes;
-  state->root.nb_defaulted = nb_defaulted;
-
-  int nb_length = nb_attributes * 5;
-  state->root.attributes = (const xmlChar**) malloc(nb_length * sizeof(attributes[0]));
-  CHECK_COPY(attributes, state->root.attributes);
-
-  memset(state->root.attributes, 0, nb_length);
-
-  for (int i = 0, index = 0; i < nb_attributes; ++i, index += 5) {
-    state->root.attributes[index] = attributes[index] ? (xmlChar*) strdup((const char*) attributes[index]) : 0;
-    CHECK_COPY(attributes[index], state->root.attributes[index]);
-    state->root.attributes[index + 1] = attributes[index + 1] ? (xmlChar*) strdup((const char*) attributes[index + 1]) : 0;
-    CHECK_COPY(attributes[index + 1], state->root.attributes[index + 1]);
-    state->root.attributes[index + 2] = attributes[index + 2] ? (xmlChar*) strdup((const char*) attributes[index + 2]) : 0;
-    CHECK_COPY(attributes[index + 2], state->root.attributes[index + 2]);
-
-    int vallength = (int)(attributes[index + 4] - attributes[index + 3]);
-    state->root.attributes[index + 3] = (const xmlChar*) malloc(vallength);
-    CHECK_COPY(attributes[index + 3], state->root.attributes[index + 3]);
-
-    strncpy((char *) state->root.attributes[index + 3], (const char*) attributes[index + 3], vallength);
-    state->root.attributes[index + 4] = state->root.attributes[index + 3] + vallength;
-  }
+  state->root = Element(ctxt, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
   // handle nested units
   ctxt->sax->startElementNs = &startElementNsFirst;
