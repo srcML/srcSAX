@@ -2,6 +2,7 @@
 #include <srcMLHandler.hpp>
 
 #include <stdio.h>
+#include <iostream>
 #include <string.h>
 #include <cassert>
 
@@ -548,7 +549,7 @@ int main() {
     srcMLHandler handler;
     try {
       control.parse(&handler);
-    } catch(...) { assert(false); }
+    } catch(SAXError error) { assert(false); }
 
   }
 
@@ -559,7 +560,10 @@ int main() {
     try {
       control.parse(&handler);
       assert(false);
-    } catch(...) {}
+    } catch(SAXError error) {
+      assert(error->message != "");
+      assert(error.error_code != 0);
+    }
 
   }
 
