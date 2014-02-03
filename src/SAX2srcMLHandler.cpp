@@ -201,7 +201,7 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
 
   state->process->startRoot(state->root.localname, state->root.prefix, state->root.URI,
 			    state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
-			    state->root.nb_defaulted, state->root.attributes);
+			    state->root.nb_defaulted, state->root.attributes, &state->meta_tags);
 
   if(!state->is_archive) {
 
@@ -361,7 +361,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 
       state->process->startRoot(state->root.localname, state->root.prefix, state->root.URI,
 				state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
-				state->root.nb_defaulted, state->root.attributes);
+				state->root.nb_defaulted, state->root.attributes, &state->meta_tags);
 
       state->process->startUnit(state->root.localname, state->root.prefix, state->root.URI,
                                 state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,

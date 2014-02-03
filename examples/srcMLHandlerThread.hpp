@@ -50,7 +50,7 @@ public :
 
   virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                          int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                         const xmlChar ** attributes) {
+                         const xmlChar ** attributes, std::vector<srcMLElement> * meta_tags) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 

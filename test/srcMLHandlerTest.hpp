@@ -104,7 +104,7 @@ public :
    */
   virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                          int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                         const xmlChar ** attributes) {
+                         const xmlChar ** attributes, std::vector<srcMLElement> * meta_tags) {
 
     start_root = ++call_count;
 
