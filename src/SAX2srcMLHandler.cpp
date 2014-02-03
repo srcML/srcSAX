@@ -188,6 +188,14 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
     if(URI && state->root.namespaces[i] && strcmp((const char *)state->root.namespaces[i], (const char *)URI) == 0)
       URI = state->root.namespaces[i];
 
+  if(strcmp((const char *)localname, "macro-list") == 0) {
+
+    state->meta_tags.push_back(srcMLElement(ctxt, localname, prefix, URI, nb_namespaces, namespaces,
+					    nb_attributes, nb_defaulted, attributes));
+    return;
+
+  }
+
   state->is_archive = strcmp((const char *)localname, "unit") == 0;
   state->process->set_is_archive(state->is_archive);
 
@@ -333,6 +341,13 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 #endif
 
   if(ctx == NULL) return;
+
+
+  if(strcmp((const char *)localname, "macro-list") == 0) {
+
+    return;
+
+  }
 
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;

@@ -46,7 +46,7 @@ struct SAX2srcMLHandler {
   srcMLElement root;
 
   /** temporary storage for meta data */
-  std::vector<std::string> meta_data;
+  std::vector<srcMLElement> meta_tags;
 
   /** used to detect root unit */
   bool is_archive;
