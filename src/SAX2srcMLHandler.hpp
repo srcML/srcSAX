@@ -29,6 +29,7 @@
 #include <libxml/parser.h>
 
 #include <string>
+#include <vector>
 
 /**
  * SAX2srcMLHandler
@@ -43,6 +44,9 @@ struct SAX2srcMLHandler {
 
   /** temporary storage for root unit */
   srcMLElement root;
+
+  /** temporary storage for meta data */
+  std::vector<std::string> meta_data;
 
   /** used to detect root unit */
   bool is_archive;

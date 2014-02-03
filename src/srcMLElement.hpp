@@ -43,6 +43,7 @@ struct srcMLElement {
               attributes(0) 
   {}
 
+  /** Constructor to initialize using start element items */
   srcMLElement(xmlParserCtxtPtr ctxt, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
 	  int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
 	  const xmlChar ** attributes)
@@ -100,6 +101,7 @@ struct srcMLElement {
     
   }
 
+  /** Copy constructor */
   srcMLElement(const srcMLElement & element)
     : ctxt(element.ctxt), localname(0), prefix(0), URI(0),
       nb_namespaces(0), namespaces(0),
@@ -155,6 +157,7 @@ struct srcMLElement {
       
   }
 
+  /** Overloaded assignment operator */
   srcMLElement & operator=(srcMLElement element) {
 
     swap(element);
@@ -162,6 +165,7 @@ struct srcMLElement {
 
   }
 
+  /** swap operator */
   void swap(srcMLElement & element) {
 
     std::swap(localname, element.localname);
@@ -176,6 +180,7 @@ struct srcMLElement {
 
   }
 
+  /** destructor */
   ~srcMLElement() {
 
     if(namespaces) {
