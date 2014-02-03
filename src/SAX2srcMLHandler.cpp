@@ -140,7 +140,7 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
   xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
   SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-  state->root = Element(ctxt, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+  state->root = srcMLElement(ctxt, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
   // handle nested units
   ctxt->sax->startElementNs = &startElementNsFirst;
