@@ -63,6 +63,8 @@ int main() {
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
+    xmlSAXHandler sax = factory();
+    ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     endDocument(&ctxt);
 
