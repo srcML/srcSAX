@@ -1,7 +1,7 @@
 /*
   @file srcMLElement.hpp
 
-  Copyright (C) 2004-2013  SDML (www.sdml.info)
+  Copyright (C) 2004-2013  SDML (www.srcML.org)
 
   This file is part of the srcML SAX2 Framework.
 
@@ -26,6 +26,7 @@
 
 #include <libxml/parser.h>
 
+#include <string.h>
 #include <string>
 
 /**
