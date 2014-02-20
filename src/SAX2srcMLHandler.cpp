@@ -223,8 +223,8 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
 
     }
 
-    ctxt->sax->startElementNs = &startElementNs;
-    ctxt->sax->characters = &charactersUnit;
+    if(ctxt->sax->startElementNs) ctxt->sax->startElementNs = &startElementNs;
+    if(ctxt->sax->characters) ctxt->sax->characters = &charactersUnit;
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
@@ -270,8 +270,9 @@ void startUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
             URI = state->root.namespaces[i];
 
     state->process->startUnit(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
-    ctxt->sax->startElementNs = &startElementNs;
-    ctxt->sax->characters = &charactersUnit;
+
+    if(ctxt->sax->startElementNs) ctxt->sax->startElementNs = &startElementNs;
+    if(ctxt->sax->characters) ctxt->sax->characters = &charactersUnit;
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
