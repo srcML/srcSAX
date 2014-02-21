@@ -45,20 +45,49 @@ private :
 
 protected:
     bool is_archive;
+    int unit_count;
 
 public :
 
+    /**
+     * set_control_handler
+     * @param control_handler pointer to control class 
+     *
+     * Used by srcMLControlHandler to provide access to self
+     * for such things as disabeling sax parsing.
+     */
     void set_control_handler(srcMLControlHandler * control_handler) {
 
         this->control_handler = control_handler;
 
     }
+    /**
+     * increment_unit_count
+     *
+     * Internally used to increment the count in SAX2srcMLHandler.
+     */
+    void increment_unit_count() {
 
+        ++unit_count;
+
+    }
+
+    /**
+     * get_control_handler
+     *
+     * Get the control handler. 
+     */
     srcMLControlHandler & get_control_handler() {
  
         return *control_handler;
 
     }
+
+    /**
+     * stop_parser
+     *
+     * Stop the srcML parser.
+     */
     void stop_parser() {
 
         control_handler->getSAX().startDocument = 0;
@@ -74,6 +103,13 @@ public :
 
     }
 
+    /**
+     * set_is_archive
+     * @param is_archive is the srcML document an archive
+     *
+     * Used by SAX2srcMLHandler when determined
+     * if an archive.  Sets if srcML document is an archive.
+     */
     void set_is_archive(bool is_archive) {
 
         this->is_archive = is_archive;
