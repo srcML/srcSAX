@@ -48,6 +48,13 @@ protected:
     int unit_count;
 
 public :
+  
+    /**
+     * srcMLHandler
+     *
+     * Default constructor default values to everything
+     */
+    srcMLHandler() : control_handler(0), is_archive(false), unit_count(0) {}
 
     /**
      * set_control_handler
@@ -61,6 +68,7 @@ public :
         this->control_handler = control_handler;
 
     }
+
     /**
      * increment_unit_count
      *
