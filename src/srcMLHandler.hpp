@@ -1,32 +1,28 @@
-
-/*
-  srcMLHandler.hpp
-
-  Copyright (C) 2004-2013  SDML (www.srcML.org)
-
-  This file is part of the srcML SAX2 Framework.
-
-  The srcML SAX2 Framework is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or
-  (at your option) any later version.
-
-  The srcML SAX2 Framework is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with the srcML SAX2 Framework; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/
+/**
+ * @file srcMLHandler.hpp
+ *
+ * @copyright Copyright (C) 2013-2014  SDML (www.srcML.org)
+ *
+ * The srcML Toolkit is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * The srcML Toolkit is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with the srcML Toolkit; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 #ifndef INCLUDED_SRCMLHANDLER_HPP
 #define INCLUDED_SRCMLHANDLER_HPP
 
 #include <srcMLElement.hpp>
 #include <srcMLControlHandler.hpp>
-//class srcMLControlHandler;
 
 #include <libxml/parser.h>
 
@@ -45,20 +41,57 @@ private :
 
 protected:
     bool is_archive;
+    int unit_count;
 
 public :
+  
+    /**
+     * srcMLHandler
+     *
+     * Default constructor default values to everything
+     */
+    srcMLHandler() : control_handler(0), is_archive(false), unit_count(0) {}
 
+    /**
+     * set_control_handler
+     * @param control_handler pointer to control class 
+     *
+     * Used by srcMLControlHandler to provide access to self
+     * for such things as disabeling sax parsing.
+     */
     void set_control_handler(srcMLControlHandler * control_handler) {
 
         this->control_handler = control_handler;
 
     }
 
+    /**
+     * increment_unit_count
+     *
+     * Internally used to increment the count in SAX2srcMLHandler.
+     */
+    void increment_unit_count() {
+
+        ++unit_count;
+
+    }
+
+    /**
+     * get_control_handler
+     *
+     * Get the control handler. 
+     */
     srcMLControlHandler & get_control_handler() {
  
         return *control_handler;
 
     }
+
+    /**
+     * stop_parser
+     *
+     * Stop the srcML parser.
+     */
     void stop_parser() {
 
         control_handler->getSAX().startDocument = 0;
@@ -74,6 +107,13 @@ public :
 
     }
 
+    /**
+     * set_is_archive
+     * @param is_archive is the srcML document an archive
+     *
+     * Used by SAX2srcMLHandler when determined
+     * if an archive.  Sets if srcML document is an archive.
+     */
     void set_is_archive(bool is_archive) {
 
         this->is_archive = is_archive;

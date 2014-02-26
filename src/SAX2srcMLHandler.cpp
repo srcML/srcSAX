@@ -1,24 +1,24 @@
-/*
-  @file SAX2srcMLHandler.cpp
+/**
+ *  @file SAX2srcMLHandler.cpp
+ *
+ * @copyright Copyright (C) 2013-2014  SDML (www.srcML.org)
+ *
+ * This file is part of the srcML SAX2 Framework.
+ *
+ * The srcML SAX2 Framework is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * The srcML SAX2 Framework is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
 
-  Copyright (C) 2004-2013  SDML (www.srcML.org)
-
-  This file is part of the srcML SAX2 Framework.
-
-  The srcML SAX2 Framework is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or
-  (at your option) any later version.
-
-  The srcML SAX2 Framework is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with the srcML SAX2 Framework; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/
+ *  You should have received a copy of the GNU General Public License
+ * along with the srcML SAX2 Framework; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 #include <SAX2srcMLHandler.hpp>
 #include <srcMLHandler.hpp>
@@ -209,6 +209,8 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
 
     if(!state->is_archive) {
 
+        state->process->increment_unit_count();
+
         state->mode = UNIT;
         state->process->startUnit(state->root.localname, state->root.prefix, state->root.URI,
                                   state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
@@ -220,6 +222,9 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
     } else {
 
         state->process->charactersRoot((const xmlChar *)state->root.characters.c_str(), (int)state->root.characters.size());
+
+	state->process->increment_unit_count();
+
 	state->mode = UNIT;
         state->process->startUnit(localname, prefix, URI,
                                   nb_namespaces, namespaces, nb_attributes,
@@ -278,6 +283,8 @@ void startUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
     for (int i = 1; i < ns_length; i += 2)
         if(URI && state->root.namespaces[i] && strcmp((const char *)state->root.namespaces[i], (const char *)URI) == 0)
             URI = state->root.namespaces[i];
+
+    state->process->increment_unit_count();
 
     state->mode = UNIT;
 
