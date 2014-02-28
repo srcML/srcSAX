@@ -47,6 +47,38 @@ int main() {
     } catch(...) {}
   }
 
+  {
+    try {
+
+      xmlParserInputBufferPtr buffer = xmlParserInputBufferCreateFilename(__FILE__, xmlParseCharEncoding(0));
+      srcMLControlHandler control(buffer);
+    } catch(...) { assert(false); }
+  }
+
+  {
+    try {
+
+      xmlParserInputBufferPtr buffer = xmlParserInputBufferCreateFilename(__FILE__, xmlParseCharEncoding("ISO-8859-1"));
+      srcMLControlHandler control(buffer, "ISO-8859-1");
+    } catch(...) { assert(false); }
+  }
+
+  {
+    try {
+
+      xmlParserInputBufferPtr buffer = xmlParserInputBufferCreateFilename(__FILE__, xmlParseCharEncoding(0));
+      srcMLControlHandler control(buffer, NULL);
+    } catch(...) { assert(false); }
+  }
+
+  {
+    try {
+
+	srcMLControlHandler control((xmlParserInputBufferPtr)NULL);
+      assert(false);
+    } catch(...) {}
+  }
+
   /*
     getSAX
    */
