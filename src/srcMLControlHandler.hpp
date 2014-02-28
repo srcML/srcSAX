@@ -1,7 +1,7 @@
 /**
  * @file srcMLControlHandler.hpp
  *
- * @copyright Copyright (C) 2013-2014  SDML (www.srcML.org)
+ * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
  * The srcML Toolkit is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,7 +64,7 @@ public :
      * Constructor
      */
     srcMLControlHandler(const char * filename);
-    srcMLControlHandler(xmlParserInputBufferPtr input);
+    srcMLControlHandler(xmlParserInputBufferPtr input, const char * encoding = 0);
 
     /**
      * getSAX
