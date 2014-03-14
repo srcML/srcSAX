@@ -53,7 +53,7 @@ private :
     // Process to execute call backs
     SAX2srcMLHandler sax2_handler;
 
-    bool pop_input;
+    xmlParserInputBufferPtr input;
 
 public :
 

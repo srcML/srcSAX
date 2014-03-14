@@ -50,11 +50,11 @@ void srcml_control_handler_init() {
  *
  * Constructor
  */
-srcMLControlHandler::srcMLControlHandler(const char * filename, const char * encoding) : sax2_handler(), pop_input(false) {
+srcMLControlHandler::srcMLControlHandler(const char * filename, const char * encoding) : sax2_handler(), input(0) {
 
     srcml_control_handler_init();
 
-    xmlParserInputBufferPtr input = 
+    input = 
 	xmlParserInputBufferCreateFilename(filename, 
 					   encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
 
@@ -72,7 +72,7 @@ srcMLControlHandler::srcMLControlHandler(const char * filename, const char * enc
  *
  * Constructor
  */
-srcMLControlHandler::srcMLControlHandler(xmlParserInputBufferPtr input) : sax2_handler(), pop_input(true) {
+srcMLControlHandler::srcMLControlHandler(xmlParserInputBufferPtr input) : sax2_handler(), input(0) {
 
     srcml_control_handler_init();
 
@@ -90,8 +90,9 @@ srcMLControlHandler::srcMLControlHandler(xmlParserInputBufferPtr input) : sax2_h
  */
 srcMLControlHandler::~srcMLControlHandler() {
 
-    if(pop_input) inputPop(ctxt);
+    inputPop(ctxt);
     if(ctxt) xmlFreeParserCtxt(ctxt);
+    if(input) xmlFreeParserInputBuffer(input);
 
 }
 
