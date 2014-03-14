@@ -63,8 +63,8 @@ public :
      *
      * Constructor
      */
-    srcMLControlHandler(const char * filename);
-    srcMLControlHandler(xmlParserInputBufferPtr input, const char * encoding = 0);
+    srcMLControlHandler(const char * filename, const char * encoding = 0);
+    srcMLControlHandler(xmlParserInputBufferPtr input);
 
     /**
      * getSAX
