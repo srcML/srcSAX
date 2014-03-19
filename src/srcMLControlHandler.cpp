@@ -54,9 +54,9 @@ srcMLControlHandler::srcMLControlHandler(const char * filename, const char * enc
 
     srcml_control_handler_init();
 
-    input = 
-	xmlParserInputBufferCreateFilename(filename, 
-					   encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
+    input =
+        xmlParserInputBufferCreateFilename(filename,
+                                           encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
 
     ctxt = SAX2FrameworkCreateParserCtxt(input);
 
@@ -114,7 +114,7 @@ xmlSAXHandler & srcMLControlHandler::getSAX() {
  */
 xmlParserCtxtPtr srcMLControlHandler::getCtxt() {
 
-  return ctxt;
+    return ctxt;
 
 }
 
@@ -179,17 +179,17 @@ void srcMLControlHandler::enable_endElementNs(bool enable) {
  */
 void srcMLControlHandler::enable_characters(bool enable) {
 
-  if(enable) {
+    if(enable) {
 
-    sax.characters = charactersFirst;
-    sax.ignorableWhitespace = charactersFirst;
+        sax.characters = charactersFirst;
+        sax.ignorableWhitespace = charactersFirst;
 
-  } else {
+    } else {
 
-    sax.characters = 0;
-    sax.ignorableWhitespace = 0;
+        sax.characters = 0;
+        sax.ignorableWhitespace = 0;
 
-  }
+    }
 
 }
 
