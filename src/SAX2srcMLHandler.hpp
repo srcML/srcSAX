@@ -62,6 +62,10 @@ struct SAX2srcMLHandler {
 
     /** the current parsing mode */
     srcMLMode mode;
+
+    /** bool to indicate if should do special function parsing. */
+    bool parse_function;
+
 };
 
 /**

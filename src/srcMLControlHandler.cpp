@@ -229,7 +229,8 @@ void srcMLControlHandler::enable_cdataBlock(bool enable) {
 */
 void enable_function(bool enable) {
 
-    
+    //sax2_handler.parse_function = true;
+
 }
 
 /**
