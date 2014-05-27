@@ -61,7 +61,7 @@ struct function_prototype {
     std::vector<std::string> parameter_list;
 
     /** function prototype parsing modes */
-    enum { RETURN_TYPE, NAME, PARAMETER_LIST } mode;
+    enum { RETURN_TYPE, NAME, PARAMETER_LIST, PARAMETER } mode;
 
 };
 

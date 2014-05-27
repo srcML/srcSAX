@@ -341,15 +341,27 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
         if(URI && state->root.namespaces[i] && strcmp((const char *)state->root.namespaces[i], (const char *)URI) == 0)
             URI = state->root.namespaces[i];
 
-    if(state->parse_function && strcmp((const char *)localname, "function") == 0)
-        state->in_function_header = true;
+    if(state->parse_function && strcmp((const char *)localname, "function") == 0) {
 
-    else if(!state->in_function_header)
+        state->in_function_header = true;
+        state->current_function = function_prototype();
+
+    } else if(!state->in_function_header) {
+
         state->process->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
-    else {
+    } else {
 
+        if(state->current_function.mode == function_prototype::NAME && strcmp((const char *)localname, "parameter_list") == 0) {
 
+            state->current_function.mode = function_prototype::PARAMETER_LIST;
+
+        } else if(state->current_function.mode == function_prototype::PARAMETER_LIST && strcmp((const char *)localname, "param") == 0) {
+
+            state->current_function.parameter_list.push_back("");
+            state->current_function.mode = function_prototype::PARAMETER;
+
+        }
 
     }
 
@@ -428,7 +440,28 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 
     } else {
 
-        state->process->endElementNs(localname, prefix, URI);
+        if(state->parse_function && strcmp((const char *)localname, "function") == 0) {
+
+            state->process->endFunction();
+
+        } else if(!state->in_function_header) {
+
+            state->process->endElementNs(localname, prefix, URI);
+
+        } else {
+
+            if(state->current_function.mode == function_prototype::RETURN_TYPE && strcmp((const char *)localname, "type") == 0)
+                state->current_function.mode = function_prototype::NAME;
+            else if(state->current_function.mode == function_prototype::PARAMETER && strcmp((const char *)localname, "param") == 0)
+                state->current_function.mode = function_prototype::PARAMETER_LIST;
+            else if(state->current_function.mode == function_prototype::PARAMETER_LIST && strcmp((const char *)localname, "parameter_list") == 0)
+
+                state->in_function_header = false;
+                state->process->startFunction(state->current_function.name, state->current_function.return_type, state->current_function.parameter_list, false);
+
+
+        }
+
     }
 
 #ifdef DEBUG
@@ -520,7 +553,20 @@ void charactersUnit(void * ctx, const xmlChar * ch, int len) {
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
 
-    state->process->charactersUnit(ch, len);
+
+    if(!state->in_function_header)
+        state->process->charactersUnit(ch, len);
+
+    else {
+
+        if(state->current_function.mode == function_prototype::RETURN_TYPE)
+            state->current_function.return_type.append((const char *)ch, len);
+        else if(state->current_function.mode == function_prototype::NAME)
+            state->current_function.name.append((const char *)ch, len);
+        else if(state->current_function.mode == function_prototype::PARAMETER)
+            state->current_function.parameter_list.back().append((const char *)ch, len);
+
+    }
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, chars.c_str());
