@@ -48,9 +48,20 @@ enum srcMLMode {
 
 struct function_prototype {
 
+    /** default constructor */
+    function_prototype() : name(), return_type(), parameter_list(), mode(RETURN_TYPE) {}
+
+    /** function name */
     std::string name;
+
+    /** function return type */
     std::string return_type;
+
+    /** function parameter list */
     std::vector<std::string> parameter_list;
+
+    /** function prototype parsing modes */
+    enum { RETURN_TYPE, NAME, PARAMETER_LIST } mode;
 
 };
 
@@ -63,7 +74,7 @@ struct function_prototype {
 struct SAX2srcMLHandler {
 
     /** default constructor */
-    SAX2srcMLHandler() : process(0), root(), meta_tags(), is_archive(false), mode(ROOT), parse_function(false) {}
+    SAX2srcMLHandler() : process(0), root(), meta_tags(), is_archive(false), mode(ROOT), parse_function(false), in_function_header(false), current_function() {}
 
     /** hooks for processing */
     srcMLHandler * process;
@@ -82,6 +93,9 @@ struct SAX2srcMLHandler {
 
     /** bool to indicate if should do special function parsing */
     bool parse_function;
+
+    /** bool to indicate if in funciton for special function parsing */
+    bool in_function_header;
 
     /** store data for special function parsing */
     function_prototype current_function;

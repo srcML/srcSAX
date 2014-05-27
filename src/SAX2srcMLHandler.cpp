@@ -341,8 +341,17 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
         if(URI && state->root.namespaces[i] && strcmp((const char *)state->root.namespaces[i], (const char *)URI) == 0)
             URI = state->root.namespaces[i];
 
-    state->process->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+    if(state->parse_function && strcmp((const char *)localname, "function") == 0)
+        state->in_function_header = true;
 
+    else if(!state->in_function_header)
+        state->process->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+
+    else {
+
+
+
+    }
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
