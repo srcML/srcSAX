@@ -1,0 +1,10 @@
+CMakeFiles
+Testing
+*.sublime-project
+*.sublime-workspace
+CMakeCache.txt
+*.cmake
+Makefile
+
+
+bin
