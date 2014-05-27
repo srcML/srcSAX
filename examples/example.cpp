@@ -28,6 +28,7 @@
 int main() {
 
   srcMLControlHandler control("example.xml");
+  control.enable_function(true);
   srcMLHandlerExample handler;
   control.parse(&handler);
 
