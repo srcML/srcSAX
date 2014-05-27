@@ -227,9 +227,9 @@ void srcMLControlHandler::enable_cdataBlock(bool enable) {
 *
 * Enables or disables special function parsing.
 */
-void enable_function(bool enable) {
+void srcMLControlHandler::enable_function(bool enable) {
 
-    //sax2_handler.parse_function = true;
+    sax2_handler.parse_function = enable;
 
 }
 

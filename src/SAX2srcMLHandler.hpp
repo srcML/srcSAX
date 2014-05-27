@@ -48,6 +48,9 @@ enum srcMLMode {
  */
 struct SAX2srcMLHandler {
 
+    /** default constructor */
+    SAX2srcMLHandler() : process(0), root(), meta_tags(), is_archive(false), mode(ROOT), parse_function(false) {}
+
     /** hooks for processing */
     srcMLHandler * process;
 

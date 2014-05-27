@@ -62,7 +62,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -88,7 +88,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -118,7 +118,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -155,7 +155,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -190,7 +190,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -228,7 +228,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -266,7 +266,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -304,7 +304,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -332,7 +332,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -359,7 +359,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -389,7 +389,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -418,7 +418,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -447,7 +447,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -476,7 +476,7 @@ int main() {
   {
 
     srcMLHandlerTest handler;
-    SAX2srcMLHandler sax2_handler = {/* 0 */};
+    SAX2srcMLHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
