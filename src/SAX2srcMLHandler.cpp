@@ -341,10 +341,10 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
         if(URI && state->root.namespaces[i] && strcmp((const char *)state->root.namespaces[i], (const char *)URI) == 0)
             URI = state->root.namespaces[i];
 
-    if(state->parse_function && strcmp((const char *)localname, "function") == 0) {
+    if(state->parse_function && (strcmp((const char *)localname, "function_decl") == 0 || strcmp((const char *)localname, "function") == 0)) {
 
         state->in_function_header = true;
-        state->current_function = function_prototype();
+        state->current_function = function_prototype(strcmp((const char *)localname, "function_decl") == 0);
 
     } else if(!state->in_function_header) {
 
@@ -444,7 +444,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 
     } else {
 
-        if(state->in_function_header && strcmp((const char *)localname, "function") == 0) {
+        if(state->in_function_header && (strcmp((const char *)localname, "function_decl") == 0 || strcmp((const char *)localname, "function") == 0)) {
 
             state->process->endFunction();
 
@@ -471,7 +471,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
             } else if(state->current_function.mode == function_prototype::PARAMETER_LIST && strcmp((const char *)localname, "parameter_list") == 0) {
 
                 state->in_function_header = false;
-                state->process->startFunction(state->current_function.name, state->current_function.return_type, state->current_function.parameter_list, false);
+                state->process->startFunction(state->current_function.name, state->current_function.return_type, state->current_function.parameter_list, state->current_function.is_decl);
 
             }
 

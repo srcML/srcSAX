@@ -68,8 +68,8 @@ struct declaration {
  */
 struct function_prototype {
 
-    /** default constructor */
-    function_prototype() : name(), return_type(), parameter_list(), mode(RETURN_TYPE) {}
+    /**constructor */
+    function_prototype(bool is_decl = false) : name(), return_type(), parameter_list(), mode(RETURN_TYPE), is_decl(is_decl) {}
 
     /** function name */
     std::string name;
@@ -82,6 +82,9 @@ struct function_prototype {
 
     /** function prototype parsing modes */
     enum { RETURN_TYPE, NAME, PARAMETER_LIST, PARAMETER } mode;
+
+    /** bool to indicate if function_decl or function */
+    bool is_decl;
 
 };
 
