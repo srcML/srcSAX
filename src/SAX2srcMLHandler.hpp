@@ -57,7 +57,7 @@ struct declaration {
     std::string name;
 
     /** declaration parsing modes */
-    enum { TYPE, NAME } mode;
+    enum { TYPE, NAME, INIT } mode;
 
 };
 

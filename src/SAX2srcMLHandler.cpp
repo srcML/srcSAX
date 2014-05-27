@@ -363,6 +363,8 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
 
         } else if(state->current_function.mode == function_prototype::PARAMETER && strcmp((const char *)localname, "init") == 0) {
 
+            state->current_function.parameter_list.back().mode = declaration::INIT;
+
             state->current_function.mode = function_prototype::PARAMETER_LIST;
 
         }
@@ -582,7 +584,7 @@ void charactersUnit(void * ctx, const xmlChar * ch, int len) {
 
             if(state->current_function.parameter_list.back().mode == declaration::TYPE)
                 state->current_function.parameter_list.back().type.append((const char *)ch, len);
-            else
+            else if(state->current_function.parameter_list.back().mode == declaration::NAME)
                 state->current_function.parameter_list.back().name.append((const char *)ch, len);
 
         }
