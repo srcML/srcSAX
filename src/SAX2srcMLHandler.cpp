@@ -440,7 +440,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 
     } else {
 
-        if(state->parse_function && strcmp((const char *)localname, "function") == 0) {
+        if(state->in_function_header && strcmp((const char *)localname, "function") == 0) {
 
             state->process->endFunction();
 
@@ -454,11 +454,12 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
                 state->current_function.mode = function_prototype::NAME;
             else if(state->current_function.mode == function_prototype::PARAMETER && strcmp((const char *)localname, "param") == 0)
                 state->current_function.mode = function_prototype::PARAMETER_LIST;
-            else if(state->current_function.mode == function_prototype::PARAMETER_LIST && strcmp((const char *)localname, "parameter_list") == 0)
+            else if(state->current_function.mode == function_prototype::PARAMETER_LIST && strcmp((const char *)localname, "parameter_list") == 0) {
 
                 state->in_function_header = false;
                 state->process->startFunction(state->current_function.name, state->current_function.return_type, state->current_function.parameter_list, false);
 
+            }
 
         }
 
