@@ -358,7 +358,7 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
 
         } else if(state->current_function.mode == function_prototype::PARAMETER_LIST && strcmp((const char *)localname, "param") == 0) {
 
-            state->current_function.parameter_list.push_back("");
+            state->current_function.parameter_list.push_back(declaration());
             state->current_function.mode = function_prototype::PARAMETER;
 
         }
@@ -450,11 +450,21 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 
         } else {
 
-            if(state->current_function.mode == function_prototype::RETURN_TYPE && strcmp((const char *)localname, "type") == 0)
+            if(state->current_function.mode == function_prototype::RETURN_TYPE && strcmp((const char *)localname, "type") == 0) {
+
                 state->current_function.mode = function_prototype::NAME;
-            else if(state->current_function.mode == function_prototype::PARAMETER && strcmp((const char *)localname, "param") == 0)
+
+            } else if(state->current_function.mode == function_prototype::PARAMETER && state->current_function.parameter_list.back().mode == declaration::TYPE
+                    && strcmp((const char *)localname, "type") == 0) {
+
+                state->current_function.parameter_list.back().mode = declaration::NAME;
+
+            } else if(state->current_function.mode == function_prototype::PARAMETER 
+                && (strcmp((const char *)localname, "param") == 0 || strcmp((const char *)localname, "decl") == 0 || strcmp((const char *)localname, "init") == 0)) {
+
                 state->current_function.mode = function_prototype::PARAMETER_LIST;
-            else if(state->current_function.mode == function_prototype::PARAMETER_LIST && strcmp((const char *)localname, "parameter_list") == 0) {
+
+            } else if(state->current_function.mode == function_prototype::PARAMETER_LIST && strcmp((const char *)localname, "parameter_list") == 0) {
 
                 state->in_function_header = false;
                 state->process->startFunction(state->current_function.name, state->current_function.return_type, state->current_function.parameter_list, false);
@@ -564,8 +574,14 @@ void charactersUnit(void * ctx, const xmlChar * ch, int len) {
             state->current_function.return_type.append((const char *)ch, len);
         else if(state->current_function.mode == function_prototype::NAME)
             state->current_function.name.append((const char *)ch, len);
-        else if(state->current_function.mode == function_prototype::PARAMETER)
-            state->current_function.parameter_list.back().append((const char *)ch, len);
+        else if(state->current_function.mode == function_prototype::PARAMETER) {
+
+            if(state->current_function.parameter_list.back().mode == declaration::TYPE)
+                state->current_function.parameter_list.back().type.append((const char *)ch, len);
+            else
+                state->current_function.parameter_list.back().name.append((const char *)ch, len);
+
+        }
 
     }
 

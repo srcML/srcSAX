@@ -41,11 +41,31 @@ enum srcMLMode {
 };
 
 /**
+ * declaration
+ *
+ * Data structure to hold a declaration.
+ */
+struct declaration {
+
+    /** default constructor */
+    declaration() : type(), name(), mode(TYPE) {}
+
+    /** declaration type */
+    std::string type;
+
+    /** declaration name */
+    std::string name;
+
+    /** declaration parsing modes */
+    enum { TYPE, NAME } mode;
+
+};
+
+/**
  * function_prototype
  *
- * Data structure to hold a function prototype
+ * Data structure to hold a function prototype.
  */
-
 struct function_prototype {
 
     /** default constructor */
@@ -58,7 +78,7 @@ struct function_prototype {
     std::string return_type;
 
     /** function parameter list */
-    std::vector<std::string> parameter_list;
+    std::vector<declaration> parameter_list;
 
     /** function prototype parsing modes */
     enum { RETURN_TYPE, NAME, PARAMETER_LIST, PARAMETER } mode;

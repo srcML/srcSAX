@@ -180,7 +180,7 @@ public :
      * startFunction
      * @param name the function's name
      * @param return_type the function return type
-     * @param parameter_list a list of the function parameters as strings
+     * @param parameter_list a list of the function parameters in struct containing type/name
      * @param is_decl indicates if the call is a function declaration (true) or definition (false)
      *
      * SAX handler function for start of function with prototype.
@@ -188,7 +188,7 @@ public :
      *
      * Overide for desired behaviour.
      */
-    virtual void startFunction(const std::string & name, const std::string & return_type, const std::vector<std::string> & parameter_list, bool is_decl) {}
+    virtual void startFunction(const std::string & name, const std::string & return_type, const std::vector<declaration> & parameter_list, bool is_decl) {}
 
     /**
      * startElementNs

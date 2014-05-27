@@ -61,12 +61,16 @@ public :
 
   }
 
-  virtual void startFunction(const std::string & name, const std::string & return_type, const std::vector<std::string> & parameter_list, bool is_decl) {
+  virtual void startFunction(const std::string & name, const std::string & return_type, const std::vector<declaration> & parameter_list, bool is_decl) {
 
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, name.c_str());
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, return_type.c_str());
-    for(std::vector<std::string>::const_iterator parameter = parameter_list.begin(); parameter != parameter_list.end(); ++parameter)
-      fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, parameter->c_str());
+    for(std::vector<declaration>::const_iterator parameter = parameter_list.begin(); parameter != parameter_list.end(); ++parameter) {
+
+      fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, parameter->type.c_str());
+      fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, parameter->name.c_str());
+
+    }
 
   }
 
