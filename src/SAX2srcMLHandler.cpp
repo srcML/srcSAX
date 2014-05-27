@@ -361,6 +361,10 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
             state->current_function.parameter_list.push_back(declaration());
             state->current_function.mode = function_prototype::PARAMETER;
 
+        } else if(state->current_function.mode == function_prototype::PARAMETER && strcmp((const char *)localname, "init") == 0) {
+
+            state->current_function.mode = function_prototype::PARAMETER_LIST;
+
         }
 
     }
@@ -460,7 +464,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
                 state->current_function.parameter_list.back().mode = declaration::NAME;
 
             } else if(state->current_function.mode == function_prototype::PARAMETER 
-                && (strcmp((const char *)localname, "param") == 0 || strcmp((const char *)localname, "decl") == 0 || strcmp((const char *)localname, "init") == 0)) {
+                && (strcmp((const char *)localname, "param") == 0 || strcmp((const char *)localname, "decl") == 0)) {
 
                 state->current_function.mode = function_prototype::PARAMETER_LIST;
 
