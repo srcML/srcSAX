@@ -184,9 +184,11 @@ public :
      * @param is_decl indicates if the call is a function declaration (true) or definition (false)
      *
      * SAX handler function for start of function with prototype.
+     * Accessing references after callback terminate is undefined.
+     *
      * Overide for desired behaviour.
      */
-    virtual void startFunction(std::string name, std::string return_type, std::vector<std::string> parameter_list, bool is_decl) {}
+    virtual void startFunction(const std::string & name, const std::string & return_type, const std::vector<const std::string> & parameter_list, bool is_decl) {}
 
     /**
      * startElementNs

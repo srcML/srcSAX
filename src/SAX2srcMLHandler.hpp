@@ -41,6 +41,20 @@ enum srcMLMode {
 };
 
 /**
+ * function_prototype
+ *
+ * Data structure to hold a function prototype
+ */
+
+struct function_prototype {
+
+    std::string name;
+    std::string return_type;
+    std::vector<std::string> parameter_list;
+
+};
+
+/**
  * SAX2srcMLHandler
  *
  * Data structure to hold process during
@@ -66,8 +80,11 @@ struct SAX2srcMLHandler {
     /** the current parsing mode */
     srcMLMode mode;
 
-    /** bool to indicate if should do special function parsing. */
+    /** bool to indicate if should do special function parsing */
     bool parse_function;
+
+    /** store data for special function parsing */
+    function_prototype current_function;
 
 };
 
