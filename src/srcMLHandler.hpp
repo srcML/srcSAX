@@ -42,6 +42,7 @@ private :
 protected:
     bool is_archive;
     int unit_count;
+    const char * encoding;
 
 public :
 
@@ -50,7 +51,7 @@ public :
      *
      * Default constructor default values to everything
      */
-    srcMLHandler() : control_handler(0), is_archive(false), unit_count(0) {}
+    srcMLHandler() : control_handler(0), is_archive(false), unit_count(0), encoding() {}
 
     /**
      * set_control_handler
@@ -105,6 +106,18 @@ public :
 
         xmlStopParser(control_handler->getCtxt());
 
+    } 
+
+    /**
+     * set_encoding
+     * @param encoding set the encoding
+     *
+     * Used by SAX2srcMLHandler when determined
+     * encoding.  Set the input encoding if any.
+     */
+    void set_encoding(const char * encoding) {
+
+        this->encoding = encoding;
     }
 
     /**
