@@ -1,9 +1,9 @@
 add_executable(test_sax2_srcml_handler test_sax2_srcml_handler.cpp)
-target_link_libraries(test_sax2_srcml_handler sax2framework ${LIBXML2_LIBRARIES})
+target_link_libraries(test_sax2_srcml_handler srcsax ${LIBXML2_LIBRARIES})
 add_executable(test_srcml_control_handler test_srcml_control_handler.cpp)
-target_link_libraries(test_srcml_control_handler sax2framework ${LIBXML2_LIBRARIES})
+target_link_libraries(test_srcml_control_handler srcsax ${LIBXML2_LIBRARIES})
 add_executable(test_srcml_handler test_srcml_handler.cpp)
-target_link_libraries(test_srcml_handler sax2framework ${LIBXML2_LIBRARIES})
+target_link_libraries(test_srcml_handler srcsax ${LIBXML2_LIBRARIES})
 
 add_test(NAME test_sax2_srcml_handler COMMAND test_sax2_srcml_handler)
 add_test(NAME test_srcml_control_handler COMMAND test_srcml_control_handler)
