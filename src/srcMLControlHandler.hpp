@@ -70,6 +70,7 @@ public :
     /**
      * srcMLControlHandler
      * @param filename name of a file
+     * @param encoding the xml encoding
      *
      * Constructor
      */
@@ -170,7 +171,13 @@ public :
      */
     void parse(srcMLHandler * handler);
 
+    /**
+     * stop_parser
+     *
+     * Stop parsing.
+     */
     void stop_parser();
+
 };
 
 #endif
