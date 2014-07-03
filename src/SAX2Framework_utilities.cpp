@@ -124,6 +124,12 @@ SAX2FrameworkCreateParserCtxt(xmlParserInputBufferPtr buffer_input) {
     return(ctxt);
 }
 
+/**
+ * internal_stop_parser
+ * @param ctxt an libxml2 xml parser context
+ *
+ * Stop the internal xml parser.
+ */
 void internal_stop_parser(xmlParserCtxtPtr ctxt) {
 
     ctxt->sax->startDocument = 0;

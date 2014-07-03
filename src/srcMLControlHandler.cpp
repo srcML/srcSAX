@@ -28,10 +28,22 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
+/**
+ * libxml_error
+ * @param ctx the context
+ * @param msg the message
+ *
+ * Stub function to intercept and do nothing with libxml errors.
+ */
 void libxml_error(void *ctx, const char *msg, ...) {}
 
 #pragma GCC diagnostic pop
 
+/**
+ * srcml_control_handler_init
+ *
+ * Internal method to initialize the srcml_control_handler.
+ */
 void srcml_control_handler_init() {
 
     static bool initialized = false;

@@ -27,9 +27,17 @@ class srcMLHandler;
 #include <libxml/parser.h>
 #include <libxml/parserInternals.h>
 
+/**
+ * SAXError
+ *
+ * Data struct to hold contents of an error.
+ */
 struct SAXError {
 
+    /** error message */
     std::string message;
+
+    /** error code */
     int error_code;
 
 };
