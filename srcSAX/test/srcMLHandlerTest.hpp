@@ -21,7 +21,7 @@
 #ifndef INCLUDED_SRCML_HANDLER_TEST_HPP
 #define INCLUDED_SRCML_HANDLER_TEST_HPP
 
-#include <srcMLHandler.hpp>
+#include <srcSAXHandler.hpp>
 
 #include <libxml/parser.h>
 
@@ -30,7 +30,7 @@
  *
  * Base class that provides hooks for SAX processing.
  */
-class srcMLHandlerTest : public srcMLHandler {
+class srcMLHandlerTest : public srcSAXHandler {
 
 public :
 

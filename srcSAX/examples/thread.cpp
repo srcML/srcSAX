@@ -19,7 +19,7 @@
  */
 
 #include <srcMLHandlerThread.hpp>
-#include <SAX2srcMLHandler.hpp>
+#include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
 #include <string>

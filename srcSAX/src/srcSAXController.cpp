@@ -19,7 +19,7 @@
  */
 
 #include <srcSAXController.hpp>
-#include <srcMLHandler.hpp>
+#include <srcSAXHandler.hpp>
 
 #include <srcSAXUtilities.hpp>
 
@@ -251,7 +251,7 @@ void srcSAXController::enable_function(bool enable) {
  *
  * Parse the xml document with the supplied hooks.
  */
-void srcSAXController::parse(srcMLHandler * handler) {
+void srcSAXController::parse(srcSAXHandler * handler) {
 
     handler->set_controller(this);
     sax2_handler.process = handler;

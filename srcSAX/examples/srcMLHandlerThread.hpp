@@ -21,7 +21,7 @@
 #ifndef INCLUDED_SRCMLHANDLERTHREAD_HPP
 #define INCLUDED_SRCMLHANDLERTHREAD_HPP
 
-#include <srcMLHandler.hpp>
+#include <srcSAXHandler.hpp>
 
 #include <libxml/parser.h>
 #include <stdio.h>
@@ -30,7 +30,7 @@
 #include <boost/thread/locks.hpp>
 #include <boost/thread/lock_types.hpp> 
 
-class srcMLHandlerThread : public srcMLHandler {
+class srcMLHandlerThread : public srcSAXHandler {
 
 private :
 

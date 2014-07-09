@@ -19,7 +19,7 @@
  */
 
 #include <srcSAXController.hpp>
-#include <srcMLHandler.hpp>
+#include <srcSAXHandler.hpp>
 
 #include <stdio.h>
 #include <iostream>
@@ -590,7 +590,7 @@ int main() {
   {
 
     srcSAXController control("test.xml");
-    srcMLHandler handler;
+    srcSAXHandler handler;
     try {
       control.parse(&handler);
     } catch(SAXError error) { assert(false); }
@@ -600,7 +600,7 @@ int main() {
   {
 
     srcSAXController control(__FILE__);
-    srcMLHandler handler;
+    srcSAXHandler handler;
     try {
       control.parse(&handler);
       assert(false);

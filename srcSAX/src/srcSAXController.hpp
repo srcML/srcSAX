@@ -22,7 +22,7 @@
 #define INCLUDED_SRCMLCONTROLHANDLER_HPP
 
 class srcMLHandler;
-#include <SAX2srcMLHandler.hpp>
+#include <SAX2srcSAXHandler.hpp>
 
 #include <libxml/parser.h>
 #include <libxml/parserInternals.h>
@@ -59,7 +59,7 @@ private :
     xmlSAXHandler sax;
 
     // Process to execute call backs
-    SAX2srcMLHandler sax2_handler;
+    SAX2srcSAXHandler sax2_handler;
 
     xmlParserInputBufferPtr input;
 
@@ -169,7 +169,7 @@ public :
      *
      * Parse the xml document with the supplied hooks.
      */
-    void parse(srcMLHandler * handler);
+    void parse(srcSAXHandler * handler);
 
     /**
      * stop_parser

@@ -21,12 +21,12 @@
 #ifndef INCLUDED_SRCMLHANDLEREXAMPLE_HPP
 #define INCLUDED_SRCMLHANDLEREXAMPLE_HPP
 
-#include <srcMLHandler.hpp>
+#include <srcSAXHandler.hpp>
 
 #include <libxml/parser.h>
 #include <stdio.h>
 
-class srcMLHandlerExample : public srcMLHandler {
+class srcMLHandlerExample : public srcSAXHandler {
 
 public :
 

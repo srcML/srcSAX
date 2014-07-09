@@ -1,5 +1,5 @@
 /**
- * @file srcMLHandler.hpp
+ * @file srcSAXHandler.hpp
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
@@ -29,11 +29,11 @@
 #include <vector>
 
 /**
- * srcMLHandler
+ * srcSAXHandler
  *
  * Base class that provides hooks for SAX processing.
  */
-class srcMLHandler {
+class srcSAXHandler {
 
 private :
 
@@ -54,11 +54,11 @@ protected:
 public :
 
     /**
-     * srcMLHandler
+     * srcSAXHandler
      *
      * Default constructor default values to everything
      */
-    srcMLHandler() : controller(0), is_archive(false), unit_count(0), encoding(0) {}
+    srcSAXHandler() : controller(0), is_archive(false), unit_count(0), encoding(0) {}
 
     /**
      * set_controller
@@ -76,7 +76,7 @@ public :
     /**
      * increment_unit_count
      *
-     * Internally used to increment the count in SAX2srcMLHandler.
+     * Internally used to increment the count in SAX2srcSAXHandler.
      */
     void increment_unit_count() {
 
@@ -119,7 +119,7 @@ public :
      * set_encoding
      * @param encoding set the encoding
      *
-     * Used by SAX2srcMLHandler when determined
+     * Used by SAX2srcSAXHandler when determined
      * encoding.  Set the input encoding if any.
      */
     void set_encoding(const char * encoding) {
@@ -131,7 +131,7 @@ public :
      * set_is_archive
      * @param is_archive is the srcML document an archive
      *
-     * Used by SAX2srcMLHandler when determined
+     * Used by SAX2srcSAXHandler when determined
      * if an archive.  Sets if srcML document is an archive.
      */
     void set_is_archive(bool is_archive) {
