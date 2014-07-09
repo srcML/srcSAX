@@ -20,7 +20,7 @@
 
 #include <srcMLHandlerThreadStop.hpp>
 #include <SAX2srcMLHandler.hpp>
-#include <srcMLControlHandler.hpp>
+#include <srcSAXController.hpp>
 
 #include <string>
 #include <libxml/parserInternals.h>
@@ -31,7 +31,7 @@ void * start_routine(void * arg) {
 
   srcMLHandlerThreadStop * handler = (srcMLHandlerThreadStop *)arg;
 
-  srcMLControlHandler control("thread.xml");
+  srcSAXController control("thread.xml");
   control.parse(handler);
 
   return 0;

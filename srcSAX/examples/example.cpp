@@ -20,14 +20,14 @@
 
 #include <srcMLHandlerExample.hpp>
 #include <SAX2srcMLHandler.hpp>
-#include <srcMLControlHandler.hpp>
+#include <srcSAXController.hpp>
 
 #include <string>
 #include <libxml/parserInternals.h>
 
 int main() {
 
-  srcMLControlHandler control("example.xml");
+  srcSAXController control("example.xml");
   control.enable_function(true);
   srcMLHandlerExample handler;
   control.parse(&handler);

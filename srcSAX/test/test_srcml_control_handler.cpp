@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <srcMLControlHandler.hpp>
+#include <srcSAXController.hpp>
 #include <srcMLHandler.hpp>
 
 #include <stdio.h>
@@ -29,12 +29,12 @@
 int main() {
 
   /*
-    srcMLControlHandler
+    srcSAXController
    */
   {
     try {
 
-      srcMLControlHandler control(__FILE__);
+      srcSAXController control(__FILE__);
 
     } catch(...) { assert(false); }
   }
@@ -42,7 +42,7 @@ int main() {
   {
     try {
 
-	srcMLControlHandler control(__FILE__, "ISO-8859-1");
+	srcSAXController control(__FILE__, "ISO-8859-1");
 
     } catch(...) { assert(false); }
   }
@@ -50,7 +50,7 @@ int main() {
   {
     try {
 
-      srcMLControlHandler control("foobar");
+      srcSAXController control("foobar");
       assert(false);
     } catch(...) {}
   }
@@ -59,14 +59,14 @@ int main() {
     try {
 
       xmlParserInputBufferPtr buffer = xmlParserInputBufferCreateFilename(__FILE__, xmlParseCharEncoding(0));
-      srcMLControlHandler control(buffer);
+      srcSAXController control(buffer);
     } catch(...) { assert(false); }
   }
 
   {
     try {
 
-	srcMLControlHandler control((xmlParserInputBufferPtr)NULL);
+	srcSAXController control((xmlParserInputBufferPtr)NULL);
       assert(false);
     } catch(...) {}
   }
@@ -79,7 +79,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -96,7 +96,7 @@ int main() {
    */
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -118,7 +118,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -140,7 +140,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -166,7 +166,7 @@ int main() {
    */
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -188,7 +188,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -210,7 +210,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -236,7 +236,7 @@ int main() {
    */
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -258,7 +258,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -280,7 +280,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -306,7 +306,7 @@ int main() {
    */
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -328,7 +328,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -350,7 +350,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -376,7 +376,7 @@ int main() {
    */
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -398,7 +398,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -420,7 +420,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -446,7 +446,7 @@ int main() {
    */
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -468,7 +468,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -490,7 +490,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -516,7 +516,7 @@ int main() {
    */
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -538,7 +538,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -560,7 +560,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     const xmlSAXHandler & sax = control.getSAX();
 
     assert(sax.startDocument == startDocument);
@@ -589,7 +589,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control("test.xml");
+    srcSAXController control("test.xml");
     srcMLHandler handler;
     try {
       control.parse(&handler);
@@ -599,7 +599,7 @@ int main() {
 
   {
 
-    srcMLControlHandler control(__FILE__);
+    srcSAXController control(__FILE__);
     srcMLHandler handler;
     try {
       control.parse(&handler);

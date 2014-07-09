@@ -22,7 +22,7 @@
 #define INCLUDED_SRCMLHANDLER_HPP
 
 #include <srcMLElement.hpp>
-#include <srcMLControlHandler.hpp>
+#include <srcSAXController.hpp>
 
 #include <libxml/parser.h>
 
@@ -37,8 +37,8 @@ class srcMLHandler {
 
 private :
 
-    /** Control handler for parser */
-    srcMLControlHandler * control_handler;
+    /** Controller for parser */
+    srcSAXController * controller;
 
 protected:
 
@@ -58,18 +58,18 @@ public :
      *
      * Default constructor default values to everything
      */
-    srcMLHandler() : control_handler(0), is_archive(false), unit_count(0), encoding(0) {}
+    srcMLHandler() : controller(0), is_archive(false), unit_count(0), encoding(0) {}
 
     /**
-     * set_control_handler
-     * @param control_handler pointer to control class
+     * set_controller
+     * @param controller pointer to control class
      *
-     * Used by srcMLControlHandler to provide access to self
+     * Used by srcSAXController to provide access to self
      * for such things as disabeling sax parsing.
      */
-    void set_control_handler(srcMLControlHandler * control_handler) {
+    void set_controller(srcSAXController * controller) {
 
-        this->control_handler = control_handler;
+        this->controller = controller;
 
     }
 
@@ -85,13 +85,13 @@ public :
     }
 
     /**
-     * get_control_handler
+     * get_controller
      *
      * Get the control handler.
      */
-    srcMLControlHandler & get_control_handler() {
+    srcSAXController & get_controller() {
 
-        return *control_handler;
+        return *controller;
 
     }
 
@@ -102,16 +102,16 @@ public :
      */
     void stop_parser() {
 
-        control_handler->getSAX().startDocument = 0;
-        control_handler->getSAX().endDocument = 0;
-        control_handler->getSAX().startElementNs = 0;
-        control_handler->getSAX().endElementNs = 0;
-        control_handler->getSAX().characters = 0;
-        control_handler->getSAX().cdataBlock = 0;
-        control_handler->getSAX().comment = 0;
-        control_handler->getSAX().ignorableWhitespace = 0;
+        controller->getSAX().startDocument = 0;
+        controller->getSAX().endDocument = 0;
+        controller->getSAX().startElementNs = 0;
+        controller->getSAX().endElementNs = 0;
+        controller->getSAX().characters = 0;
+        controller->getSAX().cdataBlock = 0;
+        controller->getSAX().comment = 0;
+        controller->getSAX().ignorableWhitespace = 0;
 
-        xmlStopParser(control_handler->getCtxt());
+        xmlStopParser(controller->getCtxt());
 
     } 
 

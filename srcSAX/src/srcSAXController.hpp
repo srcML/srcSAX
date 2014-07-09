@@ -1,5 +1,5 @@
 /**
- * @file srcMLControlHandler.hpp
+ * @file srcSAXController.hpp
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
@@ -43,12 +43,12 @@ struct SAXError {
 };
 
 /**
- * srcMLControlHandler
+ * srcSAXController
  *
  * Provides execution of sax with
  * given hooks.
  */
-class srcMLControlHandler {
+class srcSAXController {
 
 private :
 
@@ -68,14 +68,14 @@ private :
 public :
 
     /**
-     * srcMLControlHandler
+     * srcSAXController
      * @param filename name of a file
      * @param encoding the xml encoding
      *
      * Constructor
      */
-    srcMLControlHandler(const char * filename, const char * encoding = 0);
-    srcMLControlHandler(xmlParserInputBufferPtr input);
+    srcSAXController(const char * filename, const char * encoding = 0);
+    srcSAXController(xmlParserInputBufferPtr input);
 
     /**
      * getSAX
@@ -92,11 +92,11 @@ public :
     xmlParserCtxtPtr getCtxt();
 
     /**
-     * ~srcMLControlHandler
+     * ~srcSAXController
      *
      * Destructor
      */
-    ~srcMLControlHandler();
+    ~srcSAXController();
 
 
     /**

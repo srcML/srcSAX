@@ -1,5 +1,5 @@
 /**
- * @file srcMLControlHandler.cpp
+ * @file srcSAXController.cpp
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <srcMLControlHandler.hpp>
+#include <srcSAXController.hpp>
 #include <srcMLHandler.hpp>
 
 #include <srcSAXUtilities.hpp>
@@ -40,11 +40,11 @@ void libxml_error(void *ctx, const char *msg, ...) {}
 #pragma GCC diagnostic pop
 
 /**
- * srcml_control_handler_init
+ * srcsax_controller_init
  *
- * Internal method to initialize the srcml_control_handler.
+ * Internal method to initialize the srcSAXController.
  */
-void srcml_control_handler_init() {
+void srcsax_controller_init() {
 
     static bool initialized = false;
 
@@ -57,14 +57,14 @@ void srcml_control_handler_init() {
 }
 
 /**
- * srcMLControlHandler
+ * srcSAXController
  * @param filename name of a file
  *
  * Constructor
  */
-srcMLControlHandler::srcMLControlHandler(const char * filename, const char * encoding) : sax2_handler(), input(0), pop_input(true) {
+srcSAXController::srcSAXController(const char * filename, const char * encoding) : sax2_handler(), input(0), pop_input(true) {
 
-    srcml_control_handler_init();
+    srcsax_controller_init();
 
     input =
         xmlParserInputBufferCreateFilename(filename,
@@ -79,14 +79,14 @@ srcMLControlHandler::srcMLControlHandler(const char * filename, const char * enc
 
 
 /**
- * srcMLControlHandler
+ * srcSAXController
  * @param input pointer to a parser input buffer
  *
  * Constructor
  */
-srcMLControlHandler::srcMLControlHandler(xmlParserInputBufferPtr input) : sax2_handler(), input(0), pop_input(false) {
+srcSAXController::srcSAXController(xmlParserInputBufferPtr input) : sax2_handler(), input(0), pop_input(false) {
 
-    srcml_control_handler_init();
+    srcsax_controller_init();
 
     ctxt = SAX2FrameworkCreateParserCtxt(input);
 
@@ -96,11 +96,11 @@ srcMLControlHandler::srcMLControlHandler(xmlParserInputBufferPtr input) : sax2_h
 }
 
 /**
- * ~srcMLControlHandler
+ * ~srcSAXController
  *
  * Constructor
  */
-srcMLControlHandler::~srcMLControlHandler() {
+srcSAXController::~srcSAXController() {
 
     xmlParserInputPtr stream = inputPop(ctxt);
     stream->buf = 0;
@@ -115,7 +115,7 @@ srcMLControlHandler::~srcMLControlHandler() {
  *
  * Return the used sax handler.
  */
-xmlSAXHandler & srcMLControlHandler::getSAX() {
+xmlSAXHandler & srcSAXController::getSAX() {
 
     return sax;
 
@@ -126,7 +126,7 @@ xmlSAXHandler & srcMLControlHandler::getSAX() {
  *
  * Return the used parser context.
  */
-xmlParserCtxtPtr srcMLControlHandler::getCtxt() {
+xmlParserCtxtPtr srcSAXController::getCtxt() {
 
     return ctxt;
 
@@ -139,7 +139,7 @@ xmlParserCtxtPtr srcMLControlHandler::getCtxt() {
  *
  * Enables or disables startDocument parsing.
  */
-void srcMLControlHandler::enable_startDocument(bool enable) {
+void srcSAXController::enable_startDocument(bool enable) {
 
     if(enable) sax.startDocument = startDocument;
     else sax.startDocument = 0;
@@ -152,7 +152,7 @@ void srcMLControlHandler::enable_startDocument(bool enable) {
  *
  * Enables or disables endDocument parsing.
  */
-void srcMLControlHandler::enable_endDocument(bool enable) {
+void srcSAXController::enable_endDocument(bool enable) {
 
     if(enable) sax.endDocument = endDocument;
     else sax.endDocument = 0;
@@ -165,7 +165,7 @@ void srcMLControlHandler::enable_endDocument(bool enable) {
  *
  * Enables or disables startElementNs parsing.
  */
-void srcMLControlHandler::enable_startElementNs(bool enable) {
+void srcSAXController::enable_startElementNs(bool enable) {
 
     if(enable) sax.startElementNs = startRoot;
     else sax.startElementNs = 0;
@@ -178,7 +178,7 @@ void srcMLControlHandler::enable_startElementNs(bool enable) {
  *
  * Enables or disables endElementNs parsing.
  */
-void srcMLControlHandler::enable_endElementNs(bool enable) {
+void srcSAXController::enable_endElementNs(bool enable) {
 
     if(enable) sax.endElementNs = endElementNs;
     else sax.endElementNs = 0;
@@ -191,7 +191,7 @@ void srcMLControlHandler::enable_endElementNs(bool enable) {
  *
  * Enables or disables characters parsing.
  */
-void srcMLControlHandler::enable_characters(bool enable) {
+void srcSAXController::enable_characters(bool enable) {
 
     if(enable) {
 
@@ -213,7 +213,7 @@ void srcMLControlHandler::enable_characters(bool enable) {
  *
  * Enables or disables comment parsing.
  */
-void srcMLControlHandler::enable_comment(bool enable) {
+void srcSAXController::enable_comment(bool enable) {
 
     if(enable) sax.comment = comment;
     else sax.comment = 0;
@@ -226,7 +226,7 @@ void srcMLControlHandler::enable_comment(bool enable) {
  *
  * Enables or disables cdataBlock parsing.
  */
-void srcMLControlHandler::enable_cdataBlock(bool enable) {
+void srcSAXController::enable_cdataBlock(bool enable) {
 
     if(enable) sax.cdataBlock = cdataBlock;
     else sax.cdataBlock = 0;
@@ -239,7 +239,7 @@ void srcMLControlHandler::enable_cdataBlock(bool enable) {
 *
 * Enables or disables special function parsing.
 */
-void srcMLControlHandler::enable_function(bool enable) {
+void srcSAXController::enable_function(bool enable) {
 
     sax2_handler.parse_function = enable;
 
@@ -251,9 +251,9 @@ void srcMLControlHandler::enable_function(bool enable) {
  *
  * Parse the xml document with the supplied hooks.
  */
-void srcMLControlHandler::parse(srcMLHandler * handler) {
+void srcSAXController::parse(srcMLHandler * handler) {
 
-    handler->set_control_handler(this);
+    handler->set_controller(this);
     sax2_handler.process = handler;
 
     xmlSAXHandlerPtr save_sax = ctxt->sax;
