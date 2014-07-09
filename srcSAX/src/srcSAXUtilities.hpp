@@ -1,5 +1,5 @@
 /**
- * @file SAX2Framework_utilities.hpp
+ * @file srcSAXUtilities.hpp
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *

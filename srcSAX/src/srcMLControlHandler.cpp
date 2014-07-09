@@ -21,7 +21,7 @@
 #include <srcMLControlHandler.hpp>
 #include <srcMLHandler.hpp>
 
-#include <SAX2Framework_utilities.hpp>
+#include <srcSAXUtilities.hpp>
 
 #include <string>
 
