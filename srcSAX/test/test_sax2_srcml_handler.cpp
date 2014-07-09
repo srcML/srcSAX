@@ -18,14 +18,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <SAX2srcMLHandler.hpp>
-#include <srcMLHandler.hpp>
+#include <SAX2srcSAXHandler.hpp>
+#include <srcSAXHandler.hpp>
 
 #include <stdio.h>
 #include <string.h>
 #include <cassert>
 
-SAX2srcMLHandler sax2_handler_init;
+SAX2srcSAXHandler sax2_handler_init;
 
 
 int main() {
@@ -58,8 +58,8 @@ int main() {
    */
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -79,8 +79,8 @@ int main() {
    */
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler = sax2_handler_init;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler = sax2_handler_init;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -102,8 +102,8 @@ int main() {
    */
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler = sax2_handler_init;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler = sax2_handler_init;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -174,8 +174,8 @@ int main() {
    */
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler = sax2_handler_init;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler = sax2_handler_init;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -218,8 +218,8 @@ int main() {
    */
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler = sax2_handler_init;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler = sax2_handler_init;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -263,8 +263,8 @@ int main() {
    */
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler = sax2_handler_init;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler = sax2_handler_init;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -307,8 +307,8 @@ int main() {
    */
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler = sax2_handler_init;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler = sax2_handler_init;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -329,8 +329,8 @@ int main() {
 
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler = sax2_handler_init;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler = sax2_handler_init;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -352,8 +352,8 @@ int main() {
 
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler = sax2_handler_init;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler = sax2_handler_init;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -383,8 +383,8 @@ int main() {
    */
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler = sax2_handler_init;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler = sax2_handler_init;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -414,8 +414,8 @@ int main() {
    */
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler = sax2_handler_init;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler = sax2_handler_init;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -443,8 +443,8 @@ int main() {
    */
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler = sax2_handler_init;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler = sax2_handler_init;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -472,8 +472,8 @@ int main() {
    */
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler = sax2_handler_init;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler = sax2_handler_init;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;
@@ -501,8 +501,8 @@ int main() {
    */
   {
 
-    srcMLHandler handler;
-    SAX2srcMLHandler sax2_handler = sax2_handler_init;
+    srcSAXHandler handler;
+    SAX2srcSAXHandler sax2_handler = sax2_handler_init;
     sax2_handler.process = &handler;
 
     xmlParserCtxt ctxt;

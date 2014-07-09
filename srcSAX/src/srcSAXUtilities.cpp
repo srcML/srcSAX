@@ -1,5 +1,5 @@
 /**
- * @file SAX2Framework_utilities.cpp
+ * @file srcSAXUtilities.cpp
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <SAX2Framework_utilities.hpp>
+#include <srcSAXUtilities.hpp>
 
 #ifdef LIBXML2_NEW_BUFFER
 struct _xmlBuf {
@@ -83,7 +83,7 @@ _xmlBufResetInput(xmlBuffer * buf, xmlParserInputPtr input) {
 #endif
 
 /**
- * srcMLCreateParserCtxt
+ * srcSAXCreateParserCtxt
  * @param buffer_input a parser input buffer
  *
  * Create a ctxt from a parser input buffer.
@@ -92,7 +92,7 @@ _xmlBufResetInput(xmlBuffer * buf, xmlParserInputPtr input) {
  * @returns xml parser ctxt
  */
 xmlParserCtxtPtr
-SAX2FrameworkCreateParserCtxt(xmlParserInputBufferPtr buffer_input) {
+srcSAXCreateParserCtxt(xmlParserInputBufferPtr buffer_input) {
     xmlParserCtxtPtr ctxt;
     xmlParserInputPtr input;
     xmlParserInputBufferPtr buf;

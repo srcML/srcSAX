@@ -1,5 +1,5 @@
 /**
- * @file SAX2srcMLHandler.hpp
+ * @file SAX2srcSAXHandler.hpp
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
@@ -20,11 +20,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef INCLUDED_SAX2SRCMLHANDLER_HPP
-#define INCLUDED_SAX2SRCMLHANDLER_HPP
+#ifndef INCLUDED_SAX2_SRCSAX_HANDLER_HPP
+#define INCLUDED_SAX2_SRCSAX_HANDLER_HPP
 
 #include <srcMLElement.hpp>
-class srcMLHandler;
+class srcSAXHandler;
 
 #include <libxml/parser.h>
 
@@ -94,18 +94,18 @@ struct function_prototype {
 };
 
 /**
- * SAX2srcMLHandler
+ * SAX2srcSAXHandler
  *
  * Data structure to hold process during
  * sax parsing.
  */
-struct SAX2srcMLHandler {
+struct SAX2srcSAXHandler {
 
     /** default constructor */
-    SAX2srcMLHandler() : process(0), root(), meta_tags(), is_archive(false), mode(ROOT), parse_function(false), in_function_header(false), current_function() {}
+    SAX2srcSAXHandler() : process(0), root(), meta_tags(), is_archive(false), mode(ROOT), parse_function(false), in_function_header(false), current_function() {}
 
     /** hooks for processing */
-    srcMLHandler * process;
+    srcSAXHandler * process;
 
     /** temporary storage for root unit */
     srcMLElement root;

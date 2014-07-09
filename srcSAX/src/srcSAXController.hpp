@@ -1,5 +1,5 @@
 /**
- * @file srcMLControlHandler.hpp
+ * @file srcSAXController.hpp
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
@@ -18,11 +18,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef INCLUDED_SRCMLCONTROLHANDLER_HPP
-#define INCLUDED_SRCMLCONTROLHANDLER_HPP
+#ifndef INCLUDED_SRCSAX_CONTROLLER_HPP
+#define INCLUDED_SRCSAX_CONTROLLER_HPP
 
 class srcMLHandler;
-#include <SAX2srcMLHandler.hpp>
+#include <SAX2srcSAXHandler.hpp>
 
 #include <libxml/parser.h>
 #include <libxml/parserInternals.h>
@@ -43,12 +43,12 @@ struct SAXError {
 };
 
 /**
- * srcMLControlHandler
+ * srcSAXController
  *
  * Provides execution of sax with
  * given hooks.
  */
-class srcMLControlHandler {
+class srcSAXController {
 
 private :
 
@@ -59,7 +59,7 @@ private :
     xmlSAXHandler sax;
 
     // Process to execute call backs
-    SAX2srcMLHandler sax2_handler;
+    SAX2srcSAXHandler sax2_handler;
 
     xmlParserInputBufferPtr input;
 
@@ -68,14 +68,14 @@ private :
 public :
 
     /**
-     * srcMLControlHandler
+     * srcSAXController
      * @param filename name of a file
      * @param encoding the xml encoding
      *
      * Constructor
      */
-    srcMLControlHandler(const char * filename, const char * encoding = 0);
-    srcMLControlHandler(xmlParserInputBufferPtr input);
+    srcSAXController(const char * filename, const char * encoding = 0);
+    srcSAXController(xmlParserInputBufferPtr input);
 
     /**
      * getSAX
@@ -92,11 +92,11 @@ public :
     xmlParserCtxtPtr getCtxt();
 
     /**
-     * ~srcMLControlHandler
+     * ~srcSAXController
      *
      * Destructor
      */
-    ~srcMLControlHandler();
+    ~srcSAXController();
 
 
     /**
@@ -169,7 +169,7 @@ public :
      *
      * Parse the xml document with the supplied hooks.
      */
-    void parse(srcMLHandler * handler);
+    void parse(srcSAXHandler * handler);
 
     /**
      * stop_parser

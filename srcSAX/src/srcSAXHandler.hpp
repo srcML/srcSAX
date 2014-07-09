@@ -1,5 +1,5 @@
 /**
- * @file srcMLHandler.hpp
+ * @file srcSAXHandler.hpp
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
@@ -18,27 +18,27 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef INCLUDED_SRCMLHANDLER_HPP
-#define INCLUDED_SRCMLHANDLER_HPP
+#ifndef INCLUDED_SRCSAX_HANDLER_HPP
+#define INCLUDED_SRCSAX_HANDLER_HPP
 
 #include <srcMLElement.hpp>
-#include <srcMLControlHandler.hpp>
+#include <srcSAXController.hpp>
 
 #include <libxml/parser.h>
 
 #include <vector>
 
 /**
- * srcMLHandler
+ * srcSAXHandler
  *
  * Base class that provides hooks for SAX processing.
  */
-class srcMLHandler {
+class srcSAXHandler {
 
 private :
 
-    /** Control handler for parser */
-    srcMLControlHandler * control_handler;
+    /** Controller for parser */
+    srcSAXController * controller;
 
 protected:
 
@@ -54,29 +54,29 @@ protected:
 public :
 
     /**
-     * srcMLHandler
+     * srcSAXHandler
      *
      * Default constructor default values to everything
      */
-    srcMLHandler() : control_handler(0), is_archive(false), unit_count(0), encoding(0) {}
+    srcSAXHandler() : controller(0), is_archive(false), unit_count(0), encoding(0) {}
 
     /**
-     * set_control_handler
-     * @param control_handler pointer to control class
+     * set_controller
+     * @param controller pointer to control class
      *
-     * Used by srcMLControlHandler to provide access to self
+     * Used by srcSAXController to provide access to self
      * for such things as disabeling sax parsing.
      */
-    void set_control_handler(srcMLControlHandler * control_handler) {
+    void set_controller(srcSAXController * controller) {
 
-        this->control_handler = control_handler;
+        this->controller = controller;
 
     }
 
     /**
      * increment_unit_count
      *
-     * Internally used to increment the count in SAX2srcMLHandler.
+     * Internally used to increment the count in SAX2srcSAXHandler.
      */
     void increment_unit_count() {
 
@@ -85,13 +85,13 @@ public :
     }
 
     /**
-     * get_control_handler
+     * get_controller
      *
      * Get the control handler.
      */
-    srcMLControlHandler & get_control_handler() {
+    srcSAXController & get_controller() {
 
-        return *control_handler;
+        return *controller;
 
     }
 
@@ -102,16 +102,16 @@ public :
      */
     void stop_parser() {
 
-        control_handler->getSAX().startDocument = 0;
-        control_handler->getSAX().endDocument = 0;
-        control_handler->getSAX().startElementNs = 0;
-        control_handler->getSAX().endElementNs = 0;
-        control_handler->getSAX().characters = 0;
-        control_handler->getSAX().cdataBlock = 0;
-        control_handler->getSAX().comment = 0;
-        control_handler->getSAX().ignorableWhitespace = 0;
+        controller->getSAX().startDocument = 0;
+        controller->getSAX().endDocument = 0;
+        controller->getSAX().startElementNs = 0;
+        controller->getSAX().endElementNs = 0;
+        controller->getSAX().characters = 0;
+        controller->getSAX().cdataBlock = 0;
+        controller->getSAX().comment = 0;
+        controller->getSAX().ignorableWhitespace = 0;
 
-        xmlStopParser(control_handler->getCtxt());
+        xmlStopParser(controller->getCtxt());
 
     } 
 
@@ -119,7 +119,7 @@ public :
      * set_encoding
      * @param encoding set the encoding
      *
-     * Used by SAX2srcMLHandler when determined
+     * Used by SAX2srcSAXHandler when determined
      * encoding.  Set the input encoding if any.
      */
     void set_encoding(const char * encoding) {
@@ -131,7 +131,7 @@ public :
      * set_is_archive
      * @param is_archive is the srcML document an archive
      *
-     * Used by SAX2srcMLHandler when determined
+     * Used by SAX2srcSAXHandler when determined
      * if an archive.  Sets if srcML document is an archive.
      */
     void set_is_archive(bool is_archive) {

@@ -1,5 +1,5 @@
 /**
- * @file srcMLHandlerTest.hpp
+ * @file srcSAXHandlerTest.hpp
  *
  * @copyright Copyright (C) 2013-2014  SDML (www.srcML.org)
  *
@@ -18,19 +18,19 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef INCLUDED_SRCML_HANDLER_TEST_HPP
-#define INCLUDED_SRCML_HANDLER_TEST_HPP
+#ifndef INCLUDED_SRCSAX_HANDLER_TEST_HPP
+#define INCLUDED_SRCSAX_HANDLER_TEST_HPP
 
-#include <srcMLHandler.hpp>
+#include <srcSAXHandler.hpp>
 
 #include <libxml/parser.h>
 
 /**
- * srcMLHandlerTest
+ * srcSAXHandlerTest
  *
  * Base class that provides hooks for SAX processing.
  */
-class srcMLHandlerTest : public srcMLHandler {
+class srcSAXHandlerTest : public srcSAXHandler {
 
 public :
 
@@ -53,7 +53,7 @@ public :
 
   int call_count;
 
-  srcMLHandlerTest() 
+  srcSAXHandlerTest() 
     : start_document(0), end_document(0), start_root(0), start_unit(0), start_element_ns(0),
       end_root(0), end_unit(0), end_element_ns(0), characters_root(0), characters_unit(0),
       comment_(0), cdata_block(0), call_count(0) {}

@@ -28,7 +28,7 @@
 #define STRDUP _strdup
 #endif
 
-#include <SAX2Framework_utilities.hpp>
+#include <srcSAXUtilities.hpp>
 
 #include <libxml/parser.h>
 

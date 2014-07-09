@@ -18,18 +18,18 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <srcMLHandlerExample.hpp>
-#include <SAX2srcMLHandler.hpp>
-#include <srcMLControlHandler.hpp>
+#include <srcSAXHandlerExample.hpp>
+#include <SAX2srcSAXHandler.hpp>
+#include <srcSAXController.hpp>
 
 #include <string>
 #include <libxml/parserInternals.h>
 
 int main() {
 
-  srcMLControlHandler control("example.xml");
+  srcSAXController control("example.xml");
   control.enable_function(true);
-  srcMLHandlerExample handler;
+  srcSAXHandlerExample handler;
   control.parse(&handler);
 
   return 0;

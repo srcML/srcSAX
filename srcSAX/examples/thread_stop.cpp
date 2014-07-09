@@ -18,9 +18,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <srcMLHandlerThreadStop.hpp>
-#include <SAX2srcMLHandler.hpp>
-#include <srcMLControlHandler.hpp>
+#include <srcSAXHandlerThreadStop.hpp>
+#include <SAX2srcSAXHandler.hpp>
+#include <srcSAXController.hpp>
 
 #include <string>
 #include <libxml/parserInternals.h>
@@ -29,9 +29,9 @@
 
 void * start_routine(void * arg) {
 
-  srcMLHandlerThreadStop * handler = (srcMLHandlerThreadStop *)arg;
+  srcSAXHandlerThreadStop * handler = (srcSAXHandlerThreadStop *)arg;
 
-  srcMLControlHandler control("thread.xml");
+  srcSAXController control("thread.xml");
   control.parse(handler);
 
   return 0;
@@ -42,7 +42,7 @@ int main() {
 
 
   pthread_t thread;
-  srcMLHandlerThreadStop arg;
+  srcSAXHandlerThreadStop arg;
   pthread_create(&thread, 0, start_routine, &arg);
 
 

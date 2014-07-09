@@ -18,9 +18,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <srcMLHandlerThread.hpp>
-#include <SAX2srcMLHandler.hpp>
-#include <srcMLControlHandler.hpp>
+#include <srcSAXHandlerThread.hpp>
+#include <SAX2srcSAXHandler.hpp>
+#include <srcSAXController.hpp>
 
 #include <string>
 #include <libxml/parserInternals.h>
@@ -29,9 +29,9 @@
 
 void * start_routine(void * arg) {
 
-  srcMLHandlerThread * handler = (srcMLHandlerThread *)arg;
+  srcSAXHandlerThread * handler = (srcSAXHandlerThread *)arg;
 
-  srcMLControlHandler control("thread.xml");
+  srcSAXController control("thread.xml");
   control.parse(handler);
 
   return 0;
@@ -40,7 +40,7 @@ void * start_routine(void * arg) {
 
 int main() {
 
-  srcMLHandlerThread arg;
+  srcSAXHandlerThread arg;
 
   boost::thread thread = boost::thread(start_routine, &arg);
 
