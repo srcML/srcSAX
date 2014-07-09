@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <srcMLHandlerExample.hpp>
+#include <srcSAXHandlerExample.hpp>
 #include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
@@ -29,7 +29,7 @@ int main() {
 
   srcSAXController control("example.xml");
   control.enable_function(true);
-  srcMLHandlerExample handler;
+  srcSAXHandlerExample handler;
   control.parse(&handler);
 
   return 0;

@@ -1,5 +1,5 @@
 /**
- * @file srcMLHandlerThreadStop.hpp
+ * @file srcSAXHandlerThread.hpp
  *
  * @copyright Copyright (C) 2013-2014  SDML (www.srcML.org)
  *
@@ -18,18 +18,19 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef INCLUDED_SRCMLHANDLERTHREAD_HPP
-#define INCLUDED_SRCMLHANDLERTHREAD_HPP
+#ifndef INCLUDED_SRCSAXHANDLERTHREAD_HPP
+#define INCLUDED_SRCSAXHANDLERTHREAD_HPP
 
 #include <srcSAXHandler.hpp>
 
 #include <libxml/parser.h>
 #include <stdio.h>
+#include <boost/thread/mutex.hpp>
 #include <boost/thread/condition_variable.hpp>
 #include <boost/thread/locks.hpp>
 #include <boost/thread/lock_types.hpp> 
 
-class srcMLHandlerThreadStop : public srcSAXHandler {
+class srcSAXHandlerThread : public srcSAXHandler {
 
 private :
 
@@ -78,16 +79,6 @@ public :
   virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                          int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                          const xmlChar ** attributes) {
-    static int count = 0;
-    if(count) {
-
-      boost::unique_lock<boost::mutex> lock(mutex);
-      cond.notify_all();
-      stop_parser();
-
-    }
-
-    ++count;
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 

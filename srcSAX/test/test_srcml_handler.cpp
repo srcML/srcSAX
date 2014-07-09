@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <srcMLHandlerTest.hpp>
+#include <srcSAXHandlerTest.hpp>
 #include <SAX2srcSAXHandler.hpp>
 
 #include <stdio.h>
@@ -32,7 +32,7 @@ int main() {
   */
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -61,7 +61,7 @@ int main() {
   */
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -87,7 +87,7 @@ int main() {
 
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -117,7 +117,7 @@ int main() {
   */
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -154,7 +154,7 @@ int main() {
   */
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -189,7 +189,7 @@ int main() {
 
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -227,7 +227,7 @@ int main() {
   */
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -265,7 +265,7 @@ int main() {
   */
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -303,7 +303,7 @@ int main() {
   */
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -331,7 +331,7 @@ int main() {
 
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -358,7 +358,7 @@ int main() {
 
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -388,7 +388,7 @@ int main() {
   */
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -417,7 +417,7 @@ int main() {
   */
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -446,7 +446,7 @@ int main() {
   */
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
@@ -475,7 +475,7 @@ int main() {
   */
   {
 
-    srcMLHandlerTest handler;
+    srcSAXHandlerTest handler;
     SAX2srcSAXHandler sax2_handler;
     sax2_handler.process = &handler;
 
