@@ -21,10 +21,10 @@
 #include <libxml/parser.h>
 #include <libxml/parserInternals.h>
 
-#ifndef INCLUDDED_SAX2FRAMEWORK_UTILITIES_HPP
-#define INCLUDDED_SAX2FRAMEWORK_UTILITIES_HPP
+#ifndef INCLUDDED_SRCSAX_UTILITIES_HPP
+#define INCLUDDED_SRCSAX_UTILITIES_HPP
 
-xmlParserCtxtPtr SAX2FrameworkCreateParserCtxt(xmlParserInputBufferPtr buffer_input);
+xmlParserCtxtPtr srcSAXCreateParserCtxt(xmlParserInputBufferPtr buffer_input);
 
 void internal_stop_parser(xmlParserCtxtPtr ctxt);
 

@@ -18,8 +18,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef INCLUDED_SRCMLCONTROLHANDLER_HPP
-#define INCLUDED_SRCMLCONTROLHANDLER_HPP
+#ifndef INCLUDED_SRCSAX_CONTROLLER_HPP
+#define INCLUDED_SRCSAX_CONTROLLER_HPP
 
 class srcMLHandler;
 #include <SAX2srcSAXHandler.hpp>

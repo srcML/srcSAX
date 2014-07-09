@@ -70,7 +70,7 @@ srcSAXController::srcSAXController(const char * filename, const char * encoding)
         xmlParserInputBufferCreateFilename(filename,
                                            encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
 
-    ctxt = SAX2FrameworkCreateParserCtxt(input);
+    ctxt = srcSAXCreateParserCtxt(input);
 
     if(ctxt == NULL) throw std::string("File does not exist");
     sax = factory();
@@ -88,7 +88,7 @@ srcSAXController::srcSAXController(xmlParserInputBufferPtr input) : sax2_handler
 
     srcsax_controller_init();
 
-    ctxt = SAX2FrameworkCreateParserCtxt(input);
+    ctxt = srcSAXCreateParserCtxt(input);
 
     if(ctxt == NULL) throw std::string("File does not exist");
     sax = factory();
