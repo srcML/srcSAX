@@ -1,5 +1,5 @@
 /**
- * @file printCallBacksHandler.hpp
+ * @file print_callbacks_handler.hpp
  *
  * @copyright Copyright (C) 2013-2014  SDML (www.srcML.org)
  *
@@ -26,7 +26,7 @@
 #include <libxml/parser.h>
 #include <stdio.h>
 
-class printCallBacksHandler : public srcSAXHandler {
+class print_callbacks_handler : public srcSAXHandler {
 
 public :
 

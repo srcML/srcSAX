@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "printCallBacksHandler.hpp"
+#include "print_callbacks_handler.hpp"
 #include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
@@ -29,7 +29,7 @@ int main() {
 
   srcSAXController control("example.xml");
   control.enable_function(true);
-  printCallBacksHandler handler;
+  print_callbacks_handler handler;
   control.parse(&handler);
 
   return 0;
