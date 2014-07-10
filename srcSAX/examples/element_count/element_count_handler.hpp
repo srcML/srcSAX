@@ -42,6 +42,12 @@ public :
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
+    const std::map<std::string, unsigned long long> & get_counts() const {
+
+        return element_counts;
+
+    }
+
     void update_count(const xmlChar * prefix, const xmlChar * localname) {
 
         std::string element = "";
