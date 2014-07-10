@@ -116,7 +116,8 @@ public :
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes) {
 
-        update_count(prefix, localname);
+        if(is_archive)
+            update_count(prefix, localname);
 
     }
 
