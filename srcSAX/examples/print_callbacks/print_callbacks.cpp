@@ -1,5 +1,5 @@
 /**
- * @file thread.cpp
+ * @file print_callbacks.hpp
  *
  * @copyright Copyright (C) 2013-2014  SDML (www.srcML.org)
  *
@@ -18,39 +18,16 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <srcSAXHandlerThread.hpp>
+#include "print_callbacks_handler.hpp"
 #include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
-#include <string>
-#include <libxml/parserInternals.h>
-
-#include <boost/thread/thread.hpp>
-
-void * start_routine(void * arg) {
-
-  srcSAXHandlerThread * handler = (srcSAXHandlerThread *)arg;
-
-  srcSAXController control("thread.xml");
-  control.parse(handler);
-
-  return 0;
-
-}
-
 int main() {
 
-  srcSAXHandlerThread arg;
-
-  boost::thread thread = boost::thread(start_routine, &arg);
-
-  arg.wait();
-  arg.resume();
-
-  arg.wait();
-  arg.resume();
-
-  thread.join();
+  srcSAXController control("../example.xml");
+  control.enable_function(true);
+  print_callbacks_handler handler;
+  control.parse(&handler);
 
   return 0;
 }

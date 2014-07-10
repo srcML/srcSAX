@@ -8,11 +8,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY bin)
 
 find_package(LibXml2 REQUIRED)
 
-set(Boost_NO_BOOST_CMAKE ON)
-set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost COMPONENTS system thread REQUIRED)
-
-include_directories(${LIBXML2_INCLUDE_DIR} ${Boost_INCLUDE_DIR} examples test src)
+include_directories(${LIBXML2_INCLUDE_DIR} examples test src)
 
 set(CMAKE_CXX_FLAGS "-fPIC -O3 -DNDEBUG -Wno-long-long -Wall -Wextra -Wshorten-64-to-32")
 

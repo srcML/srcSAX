@@ -1,5 +1,5 @@
 /**
- * @file tread_stop.cpp
+ * @file element_count.hpp
  *
  * @copyright Copyright (C) 2013-2014  SDML (www.srcML.org)
  *
@@ -18,41 +18,24 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <srcSAXHandlerThreadStop.hpp>
+#include "element_count_handler.hpp"
 #include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
-#include <string>
-#include <libxml/parserInternals.h>
-
-#include <boost/thread/thread.hpp>
-
-void * start_routine(void * arg) {
-
-  srcSAXHandlerThreadStop * handler = (srcSAXHandlerThreadStop *)arg;
-
-  srcSAXController control("thread.xml");
-  control.parse(handler);
-
-  return 0;
-
-}
+#include <map>
+#include <iostream>
 
 int main() {
 
+  srcSAXController control("../example.xml");
+  element_count_handler handler;
+  control.parse(&handler);
 
-  pthread_t thread;
-  srcSAXHandlerThreadStop arg;
-  pthread_create(&thread, 0, start_routine, &arg);
+  for(std::map<std::string, unsigned long long>::const_iterator citr = handler.get_counts().begin(); citr != handler.get_counts().end(); ++citr) {
 
+  	std::cout << citr->first << ": " << citr->second << '\n';
 
-  arg.wait();
-  arg.resume();
-
-  arg.wait();
-
-  void * ret;
-  pthread_join(thread, &ret);
+  }
 
   return 0;
 }

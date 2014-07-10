@@ -1,5 +1,5 @@
 /**
- * @file example.hpp
+ * @file identity_copy.hpp
  *
  * @copyright Copyright (C) 2013-2014  SDML (www.srcML.org)
  *
@@ -18,18 +18,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <srcSAXHandlerExample.hpp>
+#include "identity_copy_handler.hpp"
 #include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
-#include <string>
-#include <libxml/parserInternals.h>
-
 int main() {
 
-  srcSAXController control("example.xml");
-  control.enable_function(true);
-  srcSAXHandlerExample handler;
+  srcSAXController control("../example.xml");
+  identity_copy_handler handler("copy.xml");
   control.parse(&handler);
 
   return 0;

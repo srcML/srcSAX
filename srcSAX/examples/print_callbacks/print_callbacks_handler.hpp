@@ -1,5 +1,5 @@
 /**
- * @file srcSAXHandlerThread.hpp
+ * @file print_callbacks_handler.hpp
  *
  * @copyright Copyright (C) 2013-2014  SDML (www.srcML.org)
  *
@@ -18,40 +18,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef INCLUDED_SRCSAXHANDLERTHREAD_HPP
-#define INCLUDED_SRCSAXHANDLERTHREAD_HPP
+#ifndef INCLUDED_PRINT_CALLBACKS_HANDLER_HPP
+#define INCLUDED_PRINT_CALLBACKS_HANDLER_HPP
 
 #include <srcSAXHandler.hpp>
 
-#include <libxml/parser.h>
-#include <stdio.h>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/condition_variable.hpp>
-#include <boost/thread/locks.hpp>
-#include <boost/thread/lock_types.hpp> 
-
-class srcSAXHandlerThread : public srcSAXHandler {
-
-private :
-
-  boost::mutex mutex;
-  boost::condition_variable cond;
+class print_callbacks_handler : public srcSAXHandler {
 
 public :
-
-  void wait() {
-
-    boost::unique_lock<boost::mutex> lock(mutex);
-    cond.wait(lock);
-
-  }
-
-  void resume() {
-
-    boost::unique_lock<boost::mutex> lock(mutex);
-    cond.notify_all();
-
-  }
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
@@ -59,7 +33,7 @@ public :
   virtual void startDocument() {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
-
+    
   }
 
   virtual void endDocument() {
@@ -69,24 +43,37 @@ public :
   }
 
   virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                         int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                         const xmlChar ** attributes, std::vector<srcMLElement> * meta_tags) {
+			 int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
+			 const xmlChar ** attributes, std::vector<srcMLElement> * meta_tags) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
 
   virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                         int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                         const xmlChar ** attributes) {
+                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
+                      const xmlChar ** attributes) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
 
+  virtual void startFunction(const std::string & name, const std::string & return_type, const std::vector<declaration> & parameter_list, bool is_decl) {
+
+    fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, name.c_str());
+    fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, return_type.c_str());
+    for(std::vector<declaration>::const_iterator parameter = parameter_list.begin(); parameter != parameter_list.end(); ++parameter) {
+
+      fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, parameter->type.c_str());
+      fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, parameter->name.c_str());
+
+    }
+
+  }
+
   virtual void startElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                              int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                              const xmlChar ** attributes) {
+                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
+                      const xmlChar ** attributes) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
@@ -102,10 +89,11 @@ public :
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
-    // pause
-    boost::unique_lock<boost::mutex> lock(mutex);
-    cond.notify_all();
-    cond.wait(lock);
+  }
+
+  virtual void endFunction() {
+
+    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
 
