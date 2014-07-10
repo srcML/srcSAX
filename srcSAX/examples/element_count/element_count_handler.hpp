@@ -42,7 +42,16 @@ public :
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
-    void update_count(std::string element) {
+    void update_count(const xmlChar * prefix, const xmlChar * localname) {
+
+        std::string element = "";
+        if(prefix) {
+
+            element += (const char *)prefix;
+            element += ":";
+
+        }
+        element += (const char *)localname;
 
         /* Note: in map could just use operator[], however, this a bit more general */
         std::map<std::string, unsigned long long>::iterator itr = element_counts.find(element);
@@ -81,6 +90,8 @@ public :
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes, std::vector<srcMLElement> * meta_tags) {
 
+        update_count(prefix, localname);
+
     }
 
     /**
@@ -101,6 +112,8 @@ public :
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes) {
 
+        update_count(prefix, localname);
+
     }
 
     /**
@@ -120,6 +133,8 @@ public :
     virtual void startElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                                 int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                                 const xmlChar ** attributes) {
+
+        update_count(prefix, localname);
 
     }
 
