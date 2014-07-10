@@ -27,7 +27,7 @@
 
 int main() {
 
-  srcSAXController control("example.xml");
+  srcSAXController control("../example.xml");
   control.enable_function(true);
   print_callbacks_handler handler;
   control.parse(&handler);

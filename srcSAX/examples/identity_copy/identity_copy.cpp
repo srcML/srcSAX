@@ -27,7 +27,7 @@
 
 int main() {
 
-  srcSAXController control("example.xml");
+  srcSAXController control("../example.xml");
   control.enable_function(true);
   identity_copy_handler handler("copy.xml");
   control.parse(&handler);
