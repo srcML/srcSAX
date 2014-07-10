@@ -20,24 +20,20 @@
 
 #ifndef INCLUDED_IDENTITY_COPY_HANDLER_HPP
 #define INCLUDED_IDENTITY_COPY_HANDLER_HPP
+
+#include <srcSAXHandler.hpp>
 #include <iostream>
-#include <srcMLHandler.hpp>
+#include <string>
 #include <stdlib.h>
 
 #include <libxml/xmlwriter.h>
-
-#include <iostream>
-#include "Rasp.hpp"
-
-#include <string>
-#include <stack>
 
 /**
  * identity_copy_handler
  *
  * Base class that provides hooks for SAX processing.
  */
-class identity_copy_handler : public srcMLHandler {
+class identity_copy_handler : public srcSAXHandler {
 
 private :
 
@@ -54,7 +50,7 @@ public :
 
         if((writer = xmlNewTextWriterFilename(output_filename.c_str(), 0)) == 0) {
 
-            std::cerr << "Problems opening file output file: " << output_file << '\n';
+            std::cerr << "Problems opening file output file: " << output_filename << '\n';
             exit(1);
 
         }
