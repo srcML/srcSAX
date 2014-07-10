@@ -38,6 +38,7 @@ class identity_copy_handler : public srcSAXHandler {
 private :
 
     xmlTextWriterPtr writer;
+    std::string content;
 
 public :
 
@@ -122,6 +123,18 @@ public :
 
     }
 
+    void write_content() {
+
+        if(content != "") {
+
+            xmlTextWriterWriteString(writer, (const xmlChar *)content.c_str())
+
+            content = "";
+
+        }
+
+    }
+
     /**
      * startRoot
      * @param localname the name of the element tag
@@ -162,6 +175,10 @@ public :
     virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes) {
+
+        // write out buffered root level characters
+        write_content();
+
         write_start_tag(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
     }
@@ -184,6 +201,9 @@ public :
                                 int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                                 const xmlChar ** attributes) {
 
+        // write out buffered characters
+        write_content();
+
         write_start_tag(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
     }
@@ -198,6 +218,9 @@ public :
      * Overide for desired behaviour.
      */
     virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+
+        // write out buffered root level characters
+        write_content();
 
         xmlTextWriterEndElement(writer);
 
@@ -214,6 +237,9 @@ public :
      */
     virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
+        // write out any buffered characters
+        write_content();
+
         xmlTextWriterEndElement(writer);
 
     }
@@ -229,6 +255,9 @@ public :
      */
     virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
+        // write out any buffered characters
+        write_content();
+
         xmlTextWriterEndElement(writer);
 
     }
@@ -243,9 +272,16 @@ public :
      */
     virtual void charactersRoot(const xmlChar * ch, int len) {
 
-        std::string content = "";
+        /*
+            Characters unit may be called multiple times in succession
+            in some cases the text may need to be gathered all at once
+            before output. Both style are shown here although the delayed
+            ouput is used.
+        */
+
+        //std::string content = "";
         content.append((const char *)ch, len);
-        xmlTextWriterWriteString(writer, (const xmlChar *)content.c_str());
+        //xmlTextWriterWriteString(writer, (const xmlChar *)content.c_str());
 
     }
 
@@ -259,10 +295,16 @@ public :
      */
     virtual void charactersUnit(const xmlChar * ch, int len) {
 
-        std::string content = "";
-        content.append((const char *)ch, len);
+        /*
+            Characters unit may be called multiple times in succession
+            in some cases the text may need to be gathered all at once
+            before output. Both style are shown here although the delayed
+            ouput is used.
+        */
 
-        xmlTextWriterWriteString(writer, (const xmlChar *)content.c_str());
+        //std::string content = "";
+        content.append((const char *)ch, len);
+        //xmlTextWriterWriteString(writer, (const xmlChar *)content.c_str());
 
     }
 
