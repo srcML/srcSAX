@@ -35,12 +35,28 @@ class element_count_handler : public srcSAXHandler {
 
 private :
 
-    std::map<std::string> element_counts;
+    std::map<std::string, unsigned long long> element_counts;
 
 public :
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
+
+    void update_count(std::string element) {
+
+        /* Note: in map could just use operator[], however, this a bit more general */
+        std::map<std::string, unsigned long long>::iterator itr = element_counts.find(element);
+        if(itr == element_counts.end()) {
+
+            std::pair<std::string, unsigned long long> new_element(element, 1);
+
+        } else {
+
+            ++itr->second;
+
+        }
+
+    }
 
     /*
     virtual void startDocument() {}
