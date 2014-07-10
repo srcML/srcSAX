@@ -22,14 +22,20 @@
 #include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
-#include <string>
-#include <libxml/parserInternals.h>
+#include <map>
+#include <iostream>
 
 int main() {
 
   srcSAXController control("../example.xml");
   element_count_handler handler;
   control.parse(&handler);
+
+  for(std::map<std::string, unsigned long long>::const_iterator citr = handler.get_counts().begin(); citr != handler.get_counts().end(); ++citr) {
+
+  	std::cout << citr->first << ": " << citr->second << '\n';
+
+  }
 
   return 0;
 }

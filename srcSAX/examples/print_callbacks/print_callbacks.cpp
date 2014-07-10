@@ -22,9 +22,6 @@
 #include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
-#include <string>
-#include <libxml/parserInternals.h>
-
 int main() {
 
   srcSAXController control("../example.xml");

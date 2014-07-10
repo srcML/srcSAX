@@ -23,9 +23,6 @@
 
 #include <srcSAXHandler.hpp>
 
-#include <libxml/parser.h>
-#include <stdio.h>
-
 class print_callbacks_handler : public srcSAXHandler {
 
 public :

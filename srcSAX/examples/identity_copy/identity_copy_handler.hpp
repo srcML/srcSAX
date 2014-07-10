@@ -24,7 +24,6 @@
 #include <srcSAXHandler.hpp>
 #include <iostream>
 #include <string>
-#include <stdlib.h>
 
 #include <libxml/xmlwriter.h>
 

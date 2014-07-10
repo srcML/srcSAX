@@ -24,8 +24,6 @@
 #include <srcSAXHandler.hpp>
 #include <map>
 
-#include <libxml/xmlwriter.h>
-
 /**
  * element_count_handler
  *
