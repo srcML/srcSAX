@@ -1,5 +1,5 @@
 /**
- * @file test_srcml_control_handler.cpp
+ * @file test_srcsax_control_handler.cpp
  *
  * @copyright Copyright (C) 2013-2014  SDML (www.srcML.org)
  *
