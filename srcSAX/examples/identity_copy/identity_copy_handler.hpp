@@ -127,7 +127,31 @@ public :
 
         if(content != "") {
 
-            xmlTextWriterWriteString(writer, (const xmlChar *)content.c_str())
+            /*
+                Normal output of text is for the most part
+                identical to what libxml2 provides.  However,
+                srcML does not escape " while libxml2 does escape
+                quotations.
+            */
+            int ret = 0;
+            char * text = (char *)content.c_str();
+            for(char * pos = text; *pos; ++pos) {
+
+              if(*pos != '"') continue;
+
+              *pos = 0;
+              ret = xmlTextWriterWriteString(writer, (const xmlChar *)text);
+              //if(ret == -1) return false;
+
+              *pos = '\"';
+              xmlTextWriterWriteRaw(writer, (const xmlChar *)"\"");
+              //if(ret == -1) return false;
+
+              text = pos + 1;
+
+            }
+
+            ret = xmlTextWriterWriteString(writer, (const xmlChar *)text);
 
             content = "";
 
