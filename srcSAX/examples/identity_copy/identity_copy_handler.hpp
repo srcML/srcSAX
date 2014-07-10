@@ -297,10 +297,10 @@ public :
     virtual void charactersRoot(const xmlChar * ch, int len) {
 
         /*
-            Characters unit may be called multiple times in succession
+            Characters may be called multiple times in succession
             in some cases the text may need to be gathered all at once
-            before output. Both style are shown here although the delayed
-            ouput is used.
+            before output. Both methods are shown here although the delayed
+            output is used.
         */
 
         //std::string content = "";
@@ -320,10 +320,10 @@ public :
     virtual void charactersUnit(const xmlChar * ch, int len) {
 
         /*
-            Characters unit may be called multiple times in succession
+            Characters may be called multiple times in succession
             in some cases the text may need to be gathered all at once
-            before output. Both style are shown here although the delayed
-            ouput is used.
+            before output. Both methods are shown here although the delayed
+            output is used.
         */
 
         //std::string content = "";
