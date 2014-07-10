@@ -1,5 +1,5 @@
 /**
- * @file srcMLHandleExample.hpp
+ * @file printCallBacksHandler.hpp
  *
  * @copyright Copyright (C) 2013-2014  SDML (www.srcML.org)
  *
@@ -18,15 +18,15 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef INCLUDED_SRCSACHANDLEREXAMPLE_HPP
-#define INCLUDED_SRCSACHANDLEREXAMPLE_HPP
+#ifndef INCLUDED_PRINT_CALLBACKS_HANDLER_HPP
+#define INCLUDED_PRINT_CALLBACKS_HANDLER_HPP
 
 #include <srcSAXHandler.hpp>
 
 #include <libxml/parser.h>
 #include <stdio.h>
 
-class srcSAXHandlerExample : public srcSAXHandler {
+class printCallBacksHandler : public srcSAXHandler {
 
 public :
 

@@ -1,5 +1,5 @@
 /**
- * @file example.hpp
+ * @file print_callbacks.hpp
  *
  * @copyright Copyright (C) 2013-2014  SDML (www.srcML.org)
  *
@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <srcSAXHandlerExample.hpp>
+#include "printCallBacksHandler.hpp"
 #include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
@@ -29,7 +29,7 @@ int main() {
 
   srcSAXController control("example.xml");
   control.enable_function(true);
-  srcSAXHandlerExample handler;
+  printCallBacksHandler handler;
   control.parse(&handler);
 
   return 0;
