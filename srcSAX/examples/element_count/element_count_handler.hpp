@@ -94,7 +94,8 @@ public :
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes, std::vector<srcMLElement> * meta_tags) {
 
-        update_count(prefix, localname);
+        if(is_archive)
+            update_count(prefix, localname);
 
     }
 
@@ -116,7 +117,6 @@ public :
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes) {
 
-        if(is_archive)
             update_count(prefix, localname);
 
     }
