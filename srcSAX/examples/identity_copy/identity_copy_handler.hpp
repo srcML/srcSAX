@@ -152,7 +152,7 @@ public :
 
             ret = xmlTextWriterWriteString(writer, (const xmlChar *)text);
 
-            content = "";
+            text_content = "";
 
         }
 
