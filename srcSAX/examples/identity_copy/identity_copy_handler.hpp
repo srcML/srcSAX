@@ -50,7 +50,7 @@ public :
 
         if((writer = xmlNewTextWriterFilename(output_filename.c_str(), 0)) == 0) {
 
-            std::cerr << "Problems opening file output file: " << output_filename << '\n';
+            std::cerr << "Problems opening output file: " << output_filename << '\n';
             exit(1);
 
         }
@@ -122,7 +122,7 @@ public :
 
     }
 
-    void write_content() {
+    void write_content(std::string & text_content) {
 
         if(content != "") {
 
@@ -133,7 +133,7 @@ public :
                 quotations.
             */
             int ret = 0;
-            char * text = (char *)content.c_str();
+            char * text = (char *)text_content.c_str();
             for(char * pos = text; *pos; ++pos) {
 
               if(*pos != '"') continue;
@@ -200,7 +200,7 @@ public :
                            const xmlChar ** attributes) {
 
         // write out buffered root level characters
-        write_content();
+        write_content(content);
 
         write_start_tag(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
@@ -225,7 +225,7 @@ public :
                                 const xmlChar ** attributes) {
 
         // write out buffered characters
-        write_content();
+        write_content(content);
 
         write_start_tag(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
@@ -243,7 +243,7 @@ public :
     virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
         // write out buffered root level characters
-        write_content();
+        write_content(content);
 
         xmlTextWriterEndElement(writer);
 
@@ -261,7 +261,7 @@ public :
     virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
         // write out any buffered characters
-        write_content();
+        write_content(content);
 
         xmlTextWriterEndElement(writer);
 
@@ -279,7 +279,7 @@ public :
     virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
         // write out any buffered characters
-        write_content();
+        write_content(content);
 
         xmlTextWriterEndElement(writer);
 
@@ -304,7 +304,7 @@ public :
 
         //std::string content = "";
         content.append((const char *)ch, len);
-        //xmlTextWriterWriteString(writer, (const xmlChar *)content.c_str());
+        //write_content(content);
 
     }
 
@@ -327,7 +327,7 @@ public :
 
         //std::string content = "";
         content.append((const char *)ch, len);
-        //xmlTextWriterWriteString(writer, (const xmlChar *)content.c_str());
+        //write_content(content);
 
     }
 
