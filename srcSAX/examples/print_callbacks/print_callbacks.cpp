@@ -22,9 +22,18 @@
 #include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
-int main() {
+#include <iostream>
 
-  srcSAXController control("../example.xml");
+int main(int argc, char * argv[]) {
+
+  if(argc < 2) {
+
+    std::cerr << "Useage: print_callbacks input_file.xml\n";
+    exit(1);
+
+  }
+
+  srcSAXController control(argv[1]);
   control.enable_function(true);
   print_callbacks_handler handler;
   control.parse(&handler);

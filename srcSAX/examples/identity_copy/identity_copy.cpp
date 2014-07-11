@@ -22,10 +22,19 @@
 #include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
-int main() {
+#include <iostream>
 
-  srcSAXController control("../example.xml");
-  identity_copy_handler handler("copy.xml");
+int main(int argc, char * argv[]) {
+
+  if(argc < 3) {
+
+    std::cerr << "Useage: identify_copy input_file.xml output_file\n";
+    exit(1);
+
+  }
+
+  srcSAXController control(argv[1]);
+  identity_copy_handler handler(argv[2]);
   control.parse(&handler);
 
   return 0;

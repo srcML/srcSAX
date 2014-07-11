@@ -25,9 +25,16 @@
 #include <map>
 #include <iostream>
 
-int main() {
+int main(int argc, char * argv[]) {
 
-  srcSAXController control("../example.xml");
+  if(argc < 2) {
+
+    std::cerr << "Useage: element_count input_file.xml\n";
+    exit(1);
+
+  }
+
+  srcSAXController control(argv[1]);
   element_count_handler handler;
   control.parse(&handler);
 
