@@ -124,7 +124,7 @@ public :
 
     void write_content(std::string & text_content) {
 
-        if(content != "") {
+        if(text_content != "") {
 
             /*
                 Normal output of text is for the most part
