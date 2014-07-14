@@ -33,6 +33,7 @@ class element_count_handler : public srcSAXHandler {
 
 private :
 
+    /** map to count srcML elements */
     std::map<std::string, unsigned long long> element_counts;
 
 public :
@@ -40,12 +41,30 @@ public :
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
+    /**
+     * get_counts
+     *
+     * Accessor method to get the element counts.
+     *
+     * @returns the element count map.
+     */
     const std::map<std::string, unsigned long long> & get_counts() const {
 
         return element_counts;
 
     }
 
+    /**
+     * update_count
+     * @param prefix the element's prefix
+     * @param localname the element name
+     *
+     * Helper function to update the count of an element or add it if necessary.
+     * Need the full name (prefix + localname) of elemement to disambiguate between
+     * elements with the same name, but different prefix/namespaces (e.g. cpp:if, if).
+     * A more general find approach is used instead of relying on access using the
+     * operator[] to default non-existant items to 0. 
+     */
     void update_count(const xmlChar * prefix, const xmlChar * localname) {
 
         std::string element = "";
@@ -88,6 +107,7 @@ public :
      * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
      *
      * SAX handler function for start of the root element.
+     * Counts the root unit (if an archive, to avoid double count with startUnit).
      * Overide for desired behaviour.
      */
     virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
@@ -111,6 +131,7 @@ public :
      * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
      *
      * SAX handler function for start of an unit.
+     * Counts each unit tag (= filecount non-archive, = filecount + 1 if archive).
      * Overide for desired behaviour.
      */
     virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
@@ -133,6 +154,7 @@ public :
      * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
      *
      * SAX handler function for start of an element.
+     * Count each element.
      * Overide for desired behaviour.
      */
     virtual void startElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
@@ -145,7 +167,7 @@ public :
 
     /*
 
-    // end elements may need to be used to end if you want to collect only on per file basis.
+    // end elements may need to be used if you want to collect only on per file basis or some other granularity.
     virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
     virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
     virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
