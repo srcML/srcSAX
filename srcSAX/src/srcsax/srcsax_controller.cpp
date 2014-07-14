@@ -6,7 +6,7 @@
 #include <cstring>
 
 static void libxml_error(void * /*ctx*/, const char * /*msg*/, ...) {}
-static xmlParserCtxtPtr srcsax_create_parser_ctxt(xmlParserInputBufferPtr buffer_input);
+static xmlParserCtxtPtr srcsax_create_parser_context(xmlParserInputBufferPtr buffer_input);
 
 #ifdef LIBXML2_NEW_BUFFER
 struct _xmlBuf {
@@ -104,7 +104,7 @@ struct srcsax_context * srcsax_create_context_filename(const char * filename, co
 
     }
 
-    xmlParserCtxtPtr libxml2_context = srcsax_create_parser_ctxt(context->input);
+    xmlParserCtxtPtr libxml2_context = srcsax_create_parser_context(context->input);
 
     if(libxml2_context == NULL) {
 
@@ -134,7 +134,7 @@ struct srcsax_context * srcsax_create_context_xml_parser_input_buffer(xmlParserI
 
     context->input = input;
 
-    xmlParserCtxtPtr libxml2_context = srcsax_create_parser_ctxt(context->input);
+    xmlParserCtxtPtr libxml2_context = srcsax_create_parser_context(context->input);
 
     if(libxml2_context == NULL) {
 
@@ -193,7 +193,7 @@ int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handle
 }
 
 /**
- * srcsax_create_parser_ctxt
+ * srcsax_create_parser_context
  * @param buffer_input a parser input buffer
  *
  * Create a ctxt from a parser input buffer.
@@ -202,7 +202,7 @@ int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handle
  * @returns xml parser ctxt
  */
 xmlParserCtxtPtr
-srcsax_create_parser_ctxt(xmlParserInputBufferPtr buffer_input) {
+srcsax_create_parser_context(xmlParserInputBufferPtr buffer_input) {
     xmlParserCtxtPtr ctxt;
     xmlParserInputPtr input;
     xmlParserInputBufferPtr buf;
