@@ -147,7 +147,7 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
 
-    state->root = srcMLElement(ctxt, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+    state->root = srcml_element(ctxt, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
     state->mode = ROOT;
 
@@ -199,7 +199,7 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
 
     if(strcmp((const char *)localname, "macro-list") == 0) {
 
-        state->meta_tags.push_back(srcMLElement(ctxt, localname, prefix, URI, nb_namespaces, namespaces,
+        state->meta_tags.push_back(new srcml_element(ctxt, localname, prefix, URI, nb_namespaces, namespaces,
                                                 nb_attributes, nb_defaulted, attributes));
         return;
 

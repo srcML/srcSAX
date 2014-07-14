@@ -1,5 +1,5 @@
 /**
- * @file srcMLElement.hpp
+ * @file srcml_element.hpp
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
@@ -36,22 +36,22 @@
 #include <string>
 
 /**
- * srcMLElement
+ * srcml_element
  *
  * Data structure to hold an element
  * mainly root element
  */
-struct srcMLElement {
+struct srcml_element {
 
-    /** Default constructor to Zero out srcMLElement */
-    srcMLElement() : ctxt(0), localname(0), prefix(0), URI(0),
+    /** Default constructor to Zero out srcml_element */
+    srcml_element() : ctxt(0), localname(0), prefix(0), URI(0),
                      nb_namespaces(0), namespaces(0),
                      nb_attributes(0), nb_defaulted(0),
                      attributes(0)
     {}
 
     /** Constructor to initialize using start element items */
-    srcMLElement(xmlParserCtxtPtr ctxt, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+    srcml_element(xmlParserCtxtPtr ctxt, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                  int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                  const xmlChar ** attributes)
         : ctxt(ctxt), localname(0), prefix(0), URI(0),
@@ -119,7 +119,7 @@ struct srcMLElement {
     }
 
     /** Copy constructor */
-    srcMLElement(const srcMLElement & element)
+    srcml_element(const srcml_element & element)
         : ctxt(element.ctxt), localname(0), prefix(0), URI(0),
           nb_namespaces(0), namespaces(0),
           nb_attributes(0), nb_defaulted(0),
@@ -176,7 +176,7 @@ struct srcMLElement {
     }
 
     /** Overloaded assignment operator */
-    srcMLElement & operator=(srcMLElement element) {
+    srcml_element & operator=(srcml_element element) {
 
         swap(element);
         return *this;
@@ -184,7 +184,7 @@ struct srcMLElement {
     }
 
     /** swap operator */
-    void swap(srcMLElement & element) {
+    void swap(srcml_element & element) {
 
         std::swap(localname, element.localname);
         std::swap(prefix, element.prefix);
@@ -198,7 +198,7 @@ struct srcMLElement {
     }
 
     /** destructor */
-    ~srcMLElement() {
+    ~srcml_element() {
 
         if(namespaces) {
 

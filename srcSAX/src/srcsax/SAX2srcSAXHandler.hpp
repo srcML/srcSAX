@@ -108,13 +108,13 @@ struct SAX2srcSAXHandler {
     srcSAXHandler * process;
 
     /** temporary storage for root unit */
-    srcMLElement root;
+    srcml_element root;
 
     /** root characters */
     std::string characters;
 
     /** temporary storage for meta data */
-    std::vector<srcMLElement> meta_tags;
+    std::vector<srcml_element *> meta_tags;
 
     /** used to detect root unit */
     bool is_archive;

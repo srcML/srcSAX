@@ -22,9 +22,9 @@
 #define INCLUDED_SRCSAX_HANDLER_H
 
 #include <libxml/parser.h>
-//#include <srcMLElement.hpp>
 
-struct srcsax_context context;
+struct srcsax_context;
+struct srcml_element;
 
 struct srcsax_handler {
 
@@ -58,7 +58,7 @@ void (*end_document)();
  */
 void (*start_root)(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                        int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                       const xmlChar ** attributes/*, srcMLElement * meta_tags*/);
+                       const xmlChar ** attributes, struct srcml_element * meta_tags[]);
 
 /**
  * start_unit
