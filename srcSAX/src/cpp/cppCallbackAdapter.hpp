@@ -8,7 +8,7 @@ public:
 
     cppCallbackAdapter(srcSAXHandler * handler) : handler(handler) {}
 
-    srcsax_handler factory() {
+    static srcsax_handler factory() {
 
         srcsax_handler handler;
 
