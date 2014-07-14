@@ -64,9 +64,10 @@ struct srcsax_context {
 };
 
 
-int srcsax_create_context_filename(const char * filename);
+struct srcsax_context * srcsax_create_context_filename(const char * filename, const char * encoding);
+struct srcsax_context * srcsax_create_context_xml_parser_input_buffer(xmlParserInputBufferPtr input);
 void srcsax_free_context(struct srcsax_context * context);
-int srcsax_parse(struct srcsax_context * context);
+int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handler);
 void srcsax_stop_parser(struct srcsax_context * context);
 
 

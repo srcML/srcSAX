@@ -94,7 +94,7 @@ struct srcsax_context * srcsax_create_context_filename(const char * filename, co
     struct srcsax_context * context = (struct srcsax_context *)malloc(sizeof(struct srcsax_context));
     context->pop_input = 1;
 
-   context->input =
+    context->input =
         xmlParserInputBufferCreateFilename(filename, encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
 
     if(context->input == 0) {
@@ -103,6 +103,36 @@ struct srcsax_context * srcsax_create_context_filename(const char * filename, co
         return 0;
 
     }
+
+    xmlParserCtxtPtr libxml2_context = srcsax_create_parser_ctxt(context->input);
+
+    if(libxml2_context == NULL) {
+
+        xmlFreeParserInputBuffer(context->input);
+        free(context);
+        return 0;
+
+    }
+
+    libxml2_context->_private = context;
+
+    context->libxml2_context = libxml2_context;
+
+    return context;
+
+}
+
+
+struct srcsax_context * srcsax_create_context_xml_parser_input_buffer(xmlParserInputBufferPtr input) {
+
+    if(input == 0) return 0;
+
+    srcsax_controller_init();
+
+    struct srcsax_context * context = (struct srcsax_context *)malloc(sizeof(struct srcsax_context));
+    context->pop_input = 0;
+
+    context->input = input;
 
     xmlParserCtxtPtr libxml2_context = srcsax_create_parser_ctxt(context->input);
 
