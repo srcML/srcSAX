@@ -50,5 +50,7 @@ struct srcsax_context {
 
 };
 
+void stop_srcsax_parser(struct srcsax_context * context);
+
 
 #endif

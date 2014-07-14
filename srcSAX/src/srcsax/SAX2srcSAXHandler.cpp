@@ -39,17 +39,18 @@ xmlSAXHandler factory() {
 
     sax.initialized    = XML_SAX2_MAGIC;
 
-    sax.startDocument = &startDocument;
-    sax.endDocument = &endDocument;
+    sax.startDocument = &start_document;
+    sax.endDocument = &end_document;
 
-    sax.startElementNs = &startRoot;
-    sax.endElementNs = &endElementNs;
+    sax.startElementNs = &start_root;
+    sax.endElementNs = &end_element_ns;
 
-    sax.characters = &charactersFirst;
-    sax.ignorableWhitespace = &charactersFirst;
+    sax.characters = &characters_first;
+    sax.ignorableWhitespace = &characters_first;
 
     sax.comment = &comment;
-    sax.cdataBlock = &cdataBlock;
+    sax.cdataBlock = &cdata_block;
+    sax.processingInstruction = &processing_instruction;
 
     return sax;
 }
@@ -58,13 +59,13 @@ xmlSAXHandler factory() {
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
 /**
- * startDocument
+ * start_document
  * @param ctx an xmlParserCtxtPtr
  *
  * SAX handler function for start of document.
  * Immediately calls supplied handlers function.
  */
-void startDocument(void * ctx) {
+void start_document(void * ctx) {
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -76,12 +77,12 @@ void startDocument(void * ctx) {
     SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
 
     if(ctxt->encoding)
-        state->process->set_encoding((const char *)ctxt->encoding);
+        state->context->encoding = (const char *)ctxt->encoding;
     else if(ctxt->input)
-        state->process->set_encoding((const char *)ctxt->input->encoding);
+        state->context->encoding = (const char *)ctxt->input->encoding;
 
-    //    state->process->init(ctxt);
-    state->process->startDocument();
+    //    state->context->init(ctxt);
+    state->context->sax->start_document();
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -90,14 +91,14 @@ void startDocument(void * ctx) {
 }
 
 /**
- * endDocument
+ * end_document
  * @param ctx an xmlParserCtxtPtr
  *
  * SAX handler function for end of document.
- * Calls endRoot if needed then
+ * Calls end_root if needed then
  * immediately calls supplied handlers function.
  */
-void endDocument(void * ctx) {
+void end_document(void * ctx) {
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -109,9 +110,9 @@ void endDocument(void * ctx) {
     SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
 
     if(state->mode != END_ROOT)
-        state->process->endRoot(state->root.localname, state->root.prefix, state->root.URI);
+        state->context->sax->end_root(state->root.localname, state->root.prefix, state->root.URI);
 
-    state->process->endDocument();
+    state->context->end_document();
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -120,7 +121,7 @@ void endDocument(void * ctx) {
 }
 
 /**
- * startRoot
+ * start_root
  * @param ctx an xmlParserCtxtPtr
  * @param localname the name of the element tag
  * @param prefix the tag prefix
@@ -134,7 +135,7 @@ void endDocument(void * ctx) {
  * SAX handler function for start of root element.
  * Caches root info and immediately calls supplied handlers function.
  */
-void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+void start_root(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                const xmlChar ** attributes) {
 
@@ -152,7 +153,7 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
     state->mode = ROOT;
 
     // handle nested units
-    ctxt->sax->startElementNs = &startElementNsFirst;
+    ctxt->sax->startElementNs = &start_element_ns_first;
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
@@ -161,7 +162,7 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
 }
 
 /**
- * startElementNsFirst
+ * start_element_ns_first
  * @param ctx an xmlParserCtxtPtr
  * @param localname the name of the element tag
  * @param prefix the tag prefix
@@ -175,7 +176,7 @@ void startRoot(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
  * SAX handler function for start of first element after root
  * Detects archive and acts accordingly.
  */
-void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                          int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                          const xmlChar ** attributes) {
 
@@ -206,43 +207,43 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
     }
 
     state->is_archive = strcmp((const char *)localname, "unit") == 0;
-    state->process->set_is_archive(state->is_archive);
+    state->context->set_is_archive(state->is_archive);
 
-    state->process->startRoot(state->root.localname, state->root.prefix, state->root.URI,
+    state->context->sax->start_root(state->root.localname, state->root.prefix, state->root.URI,
                               state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
                               state->root.nb_defaulted, state->root.attributes, &state->meta_tags);
 
     if(!state->is_archive) {
 
-        state->process->increment_unit_count();
+        state->context->increment_unit_count();
 
         state->mode = UNIT;
-        state->process->startUnit(state->root.localname, state->root.prefix, state->root.URI,
+        state->context->sax->start_unit(state->root.localname, state->root.prefix, state->root.URI,
                                   state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
                                   state->root.nb_defaulted, state->root.attributes);
-        state->process->charactersUnit((const xmlChar *)state->characters.c_str(), (int)state->characters.size());
-        state->process->startElementNs(localname, prefix, URI,
+        state->context->sax->characters_unit((const xmlChar *)state->characters.c_str(), (int)state->characters.size());
+        state->context->sax->startElementNs(localname, prefix, URI,
                                        nb_namespaces, namespaces, nb_attributes,
                                        nb_defaulted, attributes);
     } else {
 
-        state->process->charactersRoot((const xmlChar *)state->characters.c_str(), (int)state->characters.size());
+        state->context->sax->characters_root((const xmlChar *)state->characters.c_str(), (int)state->characters.size());
 
-        state->process->increment_unit_count();
+        state->context->sax->increment_unit_count();
 
         state->mode = UNIT;
-        state->process->startUnit(localname, prefix, URI,
+        state->context->sax->start_unit(localname, prefix, URI,
                                   nb_namespaces, namespaces, nb_attributes,
                                   nb_defaulted, attributes);
 
 
     }
 
-    if(ctxt->sax->startElementNs) ctxt->sax->startElementNs = &startElementNs;
+    if(ctxt->sax->startElementNs) ctxt->sax->startElementNs = &start_element_ns;
     if(ctxt->sax->characters) {
 
-        ctxt->sax->characters = &charactersUnit;
-        ctxt->sax->ignorableWhitespace = &charactersUnit;
+        ctxt->sax->characters = &characters_unit;
+        ctxt->sax->ignorableWhitespace = &characters_unit;
 
     }
 
@@ -253,7 +254,7 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
 }
 
 /**
- * startUnit
+ * start_unit
  * @param ctx an xmlParserCtxtPtr
  * @param localname the name of the element tag
  * @param prefix the tag prefix
@@ -267,7 +268,7 @@ void startElementNsFirst(void * ctx, const xmlChar * localname, const xmlChar * 
  * SAX handler function for start of an unit.
  * Immediately calls supplied handlers function.
  */
-void startUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+void start_unit(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                const xmlChar ** attributes) {
 
@@ -289,17 +290,17 @@ void startUnit(void * ctx, const xmlChar * localname, const xmlChar * prefix, co
         if(URI && state->root.namespaces[i] && strcmp((const char *)state->root.namespaces[i], (const char *)URI) == 0)
             URI = state->root.namespaces[i];
 
-    state->process->increment_unit_count();
+    state->context->sax->increment_unit_count();
 
     state->mode = UNIT;
 
-    state->process->startUnit(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+    state->context->sax->start_unit(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
-    if(ctxt->sax->startElementNs) ctxt->sax->startElementNs = &startElementNs;
+    if(ctxt->sax->startElementNs) ctxt->sax->startElementNs = &start_element_ns;
     if(ctxt->sax->characters) {
 
-        ctxt->sax->characters = &charactersUnit;
-        ctxt->sax->ignorableWhitespace = &charactersUnit;
+        ctxt->sax->characters = &characters_unit;
+        ctxt->sax->ignorableWhitespace = &characters_unit;
 
     }
 
@@ -353,7 +354,7 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
 
     } else if(!state->in_function_header) {
 
-        state->process->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+        state->context->sax->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
     } else {
 
@@ -383,7 +384,7 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
 }
 
 /**
- * endElementNs
+ * end_element_ns
  * @param ctx an xmlParserCtxtPtr
  * @param localname the name of the element tag
  * @param prefix the tag prefix
@@ -391,9 +392,9 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
  *
  * SAX handler function for end of an element.
  * Detects end of unit and calls correct functions
- * for either endRoot endUnit or endElementNs.
+ * for either end_root end_unit or end_element_ns.
  */
-void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
@@ -416,35 +417,35 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
         if(state->mode == ROOT) {
 
             state->is_archive = false;
-            state->process->set_is_archive(state->is_archive);
+            state->context->sax->set_is_archive(state->is_archive);
 
-            state->process->startRoot(state->root.localname, state->root.prefix, state->root.URI,
+            state->context->sax->start_root(state->root.localname, state->root.prefix, state->root.URI,
                                       state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
                                       state->root.nb_defaulted, state->root.attributes, &state->meta_tags);
 
-            state->process->startUnit(state->root.localname, state->root.prefix, state->root.URI,
+            state->context->sax->start_unit(state->root.localname, state->root.prefix, state->root.URI,
                                       state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
                                       state->root.nb_defaulted, state->root.attributes);
 
             if(state->characters.size() != 0)
-                state->process->charactersUnit((const xmlChar *)state->characters.c_str(), (int)state->characters.size());
+                state->context->sax->characters_unit((const xmlChar *)state->characters.c_str(), (int)state->characters.size());
 
         }
 
-        if(ctxt->sax->startElementNs == &startUnit) {
+        if(ctxt->sax->startElementNs == &start_unit) {
 
             state->mode = END_ROOT;
-            state->process->endRoot(localname, prefix, URI);
+            state->context->sax->end_root(localname, prefix, URI);
 
         } else {
 
             state->mode = END_UNIT;
-            state->process->endUnit(localname, prefix, URI);
-            if(ctxt->sax->startElementNs) ctxt->sax->startElementNs = &startUnit;
+            state->context->sax->end_unit(localname, prefix, URI);
+            if(ctxt->sax->startElementNs) ctxt->sax->startElementNs = &start_unit;
             if(ctxt->sax->characters) {
 
-                ctxt->sax->characters = &charactersRoot;
-                ctxt->sax->ignorableWhitespace = &charactersRoot;
+                ctxt->sax->characters = &characters_root;
+                ctxt->sax->ignorableWhitespace = &characters_root;
 
             }
         }
@@ -453,11 +454,11 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
 
         if(state->in_function_header && (strcmp((const char *)localname, "function_decl") == 0 || strcmp((const char *)localname, "function") == 0)) {
 
-            state->process->endFunction();
+            //state->context->sax->endFunction();
 
         } else if(!state->in_function_header) {
 
-            state->process->endElementNs(localname, prefix, URI);
+            state->context->sax->end_element_ns(localname, prefix, URI);
 
         } else {
 
@@ -478,7 +479,7 @@ void endElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix,
             } else if(state->current_function.mode == function_prototype::PARAMETER_LIST && strcmp((const char *)localname, "parameter_list") == 0) {
 
                 state->in_function_header = false;
-                state->process->startFunction(state->current_function.name, state->current_function.return_type, state->current_function.parameter_list, state->current_function.is_decl);
+                //state->context->sax->startFunction(state->current_function.name, state->current_function.return_type, state->current_function.parameter_list, state->current_function.is_decl);
 
             }
 
@@ -524,7 +525,7 @@ void charactersFirst(void * ctx, const xmlChar * ch, int len) {
 }
 
 /**
- * charactersRoot
+ * characters_root
  * @param ctx an xmlParserCtxtPtr
  * @param ch the characers
  * @param len number of characters
@@ -532,7 +533,7 @@ void charactersFirst(void * ctx, const xmlChar * ch, int len) {
  * SAX handler function for character handling at the root level.
  * Immediately calls supplied handlers function.
  */
-void charactersRoot(void * ctx, const xmlChar * ch, int len) {
+void characters_root(void * ctx, const xmlChar * ch, int len) {
 
 #ifdef DEBUG
     std::string chars;
@@ -545,7 +546,7 @@ void charactersRoot(void * ctx, const xmlChar * ch, int len) {
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
 
-    state->process->charactersRoot(ch, len);
+    state->context->sax->characters_root(ch, len);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, chars.c_str());
@@ -554,7 +555,7 @@ void charactersRoot(void * ctx, const xmlChar * ch, int len) {
 }
 
 /**
- * charactersUnit
+ * characters_unit
  * @param ctx an xmlParserCtxtPtr
  * @param ch the characers
  * @param len number of characters
@@ -562,7 +563,7 @@ void charactersRoot(void * ctx, const xmlChar * ch, int len) {
  * SAX handler function for character handling within a unit.
  * Immediately calls supplied handlers function.
  */
-void charactersUnit(void * ctx, const xmlChar * ch, int len) {
+void characters_unit(void * ctx, const xmlChar * ch, int len) {
 
 #ifdef DEBUG
     std::string chars;
@@ -577,7 +578,7 @@ void charactersUnit(void * ctx, const xmlChar * ch, int len) {
 
 
     if(!state->in_function_header)
-        state->process->charactersUnit(ch, len);
+        state->context->sax->characters_unit(ch, len);
 
     else {
 
@@ -621,7 +622,7 @@ void comment(void * ctx, const xmlChar * value) {
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
 
-    state->process->comment(value);
+    state->context->sax->comment(value);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -630,7 +631,7 @@ void comment(void * ctx, const xmlChar * value) {
 }
 
 /**
- * cdataBlock
+ * cdata_block
  * @param ctx an xmlParserCtxtPtr
  * @param value the pcdata content
  * @param len the block length
@@ -638,7 +639,7 @@ void comment(void * ctx, const xmlChar * value) {
  * Called when a pcdata block has been parsed.
  * Immediately calls supplied handlers function.
  */
-void cdataBlock(void * ctx, const xmlChar * value, int len) {
+void cdata_block(void * ctx, const xmlChar * value, int len) {
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -649,7 +650,7 @@ void cdataBlock(void * ctx, const xmlChar * value, int len) {
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
 
-    state->process->cdataBlock(value, len);
+    state->context->sax->cdata_block(value, len);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -658,7 +659,7 @@ void cdataBlock(void * ctx, const xmlChar * value, int len) {
 }
 
 /**
- * processingInstruction
+ * processing_instruction
  * @param ctx an xmlParserCtxtPtr
  * @param target the processing instruction target.
  * @param data the processing instruction data.
@@ -666,7 +667,7 @@ void cdataBlock(void * ctx, const xmlChar * value, int len) {
  * Called when a processing instruction has been parsed.
  * Immediately calls supplied handlers function.
  */
-void processingInstruction(void * ctx, const xmlChar * target, const xmlChar * data) {
+void processing_instruction(void * ctx, const xmlChar * target, const xmlChar * data) {
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -677,7 +678,7 @@ void processingInstruction(void * ctx, const xmlChar * target, const xmlChar * d
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
 
-    state->process->processingInstruction(target, data);
+    state->context->sax->processing_instruction(target, data);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
