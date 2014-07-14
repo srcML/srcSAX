@@ -28,12 +28,14 @@
 #define STRDUP _strdup
 #endif
 
-#include <srcsax_utilities.hpp>
+#include <srcsax.h>
 
 #include <libxml/parser.h>
 
 #include <string.h>
 #include <string>
+
+#define CHECK_COPY(ORIGINAL, COPY) if(ORIGINAL && !COPY) { fprintf(stderr, "ERROR allocating memory"); srcsax_stop_parser(context); return; }
 
 /**
  * srcml_element
@@ -44,17 +46,17 @@
 struct srcml_element {
 
     /** Default constructor to Zero out srcml_element */
-    srcml_element() : ctxt(0), localname(0), prefix(0), URI(0),
+    srcml_element() : context(0), localname(0), prefix(0), URI(0),
                      nb_namespaces(0), namespaces(0),
                      nb_attributes(0), nb_defaulted(0),
                      attributes(0)
     {}
 
     /** Constructor to initialize using start element items */
-    srcml_element(xmlParserCtxtPtr ctxt, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+    srcml_element(srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                  int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                  const xmlChar ** attributes)
-        : ctxt(ctxt), localname(0), prefix(0), URI(0),
+        : context(context), localname(0), prefix(0), URI(0),
           nb_namespaces(0), namespaces(0),
           nb_attributes(0), nb_defaulted(0),
           attributes(0) {
@@ -120,7 +122,7 @@ struct srcml_element {
 
     /** Copy constructor */
     srcml_element(const srcml_element & element)
-        : ctxt(element.ctxt), localname(0), prefix(0), URI(0),
+        : context(element.context), localname(0), prefix(0), URI(0),
           nb_namespaces(0), namespaces(0),
           nb_attributes(0), nb_defaulted(0),
           attributes(0) {
@@ -232,7 +234,7 @@ struct srcml_element {
     }
 
     /** parser context */
-    xmlParserCtxtPtr ctxt;
+    srcsax_context * context;
 
     /** local name of an element*/
     const xmlChar* localname;

@@ -67,7 +67,7 @@ struct srcsax_context {
 int srcsax_create_context_filename(const char * filename);
 void srcsax_free_context(struct srcsax_context * context);
 int srcsax_parse(struct srcsax_context * context);
-void stop_srcsax_parser(struct srcsax_context * context);
+void srcsax_stop_parser(struct srcsax_context * context);
 
 
 #endif
