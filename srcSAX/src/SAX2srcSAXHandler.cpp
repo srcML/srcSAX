@@ -657,4 +657,32 @@ void cdataBlock(void * ctx, const xmlChar * value, int len) {
 
 }
 
+/**
+ * processingInstruction
+ * @param ctx an xmlParserCtxtPtr
+ * @param target the processing instruction target.
+ * @param data the processing instruction data.
+ *
+ * Called when a processing instruction has been parsed.
+ * Immediately calls supplied handlers function.
+ */
+void processingInstruction(void * ctx, const xmlChar * target, const xmlChar * data) {
+
+#ifdef DEBUG
+    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+#endif
+
+    if(ctx == NULL) return;
+
+    xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
+    SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+
+    state->process->processingInstruction(target, data);
+
+#ifdef DEBUG
+    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+#endif
+
+}
+
 #pragma GCC diagnostic pop
