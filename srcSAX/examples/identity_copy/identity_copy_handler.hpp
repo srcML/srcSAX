@@ -44,7 +44,7 @@ public :
     /**
      * identity_copy_handler
      *
-     * Default constructor default values to everything
+     * Constructor.  Open xmlwriter. 
      */
     identity_copy_handler(std::string output_filename) : writer(0) {
 
@@ -57,6 +57,11 @@ public :
 
     }
 
+    /**
+     * ~identity_copy_handler
+     *
+     * Destructor. Free writer resource.
+     */
     ~identity_copy_handler() {
 
         if(writer)
@@ -71,6 +76,8 @@ public :
      * startDocument
      *
      * SAX handler function for start of document.
+     * Write start of xml document.
+     *
      * Overide for desired behaviour.
      */
     virtual void startDocument() {
@@ -83,6 +90,8 @@ public :
      * endDocument
      *
      * SAX handler function for end of document.
+     * Write the end of xml document.
+     *
      * Overide for desired behaviour.
      */
     virtual void endDocument() {
@@ -91,6 +100,22 @@ public :
 
     }
 
+    /**
+     * write_start_tag
+     * @param localname the name of the element tag
+     * @param prefix the tag prefix
+     * @param URI the namespace of tag
+     * @param nb_namespaces number of namespaces definitions
+     * @param namespaces the defined namespaces
+     * @param nb_attributes the number of attributes on the tag
+     * @param nb_defaulted the number of defaulted attributes
+     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     *
+     * SAX handler function for start of the root element.
+     * Write out a start tag.
+     *
+     * Overide for desired behaviour.
+     */
     void write_start_tag(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes) {
@@ -122,6 +147,12 @@ public :
 
     }
 
+    /**
+     * write_content
+     * @param text_content
+     *
+     * Write out the provided text content, escaping everything but ".
+     */
     void write_content(std::string & text_content) {
 
         if(text_content != "") {
@@ -170,6 +201,8 @@ public :
      * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
      *
      * SAX handler function for start of the root element.
+     * Write out the root start tag (unless non-archive, startUnit will handle).
+     *
      * Overide for desired behaviour.
      */
     virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
@@ -193,6 +226,8 @@ public :
      * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
      *
      * SAX handler function for start of an unit.
+     * Write out any saved text, then write out the unit tag.
+     *
      * Overide for desired behaviour.
      */
     virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
@@ -218,6 +253,8 @@ public :
      * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
      *
      * SAX handler function for start of an element.
+     * Write out any saved text, then write out the elementtag.
+     * 
      * Overide for desired behaviour.
      */
     virtual void startElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
@@ -238,14 +275,20 @@ public :
      * @param URI the namespace of tag
      *
      * SAX handler function for end of the root element.
+     * Write out any saved content, then end the root tag.
+     *
      * Overide for desired behaviour.
      */
     virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
         // write out buffered root level characters
-        write_content(content);
+        if(is_archive) {
 
-        xmlTextWriterEndElement(writer);
+            write_content(content);
+
+            xmlTextWriterEndElement(writer);
+
+        }
 
     }
 
@@ -256,6 +299,8 @@ public :
      * @param URI the namespace of tag
      *
      * SAX handler function for end of an unit.
+     * Write out any saved up content, then write out ending unit tag.
+     *
      * Overide for desired behaviour.
      */
     virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
@@ -274,6 +319,8 @@ public :
      * @param URI the namespace of tag
      *
      * SAX handler function for end of an element.
+     * Write out any saved content, then write out ending element tag.
+     *
      * Overide for desired behaviour.
      */
     virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
@@ -291,16 +338,17 @@ public :
      * @param len number of characters
      *
      * SAX handler function for character handling at the root level.
+     * Collect/write root level charactes.
+     * 
+     * Characters may be called multiple times in succession
+     * in some cases the text may need to be gathered all at once
+     * before output. Both methods are shown here although the delayed
+     * output is used.
+     *
      * Overide for desired behaviour.
      */
     virtual void charactersRoot(const xmlChar * ch, int len) {
 
-        /*
-            Characters may be called multiple times in succession
-            in some cases the text may need to be gathered all at once
-            before output. Both methods are shown here although the delayed
-            output is used.
-        */
 
         //std::string content = "";
         content.append((const char *)ch, len);
@@ -314,6 +362,13 @@ public :
      * @param len number of characters
      *
      * SAX handler function for character handling within a unit.
+     * Collect/write unit level charactes.
+     * 
+     * Characters may be called multiple times in succession
+     * in some cases the text may need to be gathered all at once
+     * before output. Both methods are shown here although the delayed
+     * output is used.
+     * 
      * Overide for desired behaviour.
      */
     virtual void charactersUnit(const xmlChar * ch, int len) {
@@ -334,6 +389,7 @@ public :
     /*
     virtual void comment(const xmlChar * value) {}
     virtual void cdataBlock(const xmlChar * value, int len) {}
+    virtual void processingInstruction(const xmlChar * target, const xmlChar * data) {}
     */
 
 #pragma GCC diagnostic pop
