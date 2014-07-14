@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <SAX2srcSAXHandler.hpp>
+#include <sax2_srcsax_handler.hpp>
 #include <srcSAXHandler.hpp>
 
 #include <stdio.h>
