@@ -30,18 +30,45 @@ public :
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
+  /**
+   * startDocument
+   *
+   * SAX handler function for start of document.
+   * Overide for desired behaviour.
+   */
   virtual void startDocument() {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
     
   }
 
+  /**
+   * endDocument
+   *
+   * SAX handler function for end of document.
+   * Overide for desired behaviour.
+   */
   virtual void endDocument() {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
 
+  /**
+   * startRoot
+   * @param localname the name of the element tag
+   * @param prefix the tag prefix
+   * @param URI the namespace of tag
+   * @param nb_namespaces number of namespaces definitions
+   * @param namespaces the defined namespaces
+   * @param nb_attributes the number of attributes on the tag
+   * @param nb_defaulted the number of defaulted attributes
+   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param meta_tags vector of elements composed of metage tags defined after root tag
+   *
+   * SAX handler function for start of the root element.
+   * Overide for desired behaviour.
+   */
   virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
 			 int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
 			 const xmlChar ** attributes, std::vector<srcMLElement> * meta_tags) {
@@ -50,6 +77,20 @@ public :
 
   }
 
+  /**
+   * startUnit
+   * @param localname the name of the element tag
+   * @param prefix the tag prefix
+   * @param URI the namespace of tag
+   * @param nb_namespaces number of namespaces definitions
+   * @param namespaces the defined namespaces
+   * @param nb_attributes the number of attributes on the tag
+   * @param nb_defaulted the number of defaulted attributes
+   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   *
+   * SAX handler function for start of an unit.
+   * Overide for desired behaviour.
+   */
   virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                       const xmlChar ** attributes) {
@@ -58,6 +99,18 @@ public :
 
   }
 
+  /**
+   * startFunction
+   * @param name the function's name
+   * @param return_type the function return type
+   * @param parameter_list a list of the function parameters in struct containing (declaration.type/declaration.name)
+   * @param is_decl indicates if the call is a function declaration (true) or definition (false)
+   *
+   * SAX handler function for start of function with prototype.
+   * Accessing references after callback termination is undefined.
+   *
+   * Overide for desired behaviour.
+   */
   virtual void startFunction(const std::string & name, const std::string & return_type, const std::vector<declaration> & parameter_list, bool is_decl) {
 
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, name.c_str());
@@ -71,6 +124,20 @@ public :
 
   }
 
+  /**
+   * startElementNs
+   * @param localname the name of the element tag
+   * @param prefix the tag prefix
+   * @param URI the namespace of tag
+   * @param nb_namespaces number of namespaces definitions
+   * @param namespaces the defined namespaces
+   * @param nb_attributes the number of attributes on the tag
+   * @param nb_defaulted the number of defaulted attributes
+   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   *
+   * SAX handler function for start of an element.
+   * Overide for desired behaviour.
+   */
   virtual void startElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                       const xmlChar ** attributes) {
@@ -79,48 +146,112 @@ public :
 
   }
 
+  /**
+   * endRoot
+   * @param localname the name of the element tag
+   * @param prefix the tag prefix
+   * @param URI the namespace of tag
+   *
+   * SAX handler function for end of the root element.
+   * Overide for desired behaviour.
+   */
   virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
 
+  /**
+   * endUnit
+   * @param localname the name of the element tag
+   * @param prefix the tag prefix
+   * @param URI the namespace of tag
+   *
+   * SAX handler function for end of an unit.
+   * Overide for desired behaviour.
+   */
   virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
 
+  /**
+   * endFunction
+   *
+   * SAX handler function for end of a function.
+   * Overide for desired behaviour.
+   */
   virtual void endFunction() {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
 
+  /**
+   * endElementNs
+   * @param localname the name of the element tag
+   * @param prefix the tag prefix
+   * @param URI the namespace of tag
+   *
+   * SAX handler function for end of an element.
+   * Overide for desired behaviour.
+   */
   virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
 
+  /**
+   * charactersRoot
+   * @param ch the characers
+   * @param len number of characters
+   *
+   * SAX handler function for character handling at the root level.
+   * Overide for desired behaviour.
+   */
   virtual void charactersRoot(const xmlChar * ch, int len) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
 
+  /**
+   * charactersUnit
+   * @param ch the characers
+   * @param len number of characters
+   *
+   * SAX handler function for character handling within a unit.
+   * Overide for desired behaviour.
+   */
   virtual void charactersUnit(const xmlChar * ch, int len) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
 
+  /**
+   * comment
+   * @param value the comment content
+   *
+   * A comment has been parsed.
+   * Overide for desired behaviour.
+   */
   virtual void comment(const xmlChar * value) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
 
+  /**
+   * cdataBlock
+   * @param value the pcdata content
+   * @param len the block length
+   *
+   * Called when a pcdata block has been parsed.
+   * Overide for desired behaviour.
+   */
   virtual void cdataBlock(const xmlChar * value, int len) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
