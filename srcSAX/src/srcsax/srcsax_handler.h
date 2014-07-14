@@ -33,14 +33,14 @@ struct srcsax_handler {
  *
  * Signature for srcSAX handler function for start of document.
  */
-void (*start_document)();
+void (*start_document)(struct srcsax_context * context);
 
 /**
  * end_document
  *
  * Signature for srcSAX handler function for end of document.
  */
-void (*end_document)();
+void (*end_document)(struct srcsax_context * context);
 
 /**
  * start_root

@@ -81,7 +81,7 @@ void start_document(void * ctx) {
         state->context->encoding = (const char *)ctxt->input->encoding;
 
     //    state->context->init(ctxt);
-    state->context->handler->start_document();
+    state->context->handler->start_document(state->context);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -111,7 +111,7 @@ void end_document(void * ctx) {
     if(state->mode != END_ROOT)
         state->context->handler->end_root(state->context, state->root.localname, state->root.prefix, state->root.URI);
 
-    state->context->handler->end_document();
+    state->context->handler->end_document(state->context);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
