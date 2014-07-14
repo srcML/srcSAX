@@ -1,5 +1,5 @@
 /**
- *  @file SAX2srcSAXHandler.cpp
+ *  @file sax2_srcsax_handler.cpp
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
@@ -20,7 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <SAX2srcSAXHandler.hpp>
+#include <sax2_srcsax_handler.hpp>
 
 #include <cstring>
 
@@ -73,7 +73,7 @@ void start_document(void * ctx) {
     if(ctx == NULL) return;
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     if(ctxt->encoding)
         state->context->encoding = (const char *)ctxt->encoding;
@@ -106,7 +106,7 @@ void end_document(void * ctx) {
     if(ctx == NULL) return;
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     if(state->mode != END_ROOT)
         state->context->handler->end_root(state->context, state->root.localname, state->root.prefix, state->root.URI);
@@ -145,7 +145,7 @@ void start_root(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
     if(ctx == NULL) return;
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     state->root = srcml_element(ctxt, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
@@ -186,7 +186,7 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
     if(ctx == NULL) return;
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
@@ -278,7 +278,7 @@ void start_unit(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
     if(ctx == NULL) return;
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
@@ -335,7 +335,7 @@ void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefi
     if(ctx == NULL) return;
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
@@ -409,7 +409,7 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
     }
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     if(strcmp((const char *)localname, "unit") == 0) {
 
@@ -513,7 +513,7 @@ void charactersFirst(void * ctx, const xmlChar * ch, int len) {
     if(ctx == NULL) return;
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     state->characters.append((const char *)ch, len);
 
@@ -543,7 +543,7 @@ void characters_root(void * ctx, const xmlChar * ch, int len) {
     if(ctx == NULL) return;
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     state->context->handler->characters_root(state->context, ch, len);
 
@@ -573,7 +573,7 @@ void characters_unit(void * ctx, const xmlChar * ch, int len) {
     if(ctx == NULL) return;
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
 
     if(!state->in_function_header)
@@ -619,7 +619,7 @@ void comment(void * ctx, const xmlChar * value) {
     if(ctx == NULL) return;
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     state->context->handler->comment(state->context, value);
 
@@ -647,7 +647,7 @@ void cdata_block(void * ctx, const xmlChar * value, int len) {
     if(ctx == NULL) return;
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     state->context->handler->cdata_block(state->context, value, len);
 
@@ -675,7 +675,7 @@ void processing_instruction(void * ctx, const xmlChar * target, const xmlChar * 
     if(ctx == NULL) return;
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     state->context->handler->processing_instruction(state->context, target, data);
 

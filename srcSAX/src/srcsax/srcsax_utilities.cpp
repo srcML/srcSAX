@@ -1,5 +1,5 @@
 /**
- * @file srcSAXUtilities.cpp
+ * @file srcsax_utilities.cpp
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <srcSAXUtilities.hpp>
+#include <srcsax_utilities.hpp>
 
 #ifdef LIBXML2_NEW_BUFFER
 struct _xmlBuf {

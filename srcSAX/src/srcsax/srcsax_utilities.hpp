@@ -1,5 +1,5 @@
 /**
- * @file srcSAXUtilities.hpp
+ * @file srcsax_utilities.hpp
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *

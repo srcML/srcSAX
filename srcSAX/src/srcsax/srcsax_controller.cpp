@@ -1,5 +1,5 @@
 #include <srcsax.h>
-#include <SAX2srcSAXHandler.hpp>
+#include <sax2_srcsax_handler.hpp>
 
 #include <libxml/parserInternals.h>
 
@@ -66,6 +66,8 @@ void srcsax_free_context(struct srcsax_context * context) {
     xmlFreeInputStream(stream);
     if(context->libxml2_context) xmlFreeParserCtxt(context->libxml2_context);
     if(context->pop_input) xmlFreeParserInputBuffer(context->input);
+
+    free(context);
 
 }
 

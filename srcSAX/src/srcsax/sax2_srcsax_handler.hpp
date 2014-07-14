@@ -1,5 +1,5 @@
 /**
- * @file SAX2srcSAXHandler.hpp
+ * @file sax2_srcsax_handler.hpp
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
@@ -94,15 +94,15 @@ struct function_prototype {
 };
 
 /**
- * SAX2srcSAXHandler
+ * sax2_srcsax_handler
  *
  * Data structure to hold process during
  * sax parsing.
  */
-struct SAX2srcSAXHandler {
+struct sax2_srcsax_handler {
 
     /** default constructor */
-    SAX2srcSAXHandler() : context(0), root(), meta_tags(), is_archive(false), mode(ROOT), parse_function(false), in_function_header(false), current_function() {}
+    sax2_srcsax_handler() : context(0), root(), meta_tags(), is_archive(false), mode(ROOT), parse_function(false), in_function_header(false), current_function() {}
 
     /** hooks for processing */
     srcsax_context * context;
