@@ -675,7 +675,7 @@ void processingInstruction(void * ctx, const xmlChar * target, const xmlChar * d
     if(ctx == NULL) return;
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    SAX2srcMLHandler * state = (SAX2srcMLHandler *) ctxt->_private;
+    SAX2srcSAXHandler * state = (SAX2srcSAXHandler *) ctxt->_private;
 
     state->process->processingInstruction(target, data);
 

@@ -239,7 +239,7 @@ void srcSAXController::enable_cdataBlock(bool enable) {
  *
  * Enables or disables processingInstruction parsing.
  */
-void srcMLControlHandler::enable_processingInstruction(bool enable) {
+void srcSAXController::enable_processingInstruction(bool enable) {
 
     if(enable) sax.processingInstruction = processingInstruction;
     else sax.processingInstruction = 0;
