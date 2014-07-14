@@ -18,6 +18,15 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+ /*
+
+  Count each the occurrences of each srcML element.
+
+  Input: input_file.xml
+  Useage: element_count input_file.xml
+  
+  */
+
 #include "element_count_handler.hpp"
 #include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
@@ -25,6 +34,13 @@
 #include <map>
 #include <iostream>
 
+/**
+ * main
+ * @param argc number of arguments
+ * @param argv the provided arguments (array of C strings)
+ * 
+ * Invoke srcSAX handler to count element occurences and print out the resulting element counts.
+ */
 int main(int argc, char * argv[]) {
 
   if(argc < 2) {

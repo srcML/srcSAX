@@ -18,17 +18,35 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+ /*
+
+  Copy the srcML document.
+
+  Input: input_file.xml
+  Input: output_file.xml
+  Useage: identity_copy input_file.xml output_file.xml
+  
+  */
+
 #include "identity_copy_handler.hpp"
 #include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
 #include <iostream>
 
-int main(int argc, char * argv[]) {
+/**
+ * main
+ * @param argc number of arguments
+ * @param argv the provided arguments (array of C strings)
+ * 
+ * Invoke srcSAX handler to copy the supplied srcML document and into the given
+ * output file.
+ */
+ int main(int argc, char * argv[]) {
 
   if(argc < 3) {
 
-    std::cerr << "Useage: identify_copy input_file.xml output_file\n";
+    std::cerr << "Useage: identify_copy input_file.xml output_file.xml\n";
     exit(1);
 
   }

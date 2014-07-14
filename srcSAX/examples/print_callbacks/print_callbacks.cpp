@@ -18,12 +18,28 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+ /*
+
+  Print each callback as it is called (callback trace).
+
+  Input: input_file.xml
+  Useage: print_callbacks input_file.xml
+  
+  */
+
 #include "print_callbacks_handler.hpp"
 #include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
 #include <iostream>
 
+/**
+ * main
+ * @param argc number of arguments
+ * @param argv the provided arguments (array of C strings)
+ * 
+ * Invoke srcSAX handler to print out each callback as it is called.
+ */
 int main(int argc, char * argv[]) {
 
   if(argc < 2) {
