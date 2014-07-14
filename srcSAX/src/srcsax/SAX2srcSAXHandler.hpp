@@ -110,6 +110,9 @@ struct SAX2srcSAXHandler {
     /** temporary storage for root unit */
     srcMLElement root;
 
+    /** root characters */
+    std::string characters;
+
     /** temporary storage for meta data */
     std::vector<srcMLElement> meta_tags;
 

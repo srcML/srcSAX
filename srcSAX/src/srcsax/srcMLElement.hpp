@@ -194,7 +194,6 @@ struct srcMLElement {
         std::swap(nb_attributes, element.nb_attributes);
         std::swap(nb_defaulted, element.nb_defaulted);
         std::swap(attributes, element.attributes);
-        std::swap(characters, element.characters);
 
     }
 
@@ -258,9 +257,6 @@ struct srcMLElement {
 
     /** attributes of an element*/
     const xmlChar** attributes;
-
-    /** text characters (most likely only those right after root tag */
-    std::string characters;
 
 };
 
