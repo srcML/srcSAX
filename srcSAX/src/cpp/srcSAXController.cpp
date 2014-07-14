@@ -20,6 +20,8 @@
 
 #include <srcSAXController.hpp>
 #include <srcSAXHandler.hpp>
+#include <cppCallbackAdapter.hpp>
+
 #include <sax2_srcsax_handler.hpp>
 
 #include <string>
@@ -211,6 +213,8 @@ void srcSAXController::enable_function(bool enable) {
  * Parse the xml document with the supplied hooks.
  */
 void srcSAXController::parse(srcSAXHandler * handler) {
+
+    cppCallbackAdapter adapter(handler);
 
     int status = srcsax_parse(context, 0);
 

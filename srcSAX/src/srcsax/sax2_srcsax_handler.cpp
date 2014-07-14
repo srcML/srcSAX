@@ -210,7 +210,7 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
 
     state->context->handler->start_root(state->context, state->root.localname, state->root.prefix, state->root.URI,
                               state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
-                              state->root.nb_defaulted, state->root.attributes, &state->meta_tags.front());
+                              state->root.nb_defaulted, state->root.attributes, state->meta_tags.size(), &state->meta_tags.front());
 
     if(!state->is_archive) {
 
@@ -420,7 +420,7 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
 
             state->context->handler->start_root(state->context, state->root.localname, state->root.prefix, state->root.URI,
                                       state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
-                                      state->root.nb_defaulted, state->root.attributes, &state->meta_tags.front());
+                                      state->root.nb_defaulted, state->root.attributes, state->meta_tags.size(), &state->meta_tags.front());
 
             state->context->handler->start_unit(state->context, state->root.localname, state->root.prefix, state->root.URI,
                                       state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,

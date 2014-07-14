@@ -1,12 +1,12 @@
 
-class CppCallbackHandler {
+class cppCallbackAdapter {
 
 private:
-    srcMLHandler & handler;
+    srcSAXHandler * handler;
 
 public:
 
-    CppCallbackHandler(srcMLHandler & handler) handler(handler) {}
+    cppCallbackAdapter(srcSAXHandler * handler) : handler(handler) {}
 
     /**
      * start_document
@@ -15,9 +15,9 @@ public:
      */
     void start_document(struct srcsax_context * context) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_handler->handler.startDocument();
+        cpp_adapter->handler->startDocument();
 
     }
 
@@ -28,9 +28,9 @@ public:
      */
     void end_document(struct srcsax_context * context) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_handler->handler.endDocument();
+        cpp_adapter->handler->endDocument();
 
 
     }
@@ -51,11 +51,15 @@ public:
      */
     void start_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                           const xmlChar ** attributes, struct srcml_element * meta_tags[]) {
+                           const xmlChar ** attributes, size_t nb_meta_tags, struct srcml_element * meta_tags[]) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_handler->handler.startRoot(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes, meta_tags);
+        std::vector<srcml_element *> meta_tags_vector(nb_meta_tags);
+        for(size_t i = 0; i < nb_meta_tags; ++i)
+            meta_tags_vector.push_back(meta_tags[i]);
+
+        cpp_adapter->handler->startRoot(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes, nb_meta_tags, &meta_tags_vector);
 
     }
 
@@ -77,9 +81,9 @@ public:
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_handler->handler.startUnit(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+        cpp_adapter->handler->startUnit(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
 
     }
@@ -98,7 +102,7 @@ public:
 /*   
      void start_functionconst char * name, const char * return_type, const struct declaration * parameter_list, _Bool is_decl) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
 
      }
@@ -121,9 +125,9 @@ public:
                                 int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                                 const xmlChar ** attributes) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_handler->handler.startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+        cpp_adapter->handler->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
 
     }
@@ -138,9 +142,9 @@ public:
      */
     void end_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_handler->handler.endRoot(localname, prefix, URI);
+        cpp_adapter->handler->endRoot(localname, prefix, URI);
 
     }
 
@@ -154,9 +158,9 @@ public:
      */
     void end_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_handler->handler.endUnit(localname, prefix, URI);
+        cpp_adapter->handler->endUnit(localname, prefix, URI);
 
     }
 
@@ -168,7 +172,7 @@ public:
  /*
     void end_function) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
 
     }
@@ -183,9 +187,9 @@ public:
      */
     void end_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_handler->handler.endElementNs(localname, prefix, URI);
+        cpp_adapter->handler->endElementNs(localname, prefix, URI);
 
     }
 
@@ -198,9 +202,9 @@ public:
      */
     void characters_root(struct srcsax_context * context, const xmlChar * ch, int len) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_handler->handler.charactersRoot(ch, len);
+        cpp_adapter->handler->charactersRoot(ch, len);
 
 
     }
@@ -214,9 +218,9 @@ public:
      */
     void characters_unit(struct srcsax_context * context, const xmlChar * ch, int len) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_handler->handler.charactersUnit(ch, len);
+        cpp_adapter->handler->charactersUnit(ch, len);
 
     }
 
@@ -228,9 +232,9 @@ public:
      */
     void comment(struct srcsax_context * context, const xmlChar * value) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_handler.handler.comment(value);
+        cpp_adapter->handler->comment(value);
 
     }
 
@@ -243,9 +247,9 @@ public:
      */
     void cdata_block(struct srcsax_context * context, const xmlChar * value, int len) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_handler.handler.cdata_block(value, len);
+        cpp_adapter->handler->cdataBlock(value, len);
 
     }
 
@@ -258,9 +262,9 @@ public:
      */
     void processing_instruction(struct srcsax_context * context, const xmlChar * target, const xmlChar * data) {
 
-        CppCallbackHandler * cpp_handler = (CppCallbackHandler *)context->data;
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_handler.handler.processingInstruction(target, data);
+        cpp_adapter->handler->processingInstruction(target, data);
 
     }
 

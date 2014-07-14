@@ -58,7 +58,7 @@ void (*end_document)(struct srcsax_context * context);
  */
 void (*start_root)(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                        int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                       const xmlChar ** attributes, struct srcml_element * meta_tags[]);
+                       const xmlChar ** attributes, size_t nb_meta_tags, struct srcml_element * meta_tags[]);
 
 /**
  * start_unit
