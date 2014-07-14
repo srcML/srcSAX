@@ -1,5 +1,7 @@
 #include <srcsax.h>
 
+#include <cstring>
+
 static void libxml_error(void *ctx, const char *msg, ...) {}
 
 /**
@@ -21,7 +23,23 @@ static void srcsax_controller_init() {
 
 int srcsax_create_context_filename(const char * filename, int options) {}
 
-int srcsax_parse(struct srcsax_context * context) {}
+int srcsax_parse(struct srcsax_context * context) {
+
+    int status = xmlParseDocument(context->libxml2_context);
+
+    if(status != 0) {
+
+        xmlErrorPtr ep = xmlCtxtGetLastError(context->libxml2_context);
+
+        size_t str_length = strlen(ep->message);
+        ep->message[str_length - 1] = '\0';
+
+        if(context->srcsax_error)
+            context->srcsax_error((const char *)ep->message, ep->code);
+
+    }
+
+}
 
 
 void stop_srcsax_parser(struct srcsax_context * context) {

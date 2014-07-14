@@ -39,7 +39,7 @@ struct srcsax_context {
     struct srcsax_handler * sax;
 
     /** error callback need to figure this one out probably message and errorcode. or struct */
-    void (*srcsax_error)();
+    void (*srcsax_error)(const char * message, int error_code);
 
     /** is the document an archive */
     int is_archive;

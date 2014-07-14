@@ -123,24 +123,3 @@ srcSAXCreateParserCtxt(xmlParserInputBufferPtr buffer_input) {
 
     return(ctxt);
 }
-
-/**
- * internal_stop_parser
- * @param ctxt an libxml2 xml parser context
- *
- * Stop the internal xml parser.
- */
-void internal_stop_parser(xmlParserCtxtPtr ctxt) {
-
-    ctxt->sax->startDocument = 0;
-    ctxt->sax->endDocument = 0;
-    ctxt->sax->startElementNs = 0;
-    ctxt->sax->endElementNs = 0;
-    ctxt->sax->characters = 0;
-    ctxt->sax->cdataBlock = 0;
-    ctxt->sax->comment = 0;
-    ctxt->sax->ignorableWhitespace = 0;
-
-    xmlStopParser(ctxt);
-
-}
