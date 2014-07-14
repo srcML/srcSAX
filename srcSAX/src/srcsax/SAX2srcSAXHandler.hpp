@@ -23,7 +23,7 @@
 #ifndef INCLUDED_SAX2_SRCSAX_HANDLER_HPP
 #define INCLUDED_SAX2_SRCSAX_HANDLER_HPP
 
-#include <srcMLElement.hpp>
+#include <srcml_element.hpp>
 #include <srcsax.h>
 
 #include <libxml/parser.h>
