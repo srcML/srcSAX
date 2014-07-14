@@ -28,7 +28,6 @@
   */
 
 #include "print_callbacks_handler.hpp"
-#include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
 #include <iostream>
@@ -50,7 +49,7 @@ int main(int argc, char * argv[]) {
   }
 
   srcSAXController control(argv[1]);
-  control.enable_function(true);
+  //control.enable_function(true);
   print_callbacks_handler handler;
   control.parse(&handler);
 

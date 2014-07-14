@@ -28,7 +28,6 @@
   */
 
 #include "element_count_handler.hpp"
-#include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
 #include <map>

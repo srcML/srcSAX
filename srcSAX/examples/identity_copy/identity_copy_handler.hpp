@@ -207,7 +207,7 @@ public :
      */
     virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                           const xmlChar ** attributes, std::vector<srcMLElement> * meta_tags) {
+                           const xmlChar ** attributes, std::vector<srcml_element *> * meta_tags) {
 
         if(is_archive)
             write_start_tag(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);

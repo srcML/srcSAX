@@ -29,7 +29,6 @@
   */
 
 #include "identity_copy_handler.hpp"
-#include <SAX2srcSAXHandler.hpp>
 #include <srcSAXController.hpp>
 
 #include <iostream>

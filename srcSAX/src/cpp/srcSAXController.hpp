@@ -21,11 +21,13 @@
 #ifndef INCLUDED_SRCSAX_CONTROLLER_HPP
 #define INCLUDED_SRCSAX_CONTROLLER_HPP
 
-class srcMLHandler;
-#include <SAX2srcSAXHandler.hpp>
+class srcSAXHandler;
+#include <srcsax.h>
 
 #include <libxml/parser.h>
 #include <libxml/parserInternals.h>
+
+#include <string>
 
 /**
  * SAXError
@@ -53,17 +55,7 @@ class srcSAXController {
 private :
 
     // xmlParserCtxt
-    xmlParserCtxtPtr ctxt;
-
-    // xmlSAXHandler
-    xmlSAXHandler sax;
-
-    // Process to execute call backs
-    SAX2srcSAXHandler sax2_handler;
-
-    xmlParserInputBufferPtr input;
-
-    bool pop_input;
+    srcsax_context * context;
 
 public :
 
@@ -78,18 +70,11 @@ public :
     srcSAXController(xmlParserInputBufferPtr input);
 
     /**
-     * getSAX
-     *
-     * Return the used sax handler.
-     */
-    xmlSAXHandler & getSAX();
-
-    /**
      * getCtxt
      *
      * Return the used parser context.
      */
-    xmlParserCtxtPtr getCtxt();
+    srcsax_context * getContext();
 
     /**
      * ~srcSAXController

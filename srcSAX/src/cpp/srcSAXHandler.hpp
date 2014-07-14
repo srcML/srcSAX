@@ -21,7 +21,7 @@
 #ifndef INCLUDED_SRCSAX_HANDLER_HPP
 #define INCLUDED_SRCSAX_HANDLER_HPP
 
-#include <srcMLElement.hpp>
+#include <srcml_element.hpp>
 #include <srcSAXController.hpp>
 
 #include <libxml/parser.h>
@@ -102,16 +102,7 @@ public :
      */
     void stop_parser() {
 
-        controller->getSAX().startDocument = 0;
-        controller->getSAX().endDocument = 0;
-        controller->getSAX().startElementNs = 0;
-        controller->getSAX().endElementNs = 0;
-        controller->getSAX().characters = 0;
-        controller->getSAX().cdataBlock = 0;
-        controller->getSAX().comment = 0;
-        controller->getSAX().ignorableWhitespace = 0;
-
-        xmlStopParser(controller->getCtxt());
+        srcsax_stop_parser(controller->getContext());
 
     } 
 
@@ -176,7 +167,7 @@ public :
      */
     virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                           const xmlChar ** attributes, std::vector<srcMLElement> * meta_tags) {}
+                           const xmlChar ** attributes, std::vector<srcml_element * > * meta_tags) {}
 
     /**
      * startUnit
@@ -208,7 +199,7 @@ public :
      *
      * Overide for desired behaviour.
      */
-    virtual void startFunction(const std::string & name, const std::string & return_type, const std::vector<declaration> & parameter_list, bool is_decl) {}
+    //virtual void startFunction(const std::string & name, const std::string & return_type, const std::vector<declaration> & parameter_list, bool is_decl) {}
 
     /**
      * startElementNs
@@ -256,7 +247,7 @@ public :
      * SAX handler function for end of a function.
      * Overide for desired behaviour.
      */
-    virtual void endFunction() {}
+    //virtual void endFunction() {}
 
     /**
      * endElementNs
