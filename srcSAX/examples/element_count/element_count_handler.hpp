@@ -173,6 +173,7 @@ public :
     virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
     virtual void comment(const xmlChar * value) {}
     virtual void cdataBlock(const xmlChar * value, int len) {}
+    virtual void processingInstruction(const xmlChar * target, const xmlChar * data) {}
     */
 
 #pragma GCC diagnostic pop
