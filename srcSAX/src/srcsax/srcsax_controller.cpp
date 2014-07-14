@@ -172,6 +172,10 @@ int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handle
 
     context->handler = handler;
 
+    sax2_srcsax_handler state;
+    state.context = context;
+    context->libxml2_context->_private = &state;
+
     int status = xmlParseDocument(context->libxml2_context);
 
     context->libxml2_context->sax = save_sax;
