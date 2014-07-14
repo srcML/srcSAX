@@ -24,6 +24,8 @@
 #include <libxml/parser.h>
 //#include <srcMLElement.hpp>
 
+struct srcsax_context context;
+
 struct srcsax_handler {
 
 /**
@@ -102,7 +104,7 @@ void (*start_unit)(const xmlChar * localname, const xmlChar * prefix, const xmlC
  *
  * Signature for srcSAX handler function for start of an element.
  */
-void (*start_element_ns)(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+void (*start_element_ns)(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                             int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                             const xmlChar ** attributes);
 
@@ -114,7 +116,7 @@ void (*start_element_ns)(const xmlChar * localname, const xmlChar * prefix, cons
  *
  * Signature for srcSAX handler function for end of the root element.
  */
-void (*end_root)(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI);
+void (*end_root)(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI);
 
 /**
  * end_unit
@@ -124,7 +126,7 @@ void (*end_root)(const xmlChar * localname, const xmlChar * prefix, const xmlCha
  *
  * Signature for srcSAX handler function for end of an unit.
  */
-void (*end_unit)(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI);
+void (*end_unit)(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI);
 
 /**
  * end_function
@@ -141,7 +143,7 @@ void (*end_unit)(const xmlChar * localname, const xmlChar * prefix, const xmlCha
  *
  * Signature for srcSAX handler function for end of an element.
  */
-void (*end_element_ns)(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI);
+void (*end_element_ns)(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI);
 
 /**
  * characters_root
@@ -150,7 +152,7 @@ void (*end_element_ns)(const xmlChar * localname, const xmlChar * prefix, const 
  *
  * Signature for srcSAX handler function for character handling at the root level.
  */
-void (*characters_root)(const xmlChar * ch, int len);
+void (*characters_root)(struct srcsax_context * context, const xmlChar * ch, int len);
 
 /**
  * characters_unit
@@ -159,7 +161,7 @@ void (*characters_root)(const xmlChar * ch, int len);
  *
  * Signature for srcSAX handler function for character handling within a unit.
  */
-void (*characters_unit)(const xmlChar * ch, int len);
+void (*characters_unit)(struct srcsax_context * context, const xmlChar * ch, int len);
 
 /**
  * comment
@@ -167,7 +169,7 @@ void (*characters_unit)(const xmlChar * ch, int len);
  *
  * Signature for srcSAX handler function for a XML comment.
  */
-void (*comment)(const xmlChar * value);
+void (*comment)(struct srcsax_context * context, const xmlChar * value);
 
 /**
  * cdata_block
@@ -176,7 +178,7 @@ void (*comment)(const xmlChar * value);
  *
  * Signature for srcSAX handler function for pcdata block.
  */
-void (*cdata_block)(const xmlChar * value, int len);
+void (*cdata_block)(struct srcsax_context * context, const xmlChar * value, int len);
 
 /**
  * processing_instruction
@@ -185,7 +187,7 @@ void (*cdata_block)(const xmlChar * value, int len);
  *
  * Signature for srcSAX handler function for processing instruction
  */
-void (*processing_instruction)(const xmlChar * target, const xmlChar * data);
+void (*processing_instruction)(struct srcsax_context * context, const xmlChar * target, const xmlChar * data);
 
 };
 
