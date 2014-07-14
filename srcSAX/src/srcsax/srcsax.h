@@ -38,6 +38,9 @@ struct srcsax_context {
     /** srcSAX handler callbacks */
     struct srcsax_handler * sax;
 
+    /** error callback need to figure this one out probably message and errorcode. or struct */
+    void (*srcsax_error)();
+
     /** is the document an archive */
     int is_archive;
 
@@ -48,12 +51,13 @@ struct srcsax_context {
     const char * encoding;
 
     /** internally used libxml2 context */
-    xmlParserCtxtPtr libxml2_ctxt;
+    xmlParserCtxtPtr libxml2_context;
 
 };
 
-int srcsax_parse_filename(const char * filename, int options);
-int srcsax_parse_libxml2_context(xmlParserCtxtPtr context, int options);
+
+int srcsax_create_context_filename(const char * filename, int options);
+int srcsax_parse(struct srcsax_context * context);
 void stop_srcsax_parser(struct srcsax_context * context);
 
 
