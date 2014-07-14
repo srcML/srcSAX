@@ -10,7 +10,7 @@ find_package(LibXml2 REQUIRED)
 
 include_directories(${LIBXML2_INCLUDE_DIR} examples test src)
 
-set(CMAKE_CXX_FLAGS "-fPIC -O3 -DNDEBUG -Wno-long-long -Wall -Wextra -Wshorten-64-to-32")
+set(CMAKE_CXX_FLAGS "-fPIC -O3 -DNDEBUG -Wno-long-long -Wall -Wextra")
 
 enable_testing()
 
