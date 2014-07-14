@@ -23,6 +23,8 @@
 
 #include <srcsax_handler.h>
 
+#include <libxml/parser.h>
+
 /**
  * srcsax_context
  *
@@ -50,6 +52,8 @@ struct srcsax_context {
 
 };
 
+int srcsax_parse_filename(const char * filename, int options);
+int srcsax_parse_libxml2_context(xmlParserCtxtPtr context, int options);
 void stop_srcsax_parser(struct srcsax_context * context);
 
 

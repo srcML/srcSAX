@@ -21,7 +21,6 @@
  */
 
 #include <SAX2srcSAXHandler.hpp>
-#include <srcSAXHandler.hpp>
 
 #include <cstring>
 
