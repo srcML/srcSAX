@@ -1,8 +1,11 @@
 #include <srcsax.h>
+#include <SAX2srcSAXHandler.hpp>
+
+#include <libxml/parserInternals.h>
 
 #include <cstring>
 
-static void libxml_error(void *ctx, const char *msg, ...) {}
+static void libxml_error(void * /*ctx*/, const char * /*msg*/, ...) {}
 
 /**
  * srcsax_controller_init
@@ -21,29 +24,62 @@ static void srcsax_controller_init() {
 
 }
 
-struct srcsax_context * srcsax_create_context_filename(const char * filename) {
+struct srcsax_context * srcsax_create_context_filename(const char * filename, const char * encoding) {
 
     srcsax_controller_init();
 
     struct srcsax_context * context = (struct srcsax_context *)malloc(sizeof(struct srcsax_context));
+    context->pop_input = 1;
 
-    input =
-        xmlParserInputBufferCreateFilename(filename,
-                                           encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
+   context->input =
+        xmlParserInputBufferCreateFilename(filename, encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
 
-    xmlParserCtxtPtr ctxt = srcSAXCreateParserCtxt(input);
+    if(context->input == 0) {
 
-    context->libxml2_context = ctxt;
+        free(context);
+        return 0;
 
+    }
 
-    if(ctxt == NULL) throw std::string("File does not exist");
-    //sax = factory();
+    xmlParserCtxtPtr libxml2_context = srcSAXCreateParserCtxt(context->input);
+
+    if(libxml2_context == NULL) {
+
+        xmlFreeParserInputBuffer(context->input);
+        free(context);
+        return 0;
+
+    }
+
+    libxml2_context->_private = context;
+
+    context->libxml2_context = libxml2_context;
+
+    return context;
 
 }
 
-int srcsax_parse(struct srcsax_context * context) {
+void srcsax_free_context(struct srcsax_context * context) {
+
+    xmlParserInputPtr stream = inputPop(context->libxml2_context);
+    stream->buf = 0;
+    xmlFreeInputStream(stream);
+    if(context->libxml2_context) xmlFreeParserCtxt(context->libxml2_context);
+    if(context->pop_input) xmlFreeParserInputBuffer(context->input);
+
+}
+
+int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handler) {
+
+    xmlSAXHandlerPtr save_sax = context->libxml2_context->sax;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    context->libxml2_context->sax = &sax;
+
+    context->handler = handler;
 
     int status = xmlParseDocument(context->libxml2_context);
+
+    context->libxml2_context->sax = save_sax;
 
     if(status != 0) {
 
@@ -56,6 +92,8 @@ int srcsax_parse(struct srcsax_context * context) {
             context->srcsax_error((const char *)ep->message, ep->code);
 
     }
+
+    return status;
 
 }
 

@@ -134,11 +134,11 @@ struct SAX2srcSAXHandler {
 };
 
 /**
- * factory
+ * srcsax_sax2_factory
  *
  * Create SAX handler.
  */
-xmlSAXHandler factory();
+xmlSAXHandler srcsax_sax2_factory();
 
 /**
  * start_document

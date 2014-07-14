@@ -36,7 +36,7 @@ struct srcsax_context {
     void * data;
 
     /** srcSAX handler callbacks */
-    struct srcsax_handler * sax;
+    struct srcsax_handler * handler;
 
     /** error callback need to figure this one out probably message and errorcode. or struct */
     void (*srcsax_error)(const char * message, int error_code);
@@ -50,6 +50,14 @@ struct srcsax_context {
     /** the xml documents encoding */
     const char * encoding;
 
+    /* Internal context handling */
+
+    /** xml parser input buffer */
+    xmlParserInputBufferPtr input;
+
+    /** pop the xml input */
+    int pop_input;
+
     /** internally used libxml2 context */
     xmlParserCtxtPtr libxml2_context;
 
@@ -57,6 +65,7 @@ struct srcsax_context {
 
 
 int srcsax_create_context_filename(const char * filename);
+void srcsax_free_context(struct srcsax_context * context);
 int srcsax_parse(struct srcsax_context * context);
 void stop_srcsax_parser(struct srcsax_context * context);
 
