@@ -21,6 +21,9 @@
 #ifndef INCLUDED_SRCSAX_HANDLER_H
 #define INCLUDED_SRCSAX_HANDLER_H
 
+#include <libxml/parser.h>
+//#include <srcMLElement.hpp>
+
 struct srcsax_handler {
 
 /**
@@ -51,9 +54,9 @@ void (*end_document)();
  *
  * Signature for srcSAX handler function for start of the root element.
  */
-void (*start_root(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+void (*start_root)(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                        int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                       const xmlChar ** attributes, std::vector<srcMLElement> * meta_tags));
+                       const xmlChar ** attributes/*, srcMLElement * meta_tags*/);
 
 /**
  * start_unit
@@ -69,9 +72,9 @@ void (*start_root(const xmlChar * localname, const xmlChar * prefix, const xmlCh
  * Signature srcSAX handler function for start of an unit.
  * Overide for desired behaviour.
  */
-void (*start_unit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+void (*start_unit)(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                        int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                       const xmlChar ** attributes));
+                       const xmlChar ** attributes);
 
 /**
  * start_function
@@ -84,7 +87,7 @@ void (*start_unit(const xmlChar * localname, const xmlChar * prefix, const xmlCh
  * Accessing references after callback termination is undefined.
 
  */
-void (*start_function(const std::string & name, const std::string & return_type, const std::vector<declaration> & parameter_list, bool is_decl));
+//void (*start_function(const char * name, const char * return_type, const struct declaration * parameter_list, _Bool is_decl);
 
 /**
  * start_element_ns
@@ -99,9 +102,9 @@ void (*start_function(const std::string & name, const std::string & return_type,
  *
  * Signature for srcSAX handler function for start of an element.
  */
-void (*start_element_ns(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+void (*start_element_ns)(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                             int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                            const xmlChar ** attributes));
+                            const xmlChar ** attributes);
 
 /**
  * end_root
@@ -111,7 +114,7 @@ void (*start_element_ns(const xmlChar * localname, const xmlChar * prefix, const
  *
  * Signature for srcSAX handler function for end of the root element.
  */
-void (*end_root(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI));
+void (*end_root)(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI);
 
 /**
  * end_unit
@@ -121,14 +124,14 @@ void (*end_root(const xmlChar * localname, const xmlChar * prefix, const xmlChar
  *
  * Signature for srcSAX handler function for end of an unit.
  */
-void (*end_unit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI));
+void (*end_unit)(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI);
 
 /**
  * end_function
  *
  * Signature for srcSAX handler function for end of a function.
  */
-void (*end_function());
+//void (*end_function();
 
 /**
  * end_element_ns
@@ -138,7 +141,7 @@ void (*end_function());
  *
  * Signature for srcSAX handler function for end of an element.
  */
-void (*end_element_ns(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI));
+void (*end_element_ns)(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI);
 
 /**
  * characters_root
@@ -147,7 +150,7 @@ void (*end_element_ns(const xmlChar * localname, const xmlChar * prefix, const x
  *
  * Signature for srcSAX handler function for character handling at the root level.
  */
-void (*characters_root(const xmlChar * ch, int len));
+void (*characters_root)(const xmlChar * ch, int len);
 
 /**
  * characters_unit
@@ -156,7 +159,7 @@ void (*characters_root(const xmlChar * ch, int len));
  *
  * Signature for srcSAX handler function for character handling within a unit.
  */
-void (*characters_unit(const xmlChar * ch, int len));
+void (*characters_unit)(const xmlChar * ch, int len);
 
 /**
  * comment
@@ -164,7 +167,7 @@ void (*characters_unit(const xmlChar * ch, int len));
  *
  * Signature for srcSAX handler function for a XML comment.
  */
-void (*comment(const xmlChar * value));
+void (*comment)(const xmlChar * value);
 
 /**
  * cdata_block
@@ -173,7 +176,7 @@ void (*comment(const xmlChar * value));
  *
  * Signature for srcSAX handler function for pcdata block.
  */
-void (*cdata_block(const xmlChar * value, int len));
+void (*cdata_block)(const xmlChar * value, int len);
 
 /**
  * processing_instruction
@@ -182,7 +185,7 @@ void (*cdata_block(const xmlChar * value, int len));
  *
  * Signature for srcSAX handler function for processing instruction
  */
-void (*processing_instruction(const xmlChar * target, const xmlChar * data));
+void (*processing_instruction)(const xmlChar * target, const xmlChar * data);
 
 };
 

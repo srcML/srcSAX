@@ -21,6 +21,8 @@
 #ifndef INCLUDED_SRCSAX_H
 #define INCLUDED_SRCSAX_H
 
+#include <srcsax_handler.h>
+
 /**
  * srcsax_context
  *
@@ -32,10 +34,10 @@ struct srcsax_context {
     void * data;
 
     /** srcSAX handler callbacks */
-    srcsax_handler sax;
+    struct srcsax_handler * sax;
 
     /** is the document an archive */
-    bool is_archive;
+    _Bool is_archive;
 
     /** the current unit count */
     int unit_count;
