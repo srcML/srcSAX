@@ -20,8 +20,7 @@
 
 #include <srcSAXController.hpp>
 #include <srcSAXHandler.hpp>
-
-#include <srcSAXUtilities.hpp>
+#include <sax2_srcsax_handler.hpp>
 
 #include <string>
 
@@ -29,51 +28,17 @@
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
 /**
- * libxml_error
- * @param ctx the context
- * @param msg the message
- *
- * Stub function to intercept and do nothing with libxml errors.
- */
-void libxml_error(void *ctx, const char *msg, ...) {}
-
-#pragma GCC diagnostic pop
-
-/**
- * srcsax_controller_init
- *
- * Internal method to initialize the srcSAXController.
- */
-void srcsax_controller_init() {
-
-    static bool initialized = false;
-
-    if(initialized) return;
-
-    xmlGenericErrorFunc error_handler = (xmlGenericErrorFunc) libxml_error;
-    initGenericErrorDefaultFunc(&error_handler);
-    initialized = true;
-
-}
-
-/**
  * srcSAXController
  * @param filename name of a file
  *
  * Constructor
  */
-srcSAXController::srcSAXController(const char * filename, const char * encoding) : sax2_handler(), input(0), pop_input(true) {
+srcSAXController::srcSAXController(const char * filename, const char * encoding) {
 
-    srcsax_controller_init();
+    context = srcsax_create_context_filename(filename, encoding);
 
-    input =
-        xmlParserInputBufferCreateFilename(filename,
-                                           encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
+    if(context == NULL) throw std::string("File does not exist");
 
-    ctxt = srcSAXCreateParserCtxt(input);
-
-    if(ctxt == NULL) throw std::string("File does not exist");
-    sax = factory();
 
 }
 
@@ -84,14 +49,11 @@ srcSAXController::srcSAXController(const char * filename, const char * encoding)
  *
  * Constructor
  */
-srcSAXController::srcSAXController(xmlParserInputBufferPtr input) : sax2_handler(), input(0), pop_input(false) {
+srcSAXController::srcSAXController(xmlParserInputBufferPtr input) {
 
-    srcsax_controller_init();
+    context = srcsax_create_context_xml_parser_input_buffer(input);
 
-    ctxt = srcSAXCreateParserCtxt(input);
-
-    if(ctxt == NULL) throw std::string("File does not exist");
-    sax = factory();
+    if(context == NULL) throw std::string("File does not exist");
 
 }
 
@@ -102,22 +64,7 @@ srcSAXController::srcSAXController(xmlParserInputBufferPtr input) : sax2_handler
  */
 srcSAXController::~srcSAXController() {
 
-    xmlParserInputPtr stream = inputPop(ctxt);
-    stream->buf = 0;
-    xmlFreeInputStream(stream);
-    if(ctxt) xmlFreeParserCtxt(ctxt);
-    if(pop_input) xmlFreeParserInputBuffer(input);
-
-}
-
-/**
- * getSAX
- *
- * Return the used sax handler.
- */
-xmlSAXHandler & srcSAXController::getSAX() {
-
-    return sax;
+    if(context) srcsax_free_context(context);
 
 }
 
@@ -126,12 +73,11 @@ xmlSAXHandler & srcSAXController::getSAX() {
  *
  * Return the used parser context.
  */
-xmlParserCtxtPtr srcSAXController::getCtxt() {
+srcsax_context * srcSAXController::getContext() {
 
-    return ctxt;
+    return context;
 
 }
-
 
 /**
  * enable_startDocument
@@ -141,8 +87,8 @@ xmlParserCtxtPtr srcSAXController::getCtxt() {
  */
 void srcSAXController::enable_startDocument(bool enable) {
 
-    if(enable) sax.startDocument = startDocument;
-    else sax.startDocument = 0;
+    if(enable) context->libxml2_context->sax->startDocument = start_document;
+    else context->libxml2_context->sax->startDocument = 0;
 
 }
 
@@ -154,8 +100,8 @@ void srcSAXController::enable_startDocument(bool enable) {
  */
 void srcSAXController::enable_endDocument(bool enable) {
 
-    if(enable) sax.endDocument = endDocument;
-    else sax.endDocument = 0;
+    if(enable) context->libxml2_context->sax->endDocument = end_document;
+    else context->libxml2_context->sax->endDocument = 0;
 
 }
 
@@ -167,8 +113,8 @@ void srcSAXController::enable_endDocument(bool enable) {
  */
 void srcSAXController::enable_startElementNs(bool enable) {
 
-    if(enable) sax.startElementNs = startRoot;
-    else sax.startElementNs = 0;
+    if(enable) context->libxml2_context->sax->startElementNs = start_root;
+    else context->libxml2_context->sax->startElementNs = 0;
 
 }
 
@@ -180,8 +126,8 @@ void srcSAXController::enable_startElementNs(bool enable) {
  */
 void srcSAXController::enable_endElementNs(bool enable) {
 
-    if(enable) sax.endElementNs = endElementNs;
-    else sax.endElementNs = 0;
+    if(enable) context->libxml2_context->sax->endElementNs = end_element_ns;
+    else context->libxml2_context->sax->endElementNs = 0;
 
 }
 
@@ -195,13 +141,13 @@ void srcSAXController::enable_characters(bool enable) {
 
     if(enable) {
 
-        sax.characters = charactersFirst;
-        sax.ignorableWhitespace = charactersFirst;
+        context->libxml2_context->sax->characters = characters_first;
+        context->libxml2_context->sax->ignorableWhitespace = characters_first;
 
     } else {
 
-        sax.characters = 0;
-        sax.ignorableWhitespace = 0;
+        context->libxml2_context->sax->characters = 0;
+        context->libxml2_context->sax->ignorableWhitespace = 0;
 
     }
 
@@ -215,8 +161,8 @@ void srcSAXController::enable_characters(bool enable) {
  */
 void srcSAXController::enable_comment(bool enable) {
 
-    if(enable) sax.comment = comment;
-    else sax.comment = 0;
+    if(enable) context->libxml2_context->sax->comment = comment;
+    else context->libxml2_context->sax->comment = 0;
 
 }
 
@@ -228,8 +174,8 @@ void srcSAXController::enable_comment(bool enable) {
  */
 void srcSAXController::enable_cdataBlock(bool enable) {
 
-    if(enable) sax.cdataBlock = cdataBlock;
-    else sax.cdataBlock = 0;
+    if(enable) context->libxml2_context->sax->cdataBlock = cdata_block;
+    else context->libxml2_context->sax->cdataBlock = 0;
 
 }
 
@@ -241,8 +187,8 @@ void srcSAXController::enable_cdataBlock(bool enable) {
  */
 void srcSAXController::enable_processingInstruction(bool enable) {
 
-    if(enable) sax.processingInstruction = processingInstruction;
-    else sax.processingInstruction = 0;
+    if(enable) context->libxml2_context->sax->processingInstruction = processing_instruction;
+    else context->libxml2_context->sax->processingInstruction = 0;
 
 }
 
@@ -254,7 +200,7 @@ void srcSAXController::enable_processingInstruction(bool enable) {
 */
 void srcSAXController::enable_function(bool enable) {
 
-    sax2_handler.parse_function = enable;
+    //sax2_handler.parse_function = enable;
 
 }
 
@@ -266,20 +212,11 @@ void srcSAXController::enable_function(bool enable) {
  */
 void srcSAXController::parse(srcSAXHandler * handler) {
 
-    handler->set_controller(this);
-    sax2_handler.process = handler;
-
-    xmlSAXHandlerPtr save_sax = ctxt->sax;
-    ctxt->sax = &sax;
-    ctxt->_private = &sax2_handler;
-
-    int status = xmlParseDocument(ctxt);
-
-    ctxt->sax = save_sax;
+    int status = srcsax_parse(context, 0);
 
     if(status != 0) {
 
-        xmlErrorPtr ep = xmlCtxtGetLastError(ctxt);
+        xmlErrorPtr ep = xmlCtxtGetLastError(context->libxml2_context);
 
         size_t str_length = strlen(ep->message);
         ep->message[str_length - 1] = '\0';
