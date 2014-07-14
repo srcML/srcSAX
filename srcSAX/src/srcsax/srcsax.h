@@ -56,7 +56,7 @@ struct srcsax_context {
 };
 
 
-int srcsax_create_context_filename(const char * filename, int options);
+int srcsax_create_context_filename(const char * filename);
 int srcsax_parse(struct srcsax_context * context);
 void stop_srcsax_parser(struct srcsax_context * context);
 

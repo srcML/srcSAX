@@ -21,7 +21,25 @@ static void srcsax_controller_init() {
 
 }
 
-int srcsax_create_context_filename(const char * filename, int options) {}
+struct srcsax_context * srcsax_create_context_filename(const char * filename) {
+
+    srcsax_controller_init();
+
+    struct srcsax_context * context = (struct srcsax_context *)malloc(sizeof(struct srcsax_context));
+
+    input =
+        xmlParserInputBufferCreateFilename(filename,
+                                           encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
+
+    xmlParserCtxtPtr ctxt = srcSAXCreateParserCtxt(input);
+
+    context->libxml2_context = ctxt;
+
+
+    if(ctxt == NULL) throw std::string("File does not exist");
+    //sax = factory();
+
+}
 
 int srcsax_parse(struct srcsax_context * context) {
 
