@@ -52,6 +52,7 @@ void (*end_document)(struct srcsax_context * context);
  * @param nb_attributes the number of attributes on the tag
  * @param nb_defaulted the number of defaulted attributes
  * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+ * @param nb_meta_tags number of meta tags
  * @param meta_tags vector of elements composed of metage tags defined after root tag
  *
  * Signature for srcSAX handler function for start of the root element.

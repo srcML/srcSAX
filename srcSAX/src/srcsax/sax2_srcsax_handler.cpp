@@ -310,7 +310,7 @@ void start_unit(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
 }
 
 /**
- * startElementNs
+ * start_element_ns
  * @param ctx an xmlParserCtxtPtr
  * @param localname the name of the element tag
  * @param prefix the tag prefix
@@ -324,7 +324,7 @@ void start_unit(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
  * SAX handler function for start of an element.
  * Immediately calls supplied handlers function.
  */
-void startElementNs(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+void start_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                     int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                     const xmlChar ** attributes) {
 
@@ -493,7 +493,7 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
 }
 
 /**
- * charactersFirst
+ * characters_first
  * @param ctx an xmlParserCtxtPtr
  * @param ch the characers
  * @param len number of characters
@@ -502,7 +502,7 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
  * know if we have an archive or not.
  * Immediately calls supplied handlers function.
  */
-void charactersFirst(void * ctx, const xmlChar * ch, int len) {
+void characters_first(void * ctx, const xmlChar * ch, int len) {
 
 #ifdef DEBUG
     std::string chars;

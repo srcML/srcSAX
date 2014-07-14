@@ -8,12 +8,34 @@ public:
 
     cppCallbackAdapter(srcSAXHandler * handler) : handler(handler) {}
 
+    srcsax_handler factory() {
+
+        srcsax_handler handler;
+
+        handler.start_document = start_document;
+        handler.end_document = end_document;
+        handler.start_root = start_root;
+        handler.start_unit = start_unit;
+        handler.start_element_ns = start_element_ns;
+        handler.end_root = end_root;
+        handler.end_unit = end_unit;
+        handler.end_element_ns = end_element_ns;
+        handler.characters_root = characters_root;
+        handler.characters_unit = characters_unit;
+        handler.comment = comment;
+        handler.cdata_block = cdata_block;
+        handler.processing_instruction = processing_instruction;
+
+        return handler;
+
+    }
+
     /**
      * start_document
      *
      * Signature for srcSAX handler function for start of document.
      */
-    void start_document(struct srcsax_context * context) {
+    static void start_document(struct srcsax_context * context) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -26,7 +48,7 @@ public:
      *
      * Signature for srcSAX handler function for end of document.
      */
-    void end_document(struct srcsax_context * context) {
+    static void end_document(struct srcsax_context * context) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -45,11 +67,12 @@ public:
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
      * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param nb_meta_tags number of meta tags
      * @param meta_tags vector of elements composed of metage tags defined after root tag
      *
      * Signature for srcSAX handler function for start of the root element.
      */
-    void start_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+    static void start_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes, size_t nb_meta_tags, struct srcml_element * meta_tags[]) {
 
@@ -59,7 +82,7 @@ public:
         for(size_t i = 0; i < nb_meta_tags; ++i)
             meta_tags_vector.push_back(meta_tags[i]);
 
-        cpp_adapter->handler->startRoot(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes, nb_meta_tags, &meta_tags_vector);
+        cpp_adapter->handler->startRoot(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes, &meta_tags_vector);
 
     }
 
@@ -77,7 +100,7 @@ public:
      * Signature srcSAX handler function for start of an unit.
      * Overide for desired behaviour.
      */
-    void start_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+    static void start_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes) {
 
@@ -100,7 +123,7 @@ public:
 
      */
 /*   
-     void start_functionconst char * name, const char * return_type, const struct declaration * parameter_list, _Bool is_decl) {
+     static void start_functionconst char * name, const char * return_type, const struct declaration * parameter_list, _Bool is_decl) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -121,7 +144,7 @@ public:
      *
      * Signature for srcSAX handler function for start of an element.
      */
-    void start_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+    static void start_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                                 int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                                 const xmlChar ** attributes) {
 
@@ -140,7 +163,7 @@ public:
      *
      * Signature for srcSAX handler function for end of the root element.
      */
-    void end_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+    static void end_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -156,7 +179,7 @@ public:
      *
      * Signature for srcSAX handler function for end of an unit.
      */
-    void end_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+    static void end_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -170,7 +193,7 @@ public:
      * Signature for srcSAX handler function for end of a function.
      */
  /*
-    void end_function) {
+    static void end_function) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -185,7 +208,7 @@ public:
      *
      * Signature for srcSAX handler function for end of an element.
      */
-    void end_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+    static void end_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -200,7 +223,7 @@ public:
      *
      * Signature for srcSAX handler function for character handling at the root level.
      */
-    void characters_root(struct srcsax_context * context, const xmlChar * ch, int len) {
+    static void characters_root(struct srcsax_context * context, const xmlChar * ch, int len) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -216,7 +239,7 @@ public:
      *
      * Signature for srcSAX handler function for character handling within a unit.
      */
-    void characters_unit(struct srcsax_context * context, const xmlChar * ch, int len) {
+    static void characters_unit(struct srcsax_context * context, const xmlChar * ch, int len) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -230,7 +253,7 @@ public:
      *
      * Signature for srcSAX handler function for a XML comment.
      */
-    void comment(struct srcsax_context * context, const xmlChar * value) {
+    static void comment(struct srcsax_context * context, const xmlChar * value) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -245,7 +268,7 @@ public:
      *
      * Signature for srcSAX handler function for pcdata block.
      */
-    void cdata_block(struct srcsax_context * context, const xmlChar * value, int len) {
+    static void cdata_block(struct srcsax_context * context, const xmlChar * value, int len) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -260,7 +283,7 @@ public:
      *
      * Signature for srcSAX handler function for processing instruction
      */
-    void processing_instruction(struct srcsax_context * context, const xmlChar * target, const xmlChar * data) {
+    static void processing_instruction(struct srcsax_context * context, const xmlChar * target, const xmlChar * data) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 

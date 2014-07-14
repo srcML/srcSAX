@@ -116,11 +116,13 @@ public :
    *
    * Overide for desired behaviour.
    */
+   /*
   virtual void startFunction(const std::string & name, const std::string & return_type, const std::vector<declaration> & parameter_list, bool is_decl) {
 
    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
+  */
 
   /**
    * startElementNs
@@ -188,11 +190,13 @@ public :
    *
    * Overide for desired behaviour.
    */
+   /*
   virtual void endFunction() {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
+  */
 
   /**
    * endElementNs
