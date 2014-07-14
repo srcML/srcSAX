@@ -56,7 +56,7 @@ void (*end_document)();
  *
  * Signature for srcSAX handler function for start of the root element.
  */
-void (*start_root)(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+void (*start_root)(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                        int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                        const xmlChar ** attributes, struct srcml_element * meta_tags[]);
 
@@ -74,7 +74,7 @@ void (*start_root)(const xmlChar * localname, const xmlChar * prefix, const xmlC
  * Signature srcSAX handler function for start of an unit.
  * Overide for desired behaviour.
  */
-void (*start_unit)(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+void (*start_unit)(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                        int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                        const xmlChar ** attributes);
 

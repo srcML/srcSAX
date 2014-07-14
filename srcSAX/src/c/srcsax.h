@@ -37,7 +37,7 @@ struct srcsax_context {
     struct srcsax_handler * sax;
 
     /** is the document an archive */
-    _Bool is_archive;
+    int is_archive;
 
     /** the current unit count */
     int unit_count;
