@@ -68,6 +68,11 @@ public :
   /** the number of calls made */
   int call_count;
 
+  /**
+   * srcsax_handler_test
+   *
+   * Constructor.  Initialize members for testing C API.
+   */
   srcsax_handler_test() 
     : start_document_call_number(0), end_document_call_number(0), start_root_call_number(0), start_unit_call_number(0), start_element_ns_call_number(0),
       end_root_call_number(0), end_unit_call_number(0), end_element_ns_call_number(0), characters_root_call_number(0), characters_unit_call_number(0),
@@ -108,11 +113,12 @@ public :
 
   /**
    * start_document
+   * @param context a srcSAX context
    *
    * SAX handler function for start of document.
    * Overidden for testing.  Count calls made and order.
    */
-  static void start_document() { 
+  static void start_document(struct srcsax_context * context) { 
 
     start_document_call_number = ++call_count;
 
@@ -120,11 +126,12 @@ public :
 
   /**
    * end_document
+   * @param context a srcSAX context
    *
    * SAX handler function for end of document.
    * Overidden for testing.  Count calls made and order.
    */
-  static void end_document() {
+  static void end_document(struct srcsax_context * context) {
 
     end_document_call_number = ++call_count;
 
@@ -132,6 +139,7 @@ public :
 
   /**
    * start_root
+   * @param context a srcSAX context
    * @param localname the name of the element tag
    * @param prefix the tag prefix
    * @param URI the namespace of tag
@@ -144,7 +152,7 @@ public :
    * SAX handler function for start of the root element.
    * Overidden for testing.  Count calls made and order.
    */
-  static void start_root(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+  static void start_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                          int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                          const xmlChar ** attributes, std::vector<srcml_element *> * meta_tags) {
 
@@ -154,6 +162,7 @@ public :
 
   /**
    * start_unit
+   * @param context a srcSAX context
    * @param localname the name of the element tag
    * @param prefix the tag prefix
    * @param URI the namespace of tag
@@ -166,7 +175,7 @@ public :
    * SAX handler function for start of an unit.
    * Overidden for testing.  Count calls made and order.
    */
-  static void start_unit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+  static void start_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                          int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                          const xmlChar ** attributes) {
 
@@ -176,6 +185,7 @@ public :
 
   /**
    * start_element_ns
+   * @param context a srcSAX context
    * @param localname the name of the element tag
    * @param prefix the tag prefix
    * @param URI the namespace of tag
@@ -188,7 +198,7 @@ public :
    * SAX handler function for start of an element.
    * Overidden for testing.  Count calls made and order.
    */
-  static void start_element_ns(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
+  static void start_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                               int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                               const xmlChar ** attributes) {
     start_element_ns_call_number = ++call_count;
@@ -197,6 +207,7 @@ public :
 
   /**
    * end_root
+   * @param context a srcSAX context
    * @param localname the name of the element tag
    * @param prefix the tag prefix
    * @param URI the namespace of tag
@@ -204,7 +215,7 @@ public :
    * SAX handler function for end of the root element.
    * Overidden for testing.  Count calls made and order.
    */
-  static void end_root(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+  static void end_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
     end_root_call_number = ++call_count;
 
@@ -212,6 +223,7 @@ public :
 
   /**
    * end_unit
+   * @param context a srcSAX context
    * @param localname the name of the element tag
    * @param prefix the tag prefix
    * @param URI the namespace of tag
@@ -219,7 +231,7 @@ public :
    * SAX handler function for end of an unit.
    * Overidden for testing.  Count calls made and order.
    */
-  static void end_unit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+  static void end_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
     end_unit_call_number = ++call_count;
 
@@ -227,6 +239,7 @@ public :
 
   /**
    * end_element_ns
+   * @param context a srcSAX context
    * @param localname the name of the element tag
    * @param prefix the tag prefix
    * @param URI the namespace of tag
@@ -234,7 +247,7 @@ public :
    * SAX handler function for end of an element.
    * Overidden for testing.  Count calls made and order.
    */
-  static void end_element_ns(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+  static void end_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
     end_element_ns_call_number = ++call_count;
 
@@ -242,13 +255,14 @@ public :
 
   /**
    * characters_root
+   * @param context a srcSAX context
    * @param ch the characers
    * @param len number of characters
    *
    * SAX handler function for character handling at the root level.
    * Overidden for testing.  Count calls made and order.
    */
-  static void characters_root(const xmlChar * ch, int len) {
+  static void characters_root(struct srcsax_context * context, const xmlChar * ch, int len) {
 
     characters_root_call_number = ++call_count;
 
@@ -256,13 +270,14 @@ public :
 
   /**
    * charactersUnit
+   * @param context a srcSAX context
    * @param ch the characers
    * @param len number of characters
    *
    * SAX handler function for character handling within a unit.
    * Overidden for testing.  Count calls made and order.
    */
-  static void charactersUnit(const xmlChar * ch, int len) {
+  static void charactersUnit(struct srcsax_context * context, const xmlChar * ch, int len) {
 
     characters_unit_call_number = ++call_count;
 
@@ -270,12 +285,13 @@ public :
 
   /**
    * comment
+   * @param context a srcSAX context
    * @param value the comment content
    *
    * A comment has been parsed.
    * Overidden for testing.  Count calls made and order.
    */
-  static void comment(const xmlChar * value) {
+  static void comment(struct srcsax_context * context, const xmlChar * value) {
 
     comment_call_number_ = ++call_count;
 
@@ -283,13 +299,14 @@ public :
 
   /**
    * cdata_block
+   * @param context a srcSAX context
    * @param value the pcdata content
    * @param len the block length
    *
    * Called when a pcdata block has been parsed.
    * Overidden for testing.  Count calls made and order.
    */
-  static void cdata_block(const xmlChar * value, int len) {
+  static void cdata_block(struct srcsax_context * context, const xmlChar * value, int len) {
 
     cdata_block_call_number = ++call_count;
 
@@ -297,13 +314,14 @@ public :
 
   /**
    * processing_instruction
+   * @param context a srcSAX context
    * @param value the pcdata content
    * @param len the block length
    *
    * Called when a pcdata block has been parsed.
    * Overidden for testing.  Count calls made and order.
    */
-  static void processing_instruction(const xmlChar * value, int len) {
+  static void processing_instruction(struct srcsax_context * context, const xmlChar * value, int len) {
 
     processing_instruction = ++call_count;
 
