@@ -376,7 +376,7 @@ int main() {
                    (const xmlChar *)"http://www.sdml.info/srcML/src");
     assert(ctxt.sax->startDocument == start_document);
     assert(ctxt.sax->endDocument == end_document);
-    assert(ctxt.sax->startElementNs == 0);
+    assert(ctxt.sax->startElementNs == start_unit);
     assert(ctxt.sax->endElementNs == end_element_ns);
     assert(ctxt.sax->characters == characters_first);
     assert(ctxt.sax->comment == comment);
@@ -440,7 +440,7 @@ int main() {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     characters_first(&ctxt, (const xmlChar *)"unit", 4);
-    assert(sax2_handler.root.characters == "unit");
+    assert(sax2_handler.characters == "unit");
     assert(ctxt.sax->startDocument == start_document);
     assert(ctxt.sax->endDocument == end_document);
     assert(ctxt.sax->startElementNs == start_root);
