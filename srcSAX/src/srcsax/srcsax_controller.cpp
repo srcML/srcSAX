@@ -127,6 +127,7 @@ struct srcsax_context * srcsax_create_context_filename(const char * filename, co
     srcsax_controller_init();
 
     struct srcsax_context * context = (struct srcsax_context *)malloc(sizeof(struct srcsax_context));
+    memset(context, 0, sizeof(struct srcsax_context));
     context->pop_input = 1;
 
     context->input =
