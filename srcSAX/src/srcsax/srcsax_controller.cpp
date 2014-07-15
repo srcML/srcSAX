@@ -221,7 +221,7 @@ void srcsax_free_context(struct srcsax_context * context) {
  * Parse the context using the provide sax handlers.
  * On error calls the error callback function before returning.
  *
- * @returns status as returned by libxml2 xmlParseDocument.
+ * @returns 0 on success -1 on error.
  */
 int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handler) {
 

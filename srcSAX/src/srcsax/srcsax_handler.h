@@ -35,6 +35,7 @@ struct srcsax_handler {
 
 /**
  * start_document
+ * @param context a srcSAX context
  *
  * Signature for srcSAX handler function for start of document.
  */
@@ -42,6 +43,7 @@ void (*start_document)(struct srcsax_context * context);
 
 /**
  * end_document
+ * @param context a srcSAX context
  *
  * Signature for srcSAX handler function for end of document.
  */
@@ -49,6 +51,7 @@ void (*end_document)(struct srcsax_context * context);
 
 /**
  * start_root
+ * @param context a srcSAX context
  * @param localname the name of the element tag
  * @param prefix the tag prefix
  * @param URI the namespace of tag
@@ -68,6 +71,7 @@ void (*start_root)(struct srcsax_context * context, const xmlChar * localname, c
 
 /**
  * start_unit
+ * @param context a srcSAX context
  * @param localname the name of the element tag
  * @param prefix the tag prefix
  * @param URI the namespace of tag
@@ -85,6 +89,7 @@ void (*start_unit)(struct srcsax_context * context, const xmlChar * localname, c
 
 /**
  * start_function
+ * @param context a srcSAX context
  * @param name the function's name
  * @param return_type the function return type
  * @param parameter_list a list of the function parameters in struct containing (declaration.type/declaration.name)
@@ -92,10 +97,11 @@ void (*start_unit)(struct srcsax_context * context, const xmlChar * localname, c
  *
  * Signature for srcSAX handler function for start of function with prototype.
  */
-//void (*start_function(const char * name, const char * return_type, const struct declaration * parameter_list, _Bool is_decl);
+//void (*start_function(struct srcsax_context * context, const char * name, const char * return_type, const struct declaration * parameter_list, _Bool is_decl);
 
 /**
  * start_element_ns
+ * @param context a srcSAX context
  * @param localname the name of the element tag
  * @param prefix the tag prefix
  * @param URI the namespace of tag
@@ -113,6 +119,7 @@ void (*start_element_ns)(struct srcsax_context * context, const xmlChar * localn
 
 /**
  * end_root
+ * @param context a srcSAX context
  * @param localname the name of the element tag
  * @param prefix the tag prefix
  * @param URI the namespace of tag
@@ -123,6 +130,7 @@ void (*end_root)(struct srcsax_context * context, const xmlChar * localname, con
 
 /**
  * end_unit
+ * @param context a srcSAX context
  * @param localname the name of the element tag
  * @param prefix the tag prefix
  * @param URI the namespace of tag
@@ -133,13 +141,15 @@ void (*end_unit)(struct srcsax_context * context, const xmlChar * localname, con
 
 /**
  * end_function
+ * @param context a srcSAX context
  *
  * Signature for srcSAX handler function for end of a function.
  */
-//void (*end_function();
+//void (*end_function(struct srcsax_context * context);
 
 /**
  * end_element_ns
+ * @param context a srcSAX context
  * @param localname the name of the element tag
  * @param prefix the tag prefix
  * @param URI the namespace of tag
@@ -150,6 +160,7 @@ void (*end_element_ns)(struct srcsax_context * context, const xmlChar * localnam
 
 /**
  * characters_root
+ * @param context a srcSAX context
  * @param ch the characers
  * @param len number of characters
  *
@@ -168,6 +179,7 @@ void (*characters_unit)(struct srcsax_context * context, const xmlChar * ch, int
 
 /**
  * comment
+ * @param context a srcSAX context
  * @param value the comment content
  *
  * Signature for srcSAX handler function for a XML comment.
@@ -176,6 +188,7 @@ void (*comment)(struct srcsax_context * context, const xmlChar * value);
 
 /**
  * cdata_block
+ * @param context a srcSAX context
  * @param value the pcdata content
  * @param len the block length
  *
@@ -185,6 +198,7 @@ void (*cdata_block)(struct srcsax_context * context, const xmlChar * value, int 
 
 /**
  * processing_instruction
+ * @param context a srcSAX context
  * @param target the processing instruction target.
  * @param data the processing instruction data.
  *

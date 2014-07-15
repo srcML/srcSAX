@@ -35,6 +35,7 @@
 #include <string.h>
 #include <string>
 
+/** Check if a copy was actually allocated */
 #define CHECK_COPY(ORIGINAL, COPY) if(ORIGINAL && !COPY) { fprintf(stderr, "ERROR allocating memory"); srcsax_stop_parser(context); return; }
 
 /**

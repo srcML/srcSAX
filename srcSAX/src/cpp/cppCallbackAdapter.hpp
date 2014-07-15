@@ -73,6 +73,7 @@ public:
 
     /**
      * start_document
+     * @param context a srcSAX context
      *
      * Callback. Forwards C API start_document to C++ API srcSAXHandler startDocument.
      */
@@ -86,6 +87,7 @@ public:
 
     /**
      * end_document
+     * @param context a srcSAX context
      *
      * Callback. Forwards C API end_document to C++ API srcSAXHandler endDocument.
      */
@@ -100,6 +102,7 @@ public:
 
     /**
      * start_root
+     * @param context a srcSAX context
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
@@ -129,6 +132,7 @@ public:
 
     /**
      * start_unit
+     * @param context a srcSAX context
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
@@ -151,27 +155,28 @@ public:
 
 
     }
-
+#if 0
     /**
      * start_function
+     * @param context a srcSAX context
      * @param name the function's name
      * @param return_type the function return type
      * @param parameter_list a list of the function parameters in struct containing (declaration.type/declaration.name)
      * @param is_decl indicates if the call is a function declaration (true) or definition (false)
      *
      * Callback. Forwards C API start_function to C++ API srcSAXHandler startFunction.
-     */
-/*   
-     static void start_function(const char * name, const char * return_type, const struct declaration * parameter_list, _Bool is_decl) {
+     */ 
+     static void start_function(struct srcsax_context * context, const char * name, const char * return_type, const struct declaration * parameter_list, _Bool is_decl) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
 
      }
-*/
+#endif
 
     /**
      * start_element_ns
+     * @param context a srcSAX context
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
@@ -197,6 +202,7 @@ public:
 
     /**
      * end_root
+     * @param context a srcSAX context
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
@@ -213,6 +219,7 @@ public:
 
     /**
      * end_unit
+     * @param context a srcSAX context
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
@@ -226,22 +233,23 @@ public:
         cpp_adapter->handler->endUnit(localname, prefix, URI);
 
     }
-
+#if 0
     /**
      * end_function
+     * @param context a srcSAX context
      *
      * Callback. Forwards C API end_function to C++ API srcSAXHandler endFunction.
      */
- /*
-    static void end_function) {
+    static void end_function(struct srcsax_context * context) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
 
     }
-*/
+#endif
     /**
      * end_element_ns
+     * @param context a srcSAX context
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
@@ -258,6 +266,7 @@ public:
 
     /**
      * characters_root
+     * @param context a srcSAX context
      * @param ch the characers
      * @param len number of characters
      *
@@ -274,6 +283,7 @@ public:
 
     /**
      * characters_unit
+     * @param context a srcSAX context
      * @param ch the characers
      * @param len number of characters
      *
@@ -289,6 +299,7 @@ public:
 
     /**
      * comment
+     * @param context a srcSAX context
      * @param value the comment content
      *
      * Callback. Forwards C API comment to C++ API srcSAXHandler comment.
@@ -303,6 +314,7 @@ public:
 
     /**
      * cdata_block
+     * @param context a srcSAX context
      * @param value the pcdata content
      * @param len the block length
      *
@@ -318,6 +330,7 @@ public:
 
     /**
      * processing_instruction
+     * @param context a srcSAX context
      * @param target the processing instruction target.
      * @param data the processing instruction data.
      *
