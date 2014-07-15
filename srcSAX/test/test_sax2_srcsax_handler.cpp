@@ -53,21 +53,19 @@ int main() {
     start_document(NULL);
 
   }
-#if 0
+
   /*
     end_document
    */
   {
 
-    srcSAXHandler handler;
-    sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler sax = srcsax_handler_test::factory();
 
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
-    end_document(&ctxt);
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &sax;
+    end_document(&context);
 
   }
 
@@ -82,20 +80,18 @@ int main() {
    */
   {
 
-    srcSAXHandler handler;
-    sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler sax = srcsax_handler_test::factory();
 
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &sax;
     const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
     const char * values = "abc";
     const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
                                     "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
-    start_root(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
+    start_root(&context, (const xmlChar *)"unit", (const xmlChar *)"src", 
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
@@ -124,14 +120,14 @@ int main() {
     assert((const char *)sax2_handler.root.attributes[12] == std::string("http://www.sdml.info/srcML/src"));
     assert(sax2_handler.root.attributes[14] - sax2_handler.root.attributes[13] == 1);
     assert((char)sax2_handler.root.attributes[13][0] == 'c');
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_element_ns_first);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
-    assert(ctxt.sax->characters == characters_first);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
-    end_document(&ctxt);
+    assert(context.sax->start_document == start_document);
+    assert(context.sax->end_document == end_document);
+    assert(context.sax->start_element_ns == start_element_ns_first);
+    assert(context.sax->end_element_ns == end_element_ns);
+    assert(context.sax->characters == characters_first);
+    assert(context.sax->comment == comment);
+    assert(context.sax->cdata_block == cdata_block);
+    end_document(&context);
 
   }
 
@@ -154,30 +150,28 @@ int main() {
    */
   {
 
-    srcSAXHandler handler;
-    sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler sax = srcsax_handler_test::factory();
 
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &sax;
     const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
     const char * values = "abc";
     const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
                                     "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
 
-    start_element_ns_first(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
+    start_element_ns_first(&context, (const xmlChar *)"unit", (const xmlChar *)"src", 
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_element_ns);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
-    assert(ctxt.sax->characters == characters_unit);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(context.sax->start_document == start_document);
+    assert(context.sax->end_document == end_document);
+    assert(context.sax->start_element_ns == start_element_ns);
+    assert(context.sax->end_element_ns == end_element_ns);
+    assert(context.sax->characters == characters_unit);
+    assert(context.sax->comment == comment);
+    assert(context.sax->cdata_block == cdata_block);
 
   }
 
@@ -198,30 +192,28 @@ int main() {
    */
   {
 
-    srcSAXHandler handler;
-    sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler sax = srcsax_handler_test::factory();
 
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &sax;
     const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
     const char * values = "abc";
     const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
                                     "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
 
-    start_unit(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
+    start_unit(&context, (const xmlChar *)"unit", (const xmlChar *)"src", 
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_element_ns);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
-    assert(ctxt.sax->characters == characters_unit);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(context.sax->start_document == start_document);
+    assert(context.sax->end_document == end_document);
+    assert(context.sax->start_element_ns == start_element_ns);
+    assert(context.sax->end_element_ns == end_element_ns);
+    assert(context.sax->characters == characters_unit);
+    assert(context.sax->comment == comment);
+    assert(context.sax->cdata_block == cdata_block);
 
   }
 
@@ -243,30 +235,28 @@ int main() {
    */
   {
 
-    srcSAXHandler handler;
-    sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler sax = srcsax_handler_test::factory();
 
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &sax;
     const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
     const char * values = "abc";
     const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
                                     "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
 
-    start_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
+    start_element_ns(&context, (const xmlChar *)"unit", (const xmlChar *)"src", 
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
-    assert(ctxt.sax->characters == characters_first);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(context.sax->start_document == start_document);
+    assert(context.sax->end_document == end_document);
+    assert(context.sax->start_element_ns == start_root);
+    assert(context.sax->end_element_ns == end_element_ns);
+    assert(context.sax->characters == characters_first);
+    assert(context.sax->comment == comment);
+    assert(context.sax->cdata_block == cdata_block);
 
   }
 
@@ -287,23 +277,21 @@ int main() {
    */
   {
 
-    srcSAXHandler handler;
-    sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler sax = srcsax_handler_test::factory();
 
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
-    end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &sax;
+    end_element_ns(&context, (const xmlChar *)"unit", (const xmlChar *)"src", 
                    (const xmlChar *)"http://www.sdml.info/srcML/src");
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_unit);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
-    assert(ctxt.sax->characters == characters_root);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(context.sax->start_document == start_document);
+    assert(context.sax->end_document == end_document);
+    assert(context.sax->start_element_ns == start_unit);
+    assert(context.sax->end_element_ns == end_element_ns);
+    assert(context.sax->characters == characters_root);
+    assert(context.sax->comment == comment);
+    assert(context.sax->cdata_block == cdata_block);
 
   }
 
@@ -316,39 +304,37 @@ int main() {
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = factory();
     sax.start_element_ns = &start_unit;
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
-    end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
+    context.sax = &sax;
+    context._private = &sax2_handler;
+    end_element_ns(&context, (const xmlChar *)"unit", (const xmlChar *)"src", 
                    (const xmlChar *)"http://www.sdml.info/srcML/src");
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == 0);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
-    assert(ctxt.sax->characters == characters_first);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(context.sax->start_document == start_document);
+    assert(context.sax->end_document == end_document);
+    assert(context.sax->start_element_ns == 0);
+    assert(context.sax->end_element_ns == end_element_ns);
+    assert(context.sax->characters == characters_first);
+    assert(context.sax->comment == comment);
+    assert(context.sax->cdata_block == cdata_block);
 
   }
 
   {
 
-    srcSAXHandler handler;
-    sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler sax = srcsax_handler_test::factory();
 
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
-    end_element_ns(&ctxt, (const xmlChar *)"name", (const xmlChar *)"src", 
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &sax;
+    end_element_ns(&context, (const xmlChar *)"name", (const xmlChar *)"src", 
                    (const xmlChar *)"http://www.sdml.info/srcML/src");
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
-    assert(ctxt.sax->characters == characters_first);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(context.sax->start_document == start_document);
+    assert(context.sax->end_document == end_document);
+    assert(context.sax->start_element_ns == start_root);
+    assert(context.sax->end_element_ns == end_element_ns);
+    assert(context.sax->characters == characters_first);
+    assert(context.sax->comment == comment);
+    assert(context.sax->cdata_block == cdata_block);
 
   }
 
@@ -363,23 +349,21 @@ int main() {
    */
   {
 
-    srcSAXHandler handler;
-    sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler sax = srcsax_handler_test::factory();
 
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
-    characters_first(&ctxt, (const xmlChar *)"unit", 4);
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &sax;
+    characters_first(&context, (const xmlChar *)"unit", 4);
     assert(sax2_handler.root.characters == "unit");
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
-    assert(ctxt.sax->characters == characters_first);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(context.sax->start_document == start_document);
+    assert(context.sax->end_document == end_document);
+    assert(context.sax->start_element_ns == start_root);
+    assert(context.sax->end_element_ns == end_element_ns);
+    assert(context.sax->characters == characters_first);
+    assert(context.sax->comment == comment);
+    assert(context.sax->cdata_block == cdata_block);
 
   }
 
@@ -394,22 +378,20 @@ int main() {
    */
   {
 
-    srcSAXHandler handler;
-    sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler sax = srcsax_handler_test::factory();
 
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
-    characters_root(&ctxt, (const xmlChar *)"unit", 4);
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
-    assert(ctxt.sax->characters == characters_first);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &sax;
+    characters_root(&context, (const xmlChar *)"unit", 4);
+    assert(context.sax->start_document == start_document);
+    assert(context.sax->end_document == end_document);
+    assert(context.sax->start_element_ns == start_root);
+    assert(context.sax->end_element_ns == end_element_ns);
+    assert(context.sax->characters == characters_first);
+    assert(context.sax->comment == comment);
+    assert(context.sax->cdata_block == cdata_block);
   }
 
   {
@@ -423,22 +405,20 @@ int main() {
    */
   {
 
-    srcSAXHandler handler;
-    sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler sax = srcsax_handler_test::factory();
 
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
-    characters_unit(&ctxt, (const xmlChar *)"unit", 4);
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
-    assert(ctxt.sax->characters == characters_first);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &sax;
+    characters_unit(&context, (const xmlChar *)"unit", 4);
+    assert(context.sax->start_document == start_document);
+    assert(context.sax->end_document == end_document);
+    assert(context.sax->start_element_ns == start_root);
+    assert(context.sax->end_element_ns == end_element_ns);
+    assert(context.sax->characters == characters_first);
+    assert(context.sax->comment == comment);
+    assert(context.sax->cdata_block == cdata_block);
   }
 
   {
@@ -452,22 +432,20 @@ int main() {
    */
   {
 
-    srcSAXHandler handler;
-    sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler sax = srcsax_handler_test::factory();
 
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
-    comment(&ctxt, (const xmlChar *)"unit");
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
-    assert(ctxt.sax->characters == characters_first);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &sax;
+    comment(&context, (const xmlChar *)"unit");
+    assert(context.sax->start_document == start_document);
+    assert(context.sax->end_document == end_document);
+    assert(context.sax->start_element_ns == start_root);
+    assert(context.sax->end_element_ns == end_element_ns);
+    assert(context.sax->characters == characters_first);
+    assert(context.sax->comment == comment);
+    assert(context.sax->cdata_block == cdata_block);
   }
 
   {
@@ -481,22 +459,20 @@ int main() {
    */
   {
 
-    srcSAXHandler handler;
-    sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler sax = srcsax_handler_test::factory();
 
-    xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
-    ctxt.sax = &sax;
-    ctxt._private = &sax2_handler;
-    cdata_block(&ctxt, (const xmlChar *)"unit", 4);
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
-    assert(ctxt.sax->characters == characters_first);
-    assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &sax;
+    cdata_block(&context, (const xmlChar *)"unit", 4);
+    assert(context.sax->start_document == start_document);
+    assert(context.sax->end_document == end_document);
+    assert(context.sax->start_element_ns == start_root);
+    assert(context.sax->end_element_ns == end_element_ns);
+    assert(context.sax->characters == characters_first);
+    assert(context.sax->comment == comment);
+    assert(context.sax->cdata_block == cdata_block);
   }
 
   {
@@ -504,6 +480,6 @@ int main() {
     cdata_block(NULL, (const xmlChar *)"unit", 4);
 
   }
-#endif
+
   return 0;
 }
