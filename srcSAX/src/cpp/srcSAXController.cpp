@@ -44,7 +44,6 @@ srcSAXController::srcSAXController(const char * filename, const char * encoding)
 
 }
 
-
 /**
  * srcSAXController
  * @param input pointer to a parser input buffer
