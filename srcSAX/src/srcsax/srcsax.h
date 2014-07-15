@@ -3,12 +3,12 @@
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
- * The srcML Toolkit is free software; you can redistribute it and/or modify
+ * srcSAX is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * The srcML Toolkit is distributed in the hope that it will be useful,
+ * srcSAX is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -65,7 +65,7 @@ struct srcsax_context {
 
 
 struct srcsax_context * srcsax_create_context_filename(const char * filename, const char * encoding);
-struct srcsax_context * srcsax_create_context_xml_parser_input_buffer(xmlParserInputBufferPtr input);
+struct srcsax_context * srcsax_create_context_libxml2(xmlParserInputBufferPtr input);
 void srcsax_free_context(struct srcsax_context * context);
 int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handler);
 void srcsax_stop_parser(struct srcsax_context * context);

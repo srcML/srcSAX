@@ -53,7 +53,7 @@ srcSAXController::srcSAXController(const char * filename, const char * encoding)
  */
 srcSAXController::srcSAXController(xmlParserInputBufferPtr input) {
 
-    context = srcsax_create_context_xml_parser_input_buffer(input);
+    context = srcsax_create_context_libxml2(input);
 
     if(context == NULL) throw std::string("File does not exist");
 

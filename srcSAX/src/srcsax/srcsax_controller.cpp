@@ -123,7 +123,7 @@ struct srcsax_context * srcsax_create_context_filename(const char * filename, co
 }
 
 
-struct srcsax_context * srcsax_create_context_xml_parser_input_buffer(xmlParserInputBufferPtr input) {
+struct srcsax_context * srcsax_create_context_libxml2(xmlParserInputBufferPtr input) {
 
     if(input == 0) return 0;
 
