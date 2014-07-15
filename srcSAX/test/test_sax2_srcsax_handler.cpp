@@ -602,5 +602,41 @@ int main() {
 
   }
 
+  /*
+    processing_instruction
+   */
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    processing_instruction(&ctxt, (const xmlChar *)"target", (const xmlChar *)"data");
+    assert(ctxt.sax->startDocument == start_document);
+    assert(ctxt.sax->endDocument == end_document);
+    assert(ctxt.sax->startElementNs == start_root);
+    assert(ctxt.sax->endElementNs == end_element_ns);
+    assert(ctxt.sax->characters == characters_first);
+    assert(ctxt.sax->comment == comment);
+    assert(ctxt.sax->cdataBlock == cdata_block);
+    assert(ctxt.sax->processingInstruction == processing_instruction);
+  }
+
+  {
+
+    processing_instruction(NULL, (const xmlChar *)"target", (const xmlChar *)"data");
+
+  }
+
   return 0;
 }
