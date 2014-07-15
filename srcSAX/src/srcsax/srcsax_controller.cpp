@@ -124,6 +124,8 @@ static void srcsax_controller_init() {
  */
 struct srcsax_context * srcsax_create_context_filename(const char * filename, const char * encoding) {
 
+    if(filename == 0) return 0;
+
     srcsax_controller_init();
 
     struct srcsax_context * context = (struct srcsax_context *)malloc(sizeof(struct srcsax_context));

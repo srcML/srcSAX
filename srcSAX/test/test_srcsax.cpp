@@ -45,6 +45,54 @@ int main() {
 
 }
 
+{
+
+  srcsax_context * context = srcsax_create_context_filename(__FILE__, "ISO-8859-1");
+
+  assert(context->data == 0);
+  assert(context->handler == 0);
+  assert(context->srcsax_error == 0);
+  assert(context->is_archive == 0);
+  assert(context->unit_count == 0);
+  assert(context->encoding == 0);
+  assert(context->input != 0);
+  assert(context->pop_input != 0);
+  assert(context->libxml2_context != 0);
+
+}
+
+{
+
+  srcsax_context * context = srcsax_create_context_filename(__FILE__, 0);
+
+  assert(context->data == 0);
+  assert(context->handler == 0);
+  assert(context->srcsax_error == 0);
+  assert(context->is_archive == 0);
+  assert(context->unit_count == 0);
+  assert(context->encoding == 0);
+  assert(context->input != 0);
+  assert(context->pop_input != 0);
+  assert(context->libxml2_context != 0);
+
+}
+
+{
+
+  srcsax_context * context = srcsax_create_context_filename(0, "UTF-8");
+
+  assert(context == 0);
+
+}
+
+{
+
+  srcsax_context * context = srcsax_create_context_filename("foobat", "UTF-8");
+
+  assert(context == 0);
+
+}
+
 /*
   srcsax_create_context_libxml2
  */
