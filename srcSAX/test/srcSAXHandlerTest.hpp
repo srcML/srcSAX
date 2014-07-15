@@ -28,65 +28,80 @@
 /**
  * srcsax_handler_test
  *
- * Base class that provides hooks for SAX processing.
+ * Test class with callbacks for C API.
  */
 class srcsax_handler_test {
 
 public :
 
+  /** number which start_document callback was called */
   int start_document_call_number;
+  /** number which end_document callback was called */
   int end_document_call_number;
 
+  /** number which start_root callback was called */
   int start_root_call_number;
+  /** number which start_unit callback was called */
   int start_unit_call_number;
+  /** number which start_element_ns callback was called */
   int start_element_ns_call_number;
 
+  /** number which end_root callback was called */
   int end_root_call_number;
+  /** number which end_unit callback was called */
   int end_unit_call_number;
+  /** number which end_elemnt_ns callback was called */
   int end_element_ns_call_number;
 
+  /** number which characters_root callback was called */
   int characters_root_call_number;
+  /** number which characters_unit callback was called */
   int characters_unit_call_number;
 
+  /** number which comment callback was called */
   int comment_call_number;
+  /** number which cdata_block callback was called */
   int cdata_block_call_number;
+  /** number which processing_instruction callback was called */
+  int processing_instruction_call_number;
 
+  /** the number of calls made */
   int call_count;
 
   srcsax_handler_test() 
     : start_document_call_number(0), end_document_call_number(0), start_root_call_number(0), start_unit_call_number(0), start_element_ns_call_number(0),
       end_root_call_number(0), end_unit_call_number(0), end_element_ns_call_number(0), characters_root_call_number(0), characters_unit_call_number(0),
-      comment_call_number_(0), cdata_block_call_number(0), call_count(0) {}
+      comment_call_number_(0), cdata_block_call_number(0), processing_insturction_call_number(0), call_count(0) {}
 
-    /**
-     * factory
-     *
-     * Factory method to generate the srcsax_handler containin this classes
-     * callbacks needed to test C API.
-     *
-     * @returns the generated srcsax_handler with the correct callbacks for C API.
-     */
-    static srcsax_handler factory() {
+  /**
+   * factory
+   *
+   * Factory method to generate the srcsax_handler containin this classes
+   * callbacks needed to test C API.
+   *
+   * @returns the generated srcsax_handler with the correct callbacks for C API.
+   */
+  static srcsax_handler factory() {
 
-        srcsax_handler handler;
+      srcsax_handler handler;
 
-        handler.start_document = start_document;
-        handler.end_document = end_document;
-        handler.start_root = start_root;
-        handler.start_unit = start_unit;
-        handler.start_element_ns = start_element_ns;
-        handler.end_root = end_root;
-        handler.end_unit = end_unit;
-        handler.end_element_ns = end_element_ns;
-        handler.characters_root = characters_root;
-        handler.characters_unit = characters_unit;
-        handler.comment = comment;
-        handler.cdata_block = cdata_block;
-        handler.processing_instruction = processing_instruction;
+      handler.start_document = start_document;
+      handler.end_document = end_document;
+      handler.start_root = start_root;
+      handler.start_unit = start_unit;
+      handler.start_element_ns = start_element_ns;
+      handler.end_root = end_root;
+      handler.end_unit = end_unit;
+      handler.end_element_ns = end_element_ns;
+      handler.characters_root = characters_root;
+      handler.characters_unit = characters_unit;
+      handler.comment = comment;
+      handler.cdata_block = cdata_block;
+      handler.processing_instruction = processing_instruction;
 
-        return handler;
+      return handler;
 
-    }
+  }
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
