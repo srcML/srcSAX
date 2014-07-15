@@ -26,6 +26,26 @@
 
 int main() {
 
+/*
+  srcsax_create_context_filename
+*/
+
+/*
+  srcsax_create_context_libxml2
+ */
+
+/*
+  srcsax_free_context
+ */
+
+/*
+  srcsax_parse
+ */
+
+ /*
+  srcsax_stop_parse
+ */
+
   return 0;
 
 }

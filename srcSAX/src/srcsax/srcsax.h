@@ -75,5 +75,4 @@ int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handle
 /* srcSAX terminate parse function */
 void srcsax_stop_parser(struct srcsax_context * context);
 
-
 #endif
