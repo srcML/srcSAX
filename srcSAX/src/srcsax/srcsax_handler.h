@@ -26,6 +26,11 @@
 struct srcsax_context;
 struct srcml_element;
 
+/**
+ * srcsax_handler
+ *
+ * Struct of srcSAX callback functions i.e. srcSAX handler.
+ */
 struct srcsax_handler {
 
 /**
@@ -73,7 +78,6 @@ void (*start_root)(struct srcsax_context * context, const xmlChar * localname, c
  * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
  *
  * Signature srcSAX handler function for start of an unit.
- * Overide for desired behaviour.
  */
 void (*start_unit)(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                        int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
@@ -87,8 +91,6 @@ void (*start_unit)(struct srcsax_context * context, const xmlChar * localname, c
  * @param is_decl indicates if the call is a function declaration (true) or definition (false)
  *
  * Signature for srcSAX handler function for start of function with prototype.
- * Accessing references after callback termination is undefined.
-
  */
 //void (*start_function(const char * name, const char * return_type, const struct declaration * parameter_list, _Bool is_decl);
 
@@ -186,7 +188,7 @@ void (*cdata_block)(struct srcsax_context * context, const xmlChar * value, int 
  * @param target the processing instruction target.
  * @param data the processing instruction data.
  *
- * Signature for srcSAX handler function for processing instruction
+ * Signature for srcSAX handler function for processing instruction.
  */
 void (*processing_instruction)(struct srcsax_context * context, const xmlChar * target, const xmlChar * data);
 

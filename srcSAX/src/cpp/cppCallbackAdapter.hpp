@@ -17,15 +17,38 @@
  * along with the srcML Toolkit; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+
+/**
+ * cppCallbackAdapter
+ *
+ * Wrapper around C srcSAX api to provide for C++ interface.
+ * Simply, forward the callbacks to the provided srcSAXHandler.
+ */
 class cppCallbackAdapter {
 
 private:
+
+    /** the srcSAXHandler to forward the callbacks */
     srcSAXHandler * handler;
 
 public:
 
+    /**
+     * cppCallbackAdapter
+     * @param handler a srcSAXHandler whose callbacks will be called.
+     *
+     * Constructor.  Initialize the handler
+     */
     cppCallbackAdapter(srcSAXHandler * handler) : handler(handler) {}
 
+    /**
+     * factory
+     *
+     * Factory method to generate the srcsax_handler containin this classes
+     * callbacks needed to perform to use the C++ wrapper API.
+     *
+     * @returns the generated srcsax_handler with the correct callbacks for C API.
+     */
     static srcsax_handler factory() {
 
         srcsax_handler handler;
@@ -51,7 +74,7 @@ public:
     /**
      * start_document
      *
-     * Signature for srcSAX handler function for start of document.
+     * Callback. Forwards C API start_document to C++ API srcSAXHandler startDocument.
      */
     static void start_document(struct srcsax_context * context) {
 
@@ -64,7 +87,7 @@ public:
     /**
      * end_document
      *
-     * Signature for srcSAX handler function for end of document.
+     * Callback. Forwards C API end_document to C++ API srcSAXHandler endDocument.
      */
     static void end_document(struct srcsax_context * context) {
 
@@ -88,7 +111,7 @@ public:
      * @param nb_meta_tags number of meta tags
      * @param meta_tags vector of elements composed of metage tags defined after root tag
      *
-     * Signature for srcSAX handler function for start of the root element.
+     * Callback. Forwards C API start_root to C++ API srcSAXHandler startRoot.
      */
     static void start_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
@@ -116,7 +139,7 @@ public:
      * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
      *
      * Signature srcSAX handler function for start of an unit.
-     * Overide for desired behaviour.
+     * Callback. Forwards C API start_unit to C++ API srcSAXHandler startUnit.
      */
     static void start_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
@@ -136,12 +159,10 @@ public:
      * @param parameter_list a list of the function parameters in struct containing (declaration.type/declaration.name)
      * @param is_decl indicates if the call is a function declaration (true) or definition (false)
      *
-     * Signature for srcSAX handler function for start of function with prototype.
-     * Accessing references after callback termination is undefined.
-
+     * Callback. Forwards C API start_function to C++ API srcSAXHandler startFunction.
      */
 /*   
-     static void start_functionconst char * name, const char * return_type, const struct declaration * parameter_list, _Bool is_decl) {
+     static void start_function(const char * name, const char * return_type, const struct declaration * parameter_list, _Bool is_decl) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -161,6 +182,7 @@ public:
      * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
      *
      * Signature for srcSAX handler function for start of an element.
+     * Callback. Forwards C API start_element_ns to C++ API srcSAXHandler startElementNs.
      */
     static void start_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                                 int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
@@ -179,7 +201,7 @@ public:
      * @param prefix the tag prefix
      * @param URI the namespace of tag
      *
-     * Signature for srcSAX handler function for end of the root element.
+     * Callback. Forwards C API end_root to C++ API srcSAXHandler endRoot.
      */
     static void end_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
@@ -195,7 +217,7 @@ public:
      * @param prefix the tag prefix
      * @param URI the namespace of tag
      *
-     * Signature for srcSAX handler function for end of an unit.
+     * Callback. Forwards C API end_unit to C++ API srcSAXHandler endUnit.
      */
     static void end_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
@@ -208,7 +230,7 @@ public:
     /**
      * end_function
      *
-     * Signature for srcSAX handler function for end of a function.
+     * Callback. Forwards C API end_function to C++ API srcSAXHandler endFunction.
      */
  /*
     static void end_function) {
@@ -224,7 +246,7 @@ public:
      * @param prefix the tag prefix
      * @param URI the namespace of tag
      *
-     * Signature for srcSAX handler function for end of an element.
+     * Callback. Forwards C API end_element_ns to C++ API srcSAXHandler endElementNs.
      */
     static void end_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
@@ -239,7 +261,7 @@ public:
      * @param ch the characers
      * @param len number of characters
      *
-     * Signature for srcSAX handler function for character handling at the root level.
+     * Callback. Forwards C API characters_root to C++ API srcSAXHandler charactersRoot.
      */
     static void characters_root(struct srcsax_context * context, const xmlChar * ch, int len) {
 
@@ -255,7 +277,7 @@ public:
      * @param ch the characers
      * @param len number of characters
      *
-     * Signature for srcSAX handler function for character handling within a unit.
+     * Callback. Forwards C API characters_unit to C++ API srcSAXHandler charactersUnit.
      */
     static void characters_unit(struct srcsax_context * context, const xmlChar * ch, int len) {
 
@@ -269,7 +291,7 @@ public:
      * comment
      * @param value the comment content
      *
-     * Signature for srcSAX handler function for a XML comment.
+     * Callback. Forwards C API comment to C++ API srcSAXHandler comment.
      */
     static void comment(struct srcsax_context * context, const xmlChar * value) {
 
@@ -284,7 +306,7 @@ public:
      * @param value the pcdata content
      * @param len the block length
      *
-     * Signature for srcSAX handler function for pcdata block.
+     * Callback. Forwards C API cdata_block to C++ API srcSAXHandler cdata_block.
      */
     static void cdata_block(struct srcsax_context * context, const xmlChar * value, int len) {
 
@@ -299,7 +321,7 @@ public:
      * @param target the processing instruction target.
      * @param data the processing instruction data.
      *
-     * Signature for srcSAX handler function for processing instruction
+     * Callback. Forwards C API processing_instruction to C++ API srcSAXHandler processingInstruction.
      */
     static void processing_instruction(struct srcsax_context * context, const xmlChar * target, const xmlChar * data) {
 
