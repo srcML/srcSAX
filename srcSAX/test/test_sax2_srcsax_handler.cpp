@@ -143,13 +143,14 @@ int main() {
     assert((const char *)sax2_handler.root.attributes[12] == std::string("http://www.sdml.info/srcML/src"));
     assert(sax2_handler.root.attributes[14] - sax2_handler.root.attributes[13] == 1);
     assert((char)sax2_handler.root.attributes[13][0] == 'c');
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_element_ns_first);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
+    assert(ctxt.sax->startDocument == start_document);
+    assert(ctxt.sax->endDocument == end_document);
+    assert(ctxt.sax->startElementNs == start_element_ns_first);
+    assert(ctxt.sax->endElementNs == end_element_ns);
     assert(ctxt.sax->characters == characters_first);
     assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(ctxt.sax->cdataBlock == cdata_block);
+    assert(ctxt.sax->processingInstruction == processing_instruction);
     end_document(&ctxt);
 
   }
@@ -196,13 +197,14 @@ int main() {
     start_element_ns_first(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_element_ns);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
+    assert(ctxt.sax->startDocument == start_document);
+    assert(ctxt.sax->endDocument == end_document);
+    assert(ctxt.sax->startElementNs == start_element_ns);
+    assert(ctxt.sax->endElementNs == end_element_ns);
     assert(ctxt.sax->characters == characters_unit);
     assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(ctxt.sax->cdataBlock == cdata_block);
+    assert(ctxt.sax->processingInstruction == processing_instruction);
 
   }
 
@@ -246,13 +248,14 @@ int main() {
     start_unit(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_element_ns);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
+    assert(ctxt.sax->startDocument == start_document);
+    assert(ctxt.sax->endDocument == end_document);
+    assert(ctxt.sax->startElementNs == start_element_ns);
+    assert(ctxt.sax->endElementNs == end_element_ns);
     assert(ctxt.sax->characters == characters_unit);
     assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(ctxt.sax->cdataBlock == cdata_block);
+    assert(ctxt.sax->processingInstruction == processing_instruction);
 
   }
 
@@ -297,13 +300,14 @@ int main() {
     start_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
+    assert(ctxt.sax->startDocument == start_document);
+    assert(ctxt.sax->endDocument == end_document);
+    assert(ctxt.sax->startElementNs == start_root);
+    assert(ctxt.sax->endElementNs == end_element_ns);
     assert(ctxt.sax->characters == characters_first);
     assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(ctxt.sax->cdataBlock == cdata_block);
+    assert(ctxt.sax->processingInstruction == processing_instruction);
 
   }
 
@@ -340,13 +344,14 @@ int main() {
     ctxt._private = &sax2_handler;
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
                    (const xmlChar *)"http://www.sdml.info/srcML/src");
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_unit);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
+    assert(ctxt.sax->startDocument == start_document);
+    assert(ctxt.sax->endDocument == end_document);
+    assert(ctxt.sax->startElementNs == start_unit);
+    assert(ctxt.sax->endElementNs == end_element_ns);
     assert(ctxt.sax->characters == characters_root);
     assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(ctxt.sax->cdataBlock == cdata_block);
+    assert(ctxt.sax->processingInstruction == processing_instruction);
 
   }
 
@@ -369,13 +374,14 @@ int main() {
     ctxt._private = &sax2_handler;
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src", 
                    (const xmlChar *)"http://www.sdml.info/srcML/src");
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == 0);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
+    assert(ctxt.sax->startDocument == start_document);
+    assert(ctxt.sax->endDocument == end_document);
+    assert(ctxt.sax->startElementNs == 0);
+    assert(ctxt.sax->endElementNs == end_element_ns);
     assert(ctxt.sax->characters == characters_first);
     assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(ctxt.sax->cdataBlock == cdata_block);
+    assert(ctxt.sax->processingInstruction == processing_instruction);
 
   }
 
@@ -397,13 +403,14 @@ int main() {
     ctxt._private = &sax2_handler;
     end_element_ns(&ctxt, (const xmlChar *)"name", (const xmlChar *)"src", 
                    (const xmlChar *)"http://www.sdml.info/srcML/src");
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
+    assert(ctxt.sax->startDocument == start_document);
+    assert(ctxt.sax->endDocument == end_document);
+    assert(ctxt.sax->startElementNs == start_root);
+    assert(ctxt.sax->endElementNs == end_element_ns);
     assert(ctxt.sax->characters == characters_first);
     assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(ctxt.sax->cdataBlock == cdata_block);
+    assert(ctxt.sax->processingInstruction == processing_instruction);
 
   }
 
@@ -434,13 +441,14 @@ int main() {
     ctxt._private = &sax2_handler;
     characters_first(&ctxt, (const xmlChar *)"unit", 4);
     assert(sax2_handler.root.characters == "unit");
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
+    assert(ctxt.sax->startDocument == start_document);
+    assert(ctxt.sax->endDocument == end_document);
+    assert(ctxt.sax->startElementNs == start_root);
+    assert(ctxt.sax->endElementNs == end_element_ns);
     assert(ctxt.sax->characters == characters_first);
     assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(ctxt.sax->cdataBlock == cdata_block);
+    assert(ctxt.sax->processingInstruction == processing_instruction);
 
   }
 
@@ -470,13 +478,14 @@ int main() {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     characters_root(&ctxt, (const xmlChar *)"unit", 4);
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
+    assert(ctxt.sax->startDocument == start_document);
+    assert(ctxt.sax->endDocument == end_document);
+    assert(ctxt.sax->startElementNs == start_root);
+    assert(ctxt.sax->endElementNs == end_element_ns);
     assert(ctxt.sax->characters == characters_first);
     assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(ctxt.sax->cdataBlock == cdata_block);
+    assert(ctxt.sax->processingInstruction == processing_instruction);
   }
 
   {
@@ -505,13 +514,14 @@ int main() {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     characters_unit(&ctxt, (const xmlChar *)"unit", 4);
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
+    assert(ctxt.sax->startDocument == start_document);
+    assert(ctxt.sax->endDocument == end_document);
+    assert(ctxt.sax->startElementNs == start_root);
+    assert(ctxt.sax->endElementNs == end_element_ns);
     assert(ctxt.sax->characters == characters_first);
     assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(ctxt.sax->cdataBlock == cdata_block);
+    assert(ctxt.sax->processingInstruction == processing_instruction);
   }
 
   {
@@ -540,13 +550,14 @@ int main() {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     comment(&ctxt, (const xmlChar *)"unit");
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
+    assert(ctxt.sax->startDocument == start_document);
+    assert(ctxt.sax->endDocument == end_document);
+    assert(ctxt.sax->startElementNs == start_root);
+    assert(ctxt.sax->endElementNs == end_element_ns);
     assert(ctxt.sax->characters == characters_first);
     assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(ctxt.sax->cdataBlock == cdata_block);
+    assert(ctxt.sax->processingInstruction == processing_instruction);
   }
 
   {
@@ -575,13 +586,14 @@ int main() {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     cdata_block(&ctxt, (const xmlChar *)"unit", 4);
-    assert(ctxt.sax->start_document == start_document);
-    assert(ctxt.sax->end_document == end_document);
-    assert(ctxt.sax->start_element_ns == start_root);
-    assert(ctxt.sax->end_element_ns == end_element_ns);
+    assert(ctxt.sax->startDocument == start_document);
+    assert(ctxt.sax->endDocument == end_document);
+    assert(ctxt.sax->startElementNs == start_root);
+    assert(ctxt.sax->endElementNs == end_element_ns);
     assert(ctxt.sax->characters == characters_first);
     assert(ctxt.sax->comment == comment);
-    assert(ctxt.sax->cdata_block == cdata_block);
+    assert(ctxt.sax->cdataBlock == cdata_block);
+    assert(ctxt.sax->processingInstruction == processing_instruction);
   }
 
   {
