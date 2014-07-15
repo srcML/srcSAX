@@ -19,7 +19,9 @@
  */
 
 #include <sax2_srcsax_handler.hpp>
-#include <srcSAXHandler.hpp>
+#include <srcsax_handler_test.hpp>
+
+#include <srcsax.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -31,41 +33,18 @@ sax2_srcsax_handler sax2_handler_init;
 int main() {
 
   /*
-    factory
-   */
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-variable"
-
-  {
-
-    xmlSAXHandler sax = factory();
-    assert(sax.initialized == XML_SAX2_MAGIC);
-    assert(sax.start_document == start_document);
-    assert(sax.end_document == end_document);
-    assert(sax.start_element_ns == start_root);
-    assert(sax.end_element_ns == end_elementns);
-    assert(sax.characters == characters_first);
-    assert(sax.comment == comment);
-    assert(sax.cdata_block == cdata_block);
-    assert(sax.processingInstruction == processing_instruction);
-
-  }
-
-#pragma GCC diagnostic pop
-
-  /*
     start_document
    */
   {
 
-    srcSAXHandler handler;
-    sax2_srcsax_handler sax2_handler;
-    sax2_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler sax = srcsax_handler_test::factory();
 
-    xmlParserCtxt ctxt;
-    ctxt._private = &sax2_handler;
-    start_document(&ctxt);
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &sax;
+
+    start_document(&context);
 
   }
 
@@ -74,7 +53,7 @@ int main() {
     start_document(NULL);
 
   }
-
+#if 0
   /*
     end_document
    */
@@ -525,6 +504,6 @@ int main() {
     cdata_block(NULL, (const xmlChar *)"unit", 4);
 
   }
-
+#endif
   return 0;
 }

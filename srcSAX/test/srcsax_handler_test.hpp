@@ -76,7 +76,7 @@ public :
   srcsax_handler_test() 
     : start_document_call_number(0), end_document_call_number(0), start_root_call_number(0), start_unit_call_number(0), start_element_ns_call_number(0),
       end_root_call_number(0), end_unit_call_number(0), end_element_ns_call_number(0), characters_root_call_number(0), characters_unit_call_number(0),
-      comment_call_number_(0), cdata_block_call_number(0), processing_insturction_call_number(0), call_count(0) {}
+      comment_call_number(0), cdata_block_call_number(0), processing_instruction_call_number(0), call_count(0) {}
 
   /**
    * factory
@@ -118,9 +118,11 @@ public :
    * SAX handler function for start of document.
    * Overidden for testing.  Count calls made and order.
    */
-  static void start_document(struct srcsax_context * context) { 
+  static void start_document(struct srcsax_context * context) {
 
-    start_document_call_number = ++call_count;
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->start_document_call_number = ++test_handler->call_count;
 
   }
 
@@ -133,7 +135,9 @@ public :
    */
   static void end_document(struct srcsax_context * context) {
 
-    end_document_call_number = ++call_count;
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->end_document_call_number = ++test_handler->call_count;
 
   }
 
@@ -154,9 +158,11 @@ public :
    */
   static void start_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                          int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                         const xmlChar ** attributes, std::vector<srcml_element *> * meta_tags) {
+                         const xmlChar ** attributes, size_t nb_meta_tags, struct srcml_element * meta_tags[]) {
 
-    start_root_call_number = ++call_count;
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->start_root_call_number = ++test_handler->call_count;
 
   }
 
@@ -179,7 +185,9 @@ public :
                          int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                          const xmlChar ** attributes) {
 
-    start_unit_call_number = ++call_count;
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->start_unit_call_number = ++test_handler->call_count;
 
   }
 
@@ -201,7 +209,10 @@ public :
   static void start_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                               int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                               const xmlChar ** attributes) {
-    start_element_ns_call_number = ++call_count;
+
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->start_element_ns_call_number = ++test_handler->call_count;
 
   }
 
@@ -217,7 +228,9 @@ public :
    */
   static void end_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
-    end_root_call_number = ++call_count;
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->end_root_call_number = ++test_handler->call_count;
 
   }
 
@@ -233,7 +246,9 @@ public :
    */
   static void end_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
-    end_unit_call_number = ++call_count;
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->end_unit_call_number = ++test_handler->call_count;
 
   }
 
@@ -249,7 +264,9 @@ public :
    */
   static void end_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
 
-    end_element_ns_call_number = ++call_count;
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->end_element_ns_call_number = ++test_handler->call_count;
 
   }
 
@@ -264,12 +281,14 @@ public :
    */
   static void characters_root(struct srcsax_context * context, const xmlChar * ch, int len) {
 
-    characters_root_call_number = ++call_count;
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->characters_root_call_number = ++test_handler->call_count;
 
   }
 
   /**
-   * charactersUnit
+   * characters_unit
    * @param context a srcSAX context
    * @param ch the characers
    * @param len number of characters
@@ -277,9 +296,11 @@ public :
    * SAX handler function for character handling within a unit.
    * Overidden for testing.  Count calls made and order.
    */
-  static void charactersUnit(struct srcsax_context * context, const xmlChar * ch, int len) {
+  static void characters_unit(struct srcsax_context * context, const xmlChar * ch, int len) {
 
-    characters_unit_call_number = ++call_count;
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->characters_unit_call_number = ++test_handler->call_count;
 
   }
 
@@ -293,7 +314,9 @@ public :
    */
   static void comment(struct srcsax_context * context, const xmlChar * value) {
 
-    comment_call_number_ = ++call_count;
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->comment_call_number = ++test_handler->call_count;
 
   }
 
@@ -308,7 +331,9 @@ public :
    */
   static void cdata_block(struct srcsax_context * context, const xmlChar * value, int len) {
 
-    cdata_block_call_number = ++call_count;
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->cdata_block_call_number = ++test_handler->call_count;
 
   }
 
@@ -321,9 +346,11 @@ public :
    * Called when a pcdata block has been parsed.
    * Overidden for testing.  Count calls made and order.
    */
-  static void processing_instruction(struct srcsax_context * context, const xmlChar * value, int len) {
+  static void processing_instruction(struct srcsax_context * context, const xmlChar * target, const xmlChar * data) {
 
-    processing_instruction = ++call_count;
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->processing_instruction_call_number = ++test_handler->call_count;
 
   }
 
