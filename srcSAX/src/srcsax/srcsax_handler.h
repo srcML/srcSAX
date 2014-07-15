@@ -1,5 +1,5 @@
 /**
- * @file srcSAXHandler.hpp
+ * @file srcsax_handler.h
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *

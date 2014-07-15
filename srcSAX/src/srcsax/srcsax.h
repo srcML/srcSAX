@@ -1,5 +1,5 @@
 /**
- * @file srcSAXHandler.hpp
+ * @file srcsax.h
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
@@ -17,7 +17,6 @@
  * along with the srcML Toolkit; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
 #ifndef INCLUDED_SRCSAX_H
 #define INCLUDED_SRCSAX_H
 
@@ -38,7 +37,7 @@ struct srcsax_context {
     /** srcSAX handler callbacks */
     struct srcsax_handler * handler;
 
-    /** error callback need to figure this one out probably message and errorcode. or struct */
+    /** error callback need to figure this one out probably message and errorcode. or struct.  Might not need, but might be nice to avoid libxml2 stuff */
     void (*srcsax_error)(const char * message, int error_code);
 
     /** is the document an archive */
@@ -50,7 +49,7 @@ struct srcsax_context {
     /** the xml documents encoding */
     const char * encoding;
 
-    /* Internal context handling */
+    /* Internal context handling NOT FOR PUBLIC USE */
 
     /** xml parser input buffer */
     xmlParserInputBufferPtr input;
@@ -63,11 +62,17 @@ struct srcsax_context {
 
 };
 
-
+/* srcSAX context creation/open functions */
 struct srcsax_context * srcsax_create_context_filename(const char * filename, const char * encoding);
 struct srcsax_context * srcsax_create_context_libxml2(xmlParserInputBufferPtr input);
+
+/* srcSAX free function */
 void srcsax_free_context(struct srcsax_context * context);
+
+/* srcSAX parse function */
 int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handler);
+
+/* srcSAX terminate parse function */
 void srcsax_stop_parser(struct srcsax_context * context);
 
 
