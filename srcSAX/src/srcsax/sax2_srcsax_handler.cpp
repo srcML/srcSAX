@@ -108,7 +108,7 @@ void end_document(void * ctx) {
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
-    if(state->mode != END_ROOT)
+    if(state->mode != END_ROOT && state->mode != START)
         state->context->handler->end_root(state->context, state->root.localname, state->root.prefix, state->root.URI);
 
     state->context->handler->end_document(state->context);

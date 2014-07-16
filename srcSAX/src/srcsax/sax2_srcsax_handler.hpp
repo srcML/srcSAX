@@ -38,6 +38,7 @@
  */
 enum srcMLMode {
 
+    START,
     ROOT,
     UNIT,
     END_UNIT,
@@ -102,7 +103,7 @@ struct function_prototype {
 struct sax2_srcsax_handler {
 
     /** default constructor */
-    sax2_srcsax_handler() : context(0), root(), meta_tags(), is_archive(false), mode(ROOT), parse_function(false), in_function_header(false), current_function() {}
+    sax2_srcsax_handler() : context(0), root(), meta_tags(), is_archive(false), mode(START), parse_function(false), in_function_header(false), current_function() {}
 
     /** hooks for processing */
     srcsax_context * context;
