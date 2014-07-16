@@ -3,12 +3,12 @@
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
- * The srcML Toolkit is free software; you can redistribute it and/or modify
+ * srcSAX is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * The srcML Toolkit is distributed in the hope that it will be useful,
+ * srcSAX is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -67,7 +67,41 @@ public :
      * Constructor
      */
     srcSAXController(const char * filename, const char * encoding = 0);
-    srcSAXController(xmlParserInputBufferPtr input);
+
+    /**
+     * srcSAXController
+     * @param srcml_buffer a string buffer
+     *
+     * Constructor
+     */
+    srcSAXController(std::string srcml_buffer, const char * encoding);
+
+    /**
+     * srcSAXController
+     * @param srcml_file a FILE for a srcML document
+     *
+     * Constructor
+     */
+    srcSAXController(FILE * srcml_file, const char * encoding);
+
+    /**
+     * srcSAXController
+     * @param srcml_fd a file descriptor for a srcML document
+     *
+     * Constructor
+     */
+    srcSAXController(int srcml_fd, const char * encoding);
+
+
+    /**
+     * srcSAXController
+     * @param srcml_context a general context for a srcML document
+     * @param read_callback a read callback function
+     * @param close_callback a close callback function
+     *
+     * Constructor
+     */
+    srcSAXController(void * srcml_context, int (*read_callback)(void * context, char * buffer, int len), int (*close_callback)(void * context), const char * encoding);
 
     /**
      * getCtxt

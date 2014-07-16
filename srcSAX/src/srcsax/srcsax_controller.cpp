@@ -1,3 +1,22 @@
+/**
+ * @file srcsax_controller.cpp
+ *
+ * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
+ *
+ * srcSAX is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * srcSAX is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with the srcML Toolkit; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 #include <srcsax.h>
 #include <sax2_srcsax_handler.hpp>
 
@@ -5,7 +24,14 @@
 
 #include <cstring>
 
+/** 
+ * libxml_error
+ *
+ * Silence/catch/default libxml2 errors.
+ */
 static void libxml_error(void * /*ctx*/, const char * /*msg*/, ...) {}
+
+/* srcsax_create_parser_context forward declaration */
 static xmlParserCtxtPtr srcsax_create_parser_context(xmlParserInputBufferPtr buffer_input);
 
 #ifdef LIBXML2_NEW_BUFFER
@@ -56,7 +82,7 @@ _xmlBufResetInput(xmlBuf * buf, xmlParserInputPtr input) {
  *
  * Function is taken fro libxml2.
  *
- * @returns 0  on success and -1 on error.
+ * @returns 0 on success and -1 on error.
  */
 int
 _xmlBufResetInput(xmlBuffer * buf, xmlParserInputPtr input) {
@@ -87,58 +113,36 @@ static void srcsax_controller_init() {
 
 }
 
-struct srcsax_context * srcsax_create_context_filename(const char * filename, const char * encoding) {
-
-    srcsax_controller_init();
-
-    struct srcsax_context * context = (struct srcsax_context *)malloc(sizeof(struct srcsax_context));
-    context->pop_input = 1;
-
-    context->input =
-        xmlParserInputBufferCreateFilename(filename, encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
-
-    if(context->input == 0) {
-
-        free(context);
-        return 0;
-
-    }
-
-    xmlParserCtxtPtr libxml2_context = srcsax_create_parser_context(context->input);
-
-    if(libxml2_context == NULL) {
-
-        xmlFreeParserInputBuffer(context->input);
-        free(context);
-        return 0;
-
-    }
-
-    libxml2_context->_private = context;
-
-    context->libxml2_context = libxml2_context;
-
-    return context;
-
-}
-
-
-struct srcsax_context * srcsax_create_context_xml_parser_input_buffer(xmlParserInputBufferPtr input) {
+/**
+ * srcsax_create_context_inner
+ * @param input a libxml2 parser input buffer
+ *
+ * A helper function that creates the srcSAX context and does error handling.
+ * With a supplied xmlParserInputBufferPtr.
+ * 
+ * @returns srcsax_context context to be used for srcML parsing.
+ */
+static struct srcsax_context * srcsax_create_context_inner(xmlParserInputBufferPtr input) {
 
     if(input == 0) return 0;
 
-    srcsax_controller_init();
-
     struct srcsax_context * context = (struct srcsax_context *)malloc(sizeof(struct srcsax_context));
-    context->pop_input = 0;
 
+    if(context == 0) {
+
+        xmlFreeParserInputBuffer(input);
+        return 0;
+
+    }
+
+    memset(context, 0, sizeof(struct srcsax_context));
     context->input = input;
 
     xmlParserCtxtPtr libxml2_context = srcsax_create_parser_context(context->input);
 
     if(libxml2_context == NULL) {
 
-        xmlFreeParserInputBuffer(context->input);
+        xmlFreeParserInputBuffer(input);
         free(context);
         return 0;
 
@@ -152,25 +156,156 @@ struct srcsax_context * srcsax_create_context_xml_parser_input_buffer(xmlParserI
 
 }
 
+/**
+ * srcsax_create_context_filename
+ * @param filename a filename
+ * @param encoding the files character encoding
+ *
+ * Open the filename with the specified encoding and return a srcSAX context for parsing.
+ *
+ * @returns srcsax_context context to be used for srcML parsing.
+ */
+struct srcsax_context * srcsax_create_context_filename(const char * filename, const char * encoding) {
+
+    if(filename == 0) return 0;
+
+    srcsax_controller_init();
+
+    xmlParserInputBufferPtr input =
+        xmlParserInputBufferCreateFilename(filename, encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
+
+    return srcsax_create_context_inner(input);
+
+}
+
+/**
+ * srcsax_create_context_memory
+ * @param buffer a buffer of memory
+ * @param buffer_size the size of the buffer/amount of buffer to use
+ * @param encoding the files character encoding
+ *
+ * Create a srcsSAX context from the supplied buffer using the provided amount and encoding.
+ *
+ * @returns srcsax_context context to be used for srcML parsing.
+ */
+struct srcsax_context * srcsax_create_context_memory(const char * buffer, size_t buffer_size, const char * encoding) {
+
+    if(buffer == 0 || buffer_size == 0) return 0;
+
+    srcsax_controller_init();
+
+    xmlParserInputBufferPtr input =
+        xmlParserInputBufferCreateMem(buffer, buffer_size, encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
+
+    return srcsax_create_context_inner(input);
+
+}
+
+/**
+ * srcsax_create_context_FILE
+ * @param srcml_file an opened file containing srcML
+ * @param encoding the files character encoding
+ *
+ * Create a srcsSAX context from the supplied FILE using the provided encoding.
+ *
+ * @returns srcsax_context context to be used for srcML parsing.
+ */
+struct srcsax_context * srcsax_create_context_FILE(FILE * srcml_file, const char * encoding) {
+
+    if(srcml_file == 0) return 0;
+
+    srcsax_controller_init();
+
+    xmlParserInputBufferPtr input =
+        xmlParserInputBufferCreateFile(srcml_file, encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
+
+    return srcsax_create_context_inner(input);
+
+}
+
+/**
+ * srcsax_create_context_fd
+ * @param srcml_fd an opened file descriptor containing srcML
+ * @param encoding the files character encoding
+ *
+ * Create a srcsSAX context from the supplied file descriptor using the provided encoding.
+ *
+ * @returns srcsax_context context to be used for srcML parsing.
+ */
+struct srcsax_context * srcsax_create_context_fd(int srcml_fd, const char * encoding) {
+
+    if(srcml_fd < 0) return 0;
+
+    srcsax_controller_init();
+
+    xmlParserInputBufferPtr input =
+        xmlParserInputBufferCreateFd(srcml_fd, encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
+
+    return srcsax_create_context_inner(input);
+
+}
+
+/**
+ * srcsax_create_context_io
+ * @param srcml_context an opened context for opened srcML document
+ * @param read_callback a read callback function
+ * @close_callback a close callback function
+ * @param encoding the files character encoding
+ *
+ * Create a srcsSAX context from a general context and read/close callbacks with the specified encoding.
+ *
+ * @returns srcsax_context context to be used for srcML parsing.
+ */
+struct srcsax_context * srcsax_create_context_io(void * srcml_context, int (*read_callback)(void * context, char * buffer, int len), int (*close_callback)(void * context), const char * encoding) {
+
+    if(srcml_context == 0 || read_callback == 0) return 0;
+
+    srcsax_controller_init();
+
+    xmlParserInputBufferPtr input =
+        xmlParserInputBufferCreateIO(read_callback, close_callback, srcml_context, encoding ? xmlParseCharEncoding(encoding) : XML_CHAR_ENCODING_NONE);
+
+    return srcsax_create_context_inner(input);
+
+}
+
+/**
+ * srcsax_free_context
+ * @param context a srcSAX context
+ *
+ * Free the resources associated with a srcsax_context as created
+ * by a previous srcsax_create_context_*.
+ */
 void srcsax_free_context(struct srcsax_context * context) {
+
+    if(context == 0) return;
 
     xmlParserInputPtr stream = inputPop(context->libxml2_context);
     stream->buf = 0;
     xmlFreeInputStream(stream);
     if(context->libxml2_context) xmlFreeParserCtxt(context->libxml2_context);
-    if(context->pop_input) xmlFreeParserInputBuffer(context->input);
+    xmlFreeParserInputBuffer(context->input);
 
     free(context);
 
 }
 
-int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handler) {
+/**
+ * srcsax_parse
+ * @param context srcSAX context
+ *
+ * Parse the context using the provide sax handlers.
+ * On error calls the error callback function before returning.
+ *
+ * @returns 0 on success -1 on error.
+ */
+int srcsax_parse(struct srcsax_context * context) {
+
+    if(context == 0 || context->handler == 0) return -1;
 
     xmlSAXHandlerPtr save_sax = context->libxml2_context->sax;
     xmlSAXHandler sax = srcsax_sax2_factory();
     context->libxml2_context->sax = &sax;
-
-    context->handler = handler;
 
     sax2_srcsax_handler state;
     state.context = context;
@@ -193,6 +328,26 @@ int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handle
     }
 
     return status;
+
+}
+
+/**
+ * srcsax_parse
+ * @param context srcSAX context
+ * @param handler sax callback handlers
+ *
+ * Parse the context using the provide sax handlers.
+ * On error calls the error callback function before returning.
+ *
+ * @returns 0 on success -1 on error.
+ */
+int srcsax_parse_handler(struct srcsax_context * context, struct srcsax_handler * handler) {
+
+    if(context == 0) return -1;
+
+    context->handler = handler;
+
+    return srcsax_parse(context);
 
 }
 
@@ -238,6 +393,12 @@ srcsax_create_parser_context(xmlParserInputBufferPtr buffer_input) {
     return(ctxt);
 }
 
+/**
+ * srcsax_stop_parser
+ * @param context a srcSAX context
+ *
+ * Stop srcSAX parser.
+ */
 void srcsax_stop_parser(struct srcsax_context * context) {
 
     xmlParserCtxtPtr ctxt = context->libxml2_context;

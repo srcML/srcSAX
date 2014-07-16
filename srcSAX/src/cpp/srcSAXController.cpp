@@ -3,12 +3,12 @@
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
- * The srcML Toolkit is free software; you can redistribute it and/or modify
+ * srcSAX is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * The srcML Toolkit is distributed in the hope that it will be useful,
+ * srcSAX is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -44,16 +44,59 @@ srcSAXController::srcSAXController(const char * filename, const char * encoding)
 
 }
 
-
 /**
  * srcSAXController
- * @param input pointer to a parser input buffer
+ * @param srcml_buffer a string buffer
  *
  * Constructor
  */
-srcSAXController::srcSAXController(xmlParserInputBufferPtr input) {
+srcSAXController::srcSAXController(std::string srcml_buffer, const char * encoding) {
 
-    context = srcsax_create_context_xml_parser_input_buffer(input);
+    context = srcsax_create_context_memory(srcml_buffer.c_str(), srcml_buffer.size(), encoding);
+
+    if(context == NULL) throw std::string("File does not exist");
+
+}
+
+/**
+ * srcSAXController
+ * @param srcml_file a FILE for a srcML document
+ *
+ * Constructor
+ */
+srcSAXController::srcSAXController(FILE * srcml_file, const char * encoding) {
+
+    context = srcsax_create_context_FILE(srcml_file, encoding);
+
+    if(context == NULL) throw std::string("File does not exist");
+
+}
+
+/**
+ * srcSAXController
+ * @param srcml_fd a file descriptor for a srcML document
+ *
+ * Constructor
+ */
+srcSAXController::srcSAXController(int srcml_fd, const char * encoding) {
+
+    context = srcsax_create_context_fd(srcml_fd, encoding);
+
+    if(context == NULL) throw std::string("File does not exist");
+
+}
+
+/**
+ * srcSAXController
+ * @param srcml_context a general context for a srcML document
+ * @param read_callback a read callback function
+ * @param close_callback a close callback function
+ *
+ * Constructor
+ */
+srcSAXController::srcSAXController(void * srcml_context, int (*read_callback)(void * context, char * buffer, int len), int (*close_callback)(void * context), const char * encoding) {
+
+    context = srcsax_create_context_io(srcml_context, read_callback, close_callback, encoding);
 
     if(context == NULL) throw std::string("File does not exist");
 
@@ -217,8 +260,9 @@ void srcSAXController::parse(srcSAXHandler * handler) {
     cppCallbackAdapter adapter(handler);
     context->data = &adapter;
     srcsax_handler sax_handler = cppCallbackAdapter::factory();
+    context->handler = &sax_handler;
 
-    int status = srcsax_parse(context, &sax_handler);
+    int status = srcsax_parse(context);
 
     context->data = 0;
 
