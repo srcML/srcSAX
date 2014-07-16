@@ -3,12 +3,12 @@
  *
  * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
  *
- * The srcML Toolkit is free software; you can redistribute it and/or modify
+ * srcSAX is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * The srcML Toolkit is distributed in the hope that it will be useful,
+ * srcSAX is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -186,7 +186,7 @@ public :
     virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
                            int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
                            const xmlChar ** attributes) {}
-
+#if 0
     /**
      * startFunction
      * @param name the function's name
@@ -199,8 +199,8 @@ public :
      *
      * Overide for desired behaviour.
      */
-    //virtual void startFunction(const std::string & name, const std::string & return_type, const std::vector<declaration> & parameter_list, bool is_decl) {}
-
+    virtual void startFunction(const std::string & name, const std::string & return_type, const std::vector<declaration> & parameter_list, bool is_decl) {}
+#endif
     /**
      * startElementNs
      * @param localname the name of the element tag
@@ -240,15 +240,15 @@ public :
      * Overide for desired behaviour.
      */
     virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
-
+#if 0
     /**
      * endFunction
      *
      * SAX handler function for end of a function.
      * Overide for desired behaviour.
      */
-    //virtual void endFunction() {}
-
+    virtual void endFunction() {}
+#endif
     /**
      * endElementNs
      * @param localname the name of the element tag
