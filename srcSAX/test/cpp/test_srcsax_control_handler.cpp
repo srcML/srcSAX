@@ -50,45 +50,61 @@ int main() {
   {
     try {
 
-      srcSAXController control("foobar");
-      assert(false);
-    } catch(...) {}
-  }
+      srcSAXController control(std::string("foobar"));
 
-  {
-    try {
-
-      xmlParserInputBufferPtr buffer = xmlParserInputBufferCreateFilename(__FILE__, xmlParseCharEncoding(0));
-      srcSAXController control(buffer);
     } catch(...) { assert(false); }
   }
 
   {
     try {
 
-	srcSAXController control((xmlParserInputBufferPtr)NULL);
-      assert(false);
-    } catch(...) {}
+      srcSAXController control(std::string("foobar", "ISO-8859-1"));
+
+    } catch(...) { assert(false); }
   }
 
-  /*
-    getSAX
-   */
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-variable"
+  {
+    try {
+
+    srcSAXController control(__FILE__, "ISO-8859-1");
+
+    } catch(...) { assert(false); }
+  }
 
   {
+    try {
 
-    srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    FILE * file = fopen(__FILE__, "r");
+    srcSAXController control(file);
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    } catch(...) { assert(false); }
+  }
+
+  {
+    try {
+
+    FILE * file = fopen(__FILE__, "r");
+    srcSAXController control(file, "ISO-8859-1");
+
+    } catch(...) { assert(false); }
+  }
+
+  {
+    try {
+
+    int fd = open(__FILE__, O_RDONLY);
+    srcSAXController control(fd);
+
+    } catch(...) { assert(false); }
+  }
+
+  {
+    try {
+
+    int fd = open(__FILE__, O_RDONLY);
+    srcSAXController control(fd, "ISO-8859-1");
+
+    } catch(...) { assert(false); }
   }
 
   /*
