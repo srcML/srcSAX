@@ -279,6 +279,8 @@ struct srcsax_context * srcsax_create_context_io(void * srcml_context, int (*rea
  */
 void srcsax_free_context(struct srcsax_context * context) {
 
+    if(context == 0) return;
+
     xmlParserInputPtr stream = inputPop(context->libxml2_context);
     stream->buf = 0;
     xmlFreeInputStream(stream);

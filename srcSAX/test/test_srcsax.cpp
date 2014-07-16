@@ -43,6 +43,8 @@ int main() {
   assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
+  srcsax_free_context(context);
+
 }
 
 {
@@ -58,6 +60,8 @@ int main() {
   assert(context->input != 0);
   assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
+
+  srcsax_free_context(context);
 
 }
 
@@ -75,6 +79,8 @@ int main() {
   assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
+  srcsax_free_context(context);
+
 }
 
 {
@@ -87,7 +93,7 @@ int main() {
 
 {
 
-  srcsax_context * context = srcsax_create_context_filename("foobat", "UTF-8");
+  srcsax_context * context = srcsax_create_context_filename("foobar", "UTF-8");
 
   assert(context == 0);
 
@@ -100,6 +106,12 @@ int main() {
 /*
   srcsax_free_context
  */
+
+{
+
+  srcsax_free_context(0);
+
+}
 
 /*
   srcsax_parse
