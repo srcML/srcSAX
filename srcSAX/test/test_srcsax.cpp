@@ -208,6 +208,7 @@ int main() {
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
+  fclose(file);
 
 }
 
@@ -227,6 +228,7 @@ int main() {
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
+  fclose(file);
 
 }
 
@@ -246,12 +248,13 @@ int main() {
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
+  fclose(file);
 
 }
 
 {
 
-  FILE * file = fopen(__FILE__, "w");
+  FILE * file = fopen(__FILE__, "a");
   srcsax_context * context = srcsax_create_context_FILE(file, "UTF-8");
 
   assert(context->data == 0);
@@ -263,6 +266,8 @@ int main() {
   assert(context->input != 0);
   assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
+
+  fclose(file);
 
 }
 
