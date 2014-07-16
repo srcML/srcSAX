@@ -69,6 +69,41 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.start_document = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    start_document(&ctxt);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
 
   }
 
@@ -104,6 +139,7 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
 
   }
 
@@ -117,6 +153,76 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.mode = END_UNIT;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    end_document(&ctxt);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 2);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 1);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+
+  }
+  
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.end_document = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    end_document(&ctxt);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.end_root = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.mode = END_UNIT;
     sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
@@ -136,6 +242,42 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.end_document = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.mode = END_UNIT;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    end_document(&ctxt);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 1);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
 
   }
 
@@ -178,7 +320,42 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
     end_document(&ctxt);
+
+  }
+  
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.start_document = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    start_document(&ctxt);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
 
   }
 
@@ -222,6 +399,7 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
     end_document(&ctxt);
 
   }
@@ -263,6 +441,308 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 3);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+    end_document(&ctxt);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.start_root = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+
+    start_element_ns_first(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 2);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 1);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+    end_document(&ctxt);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.start_unit = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+
+    start_element_ns_first(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 1);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 2);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+    end_document(&ctxt);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.characters_root = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+
+    start_element_ns_first(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 1);
+    assert(test_handler.start_unit_call_number == 2);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+    end_document(&ctxt);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.start_root = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+
+    start_element_ns_first(&ctxt, (const xmlChar *)"name", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 1);
+    assert(test_handler.start_element_ns_call_number == 3);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 2);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+    end_document(&ctxt);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.start_unit = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+
+    start_element_ns_first(&ctxt, (const xmlChar *)"name", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 1);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 3);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 2);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+    end_document(&ctxt);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.characters_unit = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+
+    start_element_ns_first(&ctxt, (const xmlChar *)"name", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 1);
+    assert(test_handler.start_unit_call_number == 2);
+    assert(test_handler.start_element_ns_call_number == 3);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+    end_document(&ctxt);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.start_element_ns = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+
+    start_element_ns_first(&ctxt, (const xmlChar *)"name", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 1);
+    assert(test_handler.start_unit_call_number == 2);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 3);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
     end_document(&ctxt);
 
   }
@@ -307,6 +787,50 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+    end_document(&ctxt);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.start_unit = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+
+    start_unit(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
     end_document(&ctxt);
 
   }
@@ -351,9 +875,51 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
 
   }
 
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.start_element_ns = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    const char * namespaces[4] = { "src", "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * values = "abc";
+    const char * attributes[15] = { "filename", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "dir", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2,
+                                    "language", "src", "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+
+    start_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
+                   (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+                   (const xmlChar **) attributes);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+
+  }
 
   /*
     end_element_ns
@@ -372,6 +938,7 @@ sax2_srcsax_handler sax2_handler_init;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
+    sax.startElementNs = &start_unit;
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
@@ -381,13 +948,14 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.start_root_call_number == 0);
     assert(test_handler.start_unit_call_number == 0);
     assert(test_handler.start_element_ns_call_number == 0);
-    assert(test_handler.end_root_call_number == 0);
-    assert(test_handler.end_unit_call_number == 1);
+    assert(test_handler.end_root_call_number == 1);
+    assert(test_handler.end_unit_call_number == 0);
     assert(test_handler.end_element_ns_call_number == 0);
     assert(test_handler.characters_root_call_number == 0);
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
 
   }
 
@@ -421,6 +989,7 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
 
   }
 
@@ -454,6 +1023,113 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.end_root = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    sax.startElementNs = &start_unit;
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
+                 (const xmlChar *)"http://www.sdml.info/srcML/src");
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.end_unit = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
+                 (const xmlChar *)"http://www.sdml.info/srcML/src");
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.end_element_ns = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    end_element_ns(&ctxt, (const xmlChar *)"name", (const xmlChar *)"src",
+                 (const xmlChar *)"http://www.sdml.info/srcML/src");
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
 
   }
 
@@ -489,6 +1165,41 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.characters_root = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    characters_root(&ctxt, (const xmlChar *)"unit", 4);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
 
   }
 
@@ -524,6 +1235,41 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 1);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.characters_unit = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    characters_unit(&ctxt, (const xmlChar *)"unit", 4);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
 
   }
 
@@ -559,6 +1305,41 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 1);
     assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.comment = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    comment(&ctxt, (const xmlChar *)"unit");
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
 
   }
 
@@ -594,6 +1375,41 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 1);
+    assert(test_handler.processing_instruction_call_number == 0);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.cdata_block = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    cdata_block(&ctxt, (const xmlChar *)"unit", 4);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
 
   }
 
@@ -628,7 +1444,42 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_root_call_number == 0);
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
     assert(test_handler.processing_instruction_call_number == 1);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+    srcsax_sax.processing_instruction = 0;
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    processing_instruction(&ctxt, (const xmlChar *)"target", (const xmlChar *)"data");
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
 
   }
 
