@@ -381,8 +381,8 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.start_root_call_number == 0);
     assert(test_handler.start_unit_call_number == 0);
     assert(test_handler.start_element_ns_call_number == 0);
-    assert(test_handler.end_root_call_number == 1);
-    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 1);
     assert(test_handler.end_element_ns_call_number == 0);
     assert(test_handler.characters_root_call_number == 0);
     assert(test_handler.characters_unit_call_number == 0);
@@ -594,6 +594,41 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.characters_unit_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 1);
+
+  }
+
+  /*
+    processing_instruction
+  */
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    processing_instruction(&ctxt, (const xmlChar *)"target", (const xmlChar *)"data");
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 1);
 
   }
 
