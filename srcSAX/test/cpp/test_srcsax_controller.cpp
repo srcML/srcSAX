@@ -356,6 +356,190 @@ int main() {
   }
 
   /*
+    enable_startRoot
+   */
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler * sax = control.getContext()->handler;
+
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_startRoot(true);
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler * sax = control.getContext()->handler;
+
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_startRoot(false);
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_element_ns == 0);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler * sax = control.getContext()->handler;
+
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_startRoot(false);
+    control.enable_startRoot(true);
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  /*
+    enable_startUnit
+   */
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler * sax = control.getContext()->handler;
+
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_startUnit(true);
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler * sax = control.getContext()->handler;
+
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_startUnit(false);
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_element_ns == 0);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler * sax = control.getContext()->handler;
+
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_startUnit(false);
+    control.enable_startUnit(true);
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  /*
     enable_startElementNs
    */
   {
@@ -434,6 +618,194 @@ int main() {
     assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
     control.enable_startElementNs(false);
     control.enable_startElementNs(true);
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  /*
+    enable_endRoot
+   */
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler * sax = control.getContext()->handler;
+
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_endRoot(true);
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler * sax = control.getContext()->handler;
+
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_endRoot(false);
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == 0);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler * sax = control.getContext()->handler;
+
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_endRoot(false);
+    control.enable_endRoot(true);
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  /*
+    enable_endRoot
+   */
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler * sax = control.getContext()->handler;
+
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_endRoot(true);
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler * sax = control.getContext()->handler;
+
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_endRoot(false);
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == 0);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler * sax = control.getContext()->handler;
+
+    assert(sax->start_document == cppCallbackAdapter::start_document);
+    assert(sax->end_document == cppCallbackAdapter::end_document);
+    assert(sax->start_root == cppCallbackAdapter::start_root);
+    assert(sax->start_unit == cppCallbackAdapter::start_unit);
+    assert(sax->start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax->end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax->characters_root == cppCallbackAdapter::characters_root);
+    assert(sax->characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax->comment == cppCallbackAdapter::comment);
+    assert(sax->cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax->processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_endRoot(false);
+    control.enable_endRoot(true);
     assert(sax->start_document == cppCallbackAdapter::start_document);
     assert(sax->end_document == cppCallbackAdapter::end_document);
     assert(sax->start_root == cppCallbackAdapter::start_root);
