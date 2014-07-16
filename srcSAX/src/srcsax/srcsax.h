@@ -54,9 +54,6 @@ struct srcsax_context {
     /** xml parser input buffer */
     xmlParserInputBufferPtr input;
 
-    /** pop the xml input */
-    int pop_input;
-
     /** internally used libxml2 context */
     xmlParserCtxtPtr libxml2_context;
 

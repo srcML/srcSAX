@@ -79,7 +79,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -97,7 +96,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -115,7 +113,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -154,7 +151,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -174,7 +170,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -194,7 +189,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -236,7 +230,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -256,7 +249,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -276,7 +268,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -307,7 +298,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -327,7 +317,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -347,7 +336,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -378,7 +366,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -397,7 +384,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
@@ -416,7 +402,6 @@ int main() {
   assert(context->unit_count == 0);
   assert(context->encoding == 0);
   assert(context->input != 0);
-  assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
   srcsax_free_context(context);
