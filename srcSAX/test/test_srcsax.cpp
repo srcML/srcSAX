@@ -459,6 +459,21 @@ int main() {
   srcsax_handler_test data;
   srcsax_handler handler = srcsax_handler_test::factory();
 
+  const char * srcml_buffer = "<unit>";
+
+  srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
+  context->data = &data;
+  context->handler = &handler;
+
+  assert(srcsax_parse(context) == -1);
+
+}
+
+{
+
+  srcsax_handler_test data;
+  srcsax_handler handler = srcsax_handler_test::factory();
+
   const char * srcml_buffer = "<unit/>";
 
   srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
@@ -510,6 +525,20 @@ int main() {
   context->data = &data;
 
   assert(srcsax_parse_handler(context, &handler) == 0);
+
+}
+
+{
+
+  srcsax_handler_test data;
+  srcsax_handler handler = srcsax_handler_test::factory();
+
+  const char * srcml_buffer = "<unit>";
+
+  srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
+  context->data = &data;
+
+  assert(srcsax_parse_handler(context, &handler) == -1);
 
 }
 
