@@ -452,6 +452,8 @@ int main() {
 
   assert(srcsax_parse(context) == 0);
 
+  srcsax_free_context(context);
+
 }
 
 {
@@ -466,6 +468,8 @@ int main() {
   context->handler = &handler;
 
   assert(srcsax_parse(context) == -1);
+
+  srcsax_free_context(context);
 
 }
 
@@ -482,6 +486,8 @@ int main() {
 
   assert(srcsax_parse(0) == -1);
 
+  srcsax_free_context(context);
+
 }
 
 {
@@ -494,6 +500,8 @@ int main() {
   context->data = &data;
 
   assert(srcsax_parse(context) == -1);
+
+  srcsax_free_context(context);
 
 }
 
@@ -508,6 +516,8 @@ int main() {
   context->handler = 0;
 
   assert(srcsax_parse(context) == -1);
+
+  srcsax_free_context(context);
 
 }
 
@@ -526,6 +536,8 @@ int main() {
 
   assert(srcsax_parse_handler(context, &handler) == 0);
 
+  srcsax_free_context(context);
+
 }
 
 {
@@ -539,6 +551,8 @@ int main() {
   context->data = &data;
 
   assert(srcsax_parse_handler(context, &handler) == -1);
+
+  srcsax_free_context(context);
 
 }
 
@@ -554,6 +568,8 @@ int main() {
 
   assert(srcsax_parse_handler(0, &handler) == -1);
 
+  srcsax_free_context(context);
+
 }
 
 {
@@ -567,11 +583,29 @@ int main() {
 
   assert(srcsax_parse_handler(context, 0) == -1);
 
+  srcsax_free_context(context);
+
 }
 
  /*
   srcsax_stop_parse
  */
+{
+
+  srcsax_handler_test data;
+  srcsax_handler handler = srcsax_handler_test::factory();
+
+  const char * srcml_buffer = "<unit/>";
+
+  srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
+  context->data = &data;
+  context->handler = &handler;
+
+  srcsax_stop_parser(context);
+
+  srcsax_free_context(context);
+
+}
 
   return 0;
 
