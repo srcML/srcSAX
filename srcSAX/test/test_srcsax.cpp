@@ -21,6 +21,8 @@
 #include <srcsax.h>
 
 #include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <string.h>
 #include <cassert>
 
@@ -274,6 +276,96 @@ int main() {
 {
 
   srcsax_context * context = srcsax_create_context_FILE(0, "UTF-8");
+
+  assert(context == 0);
+
+}
+
+/*
+  srcsax_create_context_fd
+*/
+{
+
+  int fd = open(__FILE__, O_RDONLY);
+  srcsax_context * context = srcsax_create_context_fd(fd, "UTF-8");
+
+  assert(context->data == 0);
+  assert(context->handler == 0);
+  assert(context->srcsax_error == 0);
+  assert(context->is_archive == 0);
+  assert(context->unit_count == 0);
+  assert(context->encoding == 0);
+  assert(context->input != 0);
+  assert(context->pop_input != 0);
+  assert(context->libxml2_context != 0);
+
+  srcsax_free_context(context);
+  close(fd);
+
+}
+
+{
+
+  int fd = open(__FILE__, O_RDONLY);
+  srcsax_context * context = srcsax_create_context_fd(fd, "ISO-8859-1");
+
+  assert(context->data == 0);
+  assert(context->handler == 0);
+  assert(context->srcsax_error == 0);
+  assert(context->is_archive == 0);
+  assert(context->unit_count == 0);
+  assert(context->encoding == 0);
+  assert(context->input != 0);
+  assert(context->pop_input != 0);
+  assert(context->libxml2_context != 0);
+
+  srcsax_free_context(context);
+  close(fd);
+
+}
+
+{
+
+  int fd = open(__FILE__, O_RDONLY);
+  srcsax_context * context = srcsax_create_context_fd(fd, 0);
+
+  assert(context->data == 0);
+  assert(context->handler == 0);
+  assert(context->srcsax_error == 0);
+  assert(context->is_archive == 0);
+  assert(context->unit_count == 0);
+  assert(context->encoding == 0);
+  assert(context->input != 0);
+  assert(context->pop_input != 0);
+  assert(context->libxml2_context != 0);
+
+  srcsax_free_context(context);
+  close(fd);
+
+}
+
+{
+
+  int fd = open(__FILE__, O_WRONLY | O_APPEND);
+  srcsax_context * context = srcsax_create_context_fd(fd, "UTF-8");
+
+  assert(context->data == 0);
+  assert(context->handler == 0);
+  assert(context->srcsax_error == 0);
+  assert(context->is_archive == 0);
+  assert(context->unit_count == 0);
+  assert(context->encoding == 0);
+  assert(context->input != 0);
+  assert(context->pop_input != 0);
+  assert(context->libxml2_context != 0);
+
+  close(fd);
+
+}
+
+{
+
+  srcsax_context * context = srcsax_create_context_fd(-1, "UTF-8");
 
   assert(context == 0);
 
