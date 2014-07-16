@@ -81,7 +81,8 @@ void start_document(void * ctx) {
         state->context->encoding = (const char *)ctxt->input->encoding;
 
     //    state->context->init(ctxt);
-    state->context->handler->start_document(state->context);
+    if(state->context->handler->start_document)
+        state->context->handler->start_document(state->context);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -108,10 +109,11 @@ void end_document(void * ctx) {
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
-    if(state->mode != END_ROOT)
+    if(state->mode != END_ROOT && state->mode != START && state->context->handler->end_root)
         state->context->handler->end_root(state->context, state->root.localname, state->root.prefix, state->root.URI);
 
-    state->context->handler->end_document(state->context);
+    if(state->context->handler->end_document)
+        state->context->handler->end_document(state->context);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -208,32 +210,39 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
     state->is_archive = strcmp((const char *)localname, "unit") == 0;
     state->context->is_archive = state->is_archive;
 
-    state->context->handler->start_root(state->context, state->root.localname, state->root.prefix, state->root.URI,
-                              state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
-                              state->root.nb_defaulted, state->root.attributes, state->meta_tags.size(), &state->meta_tags.front());
+    if(state->context->handler->start_root)
+        state->context->handler->start_root(state->context, state->root.localname, state->root.prefix, state->root.URI,
+                                            state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
+                                            state->root.nb_defaulted, state->root.attributes, state->meta_tags.size(), &state->meta_tags.front());
 
     if(!state->is_archive) {
 
         ++state->context->unit_count;
 
         state->mode = UNIT;
-        state->context->handler->start_unit(state->context, state->root.localname, state->root.prefix, state->root.URI,
-                                  state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
-                                  state->root.nb_defaulted, state->root.attributes);
-        state->context->handler->characters_unit(state->context, (const xmlChar *)state->characters.c_str(), (int)state->characters.size());
-        state->context->handler->start_element_ns(state->context, localname, prefix, URI,
-                                       nb_namespaces, namespaces, nb_attributes,
-                                       nb_defaulted, attributes);
+        if(state->context->handler->start_unit)
+            state->context->handler->start_unit(state->context, state->root.localname, state->root.prefix, state->root.URI,
+                                                state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
+                                                state->root.nb_defaulted, state->root.attributes);
+        if(state->context->handler->characters_unit)
+            state->context->handler->characters_unit(state->context, (const xmlChar *)state->characters.c_str(), (int)state->characters.size());
+        if(state->context->handler->start_element_ns)
+            state->context->handler->start_element_ns(state->context, localname, prefix, URI,
+                                                      nb_namespaces, namespaces, nb_attributes,
+                                                      nb_defaulted, attributes);
     } else {
 
-        state->context->handler->characters_root(state->context, (const xmlChar *)state->characters.c_str(), (int)state->characters.size());
+        
+        if(state->context->handler->characters_root)
+            state->context->handler->characters_root(state->context, (const xmlChar *)state->characters.c_str(), (int)state->characters.size());
 
         ++state->context->unit_count;
 
         state->mode = UNIT;
-        state->context->handler->start_unit(state->context, localname, prefix, URI,
-                                  nb_namespaces, namespaces, nb_attributes,
-                                  nb_defaulted, attributes);
+        if(state->context->handler->start_unit)
+            state->context->handler->start_unit(state->context, localname, prefix, URI,
+                                                nb_namespaces, namespaces, nb_attributes,
+                                                nb_defaulted, attributes);
 
 
     }
@@ -293,7 +302,9 @@ void start_unit(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
 
     state->mode = UNIT;
 
-    state->context->handler->start_unit(state->context, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+
+    if(state->context->handler->start_unit)
+        state->context->handler->start_unit(state->context, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
     if(ctxt->sax->startElementNs) ctxt->sax->startElementNs = &start_element_ns;
     if(ctxt->sax->characters) {
@@ -353,7 +364,8 @@ void start_element_ns(void * ctx, const xmlChar * localname, const xmlChar * pre
 
     } else if(!state->in_function_header) {
 
-        state->context->handler->start_element_ns(state->context, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+        if(state->context->handler->start_element_ns)
+            state->context->handler->start_element_ns(state->context, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
     } else {
 
@@ -418,15 +430,19 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
             state->is_archive = false;
             state->context->is_archive = state->is_archive;
 
-            state->context->handler->start_root(state->context, state->root.localname, state->root.prefix, state->root.URI,
-                                      state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
-                                      state->root.nb_defaulted, state->root.attributes, state->meta_tags.size(), &state->meta_tags.front());
+            
+            if(state->context->handler->start_root)
+                state->context->handler->start_root(state->context, state->root.localname, state->root.prefix, state->root.URI,
+                                                    state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
+                                                    state->root.nb_defaulted, state->root.attributes, state->meta_tags.size(), &state->meta_tags.front());
 
-            state->context->handler->start_unit(state->context, state->root.localname, state->root.prefix, state->root.URI,
-                                      state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
-                                      state->root.nb_defaulted, state->root.attributes);
 
-            if(state->characters.size() != 0)
+            if(state->context->handler->start_unit)
+                state->context->handler->start_unit(state->context, state->root.localname, state->root.prefix, state->root.URI,
+                                                    state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
+                                                    state->root.nb_defaulted, state->root.attributes);
+
+            if(state->characters.size() != 0 && state->context->handler->characters_unit)
                 state->context->handler->characters_unit(state->context, (const xmlChar *)state->characters.c_str(), (int)state->characters.size());
 
         }
@@ -434,12 +450,14 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
         if(ctxt->sax->startElementNs == &start_unit) {
 
             state->mode = END_ROOT;
-            state->context->handler->end_root(state->context, localname, prefix, URI);
+            if(state->context->handler->end_root)
+                state->context->handler->end_root(state->context, localname, prefix, URI);
 
         } else {
 
             state->mode = END_UNIT;
-            state->context->handler->end_unit(state->context, localname, prefix, URI);
+            if(state->context->handler->end_unit)
+                state->context->handler->end_unit(state->context, localname, prefix, URI);
             if(ctxt->sax->startElementNs) ctxt->sax->startElementNs = &start_unit;
             if(ctxt->sax->characters) {
 
@@ -457,7 +475,8 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
 
         } else if(!state->in_function_header) {
 
-            state->context->handler->end_element_ns(state->context, localname, prefix, URI);
+            if(state->context->handler->end_element_ns)
+                state->context->handler->end_element_ns(state->context, localname, prefix, URI);
 
         } else {
 
@@ -545,7 +564,8 @@ void characters_root(void * ctx, const xmlChar * ch, int len) {
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
-    state->context->handler->characters_root(state->context, ch, len);
+    if(state->context->handler->characters_root)
+        state->context->handler->characters_root(state->context, ch, len);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, chars.c_str());
@@ -576,10 +596,12 @@ void characters_unit(void * ctx, const xmlChar * ch, int len) {
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
 
-    if(!state->in_function_header)
-        state->context->handler->characters_unit(state->context, ch, len);
+    if(!state->in_function_header) {
 
-    else {
+        if(state->context->handler->characters_unit)
+            state->context->handler->characters_unit(state->context, ch, len);
+
+    } else {
 
         if(state->current_function.mode == function_prototype::RETURN_TYPE)
             state->current_function.return_type.append((const char *)ch, len);
@@ -621,7 +643,8 @@ void comment(void * ctx, const xmlChar * value) {
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
-    state->context->handler->comment(state->context, value);
+    if(state->context->handler->comment)
+        state->context->handler->comment(state->context, value);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -649,7 +672,8 @@ void cdata_block(void * ctx, const xmlChar * value, int len) {
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
-    state->context->handler->cdata_block(state->context, value, len);
+    if(state->context->handler->cdata_block)
+        state->context->handler->cdata_block(state->context, value, len);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -677,7 +701,8 @@ void processing_instruction(void * ctx, const xmlChar * target, const xmlChar * 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
-    state->context->handler->processing_instruction(state->context, target, data);
+    if(state->context->handler->processing_instruction)
+        state->context->handler->processing_instruction(state->context, target, data);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);

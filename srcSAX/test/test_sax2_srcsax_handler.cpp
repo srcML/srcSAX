@@ -27,9 +27,16 @@
 #include <string.h>
 #include <cassert>
 
+/* default initialization used throughout for testing */
 sax2_srcsax_handler sax2_handler_init;
 
-
+/**
+ * main
+ *
+ * Test the sax2_srcsax_handler.
+ *
+ * @returns 0 on success.
+ */
 int main() {
 
   /*

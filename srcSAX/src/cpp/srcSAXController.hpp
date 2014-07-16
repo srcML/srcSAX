@@ -74,7 +74,7 @@ public :
      *
      * Constructor
      */
-    srcSAXController(std::string srcml_buffer, const char * encoding);
+    srcSAXController(std::string srcml_buffer, const char * encoding = 0);
 
     /**
      * srcSAXController
@@ -82,7 +82,7 @@ public :
      *
      * Constructor
      */
-    srcSAXController(FILE * srcml_file, const char * encoding);
+    srcSAXController(FILE * srcml_file, const char * encoding = 0);
 
     /**
      * srcSAXController
@@ -90,7 +90,7 @@ public :
      *
      * Constructor
      */
-    srcSAXController(int srcml_fd, const char * encoding);
+    srcSAXController(int srcml_fd, const char * encoding = 0);
 
 
     /**
@@ -101,7 +101,7 @@ public :
      *
      * Constructor
      */
-    srcSAXController(void * srcml_context, int (*read_callback)(void * context, char * buffer, int len), int (*close_callback)(void * context), const char * encoding);
+    srcSAXController(void * srcml_context, int (*read_callback)(void * context, char * buffer, int len), int (*close_callback)(void * context), const char * encoding = 0);
 
     /**
      * getCtxt
@@ -135,12 +135,45 @@ public :
     void enable_endDocument(bool enable);
 
     /**
+     * enable_startRoot
+     * @param enable bool indicate enable or disable SAX parsing.
+     *
+     * Enables or disables startRoot parsing.
+     */
+    void enable_startRoot(bool enable);
+
+    /**
+     * enable_startUnit
+     * @param enable bool indicate enable or disable SAX parsing.
+     *
+     * Enables or disables startUnit parsing.
+     */
+    void enable_startUnit(bool enable);
+
+    /**
      * enable_startElementNs
      * @param enable bool indicate enable or disable SAX parsing.
      *
      * Enables or disables startElementNs parsing.
      */
     void enable_startElementNs(bool enable);
+
+    /**
+     * enable_endRoot
+     * @param enable bool indicate enable or disable SAX parsing.
+     *
+     * Enables or disables endRoot parsing.
+     */
+    void enable_endRoot(bool enable);
+
+    /**
+     * enable_endUnit
+     * @param enable bool indicate enable or disable SAX parsing.
+     *
+     * Enables or disables endUnit parsing.
+     */
+    void enable_endUnit(bool enable);
+
 
     /**
      * enable_endElementNs
@@ -151,12 +184,20 @@ public :
     void enable_endElementNs(bool enable);
 
     /**
-     * enable_characters
+     * enable_charactersRoot
      * @param enable bool indicate enable or disable SAX parsing.
      *
-     * Enables or disables characters parsing.
+     * Enables or disables charactersRoot parsing.
      */
-    void enable_characters(bool enable);
+    void enable_charactersRoot(bool enable);
+
+    /**
+     * enable_charactersUnit
+     * @param enable bool indicate enable or disable SAX parsing.
+     *
+     * Enables or disables charactersUnit parsing.
+     */
+    void enable_charactersUnit(bool enable);
 
     /**
      * enable_comment
