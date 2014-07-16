@@ -74,7 +74,7 @@ public :
      *
      * Constructor
      */
-    srcSAXController(std::string srcml_buffer, const char * encoding);
+    srcSAXController(std::string srcml_buffer, const char * encoding = 0);
 
     /**
      * srcSAXController
@@ -82,7 +82,7 @@ public :
      *
      * Constructor
      */
-    srcSAXController(FILE * srcml_file, const char * encoding);
+    srcSAXController(FILE * srcml_file, const char * encoding = 0);
 
     /**
      * srcSAXController
@@ -90,7 +90,7 @@ public :
      *
      * Constructor
      */
-    srcSAXController(int srcml_fd, const char * encoding);
+    srcSAXController(int srcml_fd, const char * encoding = 0);
 
 
     /**
@@ -101,7 +101,7 @@ public :
      *
      * Constructor
      */
-    srcSAXController(void * srcml_context, int (*read_callback)(void * context, char * buffer, int len), int (*close_callback)(void * context), const char * encoding);
+    srcSAXController(void * srcml_context, int (*read_callback)(void * context, char * buffer, int len), int (*close_callback)(void * context), const char * encoding = 0);
 
     /**
      * getCtxt

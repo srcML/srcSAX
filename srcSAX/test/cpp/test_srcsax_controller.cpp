@@ -22,10 +22,49 @@
 #include <srcSAXHandler.hpp>
 
 #include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
 #include <iostream>
 #include <string.h>
 #include <cassert>
 
+/**
+ * read_callback
+ * @param context the context to read from
+ * @param buffer the buffer to read into
+ * @param len the number of bytes to read
+ *
+ * FILE read callback for testing io.
+ *
+ * @returns the number of bytes read.
+ */
+int read_callback(void * context, char * buffer, int len) {
+
+    return (int)fread(buffer, 1, len, (FILE *)context);
+
+}
+
+/**
+ * close_callback
+ * @param context the context to read from
+ *
+ * FILE close callback for testing io.
+ *
+ * @returns 0 on success EOF otherwise.
+ */
+int close_callback(void * context) {
+
+    return fclose((FILE *)context);
+
+}
+
+/**
+ * main
+ *
+ * Test the srcsax functions.
+ *
+ * @returns 0 on success.
+ */
 int main() {
 
   /*
@@ -103,6 +142,24 @@ int main() {
 
     int fd = open(__FILE__, O_RDONLY);
     srcSAXController control(fd, "ISO-8859-1");
+
+    } catch(...) { assert(false); }
+  }
+
+  {
+    try {
+
+    FILE * file = fopen(__FILE__, "r");
+    srcSAXController control((void *)file, read_callback, close_callback);
+
+    } catch(...) { assert(false); }
+  }
+
+  {
+    try {
+
+    FILE * file = fopen(__FILE__, "r");
+    srcSAXController control((void *)file, read_callback, close_callback, "ISO-8859-1");
 
     } catch(...) { assert(false); }
   }
