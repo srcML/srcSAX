@@ -118,6 +118,14 @@ struct srcsax_context * srcsax_create_context_inner(xmlParserInputBufferPtr inpu
     if(input == 0) return 0;
 
     struct srcsax_context * context = (struct srcsax_context *)malloc(sizeof(struct srcsax_context));
+
+    if(context == 0) {
+
+        xmlFreeParserInputBuffer(context->input);
+        return 0;
+
+    }
+
     memset(context, 0, sizeof(struct srcsax_context));
     context->pop_input = 1;
 
