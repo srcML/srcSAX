@@ -184,20 +184,20 @@ public :
     void enable_endElementNs(bool enable);
 
     /**
-     * enable_characters_root
+     * enable_charactersRoot
      * @param enable bool indicate enable or disable SAX parsing.
      *
-     * Enables or disables characters_root parsing.
+     * Enables or disables charactersRoot parsing.
      */
-    void enable_characters_root(bool enable);
+    void enable_charactersRoot(bool enable);
 
     /**
-     * enable_characters_unit
+     * enable_charactersUnit
      * @param enable bool indicate enable or disable SAX parsing.
      *
-     * Enables or disables characters_unit parsing.
+     * Enables or disables charactersUnit parsing.
      */
-    void enable_characters_unit(bool enable);
+    void enable_charactersUnit(bool enable);
 
     /**
      * enable_comment

@@ -132,8 +132,8 @@ srcsax_context * srcSAXController::getContext() {
  */
 void srcSAXController::enable_startDocument(bool enable) {
 
-    if(enable) context->libxml2_context->sax->startDocument = start_document;
-    else context->libxml2_context->sax->startDocument = 0;
+    if(enable) context->handler->start_document = cppCallbackAdapter::start_document;
+    else context->handler->start_document = 0;
 
 }
 
@@ -145,8 +145,34 @@ void srcSAXController::enable_startDocument(bool enable) {
  */
 void srcSAXController::enable_endDocument(bool enable) {
 
-    if(enable) context->libxml2_context->sax->endDocument = end_document;
-    else context->libxml2_context->sax->endDocument = 0;
+    if(enable) context->handler->end_document = cppCallbackAdapter::end_document;
+    else context->handler->end_document = 0;
+
+}
+
+/**
+ * enable_startRoot
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables startRoot parsing.
+ */
+void srcSAXController::enable_startRoot(bool enable) {
+
+    if(enable) context->handler->start_element_ns = cppCallbackAdapter::start_root;
+    else context->handler->start_element_ns = 0;
+
+}
+
+/**
+ * enable_startUnit
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables startUnit parsing.
+ */
+void srcSAXController::enable_startUnit(bool enable) {
+
+    if(enable) context->handler->start_element_ns = cppCallbackAdapter::start_unit;
+    else context->handler->start_element_ns = 0;
 
 }
 
@@ -158,8 +184,34 @@ void srcSAXController::enable_endDocument(bool enable) {
  */
 void srcSAXController::enable_startElementNs(bool enable) {
 
-    if(enable) context->libxml2_context->sax->startElementNs = start_root;
-    else context->libxml2_context->sax->startElementNs = 0;
+    if(enable) context->handler->start_element_ns = cppCallbackAdapter::start_element_ns;
+    else context->handler->start_element_ns = 0;
+
+}
+
+/**
+ * enable_endRoot
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables endRoot parsing.
+ */
+void srcSAXController::enable_endRoot(bool enable) {
+
+    if(enable) context->handler->end_element_ns = cppCallbackAdapter::end_root;
+    else context->handler->end_element_ns = 0;
+
+}
+
+/**
+ * enable_endUnit
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables endUnit parsing.
+ */
+void srcSAXController::enable_endUnit(bool enable) {
+
+    if(enable) context->handler->end_element_ns = cppCallbackAdapter::end_unit;
+    else context->handler->end_element_ns = 0;
 
 }
 
@@ -171,28 +223,47 @@ void srcSAXController::enable_startElementNs(bool enable) {
  */
 void srcSAXController::enable_endElementNs(bool enable) {
 
-    if(enable) context->libxml2_context->sax->endElementNs = end_element_ns;
-    else context->libxml2_context->sax->endElementNs = 0;
+    if(enable) context->handler->end_element_ns = cppCallbackAdapter::end_element_ns;
+    else context->handler->end_element_ns = 0;
 
 }
 
 /**
- * enable_characters
+ * enable_charactersRoot
  * @param enable bool indicate enable or disable SAX parsing.
  *
- * Enables or disables characters parsing.
+ * Enables or disables charactersRoot parsing.
  */
-void srcSAXController::enable_characters(bool enable) {
+void srcSAXController::enable_charactersRoot(bool enable) {
 
     if(enable) {
 
-        context->libxml2_context->sax->characters = characters_first;
-        context->libxml2_context->sax->ignorableWhitespace = characters_first;
+        context->handler->characters_unit = cppCallbackAdapter::characters_root;
 
     } else {
 
-        context->libxml2_context->sax->characters = 0;
-        context->libxml2_context->sax->ignorableWhitespace = 0;
+        context->handler->characters_unit = 0;
+
+    }
+
+}
+}
+
+/**
+ * enable_charactersUnit
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables charactersUnit parsing.
+ */
+void srcSAXController::enable_charactersUnit(bool enable) {
+
+    if(enable) {
+
+        context->handler->characters_unit = cppCallbackAdapter::characters_unit;
+
+    } else {
+
+        context->handler->characters_unit = 0;
 
     }
 
@@ -206,8 +277,8 @@ void srcSAXController::enable_characters(bool enable) {
  */
 void srcSAXController::enable_comment(bool enable) {
 
-    if(enable) context->libxml2_context->sax->comment = comment;
-    else context->libxml2_context->sax->comment = 0;
+    if(enable) context->handler->comment = cppCallbackAdapter::comment;
+    else context->handler->comment = 0;
 
 }
 
@@ -219,8 +290,8 @@ void srcSAXController::enable_comment(bool enable) {
  */
 void srcSAXController::enable_cdataBlock(bool enable) {
 
-    if(enable) context->libxml2_context->sax->cdataBlock = cdata_block;
-    else context->libxml2_context->sax->cdataBlock = 0;
+    if(enable) context->handler->cdata_block = cppCallbackAdapter::cdata_block;
+    else context->handler->cdata_block = 0;
 
 }
 
@@ -232,8 +303,8 @@ void srcSAXController::enable_cdataBlock(bool enable) {
  */
 void srcSAXController::enable_processingInstruction(bool enable) {
 
-    if(enable) context->libxml2_context->sax->processingInstruction = processing_instruction;
-    else context->libxml2_context->sax->processingInstruction = 0;
+    if(enable) context->handler->processing_instruction = cppCallbackAdapter::processing_instruction;
+    else context->handler->processing_instruction = 0;
 
 }
 
