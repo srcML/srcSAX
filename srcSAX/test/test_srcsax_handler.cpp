@@ -50,25 +50,25 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     start_document(&ctxt);
-    assert(test_test_handler.start_document_call_number == 1);
-    assert(test_test_handler.end_document_call_number == 0);
-    assert(test_test_handler.start_root_call_number == 0);
-    assert(test_test_handler.start_unit_call_number == 0);
-    assert(test_test_handler.start_element_ns_call_number == 0);
-    assert(test_test_handler.end_root_call_number == 0);
-    assert(test_test_handler.end_unit_call_number == 0);
-    assert(test_test_handler.end_element_ns_call_number == 0);
-    assert(test_test_handler.characters_root_call_number == 0);
-    assert(test_test_handler.characters_unit_call_number == 0);
-    assert(test_test_handler.comment_call_number == 0);
-    assert(test_test_handler.cdata_block_call_number == 0);
+    assert(test_handler.start_document_call_number == 1);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
 
   }
 
@@ -85,7 +85,7 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
@@ -117,7 +117,7 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
@@ -152,7 +152,7 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
@@ -195,7 +195,7 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
@@ -236,7 +236,7 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
@@ -280,7 +280,7 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
@@ -324,7 +324,7 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
@@ -360,14 +360,19 @@ sax2_srcsax_handler sax2_handler_init;
   */
   {
 
-    srcSAXHandlerTest handler;
-    SAX2srcSAXHandler sax2_handler;
-    sax2_test_handler.process = &handler;
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
-    xmlSAXHandler sax = factory();
+    xmlSAXHandler sax = srcsax_sax2_factory();
     ctxt.sax = &sax;
-    sax.start_element_ns = start_unit;
     ctxt._private = &sax2_handler;
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
                  (const xmlChar *)"http://www.sdml.info/srcML/src");
@@ -396,7 +401,7 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
@@ -429,7 +434,7 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
@@ -465,7 +470,7 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
@@ -500,7 +505,7 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
@@ -535,7 +540,7 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
@@ -570,7 +575,7 @@ sax2_srcsax_handler sax2_handler_init;
     context.handler = &srcsax_sax;
 
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
-    sax2_test_handler.context = &context;
+    sax2_handler.context = &context;
 
     xmlParserCtxt ctxt;
     xmlSAXHandler sax = srcsax_sax2_factory();
