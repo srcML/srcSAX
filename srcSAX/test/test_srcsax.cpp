@@ -27,6 +27,36 @@
 #include <cassert>
 
 /**
+ * read_callback
+ * @param context the context to read from
+ * @param buffer the buffer to read into
+ * @param len the number of bytes to read
+ *
+ * FILE read callback for testing io.
+ *
+ * @returns the number of bytes read.
+ */
+int read_callback(void * context, char * buffer, int len) {
+
+    return (int)fread(buffer, 1, len, (FILE *)context);
+
+}
+
+/**
+ * close_callback
+ * @param context the context to read from
+ *
+ * FILE close callback for testing io.
+ *
+ * @returns 0 on success EOF otherwise.
+ */
+int close_callback(void * context) {
+
+    return fclose((FILE *)context);
+
+}
+
+/**
  * main
  *
  * Test the srcsax functions.
@@ -256,25 +286,6 @@ int main() {
 
 {
 
-  FILE * file = fopen(__FILE__, "a");
-  srcsax_context * context = srcsax_create_context_FILE(file, "UTF-8");
-
-  assert(context->data == 0);
-  assert(context->handler == 0);
-  assert(context->srcsax_error == 0);
-  assert(context->is_archive == 0);
-  assert(context->unit_count == 0);
-  assert(context->encoding == 0);
-  assert(context->input != 0);
-  assert(context->pop_input != 0);
-  assert(context->libxml2_context != 0);
-
-  fclose(file);
-
-}
-
-{
-
   srcsax_context * context = srcsax_create_context_FILE(0, "UTF-8");
 
   assert(context == 0);
@@ -346,8 +357,19 @@ int main() {
 
 {
 
-  int fd = open(__FILE__, O_WRONLY | O_APPEND);
-  srcsax_context * context = srcsax_create_context_fd(fd, "UTF-8");
+  srcsax_context * context = srcsax_create_context_fd(-1, "UTF-8");
+
+  assert(context == 0);
+
+}
+
+/*
+  srcsax_create_context_io
+*/
+{
+
+  FILE * file = fopen(__FILE__, "r");
+  srcsax_context * context = srcsax_create_context_io((void *)file, read_callback, close_callback, "UTF-8");
 
   assert(context->data == 0);
   assert(context->handler == 0);
@@ -359,13 +381,60 @@ int main() {
   assert(context->pop_input != 0);
   assert(context->libxml2_context != 0);
 
-  close(fd);
+  srcsax_free_context(context);
 
 }
 
 {
 
-  srcsax_context * context = srcsax_create_context_fd(-1, "UTF-8");
+  FILE * file = fopen(__FILE__, "r");
+  srcsax_context * context = srcsax_create_context_io((void *)file, read_callback, close_callback, "ISO-8859-1");
+
+  assert(context->data == 0);
+  assert(context->handler == 0);
+  assert(context->srcsax_error == 0);
+  assert(context->is_archive == 0);
+  assert(context->unit_count == 0);
+  assert(context->encoding == 0);
+  assert(context->input != 0);
+  assert(context->pop_input != 0);
+  assert(context->libxml2_context != 0);
+
+  srcsax_free_context(context);
+
+}
+
+{
+
+  FILE * file = fopen(__FILE__, "r");
+  srcsax_context * context = srcsax_create_context_io((void *)file, read_callback, close_callback, 0);
+
+  assert(context->data == 0);
+  assert(context->handler == 0);
+  assert(context->srcsax_error == 0);
+  assert(context->is_archive == 0);
+  assert(context->unit_count == 0);
+  assert(context->encoding == 0);
+  assert(context->input != 0);
+  assert(context->pop_input != 0);
+  assert(context->libxml2_context != 0);
+
+  srcsax_free_context(context);
+
+}
+
+{
+
+  FILE * file = fopen(__FILE__, "r");
+  srcsax_context * context = srcsax_create_context_io((void *)file, 0, close_callback, "UTF-8");
+
+  assert(context == 0);
+
+}
+
+{
+
+  srcsax_context * context = srcsax_create_context_io(0, read_callback, close_callback, "UTF-8");
 
   assert(context == 0);
 
