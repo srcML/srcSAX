@@ -113,6 +113,15 @@ static void srcsax_controller_init() {
 
 }
 
+/**
+ * srcsax_create_context_inner
+ * @param input a libxml2 parser input buffer
+ *
+ * A helper function that creates the srcSAX context and does error handling.
+ * With a supplied xmlParserInputBufferPtr.
+ * 
+ * @returns srcsax_context context to be used for srcML parsing.
+ */
 struct srcsax_context * srcsax_create_context_inner(xmlParserInputBufferPtr input) {
 
     if(input == 0) return 0;
