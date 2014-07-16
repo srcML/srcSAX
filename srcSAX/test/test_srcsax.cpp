@@ -448,8 +448,68 @@ int main() {
 
   srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
   context->data = &data;
+  context->handler = &handler;
 
-  assert(srcsax_parse(context, &handler) == 0);
+  assert(srcsax_parse(context) == 0);
+
+}
+
+{
+
+  srcsax_handler_test data;
+  srcsax_handler handler = srcsax_handler_test::factory();
+
+  const char * srcml_buffer = "<unit/>";
+
+  srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
+  context->data = &data;
+  context->handler = &handler;
+
+  assert(srcsax_parse(0) == -1);
+
+}
+
+{
+
+  srcsax_handler_test data;
+
+  const char * srcml_buffer = "<unit/>";
+
+  srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
+  context->data = &data;
+
+  assert(srcsax_parse(context) == -1);
+
+}
+
+{
+
+  srcsax_handler_test data;
+
+  const char * srcml_buffer = "<unit/>";
+
+  srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
+  context->data = &data;
+  context->handler = 0;
+
+  assert(srcsax_parse(context) == -1);
+
+}
+
+/*
+  srcsax_parse_handler
+ */
+{
+
+  srcsax_handler_test data;
+  srcsax_handler handler = srcsax_handler_test::factory();
+
+  const char * srcml_buffer = "<unit/>";
+
+  srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
+  context->data = &data;
+
+  assert(srcsax_parse_handler(context, &handler) == 0);
 
 }
 
@@ -463,7 +523,7 @@ int main() {
   srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
   context->data = &data;
 
-  assert(srcsax_parse(0, &handler) == -1);
+  assert(srcsax_parse_handler(0, &handler) == -1);
 
 }
 
@@ -476,7 +536,7 @@ int main() {
   srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
   context->data = &data;
 
-  assert(srcsax_parse(context, 0) == -1);
+  assert(srcsax_parse_handler(context, 0) == -1);
 
 }
 

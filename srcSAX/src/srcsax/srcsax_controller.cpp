@@ -293,22 +293,19 @@ void srcsax_free_context(struct srcsax_context * context) {
 /**
  * srcsax_parse
  * @param context srcSAX context
- * @param handler sax callback handlers
  *
  * Parse the context using the provide sax handlers.
  * On error calls the error callback function before returning.
  *
  * @returns 0 on success -1 on error.
  */
-int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handler) {
+int srcsax_parse(struct srcsax_context * context) {
 
-    if(context == 0 || handler == 0) return -1;
+    if(context == 0 || context->handler == 0) return -1;
 
     xmlSAXHandlerPtr save_sax = context->libxml2_context->sax;
     xmlSAXHandler sax = srcsax_sax2_factory();
     context->libxml2_context->sax = &sax;
-
-    context->handler = handler;
 
     sax2_srcsax_handler state;
     state.context = context;
@@ -331,6 +328,26 @@ int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handle
     }
 
     return status;
+
+}
+
+/**
+ * srcsax_parse
+ * @param context srcSAX context
+ * @param handler sax callback handlers
+ *
+ * Parse the context using the provide sax handlers.
+ * On error calls the error callback function before returning.
+ *
+ * @returns 0 on success -1 on error.
+ */
+int srcsax_parse_handler(struct srcsax_context * context, struct srcsax_handler * handler) {
+
+    if(context == 0) return -1;
+
+    context->handler = handler;
+
+    return srcsax_parse(context);
 
 }
 

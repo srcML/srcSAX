@@ -70,7 +70,8 @@ struct srcsax_context * srcsax_create_context_io(void * srcml_context, int (*rea
 void srcsax_free_context(struct srcsax_context * context);
 
 /* srcSAX parse function */
-int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handler);
+int srcsax_parse(struct srcsax_context * context);
+int srcsax_parse_handler(struct srcsax_context * context, struct srcsax_handler * handler);
 
 /* srcSAX terminate parse function */
 void srcsax_stop_parser(struct srcsax_context * context);

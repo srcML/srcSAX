@@ -216,8 +216,9 @@ void srcSAXController::parse(srcSAXHandler * handler) {
     cppCallbackAdapter adapter(handler);
     context->data = &adapter;
     srcsax_handler sax_handler = cppCallbackAdapter::factory();
+    context->handler = &sax_handler;
 
-    int status = srcsax_parse(context, &sax_handler);
+    int status = srcsax_parse(context);
 
     context->data = 0;
 
