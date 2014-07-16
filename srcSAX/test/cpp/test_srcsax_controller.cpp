@@ -163,75 +163,99 @@ int main() {
 
     } catch(...) { assert(false); }
   }
-#if 0
+
   /*
     enable_startDocument
    */
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_startDocument(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_startDocument(false);
-    assert(sax.startDocument == 0);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == 0);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_startDocument(false);
     control.enable_startDocument(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   /*
@@ -240,68 +264,92 @@ int main() {
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_endDocument(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_endDocument(false);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == 0);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == 0);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_endDocument(false);
     control.enable_endDocument(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   /*
@@ -310,68 +358,90 @@ int main() {
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_startElementNs(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_startElementNs(false);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == 0);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_element_ns == 0);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_startElementNs(false);
     control.enable_startElementNs(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   /*
@@ -380,68 +450,92 @@ int main() {
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_endElementNs(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_endElementNs(false);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == 0);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == 0);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_endElementNs(false);
     control.enable_endElementNs(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   /*
@@ -450,68 +544,91 @@ int main() {
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_characters(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_characters(false);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == 0);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters == 0);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_characters(false);
     control.enable_characters(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   /*
@@ -520,68 +637,92 @@ int main() {
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_comment(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_comment(false);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == 0);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == 0);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_comment(false);
     control.enable_comment(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   /*
@@ -590,68 +731,184 @@ int main() {
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_cdataBlock(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_cdataBlock(false);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == 0);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == 0);
   }
 
   {
 
     srcSAXController control(__FILE__);
-    const xmlSAXHandler & sax = control.getSAX();
+    srcml_handler * sax = control.getContext().handler;
 
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
     control.enable_cdataBlock(false);
     control.enable_cdataBlock(true);
-    assert(sax.startDocument == startDocument);
-    assert(sax.endDocument == endDocument);
-    assert(sax.startElementNs == startRoot);
-    assert(sax.endElementNs == endElementNs);
-    assert(sax.characters == charactersFirst);
-    assert(sax.comment == comment);
-    assert(sax.cdataBlock == cdataBlock);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
+  }
+
+  /*
+    enable_processing_instruction
+   */
+  {
+
+    srcSAXController control(__FILE__);
+    srcml_handler * sax = control.getContext().handler;
+
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
+    control.enable_processing_instruction(true);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
+  }
+
+  {
+
+    srcSAXController control(__FILE__);
+    srcml_handler * sax = control.getContext().handler;
+
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
+    control.enable_processing_instruction(false);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == 0);
+  }
+
+  {
+
+    srcSAXController control(__FILE__);
+    srcml_handler * sax = control.getContext().handler;
+
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
+    control.enable_processing_instruction(false);
+    control.enable_processing_instruction(true);
+    assert(sax->start_document == start_document);
+    assert(sax->end_document == end_document);
+    assert(sax->start_root == start_root);
+    assert(sax->start_unit == start_unit);
+    assert(sax->start_element_ns == start_element_ns);
+    assert(sax->end_element_ns == end_element_ns);
+    assert(sax->characters_root == characters_root);
+    assert(sax->characters_unit == characters_unit);
+    assert(sax->comment == comment);
+    assert(sax->cdata_block == cdata_block);
+    assert(sax->processing_instruction == processing_instruction);
   }
 
 #pragma GCC diagnostic pop
@@ -683,6 +940,6 @@ int main() {
     }
 
   }
-#endif
+
   return 0;
 }
