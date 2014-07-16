@@ -130,19 +130,20 @@ static struct srcsax_context * srcsax_create_context_inner(xmlParserInputBufferP
 
     if(context == 0) {
 
-        xmlFreeParserInputBuffer(context->input);
+        xmlFreeParserInputBuffer(input);
         return 0;
 
     }
 
     memset(context, 0, sizeof(struct srcsax_context));
+    context->input = input;
     context->pop_input = 1;
 
     xmlParserCtxtPtr libxml2_context = srcsax_create_parser_context(context->input);
 
     if(libxml2_context == NULL) {
 
-        xmlFreeParserInputBuffer(context->input);
+        xmlFreeParserInputBuffer(input);
         free(context);
         return 0;
 
