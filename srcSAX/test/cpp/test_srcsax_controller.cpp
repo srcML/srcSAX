@@ -106,7 +106,7 @@ int main() {
 
     } catch(...) { assert(false); }
   }
-
+#if 0
   /*
     enable_startDocument
    */
@@ -626,6 +626,6 @@ int main() {
     }
 
   }
-
+#endif
   return 0;
 }
