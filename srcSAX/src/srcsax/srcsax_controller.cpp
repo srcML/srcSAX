@@ -161,44 +161,6 @@ struct srcsax_context * srcsax_create_context_filename(const char * filename, co
 }
 
 /**
- * srcsax_create_context_libxml2
- * @param input an libxml2 xmlParserInputBufferPtr allows multiple different inputs.
- *
- * Use the provided libxml2 input for parsing
- *
- * @returns srcsax_context context to be used for srcML parsing.
- */
-struct srcsax_context * srcsax_create_context_libxml2(xmlParserInputBufferPtr input) {
-
-    if(input == 0) return 0;
-
-    srcsax_controller_init();
-
-    struct srcsax_context * context = (struct srcsax_context *)malloc(sizeof(struct srcsax_context));
-    memset(context, 0, sizeof(struct srcsax_context));
-    context->pop_input = 0;
-
-    context->input = input;
-
-    xmlParserCtxtPtr libxml2_context = srcsax_create_parser_context(context->input);
-
-    if(libxml2_context == NULL) {
-
-        xmlFreeParserInputBuffer(context->input);
-        free(context);
-        return 0;
-
-    }
-
-    libxml2_context->_private = context;
-
-    context->libxml2_context = libxml2_context;
-
-    return context;
-
-}
-
-/**
  * srcsax_free_context
  * @param context a srcSAX context
  *
