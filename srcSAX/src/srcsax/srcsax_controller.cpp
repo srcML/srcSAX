@@ -302,6 +302,8 @@ void srcsax_free_context(struct srcsax_context * context) {
  */
 int srcsax_parse(struct srcsax_context * context, struct srcsax_handler * handler) {
 
+    if(context == 0 || handler == 0) return -1;
+
     xmlSAXHandlerPtr save_sax = context->libxml2_context->sax;
     xmlSAXHandler sax = srcsax_sax2_factory();
     context->libxml2_context->sax = &sax;

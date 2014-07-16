@@ -19,6 +19,7 @@
  */
 
 #include <srcsax.h>
+#include <srcsax_handler_test.hpp>
 
 #include <stdio.h>
 #include <unistd.h>
@@ -438,6 +439,46 @@ int main() {
 /*
   srcsax_parse
  */
+{
+
+  srcsax_handler_test data;
+  srcsax_handler handler = srcsax_handler_test::factory();
+
+  const char * srcml_buffer = "<unit/>";
+
+  srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
+  context->data = &data;
+
+  assert(srcsax_parse(context, &handler) == 0);
+
+}
+
+{
+
+  srcsax_handler_test data;
+  srcsax_handler handler = srcsax_handler_test::factory();
+
+  const char * srcml_buffer = "<unit/>";
+
+  srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
+  context->data = &data;
+
+  assert(srcsax_parse(0, &handler) == -1);
+
+}
+
+{
+
+  srcsax_handler_test data;
+
+  const char * srcml_buffer = "<unit/>";
+
+  srcsax_context * context = srcsax_create_context_memory(srcml_buffer, strlen(srcml_buffer), "UTF-8");
+  context->data = &data;
+
+  assert(srcsax_parse(context, 0) == -1);
+
+}
 
  /*
   srcsax_stop_parse
