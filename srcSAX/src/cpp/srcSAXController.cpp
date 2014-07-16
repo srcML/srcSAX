@@ -158,8 +158,8 @@ void srcSAXController::enable_endDocument(bool enable) {
  */
 void srcSAXController::enable_startRoot(bool enable) {
 
-    if(enable) context->handler->start_element_ns = cppCallbackAdapter::start_root;
-    else context->handler->start_element_ns = 0;
+    if(enable) context->handler->start_root = cppCallbackAdapter::start_root;
+    else context->handler->start_root = 0;
 
 }
 
@@ -171,8 +171,8 @@ void srcSAXController::enable_startRoot(bool enable) {
  */
 void srcSAXController::enable_startUnit(bool enable) {
 
-    if(enable) context->handler->start_element_ns = cppCallbackAdapter::start_unit;
-    else context->handler->start_element_ns = 0;
+    if(enable) context->handler->start_unit = cppCallbackAdapter::start_unit;
+    else context->handler->start_unit = 0;
 
 }
 
@@ -197,8 +197,8 @@ void srcSAXController::enable_startElementNs(bool enable) {
  */
 void srcSAXController::enable_endRoot(bool enable) {
 
-    if(enable) context->handler->end_element_ns = cppCallbackAdapter::end_root;
-    else context->handler->end_element_ns = 0;
+    if(enable) context->handler->end_root = cppCallbackAdapter::end_root;
+    else context->handler->end_root = 0;
 
 }
 
@@ -210,8 +210,8 @@ void srcSAXController::enable_endRoot(bool enable) {
  */
 void srcSAXController::enable_endUnit(bool enable) {
 
-    if(enable) context->handler->end_element_ns = cppCallbackAdapter::end_unit;
-    else context->handler->end_element_ns = 0;
+    if(enable) context->handler->end_unit = cppCallbackAdapter::end_unit;
+    else context->handler->end_unit = 0;
 
 }
 
@@ -238,15 +238,14 @@ void srcSAXController::enable_charactersRoot(bool enable) {
 
     if(enable) {
 
-        context->handler->characters_unit = cppCallbackAdapter::characters_root;
+        context->handler->characters_root = cppCallbackAdapter::characters_root;
 
     } else {
 
-        context->handler->characters_unit = 0;
+        context->handler->characters_root = 0;
 
     }
 
-}
 }
 
 /**
