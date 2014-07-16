@@ -97,7 +97,7 @@ int main() {
   {
     try {
 
-      srcSAXController control(std::string("foobar", "ISO-8859-1"));
+      srcSAXController control(std::string("foobar"), "ISO-8859-1");
 
     } catch(...) { assert(false); }
   }
