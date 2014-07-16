@@ -1590,29 +1590,29 @@ int main() {
     parse
    */
 
-  // {
+  {
 
-  //   srcSAXController control("test.xml");
-  //   srcSAXHandler handler;
-  //   try {
-  //     control.parse(&handler);
-  //   } catch(SAXError error) { assert(false); }
+    srcSAXController control(std::string("<unit/>"));
+    srcSAXHandler handler;
+    try {
+      control.parse(&handler);
+    } catch(SAXError error) { assert(false); }
 
-  // }
+  }
 
-  // {
+  {
 
-  //   srcSAXController control(__FILE__);
-  //   srcSAXHandler handler;
-  //   try {
-  //     control.parse(&handler);
-  //     assert(false);
-  //   } catch(SAXError error) {
-  //     assert(error->message != "");
-  //     assert(error.error_code != 0);
-  //   }
+    srcSAXController control(__FILE__);
+    srcSAXHandler handler;
+    try {
+      control.parse(&handler);
+      assert(false);
+    } catch(SAXError error) {
+      assert(error.message != "");
+      assert(error.error_code != 0);
+    }
 
-  // }
+  }
 
   return 0;
 }
