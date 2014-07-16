@@ -25,7 +25,17 @@
 #include <string.h>
 #include <cassert>
 
-int main() {
+/* default initialization used throughout for testing */
+sax2_srcsax_handler sax2_handler_init;
+
+/**
+ * main
+ *
+ * Test the sax2_srcsax_handler/srcsax_handler.
+ *
+ * @returns 0 on success.
+ */
+ int main() {
 
   /*
     startDocument
@@ -47,18 +57,18 @@ int main() {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     startDocument(&ctxt);
-    assert(test_handler.start_document == 1);
-    assert(test_handler.end_document == 0);
-    assert(test_handler.start_root == 0);
-    assert(test_handler.start_unit == 0);
-    assert(test_handler.start_element_ns == 0);
-    assert(test_handler.end_root == 0);
-    assert(test_handler.end_unit == 0);
-    assert(test_handler.end_element_ns == 0);
-    assert(test_handler.characters_root == 0);
-    assert(test_handler.characters_unit == 0);
-    assert(test_handler.comment_ == 0);
-    assert(test_handler.cdata_block == 0);
+    assert(test_handler.start_document_call_number == 1);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 0);
+    assert(test_handler.start_unit_call_number == 0);
+    assert(test_handler.start_element_ns_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_ns_call_number == 0);
+    assert(test_handler.characters_root_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
 
   }
 #if 0
