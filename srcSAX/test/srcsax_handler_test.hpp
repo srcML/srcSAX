@@ -102,6 +102,7 @@ public :
       handler.end_element_ns = end_element_ns;
       handler.characters_root = characters_root;
       handler.characters_unit = characters_unit;
+      handler.meta_tag = meta_tag;
       handler.comment = comment;
       handler.cdata_block = cdata_block;
       handler.processing_instruction = processing_instruction;
