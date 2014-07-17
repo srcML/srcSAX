@@ -151,12 +151,12 @@ public :
     void enable_startUnit(bool enable);
 
     /**
-     * enable_startElementNs
+     * enable_startElement
      * @param enable bool indicate enable or disable SAX parsing.
      *
-     * Enables or disables startElementNs parsing.
+     * Enables or disables startElement parsing.
      */
-    void enable_startElementNs(bool enable);
+    void enable_startElement(bool enable);
 
     /**
      * enable_endRoot
@@ -176,12 +176,12 @@ public :
 
 
     /**
-     * enable_endElementNs
+     * enable_endElement
      * @param enable bool indicate enable or disable SAX parsing.
      *
-     * Enables or disables endElementNs parsing.
+     * Enables or disables endElement parsing.
      */
-    void enable_endElementNs(bool enable);
+    void enable_endElement(bool enable);
 
     /**
      * enable_charactersRoot
@@ -198,6 +198,14 @@ public :
      * Enables or disables charactersUnit parsing.
      */
     void enable_charactersUnit(bool enable);
+
+    /**
+     * enable_metaTag
+     * @param enable bool indicate enable or disable SAX parsing.
+     *
+     * Enables or disables metaTag parsing.
+     */
+    void enable_metaTag(bool enable);
 
     /**
      * enable_comment

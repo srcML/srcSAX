@@ -1,14 +1,26 @@
+##
+#  CMakeLists.txt
+#
+#  Copyright (C) 2014 SDML (www.sdml.info)
+#
+#  This file is part of the srcTools.
+#
+#  The srcTools is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  The srcTools is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with the srcTools; if not, write to the Free Software
+#  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-add_executable(test_srcsax test_srcsax.cpp)
-target_link_libraries(test_srcsax srcsax ${LIBXML2_LIBRARIES})
-add_executable(test_sax2_srcsax_handler test_sax2_srcsax_handler.cpp)
-target_link_libraries(test_sax2_srcsax_handler srcsax ${LIBXML2_LIBRARIES})
-add_executable(test_srcsax_handler test_srcsax_handler.cpp)
-target_link_libraries(test_srcsax_handler srcsax ${LIBXML2_LIBRARIES})
-add_executable(test_srcsax_controller cpp/test_srcsax_controller.cpp)
-target_link_libraries(test_srcsax_controller srcsax ${LIBXML2_LIBRARIES})
+add_unit_test(test_srcsax.cpp srcsax ${LIBXML2_LIBRARIES})
+add_unit_test(test_sax2_srcsax_handler.cpp srcsax ${LIBXML2_LIBRARIES})
+add_unit_test(test_srcsax_handler.cpp srcsax ${LIBXML2_LIBRARIES})
 
-add_test(NAME test_srcsax COMMAND test_srcsax)
-add_test(NAME test_sax2_srcsax_handler COMMAND test_sax2_srcsax_handler)
-add_test(NAME test_srcsax_handler COMMAND test_srcsax_handler)
-add_test(NAME test_srcsax_controller COMMAND test_srcsax_controller)
+add_subdirectory(cpp)

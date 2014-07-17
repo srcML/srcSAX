@@ -58,6 +58,85 @@ xmlSAXHandler srcsax_sax2_factory() {
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
 /**
+ * libxml2_namespaces2srcsax_namespaces
+ * @param number_namespaces the number of namespaces
+ * @param libxml2_namespaces
+ *
+ * Helper function to convert the libxml2 namespaces to srcsax namespaces
+ * returning a dynamically allocated struct containing the namespaces.
+ *
+ * @returns the converted namespaces as srcsax_namespace.
+ */
+static inline srcsax_namespace * libxml2_namespaces2srcsax_namespaces(int number_namespaces, const xmlChar ** libxml2_namespaces) {
+
+    struct srcsax_namespace * srcsax_namespaces = (srcsax_namespace *)calloc(number_namespaces, sizeof(srcsax_namespace));
+
+    for(int pos = 0, index = 0; pos < number_namespaces; ++pos, index += 2) {
+
+        srcsax_namespaces[pos].prefix = (const char *)libxml2_namespaces[index];
+        srcsax_namespaces[pos].uri = (const char *)libxml2_namespaces[index + 1];
+
+    }
+
+    return srcsax_namespaces;
+}
+
+/**
+ * free_srcsax_namespaces
+ * @param number_namespaces the number of namespaces (not currently used)
+ * @param libxml2_namespaces
+ *
+ * Helper function to free srcsax_namespace * struct allocated by libxml2_namespaces2srcsax_namespaces.
+ */
+static inline void free_srcsax_namespaces(int /*number_namespaces*/, srcsax_namespace * namespaces) {
+
+    free((void *)namespaces);
+
+}
+
+/**
+ * libxml2_attributes2srcsax_attributes
+ * @param number_attributes the number of attributes
+ * @param libxml2_attributes
+ *
+ * Helper function to convert the libxml2 attributes to srcsax attributes
+ * returning a dynamically allocated struct containing the attributes.
+ *
+ * @returns the converted attributes as srcsax_attribute.
+ */
+static inline srcsax_attribute * libxml2_attributes2srcsax_attributes(int number_attributes, const xmlChar ** libxml2_attributes) {
+
+    struct srcsax_attribute * srcsax_attributes = (srcsax_attribute *)calloc(number_attributes, sizeof(srcsax_attribute));
+
+    for(int pos = 0, index = 0; pos < number_attributes; ++pos, index += 5) {
+
+        srcsax_attributes[pos].localname = (const char *)libxml2_attributes[index];
+        srcsax_attributes[pos].prefix = (const char *)libxml2_attributes[index + 1];
+        srcsax_attributes[pos].uri = (const char *)libxml2_attributes[index + 2];
+        srcsax_attributes[pos].value = strndup((const char *)libxml2_attributes[index + 3], libxml2_attributes[index + 4] - libxml2_attributes[index + 3]);
+
+    }
+
+    return srcsax_attributes;
+}
+
+/**
+ * free_srcsax_attributes
+ * @param number_attributes the number of attributes
+ * @param libxml2_attributes
+ *
+ * Helper function to free srcsax_attribute * struct allocated by libxml2_attributes2srcsax_attributes.
+ */
+static inline void free_srcsax_attributes(int number_attributes, srcsax_attribute * attributes) {
+
+    for(int pos = 0; pos < number_attributes; ++pos)
+        free((void *)attributes[pos].value);
+
+    free((void *)attributes);
+
+}
+
+/**
  * start_document
  * @param ctx an xmlParserCtxtPtr
  *
@@ -110,7 +189,7 @@ void end_document(void * ctx) {
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     if(state->mode != END_ROOT && state->mode != START && state->context->handler->end_root)
-        state->context->handler->end_root(state->context, state->root.localname, state->root.prefix, state->root.URI);
+        state->context->handler->end_root(state->context, (const char *)state->root.localname, (const char *)state->root.prefix, (const char *)state->root.URI);
 
     if(state->context->handler->end_document)
         state->context->handler->end_document(state->context);
@@ -187,6 +266,9 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
 
     if(ctx == NULL) return;
 
+    srcsax_namespace * srcsax_namespaces = (srcsax_namespace *)libxml2_namespaces2srcsax_namespaces(nb_namespaces, namespaces);
+    srcsax_attribute * srcsax_attributes = (srcsax_attribute *)libxml2_attributes2srcsax_attributes(nb_attributes, attributes);
+
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
@@ -201,8 +283,13 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
 
     if(strcmp((const char *)localname, "macro-list") == 0) {
 
-        state->meta_tags.push_back(new srcml_element(state->context, localname, prefix, URI, nb_namespaces, namespaces,
-                                                nb_attributes, nb_defaulted, attributes));
+        if(state->context->handler->meta_tag)
+            state->context->handler->meta_tag(state->context, (const char *)localname, (const char *)prefix, (const char *)URI,
+                                              nb_namespaces, srcsax_namespaces, nb_attributes, srcsax_attributes);
+
+        free_srcsax_namespaces(nb_namespaces, srcsax_namespaces);
+        free_srcsax_attributes(nb_attributes, srcsax_attributes);
+
         return;
 
     }
@@ -210,39 +297,54 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
     state->is_archive = strcmp((const char *)localname, "unit") == 0;
     state->context->is_archive = state->is_archive;
 
-    if(state->context->handler->start_root)
-        state->context->handler->start_root(state->context, state->root.localname, state->root.prefix, state->root.URI,
-                                            state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
-                                            state->root.nb_defaulted, state->root.attributes, state->meta_tags.size(), &state->meta_tags.front());
+    if(state->context->handler->start_root) {
+
+        srcsax_namespace * srcsax_namespaces_root = (srcsax_namespace *)libxml2_namespaces2srcsax_namespaces(state->root.nb_namespaces, state->root.namespaces);
+        srcsax_attribute * srcsax_attributes_root = (srcsax_attribute *)libxml2_attributes2srcsax_attributes(state->root.nb_attributes, state->root.attributes);
+        state->context->handler->start_root(state->context, (const char *)state->root.localname, (const char *)state->root.prefix, (const char *)state->root.URI,
+                                            state->root.nb_namespaces, srcsax_namespaces_root, state->root.nb_attributes,
+                                            srcsax_attributes_root);
+
+        free_srcsax_namespaces(state->root.nb_namespaces, srcsax_namespaces_root);
+        free_srcsax_attributes(state->root.nb_attributes, srcsax_attributes_root);
+
+    }
 
     if(!state->is_archive) {
 
         ++state->context->unit_count;
 
         state->mode = UNIT;
-        if(state->context->handler->start_unit)
-            state->context->handler->start_unit(state->context, state->root.localname, state->root.prefix, state->root.URI,
-                                                state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
-                                                state->root.nb_defaulted, state->root.attributes);
+        if(state->context->handler->start_unit) {
+
+            srcsax_namespace * srcsax_namespaces_root = (srcsax_namespace *)libxml2_namespaces2srcsax_namespaces(state->root.nb_namespaces, state->root.namespaces);
+            srcsax_attribute * srcsax_attributes_root = (srcsax_attribute *)libxml2_attributes2srcsax_attributes(state->root.nb_attributes, state->root.attributes);        
+            state->context->handler->start_unit(state->context, (const char *)state->root.localname, (const char *)state->root.prefix, (const char *)state->root.URI,
+                                                state->root.nb_namespaces, srcsax_namespaces_root, state->root.nb_attributes,
+                                                srcsax_attributes_root);
+
+            free_srcsax_namespaces(state->root.nb_namespaces, srcsax_namespaces_root);
+            free_srcsax_attributes(state->root.nb_attributes, srcsax_attributes_root);
+
+        }
+
         if(state->context->handler->characters_unit)
-            state->context->handler->characters_unit(state->context, (const xmlChar *)state->characters.c_str(), (int)state->characters.size());
-        if(state->context->handler->start_element_ns)
-            state->context->handler->start_element_ns(state->context, localname, prefix, URI,
-                                                      nb_namespaces, namespaces, nb_attributes,
-                                                      nb_defaulted, attributes);
+            state->context->handler->characters_unit(state->context, state->characters.c_str(), (int)state->characters.size());
+        if(state->context->handler->start_element)
+            state->context->handler->start_element(state->context, (const char *)localname, (const char *)prefix, (const char *)URI,
+                                                      nb_namespaces, srcsax_namespaces, nb_attributes, srcsax_attributes);
     } else {
 
         
         if(state->context->handler->characters_root)
-            state->context->handler->characters_root(state->context, (const xmlChar *)state->characters.c_str(), (int)state->characters.size());
+            state->context->handler->characters_root(state->context, state->characters.c_str(), (int)state->characters.size());
 
         ++state->context->unit_count;
 
         state->mode = UNIT;
         if(state->context->handler->start_unit)
-            state->context->handler->start_unit(state->context, localname, prefix, URI,
-                                                nb_namespaces, namespaces, nb_attributes,
-                                                nb_defaulted, attributes);
+            state->context->handler->start_unit(state->context, (const char *)localname, (const char *)prefix, (const char *)URI,
+                                                nb_namespaces, srcsax_namespaces, nb_attributes, srcsax_attributes);
 
 
     }
@@ -254,6 +356,9 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
         ctxt->sax->ignorableWhitespace = &characters_unit;
 
     }
+
+    free_srcsax_namespaces(nb_namespaces, srcsax_namespaces);
+    free_srcsax_attributes(nb_attributes, srcsax_attributes);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
@@ -286,6 +391,9 @@ void start_unit(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
 
     if(ctx == NULL) return;
 
+    srcsax_namespace * srcsax_namespaces = (srcsax_namespace *)libxml2_namespaces2srcsax_namespaces(nb_namespaces, namespaces);
+    srcsax_attribute * srcsax_attributes = (srcsax_attribute *)libxml2_attributes2srcsax_attributes(nb_attributes, attributes);
+
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
@@ -304,7 +412,8 @@ void start_unit(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
 
 
     if(state->context->handler->start_unit)
-        state->context->handler->start_unit(state->context, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+        state->context->handler->start_unit(state->context, (const char *)localname, (const char *)prefix, (const char *)URI,
+            nb_namespaces, srcsax_namespaces, nb_attributes, srcsax_attributes);
 
     if(ctxt->sax->startElementNs) ctxt->sax->startElementNs = &start_element_ns;
     if(ctxt->sax->characters) {
@@ -313,6 +422,9 @@ void start_unit(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
         ctxt->sax->ignorableWhitespace = &characters_unit;
 
     }
+
+    free_srcsax_namespaces(nb_namespaces, srcsax_namespaces);
+    free_srcsax_attributes(nb_attributes, srcsax_attributes);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
@@ -345,6 +457,9 @@ void start_element_ns(void * ctx, const xmlChar * localname, const xmlChar * pre
 
     if(ctx == NULL) return;
 
+    srcsax_namespace * srcsax_namespaces = (srcsax_namespace *)libxml2_namespaces2srcsax_namespaces(nb_namespaces, namespaces);
+    srcsax_attribute * srcsax_attributes = (srcsax_attribute *)libxml2_attributes2srcsax_attributes(nb_attributes, attributes);
+
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
@@ -364,8 +479,9 @@ void start_element_ns(void * ctx, const xmlChar * localname, const xmlChar * pre
 
     } else if(!state->in_function_header) {
 
-        if(state->context->handler->start_element_ns)
-            state->context->handler->start_element_ns(state->context, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+        if(state->context->handler->start_element)
+            state->context->handler->start_element(state->context, (const char *)localname, (const char *)prefix, (const char *)URI,
+                nb_namespaces, srcsax_namespaces, nb_attributes, srcsax_attributes);
 
     } else {
 
@@ -387,6 +503,9 @@ void start_element_ns(void * ctx, const xmlChar * localname, const xmlChar * pre
         }
 
     }
+
+    free_srcsax_namespaces(nb_namespaces, srcsax_namespaces);
+    free_srcsax_attributes(nb_attributes, srcsax_attributes);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
@@ -430,20 +549,26 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
             state->is_archive = false;
             state->context->is_archive = state->is_archive;
 
-            
+
+            srcsax_namespace * srcsax_namespaces_root = (srcsax_namespace *)libxml2_namespaces2srcsax_namespaces(state->root.nb_namespaces, state->root.namespaces);
+            srcsax_attribute * srcsax_attributes_root = (srcsax_attribute *)libxml2_attributes2srcsax_attributes(state->root.nb_attributes, state->root.attributes);            
+
             if(state->context->handler->start_root)
-                state->context->handler->start_root(state->context, state->root.localname, state->root.prefix, state->root.URI,
-                                                    state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
-                                                    state->root.nb_defaulted, state->root.attributes, state->meta_tags.size(), &state->meta_tags.front());
+                state->context->handler->start_root(state->context, (const char *)state->root.localname, (const char *)state->root.prefix, (const char *)state->root.URI,
+                                                    state->root.nb_namespaces, srcsax_namespaces_root, state->root.nb_attributes,
+                                                    srcsax_attributes_root);
 
 
             if(state->context->handler->start_unit)
-                state->context->handler->start_unit(state->context, state->root.localname, state->root.prefix, state->root.URI,
-                                                    state->root.nb_namespaces, state->root.namespaces, state->root.nb_attributes,
-                                                    state->root.nb_defaulted, state->root.attributes);
+                state->context->handler->start_unit(state->context, (const char *)state->root.localname, (const char *)state->root.prefix, (const char *)state->root.URI,
+                                                    state->root.nb_namespaces, srcsax_namespaces_root, state->root.nb_attributes,
+                                                    srcsax_attributes_root);
+
+            free_srcsax_namespaces(state->root.nb_namespaces, srcsax_namespaces_root);
+            free_srcsax_attributes(state->root.nb_attributes, srcsax_attributes_root);
 
             if(state->characters.size() != 0 && state->context->handler->characters_unit)
-                state->context->handler->characters_unit(state->context, (const xmlChar *)state->characters.c_str(), (int)state->characters.size());
+                state->context->handler->characters_unit(state->context, state->characters.c_str(), (int)state->characters.size());
 
         }
 
@@ -451,13 +576,13 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
 
             state->mode = END_ROOT;
             if(state->context->handler->end_root)
-                state->context->handler->end_root(state->context, localname, prefix, URI);
+                state->context->handler->end_root(state->context, (const char *)localname, (const char *)prefix, (const char *)URI);
 
         } else {
 
             state->mode = END_UNIT;
             if(state->context->handler->end_unit)
-                state->context->handler->end_unit(state->context, localname, prefix, URI);
+                state->context->handler->end_unit(state->context, (const char *)localname, (const char *)prefix, (const char *)URI);
             if(ctxt->sax->startElementNs) ctxt->sax->startElementNs = &start_unit;
             if(ctxt->sax->characters) {
 
@@ -475,8 +600,8 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
 
         } else if(!state->in_function_header) {
 
-            if(state->context->handler->end_element_ns)
-                state->context->handler->end_element_ns(state->context, localname, prefix, URI);
+            if(state->context->handler->end_element)
+                state->context->handler->end_element(state->context, (const char *)localname, (const char *)prefix, (const char *)URI);
 
         } else {
 
@@ -565,7 +690,7 @@ void characters_root(void * ctx, const xmlChar * ch, int len) {
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     if(state->context->handler->characters_root)
-        state->context->handler->characters_root(state->context, ch, len);
+        state->context->handler->characters_root(state->context, (const char *)ch, len);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, chars.c_str());
@@ -599,7 +724,7 @@ void characters_unit(void * ctx, const xmlChar * ch, int len) {
     if(!state->in_function_header) {
 
         if(state->context->handler->characters_unit)
-            state->context->handler->characters_unit(state->context, ch, len);
+            state->context->handler->characters_unit(state->context, (const char *)ch, len);
 
     } else {
 
@@ -644,7 +769,7 @@ void comment(void * ctx, const xmlChar * value) {
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     if(state->context->handler->comment)
-        state->context->handler->comment(state->context, value);
+        state->context->handler->comment(state->context, (const char *)value);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -673,7 +798,7 @@ void cdata_block(void * ctx, const xmlChar * value, int len) {
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     if(state->context->handler->cdata_block)
-        state->context->handler->cdata_block(state->context, value, len);
+        state->context->handler->cdata_block(state->context, (const char *)value, len);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
@@ -702,7 +827,7 @@ void processing_instruction(void * ctx, const xmlChar * target, const xmlChar * 
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
     if(state->context->handler->processing_instruction)
-        state->context->handler->processing_instruction(state->context, target, data);
+        state->context->handler->processing_instruction(state->context, (const char *)target, (const char *)data);
 
 #ifdef DEBUG
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);

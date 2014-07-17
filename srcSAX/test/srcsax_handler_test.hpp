@@ -43,21 +43,23 @@ public :
   int start_root_call_number;
   /** number which start_unit callback was called */
   int start_unit_call_number;
-  /** number which start_element_ns callback was called */
-  int start_element_ns_call_number;
+  /** number which start_element callback was called */
+  int start_element_call_number;
 
   /** number which end_root callback was called */
   int end_root_call_number;
   /** number which end_unit callback was called */
   int end_unit_call_number;
-  /** number which end_elemnt_ns callback was called */
-  int end_element_ns_call_number;
+  /** number which end_elemnt callback was called */
+  int end_element_call_number;
 
   /** number which characters_root callback was called */
   int characters_root_call_number;
   /** number which characters_unit callback was called */
   int characters_unit_call_number;
 
+  /** number which meta_tag callback was called */
+  int meta_tag_call_number;
   /** number which comment callback was called */
   int comment_call_number;
   /** number which cdata_block callback was called */
@@ -74,9 +76,9 @@ public :
    * Constructor.  Initialize members for testing C API.
    */
   srcsax_handler_test() 
-    : start_document_call_number(0), end_document_call_number(0), start_root_call_number(0), start_unit_call_number(0), start_element_ns_call_number(0),
-      end_root_call_number(0), end_unit_call_number(0), end_element_ns_call_number(0), characters_root_call_number(0), characters_unit_call_number(0),
-      comment_call_number(0), cdata_block_call_number(0), processing_instruction_call_number(0), call_count(0) {}
+    : start_document_call_number(0), end_document_call_number(0), start_root_call_number(0), start_unit_call_number(0), start_element_call_number(0),
+      end_root_call_number(0), end_unit_call_number(0), end_element_call_number(0), characters_root_call_number(0), characters_unit_call_number(0),
+      meta_tag_call_number(0), comment_call_number(0), cdata_block_call_number(0), processing_instruction_call_number(0), call_count(0) {}
 
   /**
    * factory
@@ -94,12 +96,13 @@ public :
       handler.end_document = end_document;
       handler.start_root = start_root;
       handler.start_unit = start_unit;
-      handler.start_element_ns = start_element_ns;
+      handler.start_element = start_element;
       handler.end_root = end_root;
       handler.end_unit = end_unit;
-      handler.end_element_ns = end_element_ns;
+      handler.end_element = end_element;
       handler.characters_root = characters_root;
       handler.characters_unit = characters_unit;
+      handler.meta_tag = meta_tag;
       handler.comment = comment;
       handler.cdata_block = cdata_block;
       handler.processing_instruction = processing_instruction;
@@ -150,15 +153,14 @@ public :
    * @param nb_namespaces number of namespaces definitions
    * @param namespaces the defined namespaces
    * @param nb_attributes the number of attributes on the tag
-   * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param attributes list of attributes
    *
    * SAX handler function for start of the root element.
    * Overidden for testing.  Count calls made and order.
    */
-  static void start_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                         int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                         const xmlChar ** attributes, size_t nb_meta_tags, struct srcml_element * meta_tags[]) {
+  static void start_root(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
+                         int nb_namespaces, const struct srcsax_namespace * namespaces, int nb_attributes,
+                         const struct srcsax_attribute * attributes) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -175,15 +177,14 @@ public :
    * @param nb_namespaces number of namespaces definitions
    * @param namespaces the defined namespaces
    * @param nb_attributes the number of attributes on the tag
-   * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param attributes list of attributes
    *
    * SAX handler function for start of an unit.
    * Overidden for testing.  Count calls made and order.
    */
-  static void start_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                         int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                         const xmlChar ** attributes) {
+  static void start_unit(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
+                         int nb_namespaces, const struct srcsax_namespace * namespaces, int nb_attributes,
+                         const struct srcsax_attribute * attributes) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -192,7 +193,7 @@ public :
   }
 
   /**
-   * start_element_ns
+   * start_element
    * @param context a srcSAX context
    * @param localname the name of the element tag
    * @param prefix the tag prefix
@@ -200,19 +201,18 @@ public :
    * @param nb_namespaces number of namespaces definitions
    * @param namespaces the defined namespaces
    * @param nb_attributes the number of attributes on the tag
-   * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param attributes list of attributes
    *
    * SAX handler function for start of an element.
    * Overidden for testing.  Count calls made and order.
    */
-  static void start_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                              int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                              const xmlChar ** attributes) {
+  static void start_element(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
+                              int nb_namespaces, const struct srcsax_namespace * namespaces, int nb_attributes,
+                              const struct srcsax_attribute * attributes) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
-    test_handler->start_element_ns_call_number = ++test_handler->call_count;
+    test_handler->start_element_call_number = ++test_handler->call_count;
 
   }
 
@@ -226,7 +226,7 @@ public :
    * SAX handler function for end of the root element.
    * Overidden for testing.  Count calls made and order.
    */
-  static void end_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+  static void end_root(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -244,7 +244,7 @@ public :
    * SAX handler function for end of an unit.
    * Overidden for testing.  Count calls made and order.
    */
-  static void end_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+  static void end_unit(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -253,7 +253,7 @@ public :
   }
 
   /**
-   * end_element_ns
+   * end_element
    * @param context a srcSAX context
    * @param localname the name of the element tag
    * @param prefix the tag prefix
@@ -262,11 +262,11 @@ public :
    * SAX handler function for end of an element.
    * Overidden for testing.  Count calls made and order.
    */
-  static void end_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+  static void end_element(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
-    test_handler->end_element_ns_call_number = ++test_handler->call_count;
+    test_handler->end_element_call_number = ++test_handler->call_count;
 
   }
 
@@ -279,7 +279,7 @@ public :
    * SAX handler function for character handling at the root level.
    * Overidden for testing.  Count calls made and order.
    */
-  static void characters_root(struct srcsax_context * context, const xmlChar * ch, int len) {
+  static void characters_root(struct srcsax_context * context, const char * ch, int len) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -296,13 +296,38 @@ public :
    * SAX handler function for character handling within a unit.
    * Overidden for testing.  Count calls made and order.
    */
-  static void characters_unit(struct srcsax_context * context, const xmlChar * ch, int len) {
+  static void characters_unit(struct srcsax_context * context, const char * ch, int len) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
     test_handler->characters_unit_call_number = ++test_handler->call_count;
 
   }
+
+  /**
+   * meta_tag
+   * @param context a srcSAX context
+   * @param localname the name of the element tag
+   * @param prefix the tag prefix
+   * @param URI the namespace of tag
+   * @param nb_namespaces number of namespaces definitions
+   * @param namespaces the defined namespaces
+   * @param nb_attributes the number of attributes on the tag
+   * @param attributes list of attributes
+   *
+   * SAX handler function for meta tags.
+   * Overidden for testing.  Count calls made and order.
+   */
+  static void meta_tag(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
+                         int nb_namespaces, const struct srcsax_namespace * namespaces, int nb_attributes,
+                         const struct srcsax_attribute * attributes) {
+
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->meta_tag_call_number = ++test_handler->call_count;
+
+  }
+
 
   /**
    * comment
@@ -312,7 +337,7 @@ public :
    * A comment has been parsed.
    * Overidden for testing.  Count calls made and order.
    */
-  static void comment(struct srcsax_context * context, const xmlChar * value) {
+  static void comment(struct srcsax_context * context, const char * value) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -329,7 +354,7 @@ public :
    * Called when a pcdata block has been parsed.
    * Overidden for testing.  Count calls made and order.
    */
-  static void cdata_block(struct srcsax_context * context, const xmlChar * value, int len) {
+  static void cdata_block(struct srcsax_context * context, const char * value, int len) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -346,7 +371,7 @@ public :
    * Called when a pcdata block has been parsed.
    * Overidden for testing.  Count calls made and order.
    */
-  static void processing_instruction(struct srcsax_context * context, const xmlChar * target, const xmlChar * data) {
+  static void processing_instruction(struct srcsax_context * context, const char * target, const char * data) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 

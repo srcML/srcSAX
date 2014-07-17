@@ -61,43 +61,41 @@ public :
    * @param localname the name of the element tag
    * @param prefix the tag prefix
    * @param URI the namespace of tag
-   * @param nb_namespaces number of namespaces definitions
+   * @param num_namespaces number of namespaces definitions
    * @param namespaces the defined namespaces
-   * @param nb_attributes the number of attributes on the tag
-   * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
-   * @param meta_tags vector of elements composed of metage tags defined after root tag
+   * @param num_attributes the number of attributes on the tag
+   * @param attributes list of attributes
    *
    * SAX handler function for start of the root element.
    * Print when callback is called.
    * Overide for desired behaviour.
    */
-  virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-			 int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-			 const xmlChar ** attributes, std::vector<srcml_element *> * meta_tags) {
+  virtual void startRoot(const char * localname, const char * prefix, const char * URI,
+			 int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
+			 const struct srcsax_attribute * attributes) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
+
 
   /**
    * startUnit
    * @param localname the name of the element tag
    * @param prefix the tag prefix
    * @param URI the namespace of tag
-   * @param nb_namespaces number of namespaces definitions
+   * @param num_namespaces number of namespaces definitions
    * @param namespaces the defined namespaces
-   * @param nb_attributes the number of attributes on the tag
-   * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param num_attributes the number of attributes on the tag
+   * @param attributes list of attributes
    *
    * SAX handler function for start of an unit.
    * Print when callback is called.
    * Overide for desired behaviour.
    */
-  virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                      const xmlChar ** attributes) {
+  virtual void startUnit(const char * localname, const char * prefix, const char * URI,
+                           int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
+                      const struct srcsax_attribute * attributes) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
@@ -125,24 +123,23 @@ public :
   */
 
   /**
-   * startElementNs
+   * startElement
    * @param localname the name of the element tag
    * @param prefix the tag prefix
    * @param URI the namespace of tag
-   * @param nb_namespaces number of namespaces definitions
+   * @param num_namespaces number of namespaces definitions
    * @param namespaces the defined namespaces
-   * @param nb_attributes the number of attributes on the tag
-   * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param num_attributes the number of attributes on the tag
+   * @param attributes list of attributes
    *
    * SAX handler function for start of an element.
    * Print when callback is called.
    * 
    * Overide for desired behaviour.
    */
-  virtual void startElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                      const xmlChar ** attributes) {
+  virtual void startElement(const char * localname, const char * prefix, const char * URI,
+                           int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
+                      const struct srcsax_attribute * attributes) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
@@ -159,7 +156,7 @@ public :
    * 
    * Overide for desired behaviour.
    */
-  virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+  virtual void endRoot(const char * localname, const char * prefix, const char * URI) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
@@ -176,7 +173,7 @@ public :
    * 
    * Overide for desired behaviour.
    */
-  virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+  virtual void endUnit(const char * localname, const char * prefix, const char * URI) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
@@ -199,7 +196,7 @@ public :
   */
 
   /**
-   * endElementNs
+   * endElement
    * @param localname the name of the element tag
    * @param prefix the tag prefix
    * @param URI the namespace of tag
@@ -209,7 +206,7 @@ public :
    *
    * Overide for desired behaviour.
    */
-  virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+  virtual void endElement(const char * localname, const char * prefix, const char * URI) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
@@ -225,7 +222,7 @@ public :
    * 
    * Overide for desired behaviour.
    */
-  virtual void charactersRoot(const xmlChar * ch, int len) {
+  virtual void charactersRoot(const char * ch, int len) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
@@ -241,7 +238,30 @@ public :
    *
    * Overide for desired behaviour.
    */
-  virtual void charactersUnit(const xmlChar * ch, int len) {
+  virtual void charactersUnit(const char * ch, int len) {
+
+    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+
+  }
+
+  /**
+   * metaTag
+   * @param localname the name of the element tag
+   * @param prefix the tag prefix
+   * @param URI the namespace of tag
+   * @param num_namespaces number of namespaces definitions
+   * @param namespaces the defined namespaces
+   * @param num_attributes the number of attributes on the tag
+   * @param attributes list of attributes
+   * @param meta_tags vector of elements composed of metage tags defined after root tag
+   *
+   * SAX handler function for meta tags.
+   * Print when callback is called.
+   * Overide for desired behaviour.
+   */
+  virtual void metaTag(const char * localname, const char * prefix, const char * URI,
+       int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
+       const struct srcsax_attribute * attributes) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
@@ -256,7 +276,7 @@ public :
    *
    * Overide for desired behaviour.
    */
-  virtual void comment(const xmlChar * value) {
+  virtual void comment(const char * value) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
@@ -272,7 +292,7 @@ public :
    * 
    * Overide for desired behaviour.
    */
-  virtual void cdataBlock(const xmlChar * value, int len) {
+  virtual void cdataBlock(const char * value, int len) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
@@ -288,7 +308,7 @@ public :
    *
    * Overide for desired behaviour.
    */
-  virtual void processingInstruction(const xmlChar * target, const xmlChar * data) {
+  virtual void processingInstruction(const char * target, const char * data) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 

@@ -19,9 +19,17 @@
 #  along with the srcTools; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-file(GLOB IDENTITY_COPY_SOURCE *.cpp)
-file(GLOB IDENTITY_COPY_HEADER *.hpp)
+cmake_minimum_required(VERSION 2.8)
+project(srcTools)
 
-add_executable(identity_copy ${IDENTITY_COPY_SOURCE} ${IDENTITY_COPY_HEADER})
-target_link_libraries(identity_copy srcsax ${LIBXML2_LIBRARIES})
+enable_testing()
+
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake)
+include(srctools)
+
+# setup project includes
+#include_directories()
+
+# include sub directories
+add_subdirectory(srcSAX)
 

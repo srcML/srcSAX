@@ -177,15 +177,15 @@ void srcSAXController::enable_startUnit(bool enable) {
 }
 
 /**
- * enable_startElementNs
+ * enable_startElement
  * @param enable bool indicate enable or disable SAX parsing.
  *
- * Enables or disables startElementNs parsing.
+ * Enables or disables startElement parsing.
  */
-void srcSAXController::enable_startElementNs(bool enable) {
+void srcSAXController::enable_startElement(bool enable) {
 
-    if(enable) context->handler->start_element_ns = cppCallbackAdapter::start_element_ns;
-    else context->handler->start_element_ns = 0;
+    if(enable) context->handler->start_element = cppCallbackAdapter::start_element;
+    else context->handler->start_element = 0;
 
 }
 
@@ -216,15 +216,15 @@ void srcSAXController::enable_endUnit(bool enable) {
 }
 
 /**
- * enable_endElementNs
+ * enable_endElement
  * @param enable bool indicate enable or disable SAX parsing.
  *
- * Enables or disables endElementNs parsing.
+ * Enables or disables endElement parsing.
  */
-void srcSAXController::enable_endElementNs(bool enable) {
+void srcSAXController::enable_endElement(bool enable) {
 
-    if(enable) context->handler->end_element_ns = cppCallbackAdapter::end_element_ns;
-    else context->handler->end_element_ns = 0;
+    if(enable) context->handler->end_element = cppCallbackAdapter::end_element;
+    else context->handler->end_element = 0;
 
 }
 
@@ -263,6 +263,26 @@ void srcSAXController::enable_charactersUnit(bool enable) {
     } else {
 
         context->handler->characters_unit = 0;
+
+    }
+
+}
+
+/**
+ * enable_metaTag
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables metaTag parsing.
+ */
+void srcSAXController::enable_metaTag(bool enable) {
+
+    if(enable) {
+
+        context->handler->meta_tag = cppCallbackAdapter::meta_tag;
+
+    } else {
+
+        context->handler->meta_tag = 0;
 
     }
 
