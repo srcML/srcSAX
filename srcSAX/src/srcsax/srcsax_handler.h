@@ -94,7 +94,7 @@ void (*end_document)(struct srcsax_context * context);
  * @param namespaces the defined namespaces
  * @param nb_attributes the number of attributes on the tag
  * @param nb_defaulted the number of defaulted attributes
- * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+ * @param attributes list of attributes
  *
  * Signature for srcSAX handler function for start of the root element.
  */
@@ -112,7 +112,7 @@ void (*start_root)(struct srcsax_context * context, const char * localname, cons
  * @param namespaces the defined namespaces
  * @param nb_attributes the number of attributes on the tag
  * @param nb_defaulted the number of defaulted attributes
- * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+ * @param attributes list of attributes
  *
  * Signature srcSAX handler function for start of an unit.
  */
@@ -142,7 +142,7 @@ void (*start_unit)(struct srcsax_context * context, const char * localname, cons
  * @param namespaces the defined namespaces
  * @param nb_attributes the number of attributes on the tag
  * @param nb_defaulted the number of defaulted attributes
- * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+ * @param attributes list of attributes
  *
  * Signature for srcSAX handler function for start of an element.
  */
@@ -220,7 +220,7 @@ void (*characters_unit)(struct srcsax_context * context, const char * ch, int le
  * @param namespaces the defined namespaces
  * @param nb_attributes the number of attributes on the tag
  * @param nb_defaulted the number of defaulted attributes
- * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+ * @param attributes list of attributes
  *
  * Signature for srcSAX handler function for meta tags.
  */

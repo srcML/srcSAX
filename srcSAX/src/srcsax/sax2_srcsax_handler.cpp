@@ -57,6 +57,36 @@ xmlSAXHandler srcsax_sax2_factory() {
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
+static inline srcsax_namespace_t * libxml2_namespaces2srcsax_namespaces(int number_namespaces, const xmlChar ** libxml2_namespaces) {
+
+    struct srcsax_namespace_t * srcsax_namespaces = (srcsax_namespace_t *)malloc((number_namespaces) * sizeof(srcsax_namespace_t));
+
+    for(int pos = 0, index = 0; pos < number_namespaces; ++pos, index += 2) {
+
+        srcsax_namespaces[pos].prefix = (const char *)libxml2_namespaces[index];
+        srcsax_namespaces[pos].uri = (const char *)libxml2_namespaces[index + 1];
+
+    }
+
+    return srcsax_namespaces;
+}
+
+static inline srcsax_attribute_t * libxml2_attributes2srcsax_attributes(int number_attributes, const xmlChar ** libxml2_attributes) {
+
+    struct srcsax_attribute_t * srcsax_attributes = (srcsax_attribute_t *)malloc((number_attributes) * sizeof(srcsax_attribute_t));
+
+    for(int pos = 0, index = 0; pos < number_attributes; ++pos, index += 5) {
+
+        srcsax_attributes[pos].localname = (const char *)libxml2_attributes[index];
+        srcsax_attributes[pos].prefix = (const char *)libxml2_attributes[index + 1];
+        srcsax_attributes[pos].uri = (const char *)libxml2_attributes[index + 2];
+        srcsax_attributes[pos].value = strndup((const char *)libxml2_attributes[index + 3], libxml2_attributes[index + 4] - libxml2_attributes[index + 3]);
+
+    }
+
+    return srcsax_attributes;
+}
+
 /**
  * start_document
  * @param ctx an xmlParserCtxtPtr
