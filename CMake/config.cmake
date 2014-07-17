@@ -22,7 +22,8 @@
 #  Build configuration file
 
 # build options
-option(BUILD_UNIT_TESTS "Build unit tests for srcTools" OFF)
+option(BUILD_UNIT_TESTS "Build unit tests for srcTools" ON)
+option(BUILD_EXAMPLES "Build unit tests for srcTools" ON)
 
 # find needed libraries
 find_package(LibXml2 REQUIRED)
