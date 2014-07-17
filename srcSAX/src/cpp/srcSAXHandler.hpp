@@ -159,14 +159,14 @@ public :
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)\
+     * @param attributes list of attributes
      *
      * SAX handler function for start of the root element.
      * Overide for desired behaviour.
      */
     virtual void startRoot(const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                           const char ** attributes) {}
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                           const struct srcsax_attribute_t * attributes) {}
 
     /**
      * startUnit
@@ -177,14 +177,14 @@ public :
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * SAX handler function for start of an unit.
      * Overide for desired behaviour.
      */
     virtual void startUnit(const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                           const char ** attributes) {}
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                           const struct srcsax_attribute_t * attributes) {}
 #if 0
     /**
      * startFunction
@@ -209,14 +209,14 @@ public :
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * SAX handler function for start of an element.
      * Overide for desired behaviour.
      */
     virtual void startElementNs(const char * localname, const char * prefix, const char * URI,
-                                int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                                const char ** attributes) {}
+                                int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                                const struct srcsax_attribute_t * attributes) {}
 
     /**
      * endRoot
@@ -288,14 +288,14 @@ public :
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)\
+     * @param attributes list of attributes\
      *
      * SAX handler function for a meta tags.
      * Overide for desired behaviour.
      */
     virtual void metaTag(const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                           const char ** attributes) {}
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                           const struct srcsax_attribute_t * attributes) {}
 
     /**
      * comment

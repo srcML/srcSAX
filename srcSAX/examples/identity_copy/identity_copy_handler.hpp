@@ -109,7 +109,7 @@ public :
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * SAX handler function for start of the root element.
      * Write out a start tag.
@@ -117,32 +117,29 @@ public :
      * Overide for desired behaviour.
      */
     void write_start_tag(const char* localname, const char* prefix, const char* URI,
-                           int nb_namespaces, const char** namespaces, int nb_attributes, int nb_defaulted,
-                           const char** attributes) {
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                           const struct srcsax_attribute_t * attributes) {
 
         xmlTextWriterStartElementNS(writer, (const xmlChar *)prefix, (const xmlChar *)localname, 0);
 
-        for(int i = 0, index = 0; i < nb_namespaces; ++i, index += 2) {
+        for(int pos = 0; pos < nb_namespaces; ++pos) {
 
             std::string name = "xmlns";
-            if(namespaces[index]) {
+            if(namespaces[pos].prefix) {
                 name += ":";
 
-                name += (const char *)namespaces[index];
+                name += (const char *)namespaces[pos].prefix;
 
             }
 
-            xmlTextWriterWriteAttribute(writer, (const xmlChar *)name.c_str(), (const xmlChar *)namespaces[index + 1]);
+            xmlTextWriterWriteAttribute(writer, (const xmlChar *)name.c_str(), (const xmlChar *)namespaces[pos].uri);
 
         }
 
-        for(int i = 0, index = 0; i < nb_attributes; ++i, index += 5) {
+        for(int pos = 0; pos < nb_attributes; ++pos) {
 
-            std::string value = "";
-            value.append((const char *)attributes[index + 3], attributes[index + 4] - attributes[index + 3]);
-
-            xmlTextWriterWriteAttributeNS(writer, (const xmlChar *)attributes[index + 1], (const xmlChar *)attributes[index],
-                (const xmlChar *)attributes[index + 2], (const xmlChar *)value.c_str());
+            xmlTextWriterWriteAttributeNS(writer, (const xmlChar *)attributes[pos].prefix, (const xmlChar *)attributes[pos].localname,
+                (const xmlChar *)attributes[pos].uri, (const xmlChar *)attributes[pos].value);
 
         }
 
@@ -199,7 +196,7 @@ public :
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * SAX handler function for start of the root element.
      * Write out the root start tag (unless non-archive, startUnit will handle).
@@ -207,8 +204,8 @@ public :
      * Overide for desired behaviour.
      */
     virtual void startRoot(const char* localname, const char* prefix, const char* URI,
-                           int nb_namespaces, const char** namespaces, int nb_attributes, int nb_defaulted,
-                           const char** attributes) {
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                           const struct srcsax_attribute_t * attributes) {
 
         if(is_archive)
             write_start_tag(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
@@ -224,7 +221,7 @@ public :
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * SAX handler function for start of an unit.
      * Write out any saved text, then write out the unit tag.
@@ -232,8 +229,8 @@ public :
      * Overide for desired behaviour.
      */
     virtual void startUnit(const char* localname, const char* prefix, const char* URI,
-                           int nb_namespaces, const char** namespaces, int nb_attributes, int nb_defaulted,
-                           const char** attributes) {
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                           const struct srcsax_attribute_t * attributes) {
 
         // write out buffered root level characters
         write_content(content);
@@ -251,7 +248,7 @@ public :
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * SAX handler function for start of an element.
      * Write out any saved text, then write out the elementtag.
@@ -259,8 +256,8 @@ public :
      * Overide for desired behaviour.
      */
     virtual void startElementNs(const char* localname, const char* prefix, const char* URI,
-                                int nb_namespaces, const char** namespaces, int nb_attributes, int nb_defaulted,
-                                const char** attributes) {
+                                int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                                const struct srcsax_attribute_t * attributes) {
 
         // write out buffered characters
         write_content(content);
@@ -396,7 +393,7 @@ public :
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * SAX handler function for meta tag.
      * Write out the meta tags.
@@ -404,8 +401,8 @@ public :
      * Overide for desired behaviour.
      */
     virtual void metaTag(const char* localname, const char* prefix, const char* URI,
-                           int nb_namespaces, const char** namespaces, int nb_attributes, int nb_defaulted,
-                           const char** attributes) {
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                           const struct srcsax_attribute_t * attributes) {
 
         // write out any buffered characters
         write_content(content);

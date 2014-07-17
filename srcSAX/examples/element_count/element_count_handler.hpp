@@ -104,15 +104,15 @@ public :
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * SAX handler function for start of the root element.
      * Counts the root unit (if an archive, to avoid double count with startUnit).
      * Overide for desired behaviour.
      */
     virtual void startRoot(const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                           const char ** attributes) {
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                           const struct srcsax_attribute_t * attributes) {
 
         if(is_archive)
             update_count(prefix, localname);
@@ -128,15 +128,15 @@ public :
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * SAX handler function for start of an unit.
      * Counts each unit tag (= filecount non-archive, = filecount + 1 if archive).
      * Overide for desired behaviour.
      */
     virtual void startUnit(const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                           const char ** attributes) {
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                           const struct srcsax_attribute_t * attributes) {
 
             update_count(prefix, localname);
 
@@ -151,15 +151,15 @@ public :
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * SAX handler function for start of an element.
      * Count each element.
      * Overide for desired behaviour.
      */
     virtual void startElementNs(const char * localname, const char * prefix, const char * URI,
-                                int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                                const char ** attributes) {
+                                int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                                const struct srcsax_attribute_t * attributes) {
 
         update_count(prefix, localname);
 

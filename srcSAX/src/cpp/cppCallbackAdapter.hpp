@@ -111,13 +111,13 @@ public:
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * Callback. Forwards C API start_root to C++ API srcSAXHandler startRoot.
      */
     static void start_root(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                           const char ** attributes) {
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                           const struct srcsax_attribute_t * attributes) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -135,14 +135,14 @@ public:
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * Signature srcSAX handler function for start of an unit.
      * Callback. Forwards C API start_unit to C++ API srcSAXHandler startUnit.
      */
     static void start_unit(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                           const char ** attributes) {
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                           const struct srcsax_attribute_t * attributes) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -179,14 +179,14 @@ public:
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * Signature for srcSAX handler function for start of an element.
      * Callback. Forwards C API start_element_ns to C++ API srcSAXHandler startElementNs.
      */
     static void start_element_ns(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
-                                int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                                const char ** attributes) {
+                                int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                                const struct srcsax_attribute_t * attributes) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
@@ -302,13 +302,13 @@ public:
      * @param namespaces the defined namespaces
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
-     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     * @param attributes list of attributes
      *
      * Callback. Forwards C API meta_tag to C++ API srcSAXHandler metaTag.
      */
     static void meta_tag(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                           const char ** attributes) {
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                           const struct srcsax_attribute_t * attributes) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
