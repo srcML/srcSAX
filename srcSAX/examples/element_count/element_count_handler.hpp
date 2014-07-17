@@ -100,10 +100,9 @@ public :
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
-     * @param nb_namespaces number of namespaces definitions
+     * @param num_namespaces number of namespaces definitions
      * @param namespaces the defined namespaces
-     * @param nb_attributes the number of attributes on the tag
-     * @param nb_defaulted the number of defaulted attributes
+     * @param num_attributes the number of attributes on the tag
      * @param attributes list of attributes
      *
      * SAX handler function for start of the root element.
@@ -111,8 +110,8 @@ public :
      * Overide for desired behaviour.
      */
     virtual void startRoot(const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
-                           const struct srcsax_attribute_t * attributes) {
+                           int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
+                           const struct srcsax_attribute * attributes) {
 
         if(is_archive)
             update_count(prefix, localname);
@@ -124,10 +123,9 @@ public :
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
-     * @param nb_namespaces number of namespaces definitions
+     * @param num_namespaces number of namespaces definitions
      * @param namespaces the defined namespaces
-     * @param nb_attributes the number of attributes on the tag
-     * @param nb_defaulted the number of defaulted attributes
+     * @param num_attributes the number of attributes on the tag
      * @param attributes list of attributes
      *
      * SAX handler function for start of an unit.
@@ -135,31 +133,30 @@ public :
      * Overide for desired behaviour.
      */
     virtual void startUnit(const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
-                           const struct srcsax_attribute_t * attributes) {
+                           int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
+                           const struct srcsax_attribute * attributes) {
 
             update_count(prefix, localname);
 
     }
 
     /**
-     * startElementNs
+     * startElement
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
-     * @param nb_namespaces number of namespaces definitions
+     * @param num_namespaces number of namespaces definitions
      * @param namespaces the defined namespaces
-     * @param nb_attributes the number of attributes on the tag
-     * @param nb_defaulted the number of defaulted attributes
+     * @param num_attributes the number of attributes on the tag
      * @param attributes list of attributes
      *
      * SAX handler function for start of an element.
      * Count each element.
      * Overide for desired behaviour.
      */
-    virtual void startElementNs(const char * localname, const char * prefix, const char * URI,
-                                int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
-                                const struct srcsax_attribute_t * attributes) {
+    virtual void startElement(const char * localname, const char * prefix, const char * URI,
+                                int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
+                                const struct srcsax_attribute * attributes) {
 
         update_count(prefix, localname);
 
@@ -170,10 +167,10 @@ public :
     // end elements may need to be used if you want to collect only on per file basis or some other granularity.
     virtual void endRoot(const char * localname, const char * prefix, const char * URI) {}
     virtual void endUnit(const char * localname, const char * prefix, const char * URI) {}
-    virtual void endElementNs(const char * localname, const char * prefix, const char * URI) {}
+    virtual void endElement(const char * localname, const char * prefix, const char * URI) {}
 
     // Contains information such as stuff used for parsing.  So, probably do not need to count.
-    virtual void metaTag(const char* localname, const char* prefix, const char* URI, int nb_namespaces, const char** namespaces, int nb_attributes, int nb_defaulted, const char** attributes) {}
+    virtual void metaTag(const char* localname, const char* prefix, const char* URI, int num_namespaces, const char** namespaces, int num_attributes, const char** attributes) {}
 
     // Not typically in srcML documents    
     virtual void comment(const char * value) {}

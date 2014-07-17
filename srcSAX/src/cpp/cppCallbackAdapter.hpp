@@ -57,10 +57,10 @@ public:
         handler.end_document = end_document;
         handler.start_root = start_root;
         handler.start_unit = start_unit;
-        handler.start_element_ns = start_element_ns;
+        handler.start_element = start_element;
         handler.end_root = end_root;
         handler.end_unit = end_unit;
-        handler.end_element_ns = end_element_ns;
+        handler.end_element = end_element;
         handler.characters_root = characters_root;
         handler.characters_unit = characters_unit;
         handler.meta_tag = meta_tag;
@@ -107,21 +107,20 @@ public:
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
-     * @param nb_namespaces number of namespaces definitions
+     * @param num_namespaces number of namespaces definitions
      * @param namespaces the defined namespaces
-     * @param nb_attributes the number of attributes on the tag
-     * @param nb_defaulted the number of defaulted attributes
+     * @param num_attributes the number of attributes on the tag
      * @param attributes list of attributes
      *
      * Callback. Forwards C API start_root to C++ API srcSAXHandler startRoot.
      */
     static void start_root(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
-                           const struct srcsax_attribute_t * attributes) {
+                           int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
+                           const struct srcsax_attribute * attributes) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_adapter->handler->startRoot(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+        cpp_adapter->handler->startRoot(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
 
     }
 
@@ -131,22 +130,21 @@ public:
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
-     * @param nb_namespaces number of namespaces definitions
+     * @param num_namespaces number of namespaces definitions
      * @param namespaces the defined namespaces
-     * @param nb_attributes the number of attributes on the tag
-     * @param nb_defaulted the number of defaulted attributes
+     * @param num_attributes the number of attributes on the tag
      * @param attributes list of attributes
      *
      * Signature srcSAX handler function for start of an unit.
      * Callback. Forwards C API start_unit to C++ API srcSAXHandler startUnit.
      */
     static void start_unit(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
-                           const struct srcsax_attribute_t * attributes) {
+                           int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
+                           const struct srcsax_attribute * attributes) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_adapter->handler->startUnit(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+        cpp_adapter->handler->startUnit(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
 
 
     }
@@ -170,27 +168,26 @@ public:
 #endif
 
     /**
-     * start_element_ns
+     * start_element
      * @param context a srcSAX context
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
-     * @param nb_namespaces number of namespaces definitions
+     * @param num_namespaces number of namespaces definitions
      * @param namespaces the defined namespaces
-     * @param nb_attributes the number of attributes on the tag
-     * @param nb_defaulted the number of defaulted attributes
+     * @param num_attributes the number of attributes on the tag
      * @param attributes list of attributes
      *
      * Signature for srcSAX handler function for start of an element.
-     * Callback. Forwards C API start_element_ns to C++ API srcSAXHandler startElementNs.
+     * Callback. Forwards C API start_element to C++ API srcSAXHandler startElement.
      */
-    static void start_element_ns(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
-                                int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
-                                const struct srcsax_attribute_t * attributes) {
+    static void start_element(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
+                                int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
+                                const struct srcsax_attribute * attributes) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_adapter->handler->startElementNs(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+        cpp_adapter->handler->startElement(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
 
 
     }
@@ -243,19 +240,19 @@ public:
     }
 #endif
     /**
-     * end_element_ns
+     * end_element
      * @param context a srcSAX context
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
      *
-     * Callback. Forwards C API end_element_ns to C++ API srcSAXHandler endElementNs.
+     * Callback. Forwards C API end_element to C++ API srcSAXHandler endElement.
      */
-    static void end_element_ns(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI) {
+    static void end_element(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_adapter->handler->endElementNs(localname, prefix, URI);
+        cpp_adapter->handler->endElement(localname, prefix, URI);
 
     }
 
@@ -298,21 +295,20 @@ public:
      * @param localname the name of the element tag
      * @param prefix the tag prefix
      * @param URI the namespace of tag
-     * @param nb_namespaces number of namespaces definitions
+     * @param num_namespaces number of namespaces definitions
      * @param namespaces the defined namespaces
-     * @param nb_attributes the number of attributes on the tag
-     * @param nb_defaulted the number of defaulted attributes
+     * @param num_attributes the number of attributes on the tag
      * @param attributes list of attributes
      *
      * Callback. Forwards C API meta_tag to C++ API srcSAXHandler metaTag.
      */
     static void meta_tag(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
-                           const struct srcsax_attribute_t * attributes) {
+                           int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
+                           const struct srcsax_attribute * attributes) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_adapter->handler->metaTag(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+        cpp_adapter->handler->metaTag(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
 
     }
 
