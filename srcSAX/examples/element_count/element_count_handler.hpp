@@ -112,7 +112,7 @@ public :
      */
     virtual void startRoot(const char * localname, const char * prefix, const char * URI,
                            int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                           const char ** attributes, std::vector<srcml_element *> * meta_tags) {
+                           const char ** attributes) {
 
         if(is_archive)
             update_count(prefix, localname);
@@ -171,6 +171,11 @@ public :
     virtual void endRoot(const char * localname, const char * prefix, const char * URI) {}
     virtual void endUnit(const char * localname, const char * prefix, const char * URI) {}
     virtual void endElementNs(const char * localname, const char * prefix, const char * URI) {}
+
+    // Contains information such as stuff used for parsing.  So, probably do not need to count.
+    virtual void metaTag(const char* localname, const char* prefix, const char* URI, int nb_namespaces, const char** namespaces, int nb_attributes, int nb_defaulted, const char** attributes) {}
+
+    // Not typically in srcML documents    
     virtual void comment(const char * value) {}
     virtual void cdataBlock(const char * value, int len) {}
     virtual void processingInstruction(const char * target, const char * data) {}

@@ -60,14 +60,12 @@ void (*end_document)(struct srcsax_context * context);
  * @param nb_attributes the number of attributes on the tag
  * @param nb_defaulted the number of defaulted attributes
  * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
- * @param nb_meta_tags number of meta tags
- * @param meta_tags vector of elements composed of metage tags defined after root tag
  *
  * Signature for srcSAX handler function for start of the root element.
  */
 void (*start_root)(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
                        int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                       const char ** attributes, size_t nb_meta_tags, struct srcml_element * meta_tags[]);
+                       const char ** attributes);
 
 /**
  * start_unit
@@ -176,6 +174,24 @@ void (*characters_root)(struct srcsax_context * context, const char * ch, int le
  * Signature for srcSAX handler function for character handling within a unit.
  */
 void (*characters_unit)(struct srcsax_context * context, const char * ch, int len);
+
+/**
+ * meta_tag
+ * @param context a srcSAX context
+ * @param localname the name of the element tag
+ * @param prefix the tag prefix
+ * @param URI the namespace of tag
+ * @param nb_namespaces number of namespaces definitions
+ * @param namespaces the defined namespaces
+ * @param nb_attributes the number of attributes on the tag
+ * @param nb_defaulted the number of defaulted attributes
+ * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+ *
+ * Signature for srcSAX handler function for meta tags.
+ */
+void (*meta_tag)(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
+                       int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
+                       const char ** attributes);
 
 /**
  * comment

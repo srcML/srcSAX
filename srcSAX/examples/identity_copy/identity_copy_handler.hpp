@@ -208,7 +208,7 @@ public :
      */
     virtual void startRoot(const char* localname, const char* prefix, const char* URI,
                            int nb_namespaces, const char** namespaces, int nb_attributes, int nb_defaulted,
-                           const char** attributes, std::vector<srcml_element *> * meta_tags) {
+                           const char** attributes) {
 
         if(is_archive)
             write_start_tag(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
@@ -387,7 +387,36 @@ public :
 
     }
 
+    /**
+     * metaTag
+     * @param localname the name of the element tag
+     * @param prefix the tag prefix
+     * @param URI the namespace of tag
+     * @param nb_namespaces number of namespaces definitions
+     * @param namespaces the defined namespaces
+     * @param nb_attributes the number of attributes on the tag
+     * @param nb_defaulted the number of defaulted attributes
+     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     *
+     * SAX handler function for meta tag.
+     * Write out the meta tags.
+     *
+     * Overide for desired behaviour.
+     */
+    virtual void metaTag(const char* localname, const char* prefix, const char* URI,
+                           int nb_namespaces, const char** namespaces, int nb_attributes, int nb_defaulted,
+                           const char** attributes) {
+
+        // write out any buffered characters
+        write_content(content);
+
+        write_start_tag(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
+        xmlTextWriterEndElement(writer);
+
+    }
+
     /*
+    // Not typically in srcML documents 
     virtual void comment(const char* value) {}
     virtual void cdataBlock(const char* value, int len) {}
     virtual void processingInstruction(const char* target, const char* data) {}

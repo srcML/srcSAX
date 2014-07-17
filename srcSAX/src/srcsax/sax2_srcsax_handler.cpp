@@ -201,8 +201,9 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
 
     if(strcmp((const char *)localname, "macro-list") == 0) {
 
-        state->meta_tags.push_back(new srcml_element(state->context, localname, prefix, URI, nb_namespaces, namespaces,
-                                                nb_attributes, nb_defaulted, attributes));
+        state->context->handler->meta_tag(state->context, (const char *)localname, (const char *)prefix, (const char *)URI,
+                                          nb_namespaces, (const char **)namespaces, nb_attributes, nb_defaulted, (const char **)attributes);
+
         return;
 
     }
@@ -213,7 +214,7 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
     if(state->context->handler->start_root)
         state->context->handler->start_root(state->context, (const char *)state->root.localname, (const char *)state->root.prefix, (const char *)state->root.URI,
                                             state->root.nb_namespaces, (const char **)state->root.namespaces, state->root.nb_attributes,
-                                            state->root.nb_defaulted, (const char **)state->root.attributes, state->meta_tags.size(), &state->meta_tags.front());
+                                            state->root.nb_defaulted, (const char **)state->root.attributes);
 
     if(!state->is_archive) {
 
@@ -436,7 +437,7 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
             if(state->context->handler->start_root)
                 state->context->handler->start_root(state->context, (const char *)state->root.localname, (const char *)state->root.prefix, (const char *)state->root.URI,
                                                     state->root.nb_namespaces, (const char **)state->root.namespaces, state->root.nb_attributes,
-                                                    state->root.nb_defaulted, (const char **)state->root.attributes, state->meta_tags.size(), &state->meta_tags.front());
+                                                    state->root.nb_defaulted, (const char **)state->root.attributes);
 
 
             if(state->context->handler->start_unit)
