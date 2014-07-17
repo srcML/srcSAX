@@ -1,5 +1,5 @@
 ##
-#  CMakeLists.txt
+#  srctools.cmake
 #
 #  Copyright (C) 2014 SDML (www.sdml.info)
 #
@@ -19,9 +19,6 @@
 #  along with the srcTools; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-file(GLOB IDENTITY_COPY_SOURCE *.cpp)
-file(GLOB IDENTITY_COPY_HEADER *.hpp)
-
-add_executable(identity_copy ${IDENTITY_COPY_SOURCE} ${IDENTITY_COPY_HEADER})
-target_link_libraries(identity_copy srcsax ${LIBXML2_LIBRARIES})
-
+include(config)
+include(install)
+include(testing)

@@ -1,5 +1,5 @@
 ##
-#  CMakeLists.txt
+#  config.cmake
 #
 #  Copyright (C) 2014 SDML (www.sdml.info)
 #
@@ -18,10 +18,19 @@
 #  You should have received a copy of the GNU General Public License
 #  along with the srcTools; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+#  Build configuration file
 
-file(GLOB IDENTITY_COPY_SOURCE *.cpp)
-file(GLOB IDENTITY_COPY_HEADER *.hpp)
+# build options
+option(BUILD_UNIT_TESTS "Build unit tests for srcTools" ON)
+option(BUILD_EXAMPLES "Build unit tests for srcTools" ON)
 
-add_executable(identity_copy ${IDENTITY_COPY_SOURCE} ${IDENTITY_COPY_HEADER})
-target_link_libraries(identity_copy srcsax ${LIBXML2_LIBRARIES})
+# find needed libraries
+find_package(LibXml2 REQUIRED)
 
+# include needed includes
+include_directories(${LIBXML2_INCLUDE_DIR})
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
