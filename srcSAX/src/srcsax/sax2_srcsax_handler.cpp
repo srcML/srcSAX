@@ -71,6 +71,12 @@ static inline srcsax_namespace_t * libxml2_namespaces2srcsax_namespaces(int numb
     return srcsax_namespaces;
 }
 
+static inline void free_srcsax_namespaces(int /*number_namespaces*/, srcsax_namespace_t * namespaces) {
+
+    free((void *)namespaces);
+
+}
+
 static inline srcsax_attribute_t * libxml2_attributes2srcsax_attributes(int number_attributes, const xmlChar ** libxml2_attributes) {
 
     struct srcsax_attribute_t * srcsax_attributes = (srcsax_attribute_t *)malloc((number_attributes) * sizeof(srcsax_attribute_t));
@@ -85,6 +91,15 @@ static inline srcsax_attribute_t * libxml2_attributes2srcsax_attributes(int numb
     }
 
     return srcsax_attributes;
+}
+
+static inline void free_srcsax_attributes(int number_attributes, srcsax_attribute_t * attributes) {
+
+    for(int pos = 0; pos < number_attributes; ++pos)
+        free((void *)attributes[pos].value);
+
+    free((void *)attributes);
+
 }
 
 /**
