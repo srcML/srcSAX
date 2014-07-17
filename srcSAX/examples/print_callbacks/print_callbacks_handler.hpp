@@ -65,15 +65,15 @@ public :
    * @param namespaces the defined namespaces
    * @param nb_attributes the number of attributes on the tag
    * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param attributes list of attributes
    *
    * SAX handler function for start of the root element.
    * Print when callback is called.
    * Overide for desired behaviour.
    */
   virtual void startRoot(const char * localname, const char * prefix, const char * URI,
-			 int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-			 const char ** attributes) {
+			 int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+			 const struct srcsax_attribute_t * attributes) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
@@ -89,15 +89,15 @@ public :
    * @param namespaces the defined namespaces
    * @param nb_attributes the number of attributes on the tag
    * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param attributes list of attributes
    *
    * SAX handler function for start of an unit.
    * Print when callback is called.
    * Overide for desired behaviour.
    */
   virtual void startUnit(const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                      const char ** attributes) {
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                      const struct srcsax_attribute_t * attributes) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
@@ -133,7 +133,7 @@ public :
    * @param namespaces the defined namespaces
    * @param nb_attributes the number of attributes on the tag
    * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param attributes list of attributes
    *
    * SAX handler function for start of an element.
    * Print when callback is called.
@@ -141,8 +141,8 @@ public :
    * Overide for desired behaviour.
    */
   virtual void startElementNs(const char * localname, const char * prefix, const char * URI,
-                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                      const char ** attributes) {
+                           int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                      const struct srcsax_attribute_t * attributes) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
@@ -256,7 +256,7 @@ public :
    * @param namespaces the defined namespaces
    * @param nb_attributes the number of attributes on the tag
    * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param attributes list of attributes
    * @param meta_tags vector of elements composed of metage tags defined after root tag
    *
    * SAX handler function for meta tags.
@@ -264,8 +264,8 @@ public :
    * Overide for desired behaviour.
    */
   virtual void metaTag(const char * localname, const char * prefix, const char * URI,
-       int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-       const char ** attributes) {
+       int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+       const struct srcsax_attribute_t * attributes) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 

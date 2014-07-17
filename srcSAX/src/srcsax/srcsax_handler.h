@@ -34,10 +34,10 @@ struct srcml_element;
 struct srcsax_namespace_t  {
 
     /** a namespace prefix */
-    const char* prefix;
+    const char * prefix;
 
     /** a namespace uri */
-    const char* uri;
+    const char * uri;
 
 };
 
@@ -48,16 +48,16 @@ struct srcsax_namespace_t  {
  */struct srcsax_attribute_t  {
 
     /** attribute name */
-    const char* localname;
+    const char * localname;
 
     /** attribute namespace prefix */
-    const char* prefix;
+    const char * prefix;
 
     /** attribute namespace uri */
-    const char* uri;
+    const char * uri;
 
     /** attribute value */
-    const char* value;
+    const char * value;
 
 };
 

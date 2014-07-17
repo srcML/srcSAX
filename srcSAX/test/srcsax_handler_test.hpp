@@ -154,14 +154,14 @@ public :
    * @param namespaces the defined namespaces
    * @param nb_attributes the number of attributes on the tag
    * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param attributes list of attributes
    *
    * SAX handler function for start of the root element.
    * Overidden for testing.  Count calls made and order.
    */
   static void start_root(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
-                         int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                         const char ** attributes) {
+                         int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                         const struct srcsax_attribute_t * attributes) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -179,14 +179,14 @@ public :
    * @param namespaces the defined namespaces
    * @param nb_attributes the number of attributes on the tag
    * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param attributes list of attributes
    *
    * SAX handler function for start of an unit.
    * Overidden for testing.  Count calls made and order.
    */
   static void start_unit(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
-                         int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                         const char ** attributes) {
+                         int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                         const struct srcsax_attribute_t * attributes) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -204,14 +204,14 @@ public :
    * @param namespaces the defined namespaces
    * @param nb_attributes the number of attributes on the tag
    * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param attributes list of attributes
    *
    * SAX handler function for start of an element.
    * Overidden for testing.  Count calls made and order.
    */
   static void start_element_ns(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
-                              int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                              const char ** attributes) {
+                              int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                              const struct srcsax_attribute_t * attributes) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -317,14 +317,14 @@ public :
    * @param namespaces the defined namespaces
    * @param nb_attributes the number of attributes on the tag
    * @param nb_defaulted the number of defaulted attributes
-   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param attributes list of attributes
    *
    * SAX handler function for meta tags.
    * Overidden for testing.  Count calls made and order.
    */
   static void meta_tag(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
-                         int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                         const char ** attributes) {
+                         int nb_namespaces, const struct srcsax_namespace_t * namespaces, int nb_attributes, int nb_defaulted,
+                         const struct srcsax_attribute_t * attributes) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
