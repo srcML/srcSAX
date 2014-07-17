@@ -57,9 +57,19 @@ xmlSAXHandler srcsax_sax2_factory() {
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 
+/**
+ * libxml2_namespaces2srcsax_namespaces
+ * @param number_namespaces the number of namespaces
+ * @param libxml2_namespaces
+ *
+ * Helper function to convert the libxml2 namespaces to srcsax namespaces
+ * returning a dynamically allocated struct containing the namespaces.
+ *
+ * @returns the converted namespaces as srcsax_namespace_t.
+ */
 static inline srcsax_namespace_t * libxml2_namespaces2srcsax_namespaces(int number_namespaces, const xmlChar ** libxml2_namespaces) {
 
-    struct srcsax_namespace_t * srcsax_namespaces = (srcsax_namespace_t *)malloc((number_namespaces) * sizeof(srcsax_namespace_t));
+    struct srcsax_namespace_t * srcsax_namespaces = (srcsax_namespace_t *)calloc(number_namespaces, sizeof(srcsax_namespace_t));
 
     for(int pos = 0, index = 0; pos < number_namespaces; ++pos, index += 2) {
 
@@ -71,15 +81,32 @@ static inline srcsax_namespace_t * libxml2_namespaces2srcsax_namespaces(int numb
     return srcsax_namespaces;
 }
 
+/**
+ * free_srcsax_namespaces
+ * @param number_namespaces the number of namespaces (not currently used)
+ * @param libxml2_namespaces
+ *
+ * Helper function to free srcsax_namespace_t * struct allocated by libxml2_namespaces2srcsax_namespaces.
+ */
 static inline void free_srcsax_namespaces(int /*number_namespaces*/, srcsax_namespace_t * namespaces) {
 
     free((void *)namespaces);
 
 }
 
+/**
+ * libxml2_attributes2srcsax_attributes
+ * @param number_attributes the number of attributes
+ * @param libxml2_attributes
+ *
+ * Helper function to convert the libxml2 attributes to srcsax attributes
+ * returning a dynamically allocated struct containing the attributes.
+ *
+ * @returns the converted attributes as srcsax_attribute_t.
+ */
 static inline srcsax_attribute_t * libxml2_attributes2srcsax_attributes(int number_attributes, const xmlChar ** libxml2_attributes) {
 
-    struct srcsax_attribute_t * srcsax_attributes = (srcsax_attribute_t *)malloc((number_attributes) * sizeof(srcsax_attribute_t));
+    struct srcsax_attribute_t * srcsax_attributes = (srcsax_attribute_t *)calloc(number_attributes, sizeof(srcsax_attribute_t));
 
     for(int pos = 0, index = 0; pos < number_attributes; ++pos, index += 5) {
 
@@ -93,6 +120,13 @@ static inline srcsax_attribute_t * libxml2_attributes2srcsax_attributes(int numb
     return srcsax_attributes;
 }
 
+/**
+ * free_srcsax_attributes
+ * @param number_attributes the number of attributes (not currently used)
+ * @param libxml2_attributes
+ *
+ * Helper function to free srcsax_attribute_t * struct allocated by libxml2_attributes2srcsax_attributes.
+ */
 static inline void free_srcsax_attributes(int number_attributes, srcsax_attribute_t * attributes) {
 
     for(int pos = 0; pos < number_attributes; ++pos)
