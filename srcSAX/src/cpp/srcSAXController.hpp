@@ -200,6 +200,14 @@ public :
     void enable_charactersUnit(bool enable);
 
     /**
+     * enable_metaTag
+     * @param enable bool indicate enable or disable SAX parsing.
+     *
+     * Enables or disables metaTag parsing.
+     */
+    void enable_metaTag(bool enable);
+
+    /**
      * enable_comment
      * @param enable bool indicate enable or disable SAX parsing.
      *

@@ -66,7 +66,6 @@ public :
    * @param nb_attributes the number of attributes on the tag
    * @param nb_defaulted the number of defaulted attributes
    * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
-   * @param meta_tags vector of elements composed of metage tags defined after root tag
    *
    * SAX handler function for start of the root element.
    * Print when callback is called.
@@ -74,11 +73,12 @@ public :
    */
   virtual void startRoot(const char * localname, const char * prefix, const char * URI,
 			 int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-			 const char ** attributes, std::vector<srcml_element *> * meta_tags) {
+			 const char ** attributes) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 
   }
+
 
   /**
    * startUnit
@@ -242,6 +242,30 @@ public :
    * Overide for desired behaviour.
    */
   virtual void charactersUnit(const char * ch, int len) {
+
+    fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
+
+  }
+
+  /**
+   * metaTag
+   * @param localname the name of the element tag
+   * @param prefix the tag prefix
+   * @param URI the namespace of tag
+   * @param nb_namespaces number of namespaces definitions
+   * @param namespaces the defined namespaces
+   * @param nb_attributes the number of attributes on the tag
+   * @param nb_defaulted the number of defaulted attributes
+   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   * @param meta_tags vector of elements composed of metage tags defined after root tag
+   *
+   * SAX handler function for meta tags.
+   * Print when callback is called.
+   * Overide for desired behaviour.
+   */
+  virtual void metaTag(const char * localname, const char * prefix, const char * URI,
+       int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
+       const char ** attributes) {
 
     fprintf(stderr, "HERE: %s %s %d\n", __FILE__, __FUNCTION__, __LINE__);
 

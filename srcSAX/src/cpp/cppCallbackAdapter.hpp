@@ -63,6 +63,7 @@ public:
         handler.end_element_ns = end_element_ns;
         handler.characters_root = characters_root;
         handler.characters_unit = characters_unit;
+        handler.meta_tag = meta_tag;
         handler.comment = comment;
         handler.cdata_block = cdata_block;
         handler.processing_instruction = processing_instruction;
@@ -111,22 +112,16 @@ public:
      * @param nb_attributes the number of attributes on the tag
      * @param nb_defaulted the number of defaulted attributes
      * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
-     * @param nb_meta_tags number of meta tags
-     * @param meta_tags vector of elements composed of metage tags defined after root tag
      *
      * Callback. Forwards C API start_root to C++ API srcSAXHandler startRoot.
      */
     static void start_root(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
                            int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                           const char ** attributes, size_t nb_meta_tags, struct srcml_element * meta_tags[]) {
+                           const char ** attributes) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        std::vector<srcml_element *> meta_tags_vector(nb_meta_tags);
-        for(size_t i = 0; i < nb_meta_tags; ++i)
-            meta_tags_vector.push_back(meta_tags[i]);
-
-        cpp_adapter->handler->startRoot(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes, &meta_tags_vector);
+        cpp_adapter->handler->startRoot(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
     }
 
@@ -294,6 +289,30 @@ public:
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
         cpp_adapter->handler->charactersUnit(ch, len);
+
+    }
+
+    /**
+     * meta_tag
+     * @param context a srcSAX context
+     * @param localname the name of the element tag
+     * @param prefix the tag prefix
+     * @param URI the namespace of tag
+     * @param nb_namespaces number of namespaces definitions
+     * @param namespaces the defined namespaces
+     * @param nb_attributes the number of attributes on the tag
+     * @param nb_defaulted the number of defaulted attributes
+     * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+     *
+     * Callback. Forwards C API meta_tag to C++ API srcSAXHandler metaTag.
+     */
+    static void meta_tag(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
+                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
+                           const char ** attributes) {
+
+        cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
+
+        cpp_adapter->handler->metaTag(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
     }
 

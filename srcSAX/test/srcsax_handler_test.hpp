@@ -58,6 +58,8 @@ public :
   /** number which characters_unit callback was called */
   int characters_unit_call_number;
 
+  /** number which meta_tag callback was called */
+  int meta_tag_call_number;
   /** number which comment callback was called */
   int comment_call_number;
   /** number which cdata_block callback was called */
@@ -76,7 +78,7 @@ public :
   srcsax_handler_test() 
     : start_document_call_number(0), end_document_call_number(0), start_root_call_number(0), start_unit_call_number(0), start_element_ns_call_number(0),
       end_root_call_number(0), end_unit_call_number(0), end_element_ns_call_number(0), characters_root_call_number(0), characters_unit_call_number(0),
-      comment_call_number(0), cdata_block_call_number(0), processing_instruction_call_number(0), call_count(0) {}
+      meta_tag_call_number(0), comment_call_number(0), cdata_block_call_number(0), processing_instruction_call_number(0), call_count(0) {}
 
   /**
    * factory
@@ -100,6 +102,7 @@ public :
       handler.end_element_ns = end_element_ns;
       handler.characters_root = characters_root;
       handler.characters_unit = characters_unit;
+      handler.meta_tag = meta_tag;
       handler.comment = comment;
       handler.cdata_block = cdata_block;
       handler.processing_instruction = processing_instruction;
@@ -158,7 +161,7 @@ public :
    */
   static void start_root(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
                          int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
-                         const char ** attributes, size_t nb_meta_tags, struct srcml_element * meta_tags[]) {
+                         const char ** attributes) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -303,6 +306,32 @@ public :
     test_handler->characters_unit_call_number = ++test_handler->call_count;
 
   }
+
+  /**
+   * meta_tag
+   * @param context a srcSAX context
+   * @param localname the name of the element tag
+   * @param prefix the tag prefix
+   * @param URI the namespace of tag
+   * @param nb_namespaces number of namespaces definitions
+   * @param namespaces the defined namespaces
+   * @param nb_attributes the number of attributes on the tag
+   * @param nb_defaulted the number of defaulted attributes
+   * @param attributes list of attribute name value pairs (localname/prefix/URI/value/end)
+   *
+   * SAX handler function for meta tags.
+   * Overidden for testing.  Count calls made and order.
+   */
+  static void meta_tag(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
+                         int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
+                         const char ** attributes) {
+
+    srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    test_handler->meta_tag_call_number = ++test_handler->call_count;
+
+  }
+
 
   /**
    * comment
