@@ -269,6 +269,26 @@ void srcSAXController::enable_charactersUnit(bool enable) {
 }
 
 /**
+ * enable_metaTag
+ * @param enable bool indicate enable or disable SAX parsing.
+ *
+ * Enables or disables metaTag parsing.
+ */
+void srcSAXController::enable_metaTag(bool enable) {
+
+    if(enable) {
+
+        context->handler->meta_tag = cppCallbackAdapter::meta_tag;
+
+    } else {
+
+        context->handler->meta_tag = 0;
+
+    }
+
+}
+
+/**
  * enable_comment
  * @param enable bool indicate enable or disable SAX parsing.
  *

@@ -1425,6 +1425,7 @@ sax2_srcsax_handler sax2_handler_init;
     assert(test_handler.end_element_ns_call_number == 0);
     assert(test_handler.characters_root_call_number == 0);
     assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.meta_tag_call_number == 0);
     assert(test_handler.comment_call_number == 1);
     assert(test_handler.cdata_block_call_number == 0);
     assert(test_handler.processing_instruction_call_number == 0);

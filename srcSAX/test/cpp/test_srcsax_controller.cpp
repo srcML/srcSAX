@@ -186,6 +186,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -200,6 +201,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -221,6 +223,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -235,6 +238,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -256,6 +260,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -271,6 +276,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -295,6 +301,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -309,6 +316,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -330,6 +338,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -344,6 +353,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -365,6 +375,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -380,6 +391,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -404,6 +416,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -418,6 +431,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -439,6 +453,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -453,6 +468,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -474,6 +490,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -489,6 +506,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -513,6 +531,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -527,6 +546,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -548,6 +568,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -562,6 +583,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -583,6 +605,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -598,6 +621,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -622,6 +646,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -636,6 +661,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -657,6 +683,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -671,6 +698,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -692,6 +720,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -707,6 +736,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -731,6 +761,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -745,6 +776,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -766,6 +798,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -780,6 +813,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -801,6 +835,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -816,6 +851,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -840,6 +876,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -854,6 +891,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -875,6 +913,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -889,6 +928,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -910,6 +950,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -925,6 +966,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -949,6 +991,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -963,6 +1006,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -984,6 +1028,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -998,6 +1043,7 @@ int main() {
     assert(sax.end_element_ns == 0);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1019,6 +1065,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1034,6 +1081,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1058,6 +1106,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1072,6 +1121,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1093,6 +1143,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1107,6 +1158,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == 0);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1128,6 +1180,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1143,6 +1196,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1167,6 +1221,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1181,6 +1236,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1202,6 +1258,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1216,6 +1273,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == 0);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1237,6 +1295,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1252,6 +1311,122 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
+    assert(sax.comment == cppCallbackAdapter::comment);
+    assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  /*
+    enable_metaTag
+   */
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler sax = cppCallbackAdapter::factory(); 
+    control.getContext()->handler = &sax;
+
+    assert(sax.start_document == cppCallbackAdapter::start_document);
+    assert(sax.end_document == cppCallbackAdapter::end_document);
+    assert(sax.start_root == cppCallbackAdapter::start_root);
+    assert(sax.start_unit == cppCallbackAdapter::start_unit);
+    assert(sax.start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax.end_root == cppCallbackAdapter::end_root);
+    assert(sax.end_unit == cppCallbackAdapter::end_unit);
+    assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax.characters_root == cppCallbackAdapter::characters_root);
+    assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
+    assert(sax.comment == cppCallbackAdapter::comment);
+    assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_metaTag(true);
+    assert(sax.start_document == cppCallbackAdapter::start_document);
+    assert(sax.end_document == cppCallbackAdapter::end_document);
+    assert(sax.start_root == cppCallbackAdapter::start_root);
+    assert(sax.start_unit == cppCallbackAdapter::start_unit);
+    assert(sax.start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax.end_root == cppCallbackAdapter::end_root);
+    assert(sax.end_unit == cppCallbackAdapter::end_unit);
+    assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax.characters_root == cppCallbackAdapter::characters_root);
+    assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
+    assert(sax.comment == cppCallbackAdapter::comment);
+    assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler sax = cppCallbackAdapter::factory(); 
+    control.getContext()->handler = &sax;
+
+    assert(sax.start_document == cppCallbackAdapter::start_document);
+    assert(sax.end_document == cppCallbackAdapter::end_document);
+    assert(sax.start_root == cppCallbackAdapter::start_root);
+    assert(sax.start_unit == cppCallbackAdapter::start_unit);
+    assert(sax.start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax.end_root == cppCallbackAdapter::end_root);
+    assert(sax.end_unit == cppCallbackAdapter::end_unit);
+    assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax.characters_root == cppCallbackAdapter::characters_root);
+    assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
+    assert(sax.comment == cppCallbackAdapter::comment);
+    assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_metaTag(false);
+    assert(sax.start_document == cppCallbackAdapter::start_document);
+    assert(sax.end_document == cppCallbackAdapter::end_document);
+    assert(sax.start_root == cppCallbackAdapter::start_root);
+    assert(sax.start_unit == cppCallbackAdapter::start_unit);
+    assert(sax.start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax.end_root == cppCallbackAdapter::end_root);
+    assert(sax.end_unit == cppCallbackAdapter::end_unit);
+    assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax.characters_root == cppCallbackAdapter::characters_root);
+    assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == 0);
+    assert(sax.comment == cppCallbackAdapter::comment);
+    assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
+  }
+
+  {
+
+    srcSAXController control(__FILE__);
+    srcsax_handler sax = cppCallbackAdapter::factory(); 
+    control.getContext()->handler = &sax;
+
+    assert(sax.start_document == cppCallbackAdapter::start_document);
+    assert(sax.end_document == cppCallbackAdapter::end_document);
+    assert(sax.start_root == cppCallbackAdapter::start_root);
+    assert(sax.start_unit == cppCallbackAdapter::start_unit);
+    assert(sax.start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax.end_root == cppCallbackAdapter::end_root);
+    assert(sax.end_unit == cppCallbackAdapter::end_unit);
+    assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax.characters_root == cppCallbackAdapter::characters_root);
+    assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
+    assert(sax.comment == cppCallbackAdapter::comment);
+    assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
+    assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
+    control.enable_metaTag(false);
+    control.enable_metaTag(true);
+    assert(sax.start_document == cppCallbackAdapter::start_document);
+    assert(sax.end_document == cppCallbackAdapter::end_document);
+    assert(sax.start_root == cppCallbackAdapter::start_root);
+    assert(sax.start_unit == cppCallbackAdapter::start_unit);
+    assert(sax.start_element_ns == cppCallbackAdapter::start_element_ns);
+    assert(sax.end_root == cppCallbackAdapter::end_root);
+    assert(sax.end_unit == cppCallbackAdapter::end_unit);
+    assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
+    assert(sax.characters_root == cppCallbackAdapter::characters_root);
+    assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1276,6 +1451,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1290,6 +1466,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1311,6 +1488,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1325,6 +1503,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == 0);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1346,6 +1525,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1361,6 +1541,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1385,6 +1566,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1399,6 +1581,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1420,6 +1603,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1434,6 +1618,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == 0);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1455,6 +1640,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1470,6 +1656,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1494,6 +1681,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1508,6 +1696,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1529,6 +1718,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1543,6 +1733,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == 0);
@@ -1564,6 +1755,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
@@ -1579,6 +1771,7 @@ int main() {
     assert(sax.end_element_ns == cppCallbackAdapter::end_element_ns);
     assert(sax.characters_root == cppCallbackAdapter::characters_root);
     assert(sax.characters_unit == cppCallbackAdapter::characters_unit);
+    assert(sax.meta_tag == cppCallbackAdapter::meta_tag);
     assert(sax.comment == cppCallbackAdapter::comment);
     assert(sax.cdata_block == cppCallbackAdapter::cdata_block);
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
