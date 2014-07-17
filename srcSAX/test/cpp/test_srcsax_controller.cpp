@@ -1777,8 +1777,6 @@ int main() {
     assert(sax.processing_instruction == cppCallbackAdapter::processing_instruction);
   }
 
-#pragma GCC diagnostic pop
-
   /*
     parse
    */
