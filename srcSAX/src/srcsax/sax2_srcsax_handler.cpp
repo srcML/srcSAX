@@ -201,8 +201,9 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
 
     if(strcmp((const char *)localname, "macro-list") == 0) {
 
-        state->context->handler->meta_tag(state->context, (const char *)localname, (const char *)prefix, (const char *)URI,
-                                          nb_namespaces, (const char **)namespaces, nb_attributes, nb_defaulted, (const char **)attributes);
+        if(state->context->handler->meta_tag)
+            state->context->handler->meta_tag(state->context, (const char *)localname, (const char *)prefix, (const char *)URI,
+                                              nb_namespaces, (const char **)namespaces, nb_attributes, nb_defaulted, (const char **)attributes);
 
         return;
 
