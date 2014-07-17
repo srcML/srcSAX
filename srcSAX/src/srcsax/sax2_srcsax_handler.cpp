@@ -122,7 +122,7 @@ static inline srcsax_attribute_t * libxml2_attributes2srcsax_attributes(int numb
 
 /**
  * free_srcsax_attributes
- * @param number_attributes the number of attributes (not currently used)
+ * @param number_attributes the number of attributes
  * @param libxml2_attributes
  *
  * Helper function to free srcsax_attribute_t * struct allocated by libxml2_attributes2srcsax_attributes.
