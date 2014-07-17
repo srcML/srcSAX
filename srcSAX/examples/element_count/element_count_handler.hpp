@@ -65,7 +65,7 @@ public :
      * A more general find approach is used instead of relying on access using the
      * operator[] to default non-existant items to 0. 
      */
-    void update_count(const xmlChar * prefix, const xmlChar * localname) {
+    void update_count(const char * prefix, const char * localname) {
 
         std::string element = "";
         if(prefix) {
@@ -110,9 +110,9 @@ public :
      * Counts the root unit (if an archive, to avoid double count with startUnit).
      * Overide for desired behaviour.
      */
-    virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                           const xmlChar ** attributes, std::vector<srcml_element *> * meta_tags) {
+    virtual void startRoot(const char * localname, const char * prefix, const char * URI,
+                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
+                           const char ** attributes, std::vector<srcml_element *> * meta_tags) {
 
         if(is_archive)
             update_count(prefix, localname);
@@ -134,9 +134,9 @@ public :
      * Counts each unit tag (= filecount non-archive, = filecount + 1 if archive).
      * Overide for desired behaviour.
      */
-    virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                           const xmlChar ** attributes) {
+    virtual void startUnit(const char * localname, const char * prefix, const char * URI,
+                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
+                           const char ** attributes) {
 
             update_count(prefix, localname);
 
@@ -157,9 +157,9 @@ public :
      * Count each element.
      * Overide for desired behaviour.
      */
-    virtual void startElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                                int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                                const xmlChar ** attributes) {
+    virtual void startElementNs(const char * localname, const char * prefix, const char * URI,
+                                int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
+                                const char ** attributes) {
 
         update_count(prefix, localname);
 
@@ -168,12 +168,12 @@ public :
     /*
 
     // end elements may need to be used if you want to collect only on per file basis or some other granularity.
-    virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
-    virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
-    virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
-    virtual void comment(const xmlChar * value) {}
-    virtual void cdataBlock(const xmlChar * value, int len) {}
-    virtual void processingInstruction(const xmlChar * target, const xmlChar * data) {}
+    virtual void endRoot(const char * localname, const char * prefix, const char * URI) {}
+    virtual void endUnit(const char * localname, const char * prefix, const char * URI) {}
+    virtual void endElementNs(const char * localname, const char * prefix, const char * URI) {}
+    virtual void comment(const char * value) {}
+    virtual void cdataBlock(const char * value, int len) {}
+    virtual void processingInstruction(const char * target, const char * data) {}
     */
 
 #pragma GCC diagnostic pop

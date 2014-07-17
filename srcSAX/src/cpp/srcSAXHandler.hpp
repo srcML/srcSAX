@@ -165,9 +165,9 @@ public :
      * SAX handler function for start of the root element.
      * Overide for desired behaviour.
      */
-    virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                           const xmlChar ** attributes, std::vector<srcml_element * > * meta_tags) {}
+    virtual void startRoot(const char * localname, const char * prefix, const char * URI,
+                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
+                           const char ** attributes, std::vector<srcml_element * > * meta_tags) {}
 
     /**
      * startUnit
@@ -183,9 +183,9 @@ public :
      * SAX handler function for start of an unit.
      * Overide for desired behaviour.
      */
-    virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                           const xmlChar ** attributes) {}
+    virtual void startUnit(const char * localname, const char * prefix, const char * URI,
+                           int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
+                           const char ** attributes) {}
 #if 0
     /**
      * startFunction
@@ -215,9 +215,9 @@ public :
      * SAX handler function for start of an element.
      * Overide for desired behaviour.
      */
-    virtual void startElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                                int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                                const xmlChar ** attributes) {}
+    virtual void startElementNs(const char * localname, const char * prefix, const char * URI,
+                                int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
+                                const char ** attributes) {}
 
     /**
      * endRoot
@@ -228,7 +228,7 @@ public :
      * SAX handler function for end of the root element.
      * Overide for desired behaviour.
      */
-    virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
+    virtual void endRoot(const char * localname, const char * prefix, const char * URI) {}
 
     /**
      * endUnit
@@ -239,7 +239,7 @@ public :
      * SAX handler function for end of an unit.
      * Overide for desired behaviour.
      */
-    virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
+    virtual void endUnit(const char * localname, const char * prefix, const char * URI) {}
 #if 0
     /**
      * endFunction
@@ -258,7 +258,7 @@ public :
      * SAX handler function for end of an element.
      * Overide for desired behaviour.
      */
-    virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {}
+    virtual void endElementNs(const char * localname, const char * prefix, const char * URI) {}
 
     /**
      * charactersRoot
@@ -268,7 +268,7 @@ public :
      * SAX handler function for character handling at the root level.
      * Overide for desired behaviour.
      */
-    virtual void charactersRoot(const xmlChar * ch, int len) {}
+    virtual void charactersRoot(const char * ch, int len) {}
 
     /**
      * charactersUnit
@@ -278,7 +278,7 @@ public :
      * SAX handler function for character handling within a unit.
      * Overide for desired behaviour.
      */
-    virtual void charactersUnit(const xmlChar * ch, int len) {}
+    virtual void charactersUnit(const char * ch, int len) {}
 
     /**
      * comment
@@ -287,7 +287,7 @@ public :
      * A comment has been parsed.
      * Overide for desired behaviour.
      */
-    virtual void comment(const xmlChar * value) {}
+    virtual void comment(const char * value) {}
 
     /**
      * cdataBlock
@@ -297,7 +297,7 @@ public :
      * Called when a pcdata block has been parsed.
      * Overide for desired behaviour.
      */
-    virtual void cdataBlock(const xmlChar * value, int len) {}
+    virtual void cdataBlock(const char * value, int len) {}
 
     /**
      * processingInstruction
@@ -307,7 +307,7 @@ public :
      * Called when a processing instruction has been parsed.
      * Overide for desired behaviour.
      */
-    virtual void processingInstruction(const xmlChar * target, const xmlChar * data) {}
+    virtual void processingInstruction(const char * target, const char * data) {}
 
 #pragma GCC diagnostic pop
 

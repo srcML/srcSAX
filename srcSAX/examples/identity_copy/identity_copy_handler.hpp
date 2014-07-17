@@ -116,11 +116,11 @@ public :
      *
      * Overide for desired behaviour.
      */
-    void write_start_tag(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                           const xmlChar ** attributes) {
+    void write_start_tag(const char* localname, const char* prefix, const char* URI,
+                           int nb_namespaces, const char** namespaces, int nb_attributes, int nb_defaulted,
+                           const char** attributes) {
 
-        xmlTextWriterStartElementNS(writer, prefix, localname, 0);
+        xmlTextWriterStartElementNS(writer, (const xmlChar *)prefix, (const xmlChar *)localname, 0);
 
         for(int i = 0, index = 0; i < nb_namespaces; ++i, index += 2) {
 
@@ -132,7 +132,7 @@ public :
 
             }
 
-            xmlTextWriterWriteAttribute(writer, (const xmlChar *)name.c_str(), namespaces[index + 1]);
+            xmlTextWriterWriteAttribute(writer, (const xmlChar *)name.c_str(), (const xmlChar *)namespaces[index + 1]);
 
         }
 
@@ -141,7 +141,8 @@ public :
             std::string value = "";
             value.append((const char *)attributes[index + 3], attributes[index + 4] - attributes[index + 3]);
 
-            xmlTextWriterWriteAttributeNS(writer, attributes[index + 1], attributes[index], attributes[index + 2], (const xmlChar *)value.c_str());
+            xmlTextWriterWriteAttributeNS(writer, (const xmlChar *)attributes[index + 1], (const xmlChar *)attributes[index],
+                (const xmlChar *)attributes[index + 2], (const xmlChar *)value.c_str());
 
         }
 
@@ -205,9 +206,9 @@ public :
      *
      * Overide for desired behaviour.
      */
-    virtual void startRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                           const xmlChar ** attributes, std::vector<srcml_element *> * meta_tags) {
+    virtual void startRoot(const char* localname, const char* prefix, const char* URI,
+                           int nb_namespaces, const char** namespaces, int nb_attributes, int nb_defaulted,
+                           const char** attributes, std::vector<srcml_element *> * meta_tags) {
 
         if(is_archive)
             write_start_tag(localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
@@ -230,9 +231,9 @@ public :
      *
      * Overide for desired behaviour.
      */
-    virtual void startUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                           int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                           const xmlChar ** attributes) {
+    virtual void startUnit(const char* localname, const char* prefix, const char* URI,
+                           int nb_namespaces, const char** namespaces, int nb_attributes, int nb_defaulted,
+                           const char** attributes) {
 
         // write out buffered root level characters
         write_content(content);
@@ -257,9 +258,9 @@ public :
      * 
      * Overide for desired behaviour.
      */
-    virtual void startElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                                int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                                const xmlChar ** attributes) {
+    virtual void startElementNs(const char* localname, const char* prefix, const char* URI,
+                                int nb_namespaces, const char** namespaces, int nb_attributes, int nb_defaulted,
+                                const char** attributes) {
 
         // write out buffered characters
         write_content(content);
@@ -279,7 +280,7 @@ public :
      *
      * Overide for desired behaviour.
      */
-    virtual void endRoot(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+    virtual void endRoot(const char* localname, const char* prefix, const char* URI) {
 
         // write out buffered root level characters
         if(is_archive) {
@@ -303,7 +304,7 @@ public :
      *
      * Overide for desired behaviour.
      */
-    virtual void endUnit(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+    virtual void endUnit(const char* localname, const char* prefix, const char* URI) {
 
         // write out any buffered characters
         write_content(content);
@@ -323,7 +324,7 @@ public :
      *
      * Overide for desired behaviour.
      */
-    virtual void endElementNs(const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+    virtual void endElementNs(const char* localname, const char* prefix, const char* URI) {
 
         // write out any buffered characters
         write_content(content);
@@ -347,7 +348,7 @@ public :
      *
      * Overide for desired behaviour.
      */
-    virtual void charactersRoot(const xmlChar * ch, int len) {
+    virtual void charactersRoot(const char* ch, int len) {
 
 
         //std::string content = "";
@@ -371,7 +372,7 @@ public :
      * 
      * Overide for desired behaviour.
      */
-    virtual void charactersUnit(const xmlChar * ch, int len) {
+    virtual void charactersUnit(const char* ch, int len) {
 
         /*
             Characters may be called multiple times in succession
@@ -387,9 +388,9 @@ public :
     }
 
     /*
-    virtual void comment(const xmlChar * value) {}
-    virtual void cdataBlock(const xmlChar * value, int len) {}
-    virtual void processingInstruction(const xmlChar * target, const xmlChar * data) {}
+    virtual void comment(const char* value) {}
+    virtual void cdataBlock(const char* value, int len) {}
+    virtual void processingInstruction(const char* target, const char* data) {}
     */
 
 #pragma GCC diagnostic pop

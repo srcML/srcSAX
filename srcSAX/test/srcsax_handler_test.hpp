@@ -156,9 +156,9 @@ public :
    * SAX handler function for start of the root element.
    * Overidden for testing.  Count calls made and order.
    */
-  static void start_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                         int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                         const xmlChar ** attributes, size_t nb_meta_tags, struct srcml_element * meta_tags[]) {
+  static void start_root(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
+                         int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
+                         const char ** attributes, size_t nb_meta_tags, struct srcml_element * meta_tags[]) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -181,9 +181,9 @@ public :
    * SAX handler function for start of an unit.
    * Overidden for testing.  Count calls made and order.
    */
-  static void start_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                         int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                         const xmlChar ** attributes) {
+  static void start_unit(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
+                         int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
+                         const char ** attributes) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -206,9 +206,9 @@ public :
    * SAX handler function for start of an element.
    * Overidden for testing.  Count calls made and order.
    */
-  static void start_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI,
-                              int nb_namespaces, const xmlChar ** namespaces, int nb_attributes, int nb_defaulted,
-                              const xmlChar ** attributes) {
+  static void start_element_ns(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI,
+                              int nb_namespaces, const char ** namespaces, int nb_attributes, int nb_defaulted,
+                              const char ** attributes) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -226,7 +226,7 @@ public :
    * SAX handler function for end of the root element.
    * Overidden for testing.  Count calls made and order.
    */
-  static void end_root(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+  static void end_root(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -244,7 +244,7 @@ public :
    * SAX handler function for end of an unit.
    * Overidden for testing.  Count calls made and order.
    */
-  static void end_unit(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+  static void end_unit(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -262,7 +262,7 @@ public :
    * SAX handler function for end of an element.
    * Overidden for testing.  Count calls made and order.
    */
-  static void end_element_ns(struct srcsax_context * context, const xmlChar * localname, const xmlChar * prefix, const xmlChar * URI) {
+  static void end_element_ns(struct srcsax_context * context, const char * localname, const char * prefix, const char * URI) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -279,7 +279,7 @@ public :
    * SAX handler function for character handling at the root level.
    * Overidden for testing.  Count calls made and order.
    */
-  static void characters_root(struct srcsax_context * context, const xmlChar * ch, int len) {
+  static void characters_root(struct srcsax_context * context, const char * ch, int len) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -296,7 +296,7 @@ public :
    * SAX handler function for character handling within a unit.
    * Overidden for testing.  Count calls made and order.
    */
-  static void characters_unit(struct srcsax_context * context, const xmlChar * ch, int len) {
+  static void characters_unit(struct srcsax_context * context, const char * ch, int len) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -312,7 +312,7 @@ public :
    * A comment has been parsed.
    * Overidden for testing.  Count calls made and order.
    */
-  static void comment(struct srcsax_context * context, const xmlChar * value) {
+  static void comment(struct srcsax_context * context, const char * value) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -329,7 +329,7 @@ public :
    * Called when a pcdata block has been parsed.
    * Overidden for testing.  Count calls made and order.
    */
-  static void cdata_block(struct srcsax_context * context, const xmlChar * value, int len) {
+  static void cdata_block(struct srcsax_context * context, const char * value, int len) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
@@ -346,7 +346,7 @@ public :
    * Called when a pcdata block has been parsed.
    * Overidden for testing.  Count calls made and order.
    */
-  static void processing_instruction(struct srcsax_context * context, const xmlChar * target, const xmlChar * data) {
+  static void processing_instruction(struct srcsax_context * context, const char * target, const char * data) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
