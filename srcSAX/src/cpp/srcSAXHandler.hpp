@@ -21,7 +21,6 @@
 #ifndef INCLUDED_SRCSAX_HANDLER_HPP
 #define INCLUDED_SRCSAX_HANDLER_HPP
 
-#include <srcml_element.hpp>
 #include <srcSAXController.hpp>
 
 #include <libxml/parser.h>

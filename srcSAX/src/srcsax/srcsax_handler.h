@@ -24,7 +24,6 @@
 #include <libxml/parser.h>
 
 struct srcsax_context;
-struct srcml_element;
 
 /**
  * srcsax_namespace
