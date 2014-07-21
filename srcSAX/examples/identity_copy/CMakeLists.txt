@@ -25,3 +25,5 @@ file(GLOB IDENTITY_COPY_HEADER *.hpp)
 add_executable(identity_copy ${IDENTITY_COPY_SOURCE} ${IDENTITY_COPY_HEADER})
 target_link_libraries(identity_copy srcsax ${LIBXML2_LIBRARIES})
 
+# eventually make thes part of either the sub-directies or the add_unit_test
+copy_dependent_file(identity_copy ../example.xml)
