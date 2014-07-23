@@ -1333,7 +1333,7 @@ sax2_srcsax_handler sax2_handler_init;
     start_element_ns_first(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)"src",
               (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
               (const xmlChar **) attributes);
-      start_element_ns_first(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)"src",
+    start_element_ns_first(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)"src",
               (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
               (const xmlChar **) attributes);
     assert(test_handler.start_document_call_number == 0);
@@ -1379,7 +1379,7 @@ sax2_srcsax_handler sax2_handler_init;
     start_element_ns_first(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)"src",
               (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
               (const xmlChar **) attributes);
-      start_element_ns_first(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
+    start_element_ns_first(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
               (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
               (const xmlChar **) attributes);
     assert(test_handler.start_document_call_number == 0);
@@ -1426,7 +1426,7 @@ sax2_srcsax_handler sax2_handler_init;
     start_element_ns_first(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)"src",
               (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
               (const xmlChar **) attributes);
-      start_element_ns_first(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)"src",
+    start_element_ns_first(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)"src",
               (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
               (const xmlChar **) attributes);
     assert(test_handler.start_document_call_number == 0);
