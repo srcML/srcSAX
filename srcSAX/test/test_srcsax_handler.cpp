@@ -1358,6 +1358,52 @@ sax2_srcsax_handler sax2_handler_init;
 
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
+
+    srcsax_context context;
+    context.data = &test_handler;
+    context.handler = &srcsax_sax;
+
+    sax2_srcsax_handler sax2_handler = sax2_handler_init;
+    sax2_handler.context = &context;
+
+    xmlParserCtxt ctxt;
+    xmlSAXHandler sax = srcsax_sax2_factory();
+    sax.startElementNs = start_element_ns_first;
+    ctxt.sax = &sax;
+    ctxt._private = &sax2_handler;
+    const char ** namespaces = 0;
+    const char * values = "ab";
+    const char * attributes[10] = { "token", "src", "http://www.sdml.info/srcML/src", values, values + 1,
+                                    "type", "src", "http://www.sdml.info/srcML/src", values + 1, values + 2 };
+
+    start_element_ns_first(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
+              (const xmlChar **) attributes);
+      start_element_ns_first(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
+              (const xmlChar **) attributes);
+    assert(test_handler.start_document_call_number == 0);
+    assert(test_handler.end_document_call_number == 0);
+    assert(test_handler.start_root_call_number == 1);
+    assert(test_handler.start_unit_call_number == 4);
+    assert(test_handler.start_element_call_number == 0);
+    assert(test_handler.end_root_call_number == 0);
+    assert(test_handler.end_unit_call_number == 0);
+    assert(test_handler.end_element_call_number == 0);
+    assert(test_handler.characters_root_call_number == 3);
+    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.meta_tag_call_number == 2);
+    assert(test_handler.comment_call_number == 0);
+    assert(test_handler.cdata_block_call_number == 0);
+    assert(test_handler.processing_instruction_call_number == 0);
+    end_document(&ctxt);
+
+  }
+
+  {
+
+    srcsax_handler_test test_handler;
+    srcsax_handler srcsax_sax = srcsax_handler_test::factory();
     srcsax_sax.meta_tag = 0;
 
     srcsax_context context;
