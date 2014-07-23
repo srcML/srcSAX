@@ -140,15 +140,20 @@ static inline void free_srcsax_attributes(int number_attributes, srcsax_attribut
  * srcml_element_stack_push
  * @param context the srcsax_context
  * @param srcml_element_stack the stack
- * @param srcml_element item to push
+ * @param prefix the prefix of the element to push
+ * @param localname the name of the element to push
  *
  * Push the element on to the stack.
  */
- void srcml_element_stack_push(srcsax_context * context, std::vector<const char *> & srcml_element_stack, const char * srcml_element) {
+ void srcml_element_stack_push(srcsax_context * context, std::vector<const char *> & srcml_element_stack, const char * prefix, const char * localname) {
 
-    const char * srcml_element_copy = strdup(srcml_element);
+    size_t prefix_length = strlen(prefix);
+    size_t name_length = strlen(localname);
+    char * srcml_element_string = (char *)calloc(prefix_length + name_length + 1, sizeof(char));
+    strncat(srcml_element_string, prefix, prefix_length);
+    strncat(srcml_element_string + prefix_length, localname, name_length);
 
-    srcml_element_stack.push_back(srcml_element_copy);
+    srcml_element_stack.push_back(srcml_element_string);
 
     context->stack_size = srcml_element_stack.size();
     context->srcml_element_stack = &srcml_element_stack.front();
@@ -278,7 +283,7 @@ void start_root(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
-    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)localname);
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
 
     state->root = srcml_element(state->context, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
@@ -324,7 +329,7 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
-    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)localname);
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
 
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
@@ -451,7 +456,7 @@ void start_unit(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
-    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)localname);
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
 
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
@@ -519,7 +524,7 @@ void start_element_ns(void * ctx, const xmlChar * localname, const xmlChar * pre
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
-    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)localname);
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
 
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
