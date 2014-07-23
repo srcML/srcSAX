@@ -164,6 +164,8 @@ static inline void free_srcsax_attributes(int number_attributes, srcsax_attribut
  */
  void srcml_element_stack_pop(srcsax_context * context, std::vector<const char *> & srcml_element_stack) {
 
+    if(srcml_element_stack.size() == 0) return;
+
     const char * srcml_element = srcml_element_stack.back();
 
     srcml_element_stack.pop_back();
