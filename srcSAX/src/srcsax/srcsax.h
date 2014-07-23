@@ -46,6 +46,9 @@ struct srcsax_context {
     /** the current unit count */
     int unit_count;
 
+    /** size of the srcml_element stack */
+    size_t stack_size;
+
     /** stack of open srcML elements */
     const char ** srcml_element_stack;
 
