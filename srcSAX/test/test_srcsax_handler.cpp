@@ -1333,17 +1333,20 @@ sax2_srcsax_handler sax2_handler_init;
     start_element_ns_first(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)"src",
               (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
               (const xmlChar **) attributes);
+      start_element_ns_first(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
+              (const xmlChar **) attributes);
     assert(test_handler.start_document_call_number == 0);
     assert(test_handler.end_document_call_number == 0);
-    assert(test_handler.start_root_call_number == 0);
-    assert(test_handler.start_unit_call_number == 0);
-    assert(test_handler.start_element_call_number == 0);
+    assert(test_handler.start_root_call_number == 1);
+    assert(test_handler.start_unit_call_number == 3);
+    assert(test_handler.start_element_call_number == 5);
     assert(test_handler.end_root_call_number == 0);
     assert(test_handler.end_unit_call_number == 0);
     assert(test_handler.end_element_call_number == 0);
     assert(test_handler.characters_root_call_number == 0);
-    assert(test_handler.characters_unit_call_number == 0);
-    assert(test_handler.meta_tag_call_number == 1);
+    assert(test_handler.characters_unit_call_number == 4);
+    assert(test_handler.meta_tag_call_number == 2);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);
     assert(test_handler.processing_instruction_call_number == 0);
@@ -1377,16 +1380,19 @@ sax2_srcsax_handler sax2_handler_init;
     start_element_ns_first(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)"src",
               (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
               (const xmlChar **) attributes);
+      start_element_ns_first(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
+              (const xmlChar **) attributes);
     assert(test_handler.start_document_call_number == 0);
     assert(test_handler.end_document_call_number == 0);
-    assert(test_handler.start_root_call_number == 0);
-    assert(test_handler.start_unit_call_number == 0);
-    assert(test_handler.start_element_call_number == 0);
+    assert(test_handler.start_root_call_number == 1);
+    assert(test_handler.start_unit_call_number == 2);
+    assert(test_handler.start_element_call_number == 4);
     assert(test_handler.end_root_call_number == 0);
     assert(test_handler.end_unit_call_number == 0);
     assert(test_handler.end_element_call_number == 0);
     assert(test_handler.characters_root_call_number == 0);
-    assert(test_handler.characters_unit_call_number == 0);
+    assert(test_handler.characters_unit_call_number == 3);
     assert(test_handler.meta_tag_call_number == 0);
     assert(test_handler.comment_call_number == 0);
     assert(test_handler.cdata_block_call_number == 0);

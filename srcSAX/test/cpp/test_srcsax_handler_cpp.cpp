@@ -233,10 +233,22 @@ int main() {
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
-    assert(handler.get_stack().size() == 1);
-    assert(handler.get_stack().back() == "unit");
+    assert(handler.get_stack().size() == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)0,
+              (const xmlChar *)"http://www.sdml.info/srcML/src");
+
+    assert(handler.get_stack().size() == 0);
+
+    start_element_ns_first(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)0,
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+
+    assert(handler.get_stack().size() == 2);
+    assert(handler.get_stack().front() == "unit");
+    assert(handler.get_stack().back() == "expr_stmt");
+
+    end_element_ns(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)0,
               (const xmlChar *)"http://www.sdml.info/srcML/src");
 
     assert(handler.get_stack().size() == 1);

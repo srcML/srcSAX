@@ -839,13 +839,6 @@ int main() {
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
               (const xmlChar *)"http://www.sdml.info/srcML/src");
 
-    assert(context.stack_size == 2);
-    assert(context.srcml_element_stack != 0);
-    assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
-
-    end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
-
     assert(context.stack_size == 1);
     assert(context.srcml_element_stack != 0);
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
@@ -901,18 +894,11 @@ int main() {
               (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
-    assert(context.stack_size == 2);
-    assert(context.srcml_element_stack != 0);
-    assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "macro-list") == 0);
-
-    end_element_ns(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
-
-    assert(context.stack_size == 2);
+    assert(context.stack_size == 1);
     assert(context.srcml_element_stack != 0);
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
-    end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
+    end_element_ns(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)0,
               (const xmlChar *)"http://www.sdml.info/srcML/src");
 
     assert(context.stack_size == 1);
