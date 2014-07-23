@@ -267,6 +267,8 @@ void start_root(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)localname);
+
     state->root = srcml_element(state->context, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
     state->mode = ROOT;
@@ -310,6 +312,8 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
+
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)localname);
 
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
@@ -436,6 +440,8 @@ void start_unit(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)localname);
+
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
         if(prefix && state->root.namespaces[i] && strcmp((const char *)state->root.namespaces[i], (const char *)prefix) == 0)
@@ -501,6 +507,8 @@ void start_element_ns(void * ctx, const xmlChar * localname, const xmlChar * pre
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
+
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)localname);
 
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
@@ -580,6 +588,8 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
+
+    srcml_element_stack_pop(state->context, state->srcml_element_stack);    
 
     if(strcmp((const char *)localname, "unit") == 0) {
 
