@@ -136,6 +136,65 @@ static inline void free_srcsax_attributes(int number_attributes, srcsax_attribut
 
 }
 
+/** 
+ * srcml_element_stack_push
+ * @param context the srcsax_context
+ * @param srcml_element_stack the stack
+ * @param prefix the prefix of the element to push
+ * @param localname the name of the element to push
+ *
+ * Push the element on to the stack.
+ */
+ void srcml_element_stack_push(srcsax_context * context, std::vector<const char *> & srcml_element_stack, const char * prefix, const char * localname) {
+
+    size_t prefix_length = prefix ? strlen(prefix) : 0;
+    size_t name_length = strlen(localname);
+    size_t srcml_element_length = prefix ? prefix_length + name_length + 1 : name_length;
+    char * srcml_element_string = (char *)calloc(srcml_element_length + 1, sizeof(char));
+
+    size_t offset = 0;
+    if(prefix) {
+
+        strncat(srcml_element_string, prefix, prefix_length);
+        srcml_element_string[prefix_length] = ':';
+        offset = prefix_length + 1;
+
+    }
+
+    strncat(srcml_element_string + offset, localname, name_length);
+
+    srcml_element_stack.push_back(srcml_element_string);
+
+    context->stack_size = srcml_element_stack.size();
+    context->srcml_element_stack = &srcml_element_stack.front();
+
+ }
+
+/** 
+ * srcml_element_stack_pop
+ * @param context the srcsax_context
+ * @param srcml_element_stack the stack
+ *
+ * Pop an element off the stack.
+ */
+ void srcml_element_stack_pop(srcsax_context * context, std::vector<const char *> & srcml_element_stack) {
+
+    if(srcml_element_stack.size() == 0) return;
+
+    const char * srcml_element = srcml_element_stack.back();
+
+    srcml_element_stack.pop_back();
+
+    free((void *)srcml_element);
+
+    context->stack_size = srcml_element_stack.size();
+    if(context->stack_size == 0)
+        context->srcml_element_stack = 0;
+    else
+        context->srcml_element_stack = &srcml_element_stack.front();
+
+ }
+
 /**
  * start_document
  * @param ctx an xmlParserCtxtPtr
@@ -153,6 +212,9 @@ void start_document(void * ctx) {
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
+
+    state->context->stack_size = 0;
+    state->context->srcml_element_stack = 0;
 
     if(ctxt->encoding)
         state->context->encoding = (const char *)ctxt->encoding;
@@ -187,6 +249,9 @@ void end_document(void * ctx) {
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
+
+    state->context->stack_size = 0;
+    state->context->srcml_element_stack = 0;
 
     if(state->mode != END_ROOT && state->mode != START && state->context->handler->end_root)
         state->context->handler->end_root(state->context, (const char *)state->root.localname, (const char *)state->root.prefix, (const char *)state->root.URI);
@@ -227,6 +292,8 @@ void start_root(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
+
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
 
     state->root = srcml_element(state->context, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes);
 
@@ -271,6 +338,8 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
+
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
 
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
@@ -397,6 +466,8 @@ void start_unit(void * ctx, const xmlChar * localname, const xmlChar * prefix, c
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
+
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
         if(prefix && state->root.namespaces[i] && strcmp((const char *)state->root.namespaces[i], (const char *)prefix) == 0)
@@ -462,6 +533,8 @@ void start_element_ns(void * ctx, const xmlChar * localname, const xmlChar * pre
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
+
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
 
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
@@ -541,6 +614,8 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
 
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
+
+    srcml_element_stack_pop(state->context, state->srcml_element_stack);    
 
     if(strcmp((const char *)localname, "unit") == 0) {
 

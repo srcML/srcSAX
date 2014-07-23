@@ -117,6 +117,9 @@ struct sax2_srcsax_handler {
     /** used to detect root unit */
     bool is_archive;
 
+    /** open srcMLElement stack */
+    std::vector<const char *> srcml_element_stack;
+
     /** the current parsing mode */
     srcMLMode mode;
 
