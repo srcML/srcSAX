@@ -216,6 +216,7 @@ void start_document(void * ctx) {
     state->context->stack_size = 0;
     state->context->srcml_element_stack = 0;
 
+    state->context->encoding = "UTF-8";
     if(ctxt->encoding)
         state->context->encoding = (const char *)ctxt->encoding;
     else if(ctxt->input)
@@ -333,13 +334,8 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
 
     if(ctx == NULL) return;
 
-    srcsax_namespace * srcsax_namespaces = (srcsax_namespace *)libxml2_namespaces2srcsax_namespaces(nb_namespaces, namespaces);
-    srcsax_attribute * srcsax_attributes = (srcsax_attribute *)libxml2_attributes2srcsax_attributes(nb_attributes, attributes);
-
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
-
-    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
 
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
@@ -353,15 +349,14 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
     if(strcmp((const char *)localname, "macro-list") == 0) {
 
         if(state->context->handler->meta_tag)
-            state->context->handler->meta_tag(state->context, (const char *)localname, (const char *)prefix, (const char *)URI,
-                                              nb_namespaces, srcsax_namespaces, nb_attributes, srcsax_attributes);
-
-        free_srcsax_namespaces(nb_namespaces, srcsax_namespaces);
-        free_srcsax_attributes(nb_attributes, srcsax_attributes);
+            state->meta_tags.push_back(srcml_element(state->context, localname, prefix, URI, nb_namespaces, namespaces, nb_attributes, nb_defaulted, attributes));
 
         return;
 
     }
+
+    srcsax_namespace * srcsax_namespaces = (srcsax_namespace *)libxml2_namespaces2srcsax_namespaces(nb_namespaces, namespaces);
+    srcsax_attribute * srcsax_attributes = (srcsax_attribute *)libxml2_attributes2srcsax_attributes(nb_attributes, attributes);
 
     state->is_archive = strcmp((const char *)localname, "unit") == 0;
     state->context->is_archive = state->is_archive;
@@ -378,6 +373,31 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
         free_srcsax_attributes(state->root.nb_attributes, srcsax_attributes_root);
 
     }
+
+    if(state->context->handler->meta_tag && !state->meta_tags.empty()) {
+
+        for(std::vector<srcml_element>::const_iterator citr = state->meta_tags.begin(); citr < state->meta_tags.end(); ++citr) {
+
+            srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)citr->prefix, (const char *)citr->localname);
+
+            srcsax_namespace * srcsax_namespaces_meta_tag = (srcsax_namespace *)libxml2_namespaces2srcsax_namespaces(citr->nb_namespaces, citr->namespaces);
+            srcsax_attribute * srcsax_attributes_meta_tag = (srcsax_attribute *)libxml2_attributes2srcsax_attributes(citr->nb_attributes, citr->attributes);  
+
+            state->context->handler->meta_tag(state->context, (const char *)citr->localname, (const char *)citr->prefix, (const char *)citr->URI,
+                                                citr->nb_namespaces, srcsax_namespaces_meta_tag, citr->nb_attributes,
+                                                srcsax_attributes_meta_tag);
+
+            free_srcsax_namespaces(citr->nb_namespaces, srcsax_namespaces_meta_tag);
+            free_srcsax_attributes(citr->nb_attributes, srcsax_attributes_meta_tag);
+
+            srcml_element_stack_pop(state->context, state->srcml_element_stack);
+
+
+        }
+
+    }
+
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
 
     if(!state->is_archive) {
 
@@ -605,16 +625,16 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
 
     if(ctx == NULL) return;
 
-    xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
-
-    srcml_element_stack_pop(state->context, state->srcml_element_stack);    
-
     if(strcmp((const char *)localname, "macro-list") == 0) {
 
         return;
 
-    }
+    }    
+
+    xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;  
+
+    srcml_element_stack_pop(state->context, state->srcml_element_stack);  
 
     if(strcmp((const char *)localname, "unit") == 0) {
 
@@ -632,6 +652,28 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
                                                     state->root.nb_namespaces, srcsax_namespaces_root, state->root.nb_attributes,
                                                     srcsax_attributes_root);
 
+            if(state->context->handler->meta_tag && !state->meta_tags.empty()) {
+
+                for(std::vector<srcml_element>::const_iterator citr = state->meta_tags.begin(); citr < state->meta_tags.end(); ++citr) {
+
+                    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)citr->prefix, (const char *)citr->localname);
+
+                    srcsax_namespace * srcsax_namespaces_meta_tag = (srcsax_namespace *)libxml2_namespaces2srcsax_namespaces(citr->nb_namespaces, citr->namespaces);
+                    srcsax_attribute * srcsax_attributes_meta_tag = (srcsax_attribute *)libxml2_attributes2srcsax_attributes(citr->nb_attributes, citr->attributes);  
+
+                    state->context->handler->meta_tag(state->context, (const char *)citr->localname, (const char *)citr->prefix, (const char *)citr->URI,
+                                                        citr->nb_namespaces, srcsax_namespaces_meta_tag, citr->nb_attributes,
+                                                        srcsax_attributes_meta_tag);
+
+                    free_srcsax_namespaces(citr->nb_namespaces, srcsax_namespaces_meta_tag);
+                    free_srcsax_attributes(citr->nb_attributes, srcsax_attributes_meta_tag);
+
+                    srcml_element_stack_pop(state->context, state->srcml_element_stack);
+
+
+                }
+
+            }
 
             if(state->context->handler->start_unit)
                 state->context->handler->start_unit(state->context, (const char *)state->root.localname, (const char *)state->root.prefix, (const char *)state->root.URI,
