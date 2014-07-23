@@ -136,6 +136,37 @@ static inline void free_srcsax_attributes(int number_attributes, srcsax_attribut
 
 }
 
+/** 
+ * srcml_element_stack_push
+ * @param srcml_element_stack the stack
+ * @param srcml_element item to push
+ *
+ * Push the element on to the stack.
+ */
+ void srcml_element_stack_push(std::vector<const char *> & srcml_element_stack, const char * srcml_element) {
+
+    const char * srcml_element_copy = strdup(srcml_element);
+
+    srcml_element_stack.push_back(srcml_element_copy);
+
+ }
+
+/** 
+ * srcml_element_stack_pop
+ * @param srcml_element_stack the stack
+ *
+ * Pop an element off the stack.
+ */
+ void srcml_element_stack_pop(std::vector<const char *> & srcml_element_stack) {
+
+    const char * srcml_element = srcml_element_stack.back();
+
+    srcml_element_stack.pop_back();
+
+    free((void *)srcml_element);
+
+ }
+
 /**
  * start_document
  * @param ctx an xmlParserCtxtPtr
