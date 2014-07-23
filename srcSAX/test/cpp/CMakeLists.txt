@@ -20,4 +20,4 @@
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 add_unit_test(test_srcsax_controller.cpp srcsax ${LIBXML2_LIBRARIES})
-
+add_unit_test(test_srcsax_handler_cpp.cpp srcsax ${LIBXML2_LIBRARIES})

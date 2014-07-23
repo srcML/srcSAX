@@ -47,12 +47,8 @@ protected:
     /** the current unit count */
     int unit_count;
 
-    /** number of open elements on stack */
-    size_t stack_size;
-
     /** open srcML element stack */
-    //std::vector<std::string> srcml_element_stack;
-    const char ** srcml_element_stack;
+    std::vector<std::string> srcml_element_stack;
 
     /** the xml documents encoding */
     const char * encoding;
@@ -91,16 +87,13 @@ public :
     }
 
     /**
-     * set_stack
-     * @param controller pointer to control class
+     * get_stack
      *
-     * Used by srcSAXController to provide access to self
-     * for such things as disabeling sax parsing.
+     * Used internally to update the stack.
      */
-    void set_stack(size_t stack_size, const char ** srcml_element_stack) {
+    std::vector<std::string> & get_stack() {
 
-        this->stack_size = stack_size;
-        this->srcml_element_stack = srcml_element_stack;
+        return srcml_element_stack;
 
     }
 
