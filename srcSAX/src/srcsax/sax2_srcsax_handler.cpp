@@ -713,6 +713,8 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
 
     } else {
 
+        srcml_element_stack_pop(state->context, state->srcml_element_stack);  
+
         if(state->in_function_header && (strcmp((const char *)localname, "function_decl") == 0 || strcmp((const char *)localname, "function") == 0)) {
 
             //state->context->handler->endFunction();

@@ -25,6 +25,7 @@
 
 #include <libxml/parser.h>
 
+#include <string>
 #include <cassert>
 
 /**
@@ -225,7 +226,17 @@ public :
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
-    assert(strcmp(context->srcml_element_stack[context->stack_size - 1], localname) == 0);
+    std::string element = "";
+    if(prefix) {
+
+      element += prefix;
+      element += ':';
+
+    }
+
+    element += localname;
+
+   assert(std::string(context->srcml_element_stack[context->stack_size - 1]) == element);
 
     test_handler->start_element_call_number = ++test_handler->call_count;
 
