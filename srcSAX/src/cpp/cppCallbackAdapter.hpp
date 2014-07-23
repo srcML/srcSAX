@@ -73,6 +73,18 @@ public:
     }
 
     /**
+     * update_srcml_element_stack
+     * @param context the srcml_context.
+     *
+     * Update the srcML element stack from the context;
+     */
+    void update_srcml_element_stack(struct srcsax_context * context) {
+
+        handler->set_stack(context->stack_size, context->srcml_element_stack);
+
+    }
+
+    /**
      * start_document
      * @param context a srcSAX context
      *
@@ -81,6 +93,8 @@ public:
     static void start_document(struct srcsax_context * context) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
+
+        cpp_adapter->update_srcml_element_stack(context);
 
         cpp_adapter->handler->startDocument();
 
