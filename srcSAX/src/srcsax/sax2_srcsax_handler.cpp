@@ -216,6 +216,7 @@ void start_document(void * ctx) {
     state->context->stack_size = 0;
     state->context->srcml_element_stack = 0;
 
+    state->context->encoding = "UTF-8";
     if(ctxt->encoding)
         state->context->encoding = (const char *)ctxt->encoding;
     else if(ctxt->input)

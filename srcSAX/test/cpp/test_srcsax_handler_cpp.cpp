@@ -28,8 +28,11 @@
 #include <string.h>
 #include <cassert>
 
-/* default initialization used throughout for testing */
+/** default initialization used throughout for testing */
 sax2_srcsax_handler sax2_handler_init;
+
+/** default initialization used throughout for testing */
+xmlParserCtxt ctxt_init;
 
 /**
  * main
@@ -57,7 +60,7 @@ int main() {
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
     sax2_handler.context = &context;
 
-    xmlParserCtxt ctxt;
+    xmlParserCtxt ctxt = ctxt_init;
     xmlSAXHandler sax = srcsax_sax2_factory();
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
@@ -153,7 +156,7 @@ int main() {
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
     sax2_handler.context = &context;
 
-    xmlParserCtxt ctxt;
+    xmlParserCtxt ctxt = ctxt_init;
     xmlSAXHandler sax = srcsax_sax2_factory();
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
@@ -210,7 +213,7 @@ int main() {
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
     sax2_handler.context = &context;
 
-    xmlParserCtxt ctxt;
+    xmlParserCtxt ctxt = ctxt_init;
     xmlSAXHandler sax = srcsax_sax2_factory();
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
@@ -278,7 +281,7 @@ int main() {
     sax2_srcsax_handler sax2_handler = sax2_handler_init;
     sax2_handler.context = &context;
 
-    xmlParserCtxt ctxt;
+    xmlParserCtxt ctxt = ctxt_init;
     xmlSAXHandler sax = srcsax_sax2_factory();
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
