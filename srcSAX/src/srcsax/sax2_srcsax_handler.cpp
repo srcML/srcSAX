@@ -339,8 +339,6 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
     xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
     sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
 
-    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
-
     int ns_length = state->root.nb_namespaces * 2;
     for (int i = 0; i < ns_length; i += 2)
         if(prefix && state->root.namespaces[i] && strcmp((const char *)state->root.namespaces[i], (const char *)prefix) == 0)
@@ -378,6 +376,8 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
         free_srcsax_attributes(state->root.nb_attributes, srcsax_attributes_root);
 
     }
+
+    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
 
     if(!state->is_archive) {
 
