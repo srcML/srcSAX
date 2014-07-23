@@ -173,7 +173,10 @@ static inline void free_srcsax_attributes(int number_attributes, srcsax_attribut
     free((void *)srcml_element);
 
     context->stack_size = srcml_element_stack.size();
-    context->srcml_element_stack = &srcml_element_stack.front();
+    if(context->stack_size == 0)
+        context->srcml_element_stack = 0;
+    else
+        context->srcml_element_stack = &srcml_element_stack.front();
 
  }
 

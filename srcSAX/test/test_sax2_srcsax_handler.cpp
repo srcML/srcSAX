@@ -721,6 +721,62 @@ int main() {
     assert(context.srcml_element_stack != 0);
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
+    start_element_ns_first(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+
+    assert(context.stack_size == 2);
+    assert(context.srcml_element_stack != 0);
+    assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "expr_stmt") == 0);
+
+    start_unit(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+
+    assert(context.stack_size == 3);
+    assert(context.srcml_element_stack != 0);
+    assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
+
+    end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src");
+
+    assert(context.stack_size == 2);
+    assert(context.srcml_element_stack != 0);
+    assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "expr_stmt") == 0);
+
+    start_unit(&ctxt, (const xmlChar *)"decl_stmt", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar **) attributes);
+
+    assert(context.stack_size == 3);
+    assert(context.srcml_element_stack != 0);
+    assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "decl_stmt") == 0);
+
+    end_element_ns(&ctxt, (const xmlChar *)"decl_stmt", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src");
+
+    assert(context.stack_size == 2);
+    assert(context.srcml_element_stack != 0);
+    assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "expr_stmt") == 0);
+
+    end_element_ns(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src");
+
+    assert(context.stack_size == 1);
+    assert(context.srcml_element_stack != 0);
+    assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
+
+    end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)"src",
+              (const xmlChar *)"http://www.sdml.info/srcML/src");
+
+    assert(context.stack_size == 0);
+    assert(context.srcml_element_stack == 0);
+
+    end_document(&ctxt);
+
+    assert(context.stack_size == 0);
+    assert(context.srcml_element_stack == 0);
+
   }
 
   return 0;
