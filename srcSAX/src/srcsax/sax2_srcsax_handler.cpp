@@ -603,6 +603,12 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
     fprintf(stderr, "HERE: %s %s %d '%s'\n", __FILE__, __FUNCTION__, __LINE__, (const char *)localname);
 #endif
 
+    xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
+    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
+
+    srcml_element_stack_pop(state->context, state->srcml_element_stack);    
+
+
     if(ctx == NULL) return;
 
 
@@ -611,12 +617,7 @@ void end_element_ns(void * ctx, const xmlChar * localname, const xmlChar * prefi
         return;
 
     }
-
-    xmlParserCtxtPtr ctxt = (xmlParserCtxtPtr) ctx;
-    sax2_srcsax_handler * state = (sax2_srcsax_handler *) ctxt->_private;
-
-    srcml_element_stack_pop(state->context, state->srcml_element_stack);    
-
+    
     if(strcmp((const char *)localname, "unit") == 0) {
 
         if(state->mode == ROOT) {
