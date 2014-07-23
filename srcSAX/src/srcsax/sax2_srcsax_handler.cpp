@@ -147,11 +147,21 @@ static inline void free_srcsax_attributes(int number_attributes, srcsax_attribut
  */
  void srcml_element_stack_push(srcsax_context * context, std::vector<const char *> & srcml_element_stack, const char * prefix, const char * localname) {
 
-    size_t prefix_length = strlen(prefix);
+    size_t prefix_length = prefix ? strlen(prefix) : 0;
     size_t name_length = strlen(localname);
-    char * srcml_element_string = (char *)calloc(prefix_length + name_length + 1, sizeof(char));
-    strncat(srcml_element_string, prefix, prefix_length);
-    strncat(srcml_element_string + prefix_length, localname, name_length);
+    size_t srcml_element_length = prefix ? prefix_length + name_length + 1 : name_length;
+    char * srcml_element_string = (char *)calloc(srcml_element_length + 1, sizeof(char));
+
+    size_t offset = 0;
+    if(prefix) {
+
+        strncat(srcml_element_string, prefix, prefix_length);
+        srcml_element_string[prefix_length] = ':';
+        offset = prefix_length + 1;
+
+    }
+
+    strncat(srcml_element_string + offset, localname, name_length);
 
     srcml_element_stack.push_back(srcml_element_string);
 
