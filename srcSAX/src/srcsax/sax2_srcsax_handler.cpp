@@ -397,8 +397,6 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
 
     }
 
-    srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
-
     if(!state->is_archive) {
 
         ++state->context->unit_count;
@@ -419,6 +417,9 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
 
         if(state->context->handler->characters_unit)
             state->context->handler->characters_unit(state->context, state->characters.c_str(), (int)state->characters.size());
+
+        srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
+
         if(state->context->handler->start_element)
             state->context->handler->start_element(state->context, (const char *)localname, (const char *)prefix, (const char *)URI,
                                                       nb_namespaces, srcsax_namespaces, nb_attributes, srcsax_attributes);
@@ -429,6 +430,8 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
             state->context->handler->characters_root(state->context, state->characters.c_str(), (int)state->characters.size());
 
         ++state->context->unit_count;
+
+        srcml_element_stack_push(state->context, state->srcml_element_stack, (const char *)prefix, (const char *)localname);
 
         state->mode = UNIT;
         if(state->context->handler->start_unit)
