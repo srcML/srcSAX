@@ -25,6 +25,10 @@
 
 #include <libxml/parser.h>
 
+#include <string.h>
+#include <string>
+#include <cassert>
+
 /**
  * srcsax_handler_test
  *
@@ -125,6 +129,9 @@ public :
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
+    assert(context->stack_size == 0);
+    assert(context->srcml_element_stack == 0);
+
     test_handler->start_document_call_number = ++test_handler->call_count;
 
   }
@@ -139,6 +146,9 @@ public :
   static void end_document(struct srcsax_context * context) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    assert(context->stack_size == 0);
+    assert(context->srcml_element_stack == 0);
 
     test_handler->end_document_call_number = ++test_handler->call_count;
 
@@ -164,6 +174,9 @@ public :
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
+    assert(context->stack_size == 1);
+    assert(strcmp(context->srcml_element_stack[context->stack_size - 1], "unit") == 0);
+
     test_handler->start_root_call_number = ++test_handler->call_count;
 
   }
@@ -188,6 +201,8 @@ public :
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
 
+    assert(strcmp(context->srcml_element_stack[context->stack_size - 1], "unit") == 0);
+
     test_handler->start_unit_call_number = ++test_handler->call_count;
 
   }
@@ -211,6 +226,18 @@ public :
                               const struct srcsax_attribute * attributes) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    std::string element = "";
+    if(prefix) {
+
+      element += prefix;
+      element += ':';
+
+    }
+
+    element += localname;
+
+   assert(std::string(context->srcml_element_stack[context->stack_size - 1]) == element);
 
     test_handler->start_element_call_number = ++test_handler->call_count;
 
@@ -323,6 +350,8 @@ public :
                          const struct srcsax_attribute * attributes) {
 
     srcsax_handler_test * test_handler = (srcsax_handler_test *)context->data;
+
+    assert(strcmp(context->srcml_element_stack[context->stack_size - 1], localname) == 0);
 
     test_handler->meta_tag_call_number = ++test_handler->call_count;
 

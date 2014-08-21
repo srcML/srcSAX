@@ -21,7 +21,6 @@
 #ifndef INCLUDED_SRCSAX_HANDLER_HPP
 #define INCLUDED_SRCSAX_HANDLER_HPP
 
-#include <srcml_element.hpp>
 #include <srcSAXController.hpp>
 
 #include <libxml/parser.h>
@@ -47,6 +46,9 @@ protected:
 
     /** the current unit count */
     int unit_count;
+
+    /** open srcML element stack */
+    std::vector<std::string> srcml_element_stack;
 
     /** the xml documents encoding */
     const char * encoding;
@@ -81,6 +83,17 @@ public :
     void increment_unit_count() {
 
         ++unit_count;
+
+    }
+
+    /**
+     * get_stack
+     *
+     * Used internally to update the stack.
+     */
+    std::vector<std::string> & get_stack() {
+
+        return srcml_element_stack;
 
     }
 

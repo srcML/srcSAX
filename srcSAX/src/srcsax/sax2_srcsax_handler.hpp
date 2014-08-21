@@ -103,7 +103,7 @@ struct function_prototype {
 struct sax2_srcsax_handler {
 
     /** default constructor */
-    sax2_srcsax_handler() : context(0), root(), is_archive(false), mode(START), parse_function(false), in_function_header(false), current_function() {}
+    sax2_srcsax_handler() : context(0), root(), meta_tags(), characters(), is_archive(false), mode(START), parse_function(false), in_function_header(false), current_function() {}
 
     /** hooks for processing */
     srcsax_context * context;
@@ -111,11 +111,17 @@ struct sax2_srcsax_handler {
     /** temporary storage for root unit */
     srcml_element root;
 
-    /** root characters */
+    /** temporary storage of meta-tags */
+    std::vector<srcml_element> meta_tags;
+
+    /** temporary storate of root characters */
     std::string characters;
 
     /** used to detect root unit */
     bool is_archive;
+
+    /** open srcMLElement stack */
+    std::vector<const char *> srcml_element_stack;
 
     /** the current parsing mode */
     srcMLMode mode;
