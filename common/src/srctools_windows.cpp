@@ -20,6 +20,9 @@
 
 #include <srctools_windows.hpp>
 
+#include <cstdlib>
+#include <cstring>
+
 #ifdef _MSC_BUILD
 
 char * strndup(const char * source, size_t n) {
