@@ -29,7 +29,7 @@ option(BUILD_EXAMPLES "Build unit tests for srcTools" ON)
 find_package(LibXml2 REQUIRED)
 
 # include needed includes
-include_directories(${LIBXML2_INCLUDE_DIR})
+include_directories(${LIBXML2_INCLUDE_DIR} common/include)
 add_definitions("-std=c++11")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
