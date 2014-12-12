@@ -120,6 +120,8 @@ public:
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
+        cpp_adapter->handler->set_encoding(context->encoding);
+
         cpp_adapter->handler->startDocument();
 
     }
@@ -159,6 +161,8 @@ public:
                            const struct srcsax_attribute * attributes) {
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
+
+        cpp_adapter->handler->set_is_archive(context->is_archive);
 
         if(context->is_archive)
             cpp_adapter->srcml_element_stack_push((const char *)prefix, (const char *)localname);
