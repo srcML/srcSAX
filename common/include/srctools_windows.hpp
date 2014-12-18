@@ -1,7 +1,7 @@
 /**
  * @file srctools_windows.hpp
  *
- * @copyright Copyright (C) 2013-2014 SDML (www.srcML.org)
+ * @copyright Copyright (C) 2014 srcML, LLC. (www.srcML.org)
  *
  * srcTools are free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,10 @@
 #define INCLUDED_SRCTOOLS_WINDOWS_HPP
 
 #ifdef _MSC_BUILD
+
+#ifdef WIN32
+#include <cstdlib>
+#endif
 
 char * strndup(const char * source, size_t n);
 
