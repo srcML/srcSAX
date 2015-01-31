@@ -33,4 +33,4 @@ include(srctools)
 # include sub directories
 add_subdirectory(srcSAX)
 add_subdirectory(srcSlice)
-
+add_subdirectory(srcType)
