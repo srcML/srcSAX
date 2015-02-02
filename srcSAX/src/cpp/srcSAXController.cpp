@@ -50,7 +50,7 @@ srcSAXController::srcSAXController(const char * filename, const char * encoding)
  *
  * Constructor
  */
-srcSAXController::srcSAXController(std::string srcml_buffer, const char * encoding) {
+srcSAXController::srcSAXController(const std::string & srcml_buffer, const char * encoding) {
 
     context = srcsax_create_context_memory(srcml_buffer.c_str(), srcml_buffer.size(), encoding);
 

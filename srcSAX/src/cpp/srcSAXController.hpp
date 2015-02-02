@@ -74,7 +74,7 @@ public :
      *
      * Constructor
      */
-    srcSAXController(std::string srcml_buffer, const char * encoding = 0);
+    srcSAXController(const std::string & srcml_buffer, const char * encoding = 0);
 
     /**
      * srcSAXController
