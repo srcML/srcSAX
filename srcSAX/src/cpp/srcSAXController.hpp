@@ -57,6 +57,9 @@ private :
     // xmlParserCtxt
     srcsax_context * context;
 
+    // memory buffer storage
+    std::string srcml_buffer;
+
 public :
 
     /**

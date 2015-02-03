@@ -50,9 +50,9 @@ srcSAXController::srcSAXController(const char * filename, const char * encoding)
  *
  * Constructor
  */
-srcSAXController::srcSAXController(const std::string & srcml_buffer, const char * encoding) {
+srcSAXController::srcSAXController(const std::string & srcml_buffer, const char * encoding) : srcml_buffer(srcml_buffer) {
 
-    context = srcsax_create_context_memory(srcml_buffer.c_str(), srcml_buffer.size(), encoding);
+    context = srcsax_create_context_memory(this->srcml_buffer.c_str(), this->srcml_buffer.size(), encoding);
 
     if(context == NULL) throw std::string("File does not exist");
 
