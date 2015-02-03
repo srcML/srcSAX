@@ -3,34 +3,41 @@
 #
 #  Copyright (C) 2014 SDML (www.sdml.info)
 #
-#  This file is part of the srcTools.
+#  This file is part of the srcSAX.
 #
-#  The srcTools is free software; you can redistribute it and/or modify
+#  The srcSAX is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 2 of the License, or
 #  (at your option) any later version.
 #
-#  The srcTools is distributed in the hope that it will be useful,
+#  The srcSAX is distributed in the hope that it will be useful,
 #  but WITHOUT ANY WARRANTY; without even the implied warranty of
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU General Public License for more details.
 #
 #  You should have received a copy of the GNU General Public License
-#  along with the srcTools; if not, write to the Free Software
+#  along with the srcSAX; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 cmake_minimum_required(VERSION 2.8)
-project(srcTools)
+project(srcSAX)
 
 enable_testing()
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake)
-include(srctools)
+include(srcsax)
 
-# setup project includes
-#include_directories()
+# includes and add subdirectories
+include_directories(${LIBXML2_INCLUDE_DIR} src/srcsax src/c src/cpp)
 
-# include sub directories
-add_subdirectory(srcSAX)
-add_subdirectory(srcSlice)
-add_subdirectory(srcType)
+add_subdirectory(src)
+
+if(BUILD_UNIT_TESTS)
+    include_directories(test)
+    add_subdirectory(test)
+endif()
+
+if(BUILD_EXAMPLES)
+    include_directories(examples)
+    add_subdirectory(examples)
+endif()

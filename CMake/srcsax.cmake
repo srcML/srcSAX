@@ -1,5 +1,5 @@
 ##
-#  srctools.cmake
+#  srcsax.cmake
 #
 #  Copyright (C) 2014 SDML (www.sdml.info)
 #
