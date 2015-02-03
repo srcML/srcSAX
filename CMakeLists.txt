@@ -27,17 +27,14 @@ enable_testing()
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake)
 include(srcsax)
 
-# includes and add subdirectories
-include_directories(${LIBXML2_INCLUDE_DIR} src/srcsax src/c src/cpp)
-
 add_subdirectory(src)
 
 if(BUILD_UNIT_TESTS)
-    include_directories(test)
+    include_directories(test ${LIBXML2_INCLUDE_DIR} src/srcsax src/cpp src/windows)
     add_subdirectory(test)
 endif()
 
 if(BUILD_EXAMPLES)
-    include_directories(examples)
+    include_directories(examples ${LIBXML2_INCLUDE_DIR} src/srcsax src/cpp src/windows)
     add_subdirectory(examples)
 endif()

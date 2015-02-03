@@ -21,7 +21,7 @@
  */
 
 #include <sax2_srcsax_handler.hpp>
-#include <srctools_windows.hpp>
+#include <windows_utils.hpp>
 
 #include <cstring>
 

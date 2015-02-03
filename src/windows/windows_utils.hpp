@@ -1,14 +1,14 @@
 /**
- * @file srctools_windows.hpp
+ * @file windows_utils.hpp
  *
  * @copyright Copyright (C) 2014 srcML, LLC. (www.srcML.org)
  *
- * srcTools are free software; you can redistribute it and/or modify
+ * srcSAX are free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * srcTools are distributed in the hope that it will be useful,
+ * srcSAX are distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
