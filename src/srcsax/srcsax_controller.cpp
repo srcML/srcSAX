@@ -336,7 +336,16 @@ int srcsax_parse(struct srcsax_context * context) {
     state.context = context;
     context->libxml2_context->_private = &state;
 
-    int status = xmlParseDocument(context->libxml2_context);
+    int status = 0;
+    try {
+
+        status = xmlParseDocument(context->libxml2_context);
+
+    } catch(...) {
+
+        return -1;
+
+    }
 
     context->libxml2_context->sax = save_sax;
 

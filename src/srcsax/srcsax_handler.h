@@ -23,6 +23,10 @@
 
 #include <libxml/parser.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct srcsax_context;
 
 /**
@@ -255,5 +259,8 @@ void (*processing_instruction)(struct srcsax_context * context, const char * tar
 
 };
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif

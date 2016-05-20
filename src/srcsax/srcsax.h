@@ -24,6 +24,10 @@
 
 #include <libxml/parser.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * srcsax_context
  *
@@ -88,5 +92,9 @@ int srcsax_parse_handler(struct srcsax_context * context, struct srcsax_handler 
 
 /* srcSAX terminate parse function */
 void srcsax_stop_parser(struct srcsax_context * context);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

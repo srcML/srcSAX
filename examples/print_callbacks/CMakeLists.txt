@@ -23,7 +23,7 @@ file(GLOB PRINT_CALLBACKS_SOURCE *.cpp)
 file(GLOB PRINT_CALLBACKS_HEADER *.hpp)
 
 add_executable(print_callbacks ${PRINT_CALLBACKS_SOURCE} ${PRINT_CALLBACKS_HEADER})
-target_link_libraries(print_callbacks srcsax ${LIBXML2_LIBRARIES})
+target_link_libraries(print_callbacks srcsax_static ${LIBXML2_LIBRARIES})
 
 # eventually make thes part of either the sub-directies or the add_unit_test
 copy_dependent_file(print_callbacks ../example.xml)
