@@ -64,7 +64,7 @@ struct _xmlBuf {
  *
  * @returns 0 on success and -1 on error.
  */
-int
+static int
 _xmlBufResetInput(xmlBuf * buf, xmlParserInputPtr input) {
     if ((input == NULL) || (buf == NULL) || (buf->error))
         return(-1);
@@ -84,7 +84,7 @@ _xmlBufResetInput(xmlBuf * buf, xmlParserInputPtr input) {
  *
  * @returns 0 on success and -1 on error.
  */
-int
+static int
 _xmlBufResetInput(xmlBuffer * buf, xmlParserInputPtr input) {
     if ((input == NULL) || (buf == NULL))
         return -1;
