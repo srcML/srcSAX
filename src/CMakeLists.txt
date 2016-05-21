@@ -21,9 +21,8 @@ else()
     set_target_properties(${LIB_NAME} PROPERTIES OUTPUT_NAME srcsax)
 endif()
 
-    target_link_libraries(${LIB_NAME} PRIVATE ${LIBXML2_LIBRARIES})
-
 endmacro()
 
 build_lib(srcsax_static STATIC)
 build_lib(srcsax_shared SHARED)
+target_link_libraries(srcsax_shared PRIVATE ${LIBXML2_LIBRARIES})
