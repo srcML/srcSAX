@@ -50,7 +50,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -79,7 +79,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -108,7 +108,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -119,38 +119,38 @@ int main() {
     xmlSAXHandler sax = srcsax_sax2_factory();
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
-    const char * namespaces[4] = { 0, "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * namespaces[4] = { 0, "http://www.srcML.org/srcML/src", "cpp", "http://www.srcML.org/srcML/cpp" };
     const char * values = "abc";
-    const char * attributes[15] = { "filename", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                   "language", 0, "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    const char * attributes[15] = { "filename", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "dir", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2,
+                                   "language", 0, "http://www.srcML.org/srcML/src", values + 2, values + 3 };
     start_root(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert((const char *)sax2_handler.root.localname == std::string("unit"));
     assert((const char *)sax2_handler.root.prefix == 0);
-    assert((const char *)sax2_handler.root.URI == std::string("http://www.sdml.info/srcML/src"));
+    assert((const char *)sax2_handler.root.URI == std::string("http://www.srcML.org/srcML/src"));
     assert(sax2_handler.root.nb_namespaces == 2);
     assert((const char *)sax2_handler.root.namespaces[0] == 0);
-    assert((const char *)sax2_handler.root.namespaces[1] == std::string("http://www.sdml.info/srcML/src"));
+    assert((const char *)sax2_handler.root.namespaces[1] == std::string("http://www.srcML.org/srcML/src"));
     assert((const char *)sax2_handler.root.namespaces[2] == std::string("cpp"));
-    assert((const char *)sax2_handler.root.namespaces[3] == std::string("http://www.sdml.info/srcML/cpp"));
+    assert((const char *)sax2_handler.root.namespaces[3] == std::string("http://www.srcML.org/srcML/cpp"));
     assert(sax2_handler.root.nb_attributes == 3);
     assert(sax2_handler.root.nb_defaulted == 0);
     assert((const char *)sax2_handler.root.attributes[0] == std::string("filename"));
     assert((const char *)sax2_handler.root.attributes[1] == 0);
-    assert((const char *)sax2_handler.root.attributes[2] == std::string("http://www.sdml.info/srcML/src"));
+    assert((const char *)sax2_handler.root.attributes[2] == std::string("http://www.srcML.org/srcML/src"));
     assert(sax2_handler.root.attributes[4] - sax2_handler.root.attributes[3] == 1);
     assert((char)sax2_handler.root.attributes[3][0] == 'a');
     assert((const char *)sax2_handler.root.attributes[5] == std::string("dir"));
     assert((const char *)sax2_handler.root.attributes[6] == 0);
-    assert((const char *)sax2_handler.root.attributes[7] == std::string("http://www.sdml.info/srcML/src"));
+    assert((const char *)sax2_handler.root.attributes[7] == std::string("http://www.srcML.org/srcML/src"));
     assert(sax2_handler.root.attributes[9] - sax2_handler.root.attributes[8] == 1);
     assert((char)sax2_handler.root.attributes[8][0] == 'b');
     assert((const char *)sax2_handler.root.attributes[10] == std::string("language"));
     assert((const char *)sax2_handler.root.attributes[11] == 0);
-    assert((const char *)sax2_handler.root.attributes[12] == std::string("http://www.sdml.info/srcML/src"));
+    assert((const char *)sax2_handler.root.attributes[12] == std::string("http://www.srcML.org/srcML/src"));
     assert(sax2_handler.root.attributes[14] - sax2_handler.root.attributes[13] == 1);
     assert((char)sax2_handler.root.attributes[13][0] == 'c');
     assert(ctxt.sax->startDocument == start_document);
@@ -167,13 +167,13 @@ int main() {
 
   {
 
-    const char * namespaces[4] = { 0, "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * namespaces[4] = { 0, "http://www.srcML.org/srcML/src", "cpp", "http://www.srcML.org/srcML/cpp" };
     const char * values = "abc";
-    const char * attributes[15] = { "filename", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                    "language", 0, "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    const char * attributes[15] = { "filename", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "dir", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2,
+                                    "language", 0, "http://www.srcML.org/srcML/src", values + 2, values + 3 };
     start_root(NULL, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
   }
@@ -186,7 +186,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -197,16 +197,16 @@ int main() {
     xmlSAXHandler sax = srcsax_sax2_factory();
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
-    const char * namespaces[4] = { 0, "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * namespaces[4] = { 0, "http://www.srcML.org/srcML/src", "cpp", "http://www.srcML.org/srcML/cpp" };
     const char * values = "abc";
-    const char * attributes[15] = { "filename", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                   "language", 0, "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    const char * attributes[15] = { "filename", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "dir", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2,
+                                   "language", 0, "http://www.srcML.org/srcML/src", values + 2, values + 3 };
     start_root(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
     start_element_ns_first(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
     assert(ctxt.sax->startDocument == start_document);
     assert(ctxt.sax->endDocument == end_document);
@@ -220,16 +220,16 @@ int main() {
   }
 
   {
-    const char * namespaces[4] = { 0, "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * namespaces[4] = { 0, "http://www.srcML.org/srcML/src", "cpp", "http://www.srcML.org/srcML/cpp" };
     const char * values = "abc";
-    const char * attributes[15] = { "filename", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                    "language", 0, "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    const char * attributes[15] = { "filename", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "dir", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2,
+                                    "language", 0, "http://www.srcML.org/srcML/src", values + 2, values + 3 };
     start_root(NULL, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);                                    
     start_element_ns_first(NULL, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
   }
@@ -242,7 +242,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -253,14 +253,14 @@ int main() {
     xmlSAXHandler sax = srcsax_sax2_factory();
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
-    const char * namespaces[4] = { 0, "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * namespaces[4] = { 0, "http://www.srcML.org/srcML/src", "cpp", "http://www.srcML.org/srcML/cpp" };
     const char * values = "abc";
-    const char * attributes[15] = { "filename", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                   "language", 0, "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    const char * attributes[15] = { "filename", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "dir", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2,
+                                   "language", 0, "http://www.srcML.org/srcML/src", values + 2, values + 3 };
 
     start_unit(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
     assert(ctxt.sax->startDocument == start_document);
     assert(ctxt.sax->endDocument == end_document);
@@ -275,13 +275,13 @@ int main() {
 
   {
 
-    const char * namespaces[4] = { 0, "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * namespaces[4] = { 0, "http://www.srcML.org/srcML/src", "cpp", "http://www.srcML.org/srcML/cpp" };
     const char * values = "abc";
-    const char * attributes[15] = { "filename", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                    "language", 0, "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    const char * attributes[15] = { "filename", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "dir", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2,
+                                    "language", 0, "http://www.srcML.org/srcML/src", values + 2, values + 3 };
     start_unit(NULL, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
   }
@@ -294,7 +294,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -305,14 +305,14 @@ int main() {
     xmlSAXHandler sax = srcsax_sax2_factory();
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
-    const char * namespaces[4] = { 0, "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * namespaces[4] = { 0, "http://www.srcML.org/srcML/src", "cpp", "http://www.srcML.org/srcML/cpp" };
     const char * values = "abc";
-    const char * attributes[15] = { "filename", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                   "language", 0, "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    const char * attributes[15] = { "filename", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "dir", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2,
+                                   "language", 0, "http://www.srcML.org/srcML/src", values + 2, values + 3 };
 
     start_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
     assert(ctxt.sax->startDocument == start_document);
     assert(ctxt.sax->endDocument == end_document);
@@ -326,13 +326,13 @@ int main() {
   }
 
   {
-    const char * namespaces[4] = { 0, "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * namespaces[4] = { 0, "http://www.srcML.org/srcML/src", "cpp", "http://www.srcML.org/srcML/cpp" };
     const char * values = "abc";
-    const char * attributes[15] = { "filename", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                    "language", 0, "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    const char * attributes[15] = { "filename", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "dir", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2,
+                                    "language", 0, "http://www.srcML.org/srcML/src", values + 2, values + 3 };
     start_element_ns(NULL, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
   }
@@ -345,7 +345,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -357,7 +357,7 @@ int main() {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-                   (const xmlChar *)"http://www.sdml.info/srcML/src");
+                   (const xmlChar *)"http://www.srcML.org/srcML/src");
     assert(ctxt.sax->startDocument == start_document);
     assert(ctxt.sax->endDocument == end_document);
     assert(ctxt.sax->startElementNs == start_unit);
@@ -374,7 +374,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -387,7 +387,7 @@ int main() {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-                   (const xmlChar *)"http://www.sdml.info/srcML/src");
+                   (const xmlChar *)"http://www.srcML.org/srcML/src");
     assert(ctxt.sax->startDocument == start_document);
     assert(ctxt.sax->endDocument == end_document);
     assert(ctxt.sax->startElementNs == start_unit);
@@ -404,7 +404,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -416,7 +416,7 @@ int main() {
     ctxt.sax = &sax;
     ctxt._private = &sax2_handler;
     end_element_ns(&ctxt, (const xmlChar *)"name", (const xmlChar *)0,
-                   (const xmlChar *)"http://www.sdml.info/srcML/src");
+                   (const xmlChar *)"http://www.srcML.org/srcML/src");
     assert(ctxt.sax->startDocument == start_document);
     assert(ctxt.sax->endDocument == end_document);
     assert(ctxt.sax->startElementNs == start_root);
@@ -431,7 +431,7 @@ int main() {
   {
 
     end_element_ns(NULL, (const xmlChar *)"unit", (const xmlChar *)0,
-                 (const xmlChar *)"http://www.sdml.info/srcML/src");
+                 (const xmlChar *)"http://www.srcML.org/srcML/src");
   }
 
   /*
@@ -442,7 +442,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -480,7 +480,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -516,7 +516,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -552,7 +552,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -566,15 +566,15 @@ int main() {
     ctxt._private = &sax2_handler;
     const char ** namespaces = 0;
     const char * values = "ab";
-    const char * attributes[10] = { "token", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "type", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2 };
+    const char * attributes[10] = { "token", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "type", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2 };
 
     start_root(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
               (const xmlChar **) attributes);
 
     start_element_ns_first(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 0, (const xmlChar **)namespaces, 2, 0,
               (const xmlChar **) attributes);
     assert(ctxt.sax->startDocument == start_document);
     assert(ctxt.sax->endDocument == end_document);
@@ -595,7 +595,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -631,7 +631,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -667,7 +667,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -703,7 +703,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -719,13 +719,13 @@ int main() {
     assert(context.stack_size == 0);
     assert(context.srcml_element_stack == 0);
 
-    const char * namespaces[4] = { 0, "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * namespaces[4] = { 0, "http://www.srcML.org/srcML/src", "cpp", "http://www.srcML.org/srcML/cpp" };
     const char * values = "abc";
-    const char * attributes[15] = { "filename", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                   "language", 0, "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    const char * attributes[15] = { "filename", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "dir", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2,
+                                   "language", 0, "http://www.srcML.org/srcML/src", values + 2, values + 3 };
     start_root(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 1);
@@ -733,7 +733,7 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     start_element_ns_first(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 2);
@@ -741,7 +741,7 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "expr_stmt") == 0);
 
     start_unit(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 3);
@@ -749,14 +749,14 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 2);
     assert(context.srcml_element_stack != 0);
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "expr_stmt") == 0);
 
     start_element_ns(&ctxt, (const xmlChar *)"decl_stmt", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 3);
@@ -764,7 +764,7 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "decl_stmt") == 0);
 
     start_element_ns(&ctxt, (const xmlChar *)"if", (const xmlChar *)"cpp",
-              (const xmlChar *)"http://www.sdml.info/srcML/cpp", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/cpp", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 4);
@@ -772,28 +772,28 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "cpp:if") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"if", (const xmlChar *)"cpp",
-              (const xmlChar *)"http://www.sdml.info/srcML/cpp");
+              (const xmlChar *)"http://www.srcML.org/srcML/cpp");
 
     assert(context.stack_size == 3);
     assert(context.srcml_element_stack != 0);
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "decl_stmt") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"decl_stmt", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 2);
     assert(context.srcml_element_stack != 0);
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "expr_stmt") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 1);
     assert(context.srcml_element_stack != 0);
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 0);
     assert(context.srcml_element_stack == 0);
@@ -810,7 +810,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -826,13 +826,13 @@ int main() {
     assert(context.stack_size == 0);
     assert(context.srcml_element_stack == 0);
 
-    const char * namespaces[4] = { 0, "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * namespaces[4] = { 0, "http://www.srcML.org/srcML/src", "cpp", "http://www.srcML.org/srcML/cpp" };
     const char * values = "abc";
-    const char * attributes[15] = { "filename", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                   "language", 0, "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    const char * attributes[15] = { "filename", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "dir", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2,
+                                   "language", 0, "http://www.srcML.org/srcML/src", values + 2, values + 3 };
     start_root(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 1);
@@ -840,7 +840,7 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     start_element_ns_first(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 2);
@@ -848,14 +848,14 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 1);
     assert(context.srcml_element_stack != 0);
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 0);
     assert(context.srcml_element_stack == 0);
@@ -872,7 +872,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -888,13 +888,13 @@ int main() {
     assert(context.stack_size == 0);
     assert(context.srcml_element_stack == 0);
 
-    const char * namespaces[4] = { 0, "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * namespaces[4] = { 0, "http://www.srcML.org/srcML/src", "cpp", "http://www.srcML.org/srcML/cpp" };
     const char * values = "abc";
-    const char * attributes[15] = { "filename", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                   "language", 0, "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    const char * attributes[15] = { "filename", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "dir", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2,
+                                   "language", 0, "http://www.srcML.org/srcML/src", values + 2, values + 3 };
     start_root(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 1);
@@ -902,7 +902,7 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     start_element_ns_first(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 1);
@@ -910,7 +910,7 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 1);
     assert(context.srcml_element_stack != 0);
@@ -918,7 +918,7 @@ int main() {
 
 
     start_element_ns_first(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 2);
@@ -926,14 +926,14 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 1);
     assert(context.srcml_element_stack != 0);
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 0);
     assert(context.srcml_element_stack == 0);
@@ -950,7 +950,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -966,13 +966,13 @@ int main() {
     assert(context.stack_size == 0);
     assert(context.srcml_element_stack == 0);
 
-    const char * namespaces[4] = { 0, "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * namespaces[4] = { 0, "http://www.srcML.org/srcML/src", "cpp", "http://www.srcML.org/srcML/cpp" };
     const char * values = "abc";
-    const char * attributes[15] = { "filename", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                   "language", 0, "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    const char * attributes[15] = { "filename", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "dir", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2,
+                                   "language", 0, "http://www.srcML.org/srcML/src", values + 2, values + 3 };
     start_root(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 1);
@@ -980,7 +980,7 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     start_element_ns_first(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 1);
@@ -988,7 +988,7 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 1);
     assert(context.srcml_element_stack != 0);
@@ -996,7 +996,7 @@ int main() {
 
 
     start_element_ns_first(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 2);
@@ -1004,14 +1004,14 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "expr_stmt") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"expr_stmt", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 1);
     assert(context.srcml_element_stack != 0);
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 0);
     assert(context.srcml_element_stack == 0);
@@ -1028,7 +1028,7 @@ int main() {
     srcsax_handler_test test_handler;
     srcsax_handler srcsax_sax = srcsax_handler_test::factory();
 
-    srcsax_context context;
+    srcsax_context context = {};
     context.data = &test_handler;
     context.handler = &srcsax_sax;
 
@@ -1044,13 +1044,13 @@ int main() {
     assert(context.stack_size == 0);
     assert(context.srcml_element_stack == 0);
 
-    const char * namespaces[4] = { 0, "http://www.sdml.info/srcML/src", "cpp", "http://www.sdml.info/srcML/cpp" };
+    const char * namespaces[4] = { 0, "http://www.srcML.org/srcML/src", "cpp", "http://www.srcML.org/srcML/cpp" };
     const char * values = "abc";
-    const char * attributes[15] = { "filename", 0, "http://www.sdml.info/srcML/src", values, values + 1,
-                                    "dir", 0, "http://www.sdml.info/srcML/src", values + 1, values + 2,
-                                   "language", 0, "http://www.sdml.info/srcML/src", values + 2, values + 3 };
+    const char * attributes[15] = { "filename", 0, "http://www.srcML.org/srcML/src", values, values + 1,
+                                    "dir", 0, "http://www.srcML.org/srcML/src", values + 1, values + 2,
+                                   "language", 0, "http://www.srcML.org/srcML/src", values + 2, values + 3 };
     start_root(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 1);
@@ -1058,7 +1058,7 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     start_element_ns_first(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
+              (const xmlChar *)"http://www.srcML.org/srcML/src", 2, (const xmlChar **)namespaces, 3, 0,
               (const xmlChar **) attributes);
 
     assert(context.stack_size == 1);
@@ -1066,14 +1066,14 @@ int main() {
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"macro-list", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 1);
     assert(context.srcml_element_stack != 0);
     assert(strcmp(context.srcml_element_stack[context.stack_size - 1], "unit") == 0);
 
     end_element_ns(&ctxt, (const xmlChar *)"unit", (const xmlChar *)0,
-              (const xmlChar *)"http://www.sdml.info/srcML/src");
+              (const xmlChar *)"http://www.srcML.org/srcML/src");
 
     assert(context.stack_size == 0);
     assert(context.srcml_element_stack == 0);
