@@ -433,7 +433,7 @@ void start_element_ns_first(void * ctx, const xmlChar * localname, const xmlChar
 
         if(state->context->terminate) return;
 
-        if(state->context->handler->characters_unit)
+        if(state->characters.size() != 0 && state->context->handler->characters_unit)
             state->context->handler->characters_unit(state->context, state->characters.c_str(), (int)state->characters.size());
 
         if(state->context->terminate) return;
