@@ -164,10 +164,10 @@ public:
 
         cpp_adapter->handler->set_is_archive(context->is_archive);
 
+        cpp_adapter->handler->startRoot(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
+
         if(context->is_archive)
             cpp_adapter->srcml_element_stack_push((const char *)prefix, (const char *)localname);
-
-        cpp_adapter->handler->startRoot(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
 
     }
 
@@ -191,9 +191,9 @@ public:
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_adapter->srcml_element_stack_push((const char *)prefix, (const char *)localname);
-
         cpp_adapter->handler->startUnit(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
+
+        cpp_adapter->srcml_element_stack_push((const char *)prefix, (const char *)localname);
 
 
     }
@@ -236,10 +236,9 @@ public:
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_adapter->srcml_element_stack_push((const char *)prefix, (const char *)localname);
-
         cpp_adapter->handler->startElement(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
 
+        cpp_adapter->srcml_element_stack_push((const char *)prefix, (const char *)localname);
 
     }
 
@@ -365,11 +364,7 @@ public:
 
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
-        cpp_adapter->srcml_element_stack_push((const char *)prefix, (const char *)localname);
-
         cpp_adapter->handler->metaTag(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
-
-        cpp_adapter->srcml_element_stack_pop();
 
     }
 
