@@ -1,5 +1,5 @@
 file(GLOB HANDLER_SOURCE srcsax/*.cpp cpp/*.cpp)
-file(GLOB HANDLER_INCLUDE srcsax/*.hpp cpp/*.hpp)
+file(GLOB HANDLER_INCLUDE srcsax/*.h srcsax/*.hpp cpp/*.hpp)
 
 file(GLOB WINDOWS_SOURCE windows/*.cpp)
 file(GLOB WINDOWS_INCLUDE windows/*.hpp)
