@@ -26,3 +26,6 @@ endmacro()
 build_lib(srcsax_static STATIC)
 build_lib(srcsax_shared SHARED)
 target_link_libraries(srcsax_shared PRIVATE ${LIBXML2_LIBRARIES})
+
+install(TARGETS srcsax_shared srcsax_static RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
+install(FILES ${HANDLER_INCLUDE} DESTINATION include/srcsax)
