@@ -1,5 +1,5 @@
 ##
-#  config.cmake
+#  srcsax_build.cmake
 #
 #  Copyright (C) 2014 SDML (www.sdml.info)
 #
@@ -30,11 +30,16 @@ add_definitions("-std=c++11")
 # find needed libraries
 find_package(LibXml2 REQUIRED)
 
+set(SRCSAX_INCLUDE_DIR ${LIBXML2_INCLUDE_DIR}
+                       ${SRCSAX_SOURCE_DIR}/src/srcsax
+                       ${SRCSAX_SOURCE_DIR}/src/cpp
+                       ${SRCSAX_SOURCE_DIR}/src/windows
+    CACHE INTERNAL "Include directories for srcSAX")
+
+set(SRCSAX_LIBRARIES ${LIBXML2_LIBRARIES} CACHE INTERNAL "Libraries for srcSAX")
+
 # include needed includes
-include_directories(${LIBXML2_INCLUDE_DIR} 
-    ${SRCSAX_SOURCE_DIR}/src/srcsax
-    ${SRCSAX_SOURCE_DIR}/src/cpp
-    ${SRCSAX_SOURCE_DIR}/src/windows)
+include_directories(${SRCSAX_INCLUDE_DIR})
 
 # Continue to build directory
 add_subdirectory(${SRCSAX_SOURCE_DIR}/src ${SRCSAX_BINARY_DIR}/src)

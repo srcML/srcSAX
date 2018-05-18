@@ -44,19 +44,3 @@ macro(add_unit_test TEST_FILE)
     set_target_properties(${TEST_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 endmacro()
-
-# 
-# copy_dependent_file 
-# This copies a file given as FILE_NAME to the current bunary directory
-# of the build and adds it as a dependency to TARGET_NAME.
-# 
-macro(copy_dependent_file TARGET_NAME FILE_NAME)
-
-    if(NOT ${CMAKE_SOURCE_DIR} MATCHES ${CMAKE_BINARY_DIR})
-
-        file(COPY ${FILE_NAME} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-        add_dependencies(${TARGET_NAME} ${FILE_NAME})
-
-    endif()
-
-endmacro()

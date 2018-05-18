@@ -19,5 +19,5 @@
 #  along with the srcSAX; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-add_unit_test(test_srcsax_controller.cpp srcsax_static ${LIBXML2_LIBRARIES})
-add_unit_test(test_srcsax_handler_cpp.cpp srcsax_static ${LIBXML2_LIBRARIES})
+add_unit_test(test_srcsax_controller.cpp srcsax_static ${SRCSAX_LIBRARIES})
+add_unit_test(test_srcsax_handler_cpp.cpp srcsax_static ${SRCSAX_LIBRARIES})

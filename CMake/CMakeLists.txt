@@ -1,5 +1,5 @@
 ##
-#  srcsax.cmake
+#  CMakeLists.txt
 #
 #  Copyright (C) 2014 SDML (www.sdml.info)
 #
@@ -22,10 +22,8 @@
 # add this directory
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 
-# project options
-option(INCLUDE_UNIT_TESTS "Build unit tests for srcSAX" ON)
-option(INCLUDE_EXAMPLES "Build unit tests for srcSAX" ON)
-
 include(srcsax_build)
-include(srcsax_install)
-include(srcsax_testing)
+if(CMAKE_PROJECT_NAME STREQUAL "srcSAX")
+    include(srcsax_install)
+    include(srcsax_testing)
+endif()
