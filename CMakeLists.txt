@@ -28,6 +28,10 @@ enable_testing()
 option(INCLUDE_UNIT_TESTS "Build unit tests for srcSAX" ON)
 option(INCLUDE_EXAMPLES "Build unit tests for srcSAX" ON)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 add_subdirectory(CMake)
 
 if(INCLUDE_UNIT_TESTS)
