@@ -21,17 +21,19 @@
 #
 #  Build configuration file
 
-# build options
-option(BUILD_UNIT_TESTS "Build unit tests for srcSAX" ON)
-option(BUILD_EXAMPLES "Build unit tests for srcSAX" ON)
+set(SRCSAX_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
+# Compiler options
+add_definitions("-std=c++11")
 
 # find needed libraries
 find_package(LibXml2 REQUIRED)
 
 # include needed includes
-include_directories(${LIBXML2_INCLUDE_DIR})
-add_definitions("-std=c++11")
+include_directories(${LIBXML2_INCLUDE_DIR} 
+    ${SRCSAX_DIR}/src/srcsax
+    ${SRCSAX_DIR}/src/cpp
+    ${SRCSAX_DIR}/src/windows)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+# Continue to build directory
+add_subdirectory(src)

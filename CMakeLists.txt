@@ -1,7 +1,7 @@
 ##
 #  CMakeLists.txt
 #
-#  Copyright (C) 2014 SDML (www.sdml.info)
+#  Copyright (C) 2014-2018 srcML, LLC.  (www.srcML.org)
 #
 #  This file is part of the srcSAX.
 #
@@ -26,10 +26,6 @@ enable_testing()
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake)
 include(srcsax)
-
-include_directories(${LIBXML2_INCLUDE_DIR} src/srcsax src/cpp src/windows)
-
-add_subdirectory(src)
 
 if(BUILD_UNIT_TESTS)
     include_directories(test)
