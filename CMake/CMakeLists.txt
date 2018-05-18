@@ -20,9 +20,9 @@
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 # add this directory
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 
-# projoect options
+# project options
 option(INCLUDE_UNIT_TESTS "Build unit tests for srcSAX" ON)
 option(INCLUDE_EXAMPLES "Build unit tests for srcSAX" ON)
 
