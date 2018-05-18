@@ -21,7 +21,8 @@
 #
 #  Build configuration file
 
-set(SRCSAX_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+get_filename_component(SRCSAX_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
+get_filename_component(SRCSAX_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR} DIRECTORY)
 
 # Compiler options
 add_definitions("-std=c++11")
@@ -31,9 +32,9 @@ find_package(LibXml2 REQUIRED)
 
 # include needed includes
 include_directories(${LIBXML2_INCLUDE_DIR} 
-    ${SRCSAX_DIR}/src/srcsax
-    ${SRCSAX_DIR}/src/cpp
-    ${SRCSAX_DIR}/src/windows)
+    ${SRCSAX_SOURCE_DIR}/src/srcsax
+    ${SRCSAX_SOURCE_DIR}/src/cpp
+    ${SRCSAX_SOURCE_DIR}/src/windows)
 
 # Continue to build directory
-add_subdirectory(src)
+add_subdirectory(${SRCSAX_SOURCE_DIR}/src ${SRCSAX_BINARY_DIR}/src)

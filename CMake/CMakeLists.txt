@@ -19,10 +19,13 @@
 #  along with the srcSAX; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+# add this directory
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake)
+
 # projoect options
 option(INCLUDE_UNIT_TESTS "Build unit tests for srcSAX" ON)
 option(INCLUDE_EXAMPLES "Build unit tests for srcSAX" ON)
 
-include(build)
-include(install)
-include(testing)
+include(srcsax_build)
+include(srcsax_install)
+include(srcsax_testing)

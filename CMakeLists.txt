@@ -24,8 +24,7 @@ project(srcSAX)
 
 enable_testing()
 
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake)
-include(srcsax)
+add_subdirectory(CMake)
 
 if(BUILD_UNIT_TESTS)
     include_directories(test)
