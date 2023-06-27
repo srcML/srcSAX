@@ -1,7 +1,7 @@
 ##
 #  CMakeLists.txt
 #
-#  Copyright (C) 2014-2023 SDML (www.sdml.info)
+#  Copyright (C) 2023 SDML (www.sdml.info)
 #
 #  This file is part of the srcSAX.
 #
@@ -19,9 +19,8 @@
 #  along with the srcSAX; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-add_subdirectory(print_callbacks)
-add_subdirectory(identity_copy)
-add_subdirectory(element_count)
-add_subdirectory(name_collector)
+file(GLOB NAME_COLLECTOR_COPY_SOURCE *.cpp)
+file(GLOB NAME_COLLECTOR_COPY_HEADER *.hpp)
 
-file(COPY example.xml DESTINATION ${CMAKE_BINARY_DIR}/bin)
+add_executable(name_collector ${NAME_COLLECTOR_COPY_SOURCE} ${NAME_COLLECTOR_COPY_HEADER})
+target_link_libraries(name_collector srcsax_static ${SRCSAX_LIBRARIES})
