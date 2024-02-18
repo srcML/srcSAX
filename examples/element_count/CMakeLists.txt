@@ -22,5 +22,7 @@
 file(GLOB ELEMENT_COUNT_SOURCE *.cpp)
 file(GLOB ELEMENT_COUNT_HEADER *.hpp)
 
+find_package(LibXml2 REQUIRED)
+
 add_executable(element_count ${ELEMENT_COUNT_SOURCE} ${ELEMENT_COUNT_HEADER})
-target_link_libraries(element_count srcsax_static ${SRCSAX_LIBRARIES})
+target_link_libraries(element_count srcsax_static LibXml2::LibXml2)

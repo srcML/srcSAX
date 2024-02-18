@@ -22,5 +22,7 @@
 file(GLOB IDENTITY_COPY_SOURCE *.cpp)
 file(GLOB IDENTITY_COPY_HEADER *.hpp)
 
+find_package(LibXml2 REQUIRED)
+
 add_executable(identity_copy ${IDENTITY_COPY_SOURCE} ${IDENTITY_COPY_HEADER})
-target_link_libraries(identity_copy srcsax_static ${SRCSAX_LIBRARIES})
+target_link_libraries(identity_copy srcsax_static LibXml2::LibXml2)

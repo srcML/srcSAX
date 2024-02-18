@@ -22,5 +22,7 @@
 file(GLOB PRINT_CALLBACKS_SOURCE *.cpp)
 file(GLOB PRINT_CALLBACKS_HEADER *.hpp)
 
+find_package(LibXml2 REQUIRED)
+
 add_executable(print_callbacks ${PRINT_CALLBACKS_SOURCE} ${PRINT_CALLBACKS_HEADER})
-target_link_libraries(print_callbacks srcsax_static ${SRCSAX_LIBRARIES})
+target_link_libraries(print_callbacks srcsax_static LibXml2::LibXml2)

@@ -27,16 +27,10 @@ get_filename_component(SRCSAX_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR} DIRECTORY)
 # Compiler options
 add_definitions("-std=c++11")
 
-# find needed libraries
-find_package(LibXml2 REQUIRED)
-
-set(SRCSAX_INCLUDE_DIR ${LIBXML2_INCLUDE_DIR}
-                       ${SRCSAX_SOURCE_DIR}/src/srcsax
+set(SRCSAX_INCLUDE_DIR ${SRCSAX_SOURCE_DIR}/src/srcsax
                        ${SRCSAX_SOURCE_DIR}/src/cpp
                        ${SRCSAX_SOURCE_DIR}/src/windows
     CACHE INTERNAL "Include directories for srcSAX")
-
-set(SRCSAX_LIBRARIES ${LIBXML2_LIBRARIES} CACHE INTERNAL "Libraries for srcSAX")
 
 # include needed includes
 include_directories(${SRCSAX_INCLUDE_DIR})

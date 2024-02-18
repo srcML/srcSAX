@@ -22,5 +22,7 @@
 file(GLOB NAME_COLLECTOR_COPY_SOURCE *.cpp)
 file(GLOB NAME_COLLECTOR_COPY_HEADER *.hpp)
 
+find_package(LibXml2 REQUIRED)
+
 add_executable(name_collector ${NAME_COLLECTOR_COPY_SOURCE} ${NAME_COLLECTOR_COPY_HEADER})
-target_link_libraries(name_collector srcsax_static ${SRCSAX_LIBRARIES})
+target_link_libraries(name_collector srcsax_static LibXml2::LibXml2)

@@ -1,7 +1,7 @@
 ##
 #  CMakeLists.txt
 #
-#  Copyright (C) 2014-2021 srcML, LLC.  (www.srcML.org)
+#  Copyright (C) 2014-2024 srcML, LLC.  (www.srcML.org)
 #
 #  This file is part of the srcSAX.
 #

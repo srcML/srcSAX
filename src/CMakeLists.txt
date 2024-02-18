@@ -24,9 +24,13 @@ macro(build_lib LIB_NAME LIB_TYPE LIB_OUTPUT_NAME)
 
 endmacro()
 
+find_package(LibXml2 REQUIRED)
+
 build_lib(srcsax_static STATIC srcsax_static)
+target_link_libraries(srcsax_static PRIVATE LibXml2::LibXml2)
+
 build_lib(srcsax_shared SHARED srcsax)
-target_link_libraries(srcsax_shared PRIVATE ${LIBXML2_LIBRARIES})
+target_link_libraries(srcsax_shared PRIVATE LibXml2::LibXml2)
 
 install(TARGETS srcsax_shared srcsax_static RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
 install(FILES ${HANDLER_INCLUDE} DESTINATION include/srcsax)
