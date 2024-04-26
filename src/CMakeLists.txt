@@ -26,7 +26,11 @@ endmacro()
 
 find_package(LibXml2 REQUIRED)
 
-build_lib(srcsax_static STATIC srcsax_static)
+if(WIN32)
+    build_lib(srcsax_static STATIC srcsax_static)
+else()
+    build_lib(srcsax_static STATIC srcsax)
+endif()
 target_link_libraries(srcsax_static PRIVATE LibXml2::LibXml2)
 
 build_lib(srcsax_shared SHARED srcsax)
