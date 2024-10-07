@@ -27,3 +27,7 @@ if(CMAKE_PROJECT_NAME STREQUAL "srcSAX")
     include(srcsax_install)
     include(srcsax_testing)
 endif()
+
+if(APPLE)
+    set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64")
+endif()
