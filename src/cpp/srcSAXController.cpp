@@ -375,7 +375,7 @@ void srcSAXController::parse(srcSAXHandler * handler) {
 
     if(status != 0) {
 
-        xmlErrorPtr ep = xmlCtxtGetLastError(context->libxml2_context);
+        auto ep = xmlCtxtGetLastError(context->libxml2_context);
 
         size_t str_length = strlen(ep->message);
         ep->message[str_length - 1] = '\0';
