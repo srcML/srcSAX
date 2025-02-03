@@ -168,17 +168,18 @@ public :
 
               *pos = 0;
               ret = xmlTextWriterWriteString(writer, (const xmlChar *)text);
-              //if(ret == -1) return false;
+              if(ret == -1) throw std::string("XML Error");
 
               *pos = '\"';
               xmlTextWriterWriteRaw(writer, (const xmlChar *)"\"");
-              //if(ret == -1) return false;
+              if(ret == -1) throw std::string("XML Error");
 
               text = pos + 1;
 
             }
 
             ret = xmlTextWriterWriteString(writer, (const xmlChar *)text);
+            if(ret == -1) throw std::string("XML Error");
 
             text_content = "";
 
