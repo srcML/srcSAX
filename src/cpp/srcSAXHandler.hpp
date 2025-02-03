@@ -34,7 +34,7 @@
  */
 class srcSAXHandler {
 
-private :
+private:
 
     /** Controller for parser */
     srcSAXController * controller;
@@ -48,12 +48,16 @@ protected:
     int unit_count;
 
     /** open srcML element stack */
-    std::vector<std::string> srcml_element_stack;
+    std::vector<std::string> element_stack;
 
     /** the xml documents encoding */
     const char * encoding;
 
-public :
+public:
+    static std::string get_qualified_name(const char* localname, const char* prefix) {
+        if(prefix == nullptr) return localname;
+        return std::string(prefix) + ":" +  localname;
+    }
 
     /**
      * srcSAXHandler
@@ -93,7 +97,7 @@ public :
      */
     std::vector<std::string> & get_stack() {
 
-        return srcml_element_stack;
+        return element_stack;
 
     }
 
