@@ -54,6 +54,18 @@ protected:
     const char * encoding;
 
 public:
+    static const srcsax_attribute*  find_attribute(int num_attributes, const struct srcsax_attribute* attributes, const char* name) {
+        if(attributes == nullptr) return nullptr;
+
+        const struct srcsax_attribute* end_pos = attributes + num_attributes;
+        const struct srcsax_attribute* attribute = std::find_if(attributes, end_pos,
+            [name](const struct srcsax_attribute& attribute) {
+                        return strcmp(attribute.localname, name) == 0;
+            }
+        );
+        return attribute != end_pos ? attribute : nullptr;
+    }
+
     static std::string get_qualified_name(const char* localname, const char* prefix) {
         if(prefix == nullptr) return localname;
         return std::string(prefix) + ":" +  localname;

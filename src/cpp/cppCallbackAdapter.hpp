@@ -79,9 +79,13 @@ public:
      *
      * Push the element to the stack.
      */
-    void push_element(const char * prefix, const char * localname) {
+    void push_element(const char * prefix, const char * localname, int num_attributes, const struct srcsax_attribute* attributes) {
 
         std::string qualified_name = srcSAXHandler::get_qualified_name(localname, prefix);
+        const struct srcsax_attribute* type_attr = srcSAXHandler::find_attribute(num_attributes, attributes, "type");
+        if(type_attr != nullptr) {
+            qualified_name += std::string(" type=") + type_attr->value;
+        }
         handler->get_stack().push_back(qualified_name);
     }
 
@@ -153,7 +157,7 @@ public:
         cpp_adapter->handler->startRoot(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
 
         if(context->is_archive) {
-            cpp_adapter->push_element((const char *)prefix, (const char *)localname);
+            cpp_adapter->push_element((const char *)prefix, (const char *)localname, num_attributes, attributes);
         }
 
     }
@@ -179,7 +183,7 @@ public:
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
         cpp_adapter->handler->startUnit(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
-        cpp_adapter->push_element((const char *)prefix, (const char *)localname);
+        cpp_adapter->push_element((const char *)prefix, (const char *)localname, num_attributes, attributes);
 
 
     }
@@ -223,7 +227,8 @@ public:
         cppCallbackAdapter * cpp_adapter = (cppCallbackAdapter *)context->data;
 
         cpp_adapter->handler->startElement(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
-        cpp_adapter->push_element((const char *)prefix, (const char *)localname);
+        cpp_adapter->push_element((const char *)prefix, (const char *)localname, num_attributes, attributes);
+
 
     }
 
