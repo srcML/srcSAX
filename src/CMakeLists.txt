@@ -30,6 +30,3 @@ target_link_libraries(srcsax_static PRIVATE LibXml2::LibXml2)
 
 build_lib(srcsax_shared SHARED)
 target_link_libraries(srcsax_shared PRIVATE LibXml2::LibXml2)
-
-install(TARGETS srcsax_shared srcsax_static RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
-install(FILES ${HANDLER_INCLUDE} DESTINATION include/srcsax)
