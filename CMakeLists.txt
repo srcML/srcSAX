@@ -49,6 +49,3 @@ if(INCLUDE_EXAMPLES)
     include_directories(${SRCSAX_INCLUDE_DIR} examples)
     add_subdirectory(examples)
 endif()
-
-install(TARGETS srcsax_shared srcsax_static RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
-install(FILES ${HANDLER_INCLUDE} DESTINATION include/srcsax)
