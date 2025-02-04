@@ -84,7 +84,7 @@ public:
         std::string qualified_name = srcSAXHandler::get_qualified_name(localname, prefix);
         const struct srcsax_attribute* type_attr = srcSAXHandler::find_attribute(num_attributes, attributes, "type");
         if(type_attr != nullptr) {
-            qualified_name += std::string("-") + type_attr->value;
+            qualified_name += std::string("-type-") + type_attr->value;
         }
         handler->get_stack().push_back(qualified_name);
     }
