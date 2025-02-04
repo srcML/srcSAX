@@ -26,6 +26,8 @@
 #include <libxml/parser.h>
 
 #include <vector>
+#include <algorithm>
+#include <cstring>
 
 /**
  * srcSAXHandler
