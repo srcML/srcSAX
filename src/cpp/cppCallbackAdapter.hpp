@@ -1,7 +1,7 @@
 /**
  * @file cppCallbackAdapter.hpp
  *
- * @copyright Copyright (C) 2013-2014 srcML, LLC. (www.srcML.org)
+ * @copyright Copyright (C) 2013-2026 srcML, LLC. (www.srcML.org)
  *
  * srcSAX is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,6 +18,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#include <stack>
+
 /**
  * cppCallbackAdapter
  *
@@ -28,8 +30,8 @@ class cppCallbackAdapter {
 
 private:
 
-    /** the srcSAXHandler to forward the callbacks */
-    srcSAXHandler* handler;
+    /** srcSAXHandler to forward the callbacks */
+    std::stack<srcSAXHandler*> handlers;
 
 public:
 
@@ -37,9 +39,42 @@ public:
      * cppCallbackAdapter
      * @param handler a srcSAXHandler whose callbacks will be called.
      *
-     * Constructor.  Initialize the handler
+     * Constructor.  Initialize the handler.
      */
-    cppCallbackAdapter(srcSAXHandler* handler) : handler(handler) {}
+    cppCallbackAdapter(srcSAXHandler* handler) : handlers() {
+        handlers.push(handler);
+    }
+
+    /**
+     * get_handler
+     * 
+     * Gets the current active handler.
+     * 
+     * @returns the current handler.
+     */
+    srcSAXHandler* get_handler() {
+        return handlers.top();
+    }
+
+    /**
+     * push_handler
+     * @param handler a srcSAXHandler to add to the stack.
+     * 
+     * Add a handler to the handler stack
+     */
+    void push_handler(srcSAXHandler* handler) {
+        handlers.push(handler);
+    }
+
+    /**
+     * pop_handler
+     * 
+     * Remove a handler from the handler stack.
+     */
+    void pop_handler() {
+        if(handlers.size() < 2) return;
+        handlers.pop();
+    }
 
     /**
      * factory
@@ -86,7 +121,7 @@ public:
         if(type_attr != nullptr) {
             qualified_name += std::string("-type-") + type_attr->value;
         }
-        handler->get_stack().push_back(qualified_name);
+        get_handler()->get_stack().push_back(qualified_name);
     }
 
     /**
@@ -97,8 +132,8 @@ public:
      */
     void pop_element() {
 
-        if(handler->get_stack().size() == 0) return;
-        handler->get_stack().pop_back();
+        if(get_handler()->get_stack().size() == 0) return;
+        get_handler()->get_stack().pop_back();
     }
 
     /**
@@ -111,9 +146,9 @@ public:
 
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
 
-        cpp_adapter->handler->set_encoding(context->encoding);
+        cpp_adapter->get_handler()->set_encoding(context->encoding);
 
-        cpp_adapter->handler->startDocument();
+        cpp_adapter->get_handler()->startDocument();
 
     }
 
@@ -127,9 +162,9 @@ public:
 
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
 
-        cpp_adapter->handler->get_stack().clear();
+        cpp_adapter->get_handler()->get_stack().clear();
 
-        cpp_adapter->handler->endDocument();
+        cpp_adapter->get_handler()->endDocument();
 
 
     }
@@ -153,8 +188,8 @@ public:
 
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
 
-        cpp_adapter->handler->set_is_archive(context->is_archive);
-        cpp_adapter->handler->startRoot(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
+        cpp_adapter->get_handler()->set_is_archive(context->is_archive);
+        cpp_adapter->get_handler()->startRoot(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
 
         if(context->is_archive) {
             cpp_adapter->push_element((const char*)prefix, (const char*)localname, num_attributes, attributes);
@@ -182,7 +217,7 @@ public:
 
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
 
-        cpp_adapter->handler->startUnit(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
+        cpp_adapter->get_handler()->startUnit(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
         cpp_adapter->push_element((const char*)prefix, (const char*)localname, num_attributes, attributes);
 
 
@@ -226,7 +261,7 @@ public:
 
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
 
-        cpp_adapter->handler->startElement(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
+        cpp_adapter->get_handler()->startElement(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
         cpp_adapter->push_element((const char*)prefix, (const char*)localname, num_attributes, attributes);
 
 
@@ -246,7 +281,7 @@ public:
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
 
         cpp_adapter->pop_element();
-        cpp_adapter->handler->endRoot(localname, prefix, URI);
+        cpp_adapter->get_handler()->endRoot(localname, prefix, URI);
 
     }
 
@@ -264,7 +299,7 @@ public:
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
 
         cpp_adapter->pop_element();
-        cpp_adapter->handler->endUnit(localname, prefix, URI);
+        cpp_adapter->get_handler()->endUnit(localname, prefix, URI);
 
     }
 #if 0
@@ -295,7 +330,7 @@ public:
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
 
         cpp_adapter->pop_element();
-        cpp_adapter->handler->endElement(localname, prefix, URI);
+        cpp_adapter->get_handler()->endElement(localname, prefix, URI);
 
     }
 
@@ -310,7 +345,7 @@ public:
     static void characters_root(struct srcsax_context* context, const char* ch, int len) {
 
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
-        cpp_adapter->handler->charactersRoot(ch, len);
+        cpp_adapter->get_handler()->charactersRoot(ch, len);
 
 
     }
@@ -326,7 +361,7 @@ public:
     static void characters_unit(struct srcsax_context* context, const char* ch, int len) {
 
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
-        cpp_adapter->handler->charactersUnit(ch, len);
+        cpp_adapter->get_handler()->charactersUnit(ch, len);
 
     }
 
@@ -349,7 +384,7 @@ public:
 
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
 
-        cpp_adapter->handler->metaTag(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
+        cpp_adapter->get_handler()->metaTag(localname, prefix, URI, num_namespaces, namespaces, num_attributes, attributes);
 
     }
 
@@ -364,7 +399,7 @@ public:
 
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
 
-        cpp_adapter->handler->comment(value);
+        cpp_adapter->get_handler()->comment(value);
 
     }
 
@@ -380,7 +415,7 @@ public:
 
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
 
-        cpp_adapter->handler->cdataBlock(value, len);
+        cpp_adapter->get_handler()->cdataBlock(value, len);
 
     }
 
@@ -396,7 +431,7 @@ public:
 
         cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
 
-        cpp_adapter->handler->processingInstruction(target, data);
+        cpp_adapter->get_handler()->processingInstruction(target, data);
 
     }
 
