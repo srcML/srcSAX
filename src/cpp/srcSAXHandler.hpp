@@ -1,7 +1,7 @@
 /**
  * @file srcSAXHandler.hpp
  *
- * @copyright Copyright (C) 2013-2014 srcML, LLC. (www.srcML.org)
+ * @copyright Copyright (C) 2013-2026 srcML, LLC. (www.srcML.org)
  *
  * srcSAX is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -201,21 +201,7 @@ public:
     virtual void startUnit(const char* localname, const char* prefix, const char* URI,
                            int num_namespaces, const struct srcsax_namespace* namespaces, int num_attributes,
                            const struct srcsax_attribute* attributes) {}
-#if 0
-    /**
-     * startFunction
-     * @param name the function's name
-     * @param return_type the function return type
-     * @param parameter_list a list of the function parameters in struct containing (declaration.type/declaration.name)
-     * @param is_decl indicates if the call is a function declaration (true) or definition (false)
-     *
-     * SAX handler function for start of function with prototype.
-     * Accessing references after callback termination is undefined.
-     *
-     * Overide for desired behaviour.
-     */
-    virtual void startFunction(const std::string & name, const std::string & return_type, const std::vector<declaration> & parameter_list, bool is_decl) {}
-#endif
+
     /**
      * startElement
      * @param localname the name of the element tag
@@ -254,15 +240,7 @@ public:
      * Overide for desired behaviour.
      */
     virtual void endUnit(const char* localname, const char* prefix, const char* URI) {}
-#if 0
-    /**
-     * endFunction
-     *
-     * SAX handler function for end of a function.
-     * Overide for desired behaviour.
-     */
-    virtual void endFunction() {}
-#endif
+
     /**
      * endElement
      * @param localname the name of the element tag
