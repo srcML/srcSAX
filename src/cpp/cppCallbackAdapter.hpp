@@ -63,6 +63,7 @@ public:
      * Add a handler to the handler stack
      */
     void push_handler(srcSAXHandler* handler) {
+        handler->set_controller(&get_handler()->get_controller());
         handlers.push(handler);
     }
 
