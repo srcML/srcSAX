@@ -39,7 +39,7 @@ class srcSAXHandler {
 private:
 
     /** Controller for parser */
-    srcSAXController * controller;
+    srcSAXController* controller;
 
 protected:
 
@@ -53,7 +53,7 @@ protected:
     std::vector<std::string> element_stack;
 
     /** the xml documents encoding */
-    const char * encoding;
+    const char* encoding;
 
 public:
     static const srcsax_attribute*  find_attribute(int num_attributes, const struct srcsax_attribute* attributes, const char* name) {
@@ -87,10 +87,8 @@ public:
      * Used by srcSAXController to provide access to self
      * for such things as disabeling sax parsing.
      */
-    void set_controller(srcSAXController * controller) {
-
+    void set_controller(srcSAXController* controller) {
         this->controller = controller;
-
     }
 
     /**
@@ -99,9 +97,7 @@ public:
      * Internally used to increment the count in SAX2srcSAXHandler.
      */
     void increment_unit_count() {
-
         ++unit_count;
-
     }
 
     /**
@@ -109,10 +105,8 @@ public:
      *
      * Used internally to update the stack.
      */
-    std::vector<std::string> & get_stack() {
-
+    std::vector<std::string>& get_stack() {
         return element_stack;
-
     }
 
     /**
@@ -120,10 +114,8 @@ public:
      *
      * Get the control handler.
      */
-    srcSAXController & get_controller() {
-
+    srcSAXController& get_controller() {
         return *controller;
-
     }
 
     /**
@@ -132,9 +124,7 @@ public:
      * Stop the srcML parser.
      */
     void stop_parser() {
-
         srcsax_stop_parser(controller->getContext());
-
     } 
 
     /**
@@ -144,8 +134,7 @@ public:
      * Used by SAX2srcSAXHandler when determined
      * encoding.  Set the input encoding if any.
      */
-    void set_encoding(const char * encoding) {
-
+    void set_encoding(const char* encoding) {
         this->encoding = encoding;
     }
 
@@ -157,9 +146,7 @@ public:
      * if an archive.  Sets if srcML document is an archive.
      */
     void set_is_archive(bool is_archive) {
-
         this->is_archive = is_archive;
-
     }
 
 #pragma GCC diagnostic push
@@ -194,9 +181,9 @@ public:
      * SAX handler function for start of the root element.
      * Overide for desired behaviour.
      */
-    virtual void startRoot(const char * localname, const char * prefix, const char * URI,
-                           int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
-                           const struct srcsax_attribute * attributes) {}
+    virtual void startRoot(const char* localname, const char* prefix, const char* URI,
+                           int num_namespaces, const struct srcsax_namespace* namespaces, int num_attributes,
+                           const struct srcsax_attribute* attributes) {}
 
     /**
      * startUnit
@@ -211,9 +198,9 @@ public:
      * SAX handler function for start of an unit.
      * Overide for desired behaviour.
      */
-    virtual void startUnit(const char * localname, const char * prefix, const char * URI,
-                           int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
-                           const struct srcsax_attribute * attributes) {}
+    virtual void startUnit(const char* localname, const char* prefix, const char* URI,
+                           int num_namespaces, const struct srcsax_namespace* namespaces, int num_attributes,
+                           const struct srcsax_attribute* attributes) {}
 #if 0
     /**
      * startFunction
@@ -242,9 +229,9 @@ public:
      * SAX handler function for start of an element.
      * Overide for desired behaviour.
      */
-    virtual void startElement(const char * localname, const char * prefix, const char * URI,
-                                int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
-                                const struct srcsax_attribute * attributes) {}
+    virtual void startElement(const char* localname, const char* prefix, const char* URI,
+                                int num_namespaces, const struct srcsax_namespace* namespaces, int num_attributes,
+                                const struct srcsax_attribute* attributes) {}
 
     /**
      * endRoot
@@ -255,7 +242,7 @@ public:
      * SAX handler function for end of the root element.
      * Overide for desired behaviour.
      */
-    virtual void endRoot(const char * localname, const char * prefix, const char * URI) {}
+    virtual void endRoot(const char* localname, const char* prefix, const char* URI) {}
 
     /**
      * endUnit
@@ -266,7 +253,7 @@ public:
      * SAX handler function for end of an unit.
      * Overide for desired behaviour.
      */
-    virtual void endUnit(const char * localname, const char * prefix, const char * URI) {}
+    virtual void endUnit(const char* localname, const char* prefix, const char* URI) {}
 #if 0
     /**
      * endFunction
@@ -285,7 +272,7 @@ public:
      * SAX handler function for end of an element.
      * Overide for desired behaviour.
      */
-    virtual void endElement(const char * localname, const char * prefix, const char * URI) {}
+    virtual void endElement(const char* localname, const char* prefix, const char* URI) {}
 
     /**
      * charactersRoot
@@ -295,7 +282,7 @@ public:
      * SAX handler function for character handling at the root level.
      * Overide for desired behaviour.
      */
-    virtual void charactersRoot(const char * ch, int len) {}
+    virtual void charactersRoot(const char* ch, int len) {}
 
     /**
      * charactersUnit
@@ -305,7 +292,7 @@ public:
      * SAX handler function for character handling within a unit.
      * Overide for desired behaviour.
      */
-    virtual void charactersUnit(const char * ch, int len) {}
+    virtual void charactersUnit(const char* ch, int len) {}
 
     /**
      * metaTag
@@ -320,9 +307,9 @@ public:
      * SAX handler function for a meta tags.
      * Overide for desired behaviour.
      */
-    virtual void metaTag(const char * localname, const char * prefix, const char * URI,
-                           int num_namespaces, const struct srcsax_namespace * namespaces, int num_attributes,
-                           const struct srcsax_attribute * attributes) {}
+    virtual void metaTag(const char* localname, const char* prefix, const char* URI,
+                           int num_namespaces, const struct srcsax_namespace* namespaces, int num_attributes,
+                           const struct srcsax_attribute* attributes) {}
 
     /**
      * comment
@@ -331,7 +318,7 @@ public:
      * A comment has been parsed.
      * Overide for desired behaviour.
      */
-    virtual void comment(const char * value) {}
+    virtual void comment(const char* value) {}
 
     /**
      * cdataBlock
@@ -341,7 +328,7 @@ public:
      * Called when a pcdata block has been parsed.
      * Overide for desired behaviour.
      */
-    virtual void cdataBlock(const char * value, int len) {}
+    virtual void cdataBlock(const char* value, int len) {}
 
     /**
      * processingInstruction
@@ -351,7 +338,7 @@ public:
      * Called when a processing instruction has been parsed.
      * Overide for desired behaviour.
      */
-    virtual void processingInstruction(const char * target, const char * data) {}
+    virtual void processingInstruction(const char* target, const char* data) {}
 
 #pragma GCC diagnostic pop
 
