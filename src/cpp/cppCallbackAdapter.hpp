@@ -222,24 +222,6 @@ public:
 
 
     }
-#if 0
-    /**
-     * start_function
-     * @param context a srcSAX context
-     * @param name the function's name
-     * @param return_type the function return type
-     * @param parameter_list a list of the function parameters in struct containing (declaration.type/declaration.name)
-     * @param is_decl indicates if the call is a function declaration (true) or definition (false)
-     *
-     * Callback. Forwards C API start_function to C++ API srcSAXHandler startFunction.
-     */ 
-     static void start_function(struct srcsax_context* context, const char* name, const char* return_type, const struct declaration * parameter_list, _Bool is_decl) {
-
-        cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
-
-
-     }
-#endif
 
     /**
      * start_element
@@ -302,20 +284,7 @@ public:
         cpp_adapter->get_handler()->endUnit(localname, prefix, URI);
 
     }
-#if 0
-    /**
-     * end_function
-     * @param context a srcSAX context
-     *
-     * Callback. Forwards C API end_function to C++ API srcSAXHandler endFunction.
-     */
-    static void end_function(struct srcsax_context* context) {
 
-        cppCallbackAdapter* cpp_adapter = (cppCallbackAdapter*)context->data;
-
-
-    }
-#endif
     /**
      * end_element
      * @param context a srcSAX context
