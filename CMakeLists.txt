@@ -1,7 +1,7 @@
 ##
 #  CMakeLists.txt
 #
-#  Copyright (C) 2014-2024 srcML, LLC.  (www.srcML.org)
+#  Copyright (C) 2014-2026 srcML, LLC.  (www.srcML.org)
 #
 #  This file is part of the srcSAX.
 #
@@ -19,7 +19,7 @@
 #  along with the srcSAX; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.28)
 project(srcSAX)
 
 enable_testing()
