@@ -141,7 +141,7 @@ public:
      * startDocument
      *
      * SAX handler function for start of document.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void startDocument() {}
 
@@ -149,7 +149,7 @@ public:
      * endDocument
      *
      * SAX handler function for end of document.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void endDocument() {}
 
@@ -164,7 +164,7 @@ public:
      * @param attributes list of attributes
      *
      * SAX handler function for start of the root element.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void startRoot(const char* localname, const char* prefix, const char* URI,
                            int num_namespaces, const struct srcsax_namespace* namespaces, int num_attributes,
@@ -181,7 +181,7 @@ public:
      * @param attributes list of attributes
      *
      * SAX handler function for start of an unit.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void startUnit(const char* localname, const char* prefix, const char* URI,
                            int num_namespaces, const struct srcsax_namespace* namespaces, int num_attributes,
@@ -198,7 +198,7 @@ public:
      * @param attributes list of attributes
      *
      * SAX handler function for start of an element.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void startElement(const char* localname, const char* prefix, const char* URI,
                                 int num_namespaces, const struct srcsax_namespace* namespaces, int num_attributes,
@@ -211,7 +211,7 @@ public:
      * @param URI the namespace of tag
      *
      * SAX handler function for end of the root element.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void endRoot(const char* localname, const char* prefix, const char* URI) {}
 
@@ -222,7 +222,7 @@ public:
      * @param URI the namespace of tag
      *
      * SAX handler function for end of an unit.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void endUnit(const char* localname, const char* prefix, const char* URI) {}
 
@@ -233,7 +233,7 @@ public:
      * @param URI the namespace of tag
      *
      * SAX handler function for end of an element.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void endElement(const char* localname, const char* prefix, const char* URI) {}
 
@@ -243,7 +243,7 @@ public:
      * @param len number of characters
      *
      * SAX handler function for character handling at the root level.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void charactersRoot(const char* ch, int len) {}
 
@@ -253,7 +253,7 @@ public:
      * @param len number of characters
      *
      * SAX handler function for character handling within a unit.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void charactersUnit(const char* ch, int len) {}
 
@@ -268,7 +268,7 @@ public:
      * @param attributes list of attributes\
      *
      * SAX handler function for a meta tags.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void metaTag(const char* localname, const char* prefix, const char* URI,
                            int num_namespaces, const struct srcsax_namespace* namespaces, int num_attributes,
@@ -279,7 +279,7 @@ public:
      * @param value the comment content
      *
      * A comment has been parsed.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void comment(const char* value) {}
 
@@ -289,7 +289,7 @@ public:
      * @param len the block length
      *
      * Called when a pcdata block has been parsed.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void cdataBlock(const char* value, int len) {}
 
@@ -299,7 +299,7 @@ public:
      * @param data the processing instruction data.
      *
      * Called when a processing instruction has been parsed.
-     * Overide for desired behaviour.
+     * Override for desired behaviour.
      */
     virtual void processingInstruction(const char* target, const char* data) {}
 
