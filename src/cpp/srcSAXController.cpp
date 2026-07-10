@@ -278,25 +278,24 @@ void srcSAXController::enable_processingInstruction(bool enable) {
  */
 void srcSAXController::parse(srcSAXHandler* handler) {
 
-    handler->set_controller(this);
 
     cppCallbackAdapter adapter(handler);
     context->data = &adapter;
+
     srcsax_handler sax_handler = cppCallbackAdapter::factory();
     context->handler = &sax_handler;
+
+    handler->set_context(context);
 
     int status = srcsax_parse(context);
 
     context->data = 0;
 
     if(status != 0) {
-
         auto ep = xmlCtxtGetLastError(context->libxml2_context);
-
         size_t str_length = strlen(ep->message);
         ep->message[str_length - 1] = '\0';
         SAXError error = { std::string((const char*)ep->message), ep->code };
-
         throw error;
     }
 

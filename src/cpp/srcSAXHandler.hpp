@@ -36,27 +36,8 @@
  */
 class srcSAXHandler {
 
-private:
-
-    /** Controller for parser */
-    srcSAXController* controller;
-
-protected:
-
-    /** is the document an archive */
-    bool is_archive;
-
-    /** the current unit count */
-    int unit_count;
-
-    /** open srcML element stack */
-    std::vector<std::string> element_stack;
-
-    /** the xml documents encoding */
-    const char* encoding;
-
 public:
-    static const srcsax_attribute*  find_attribute(int num_attributes, const struct srcsax_attribute* attributes, const char* name) {
+    static const srcsax_attribute* find_attribute(int num_attributes, const struct srcsax_attribute* attributes, const char* name) {
         if(attributes == nullptr) return nullptr;
 
         const struct srcsax_attribute* end_pos = attributes + num_attributes;
@@ -78,18 +59,7 @@ public:
      *
      * Default constructor default values to everything
      */
-    srcSAXHandler() : controller(0), is_archive(false), unit_count(0), encoding(0) {}
-
-    /**
-     * set_controller
-     * @param controller pointer to control class
-     *
-     * Used by srcSAXController to provide access to self
-     * for such things as disabeling sax parsing.
-     */
-    void set_controller(srcSAXController* controller) {
-        this->controller = controller;
-    }
+    srcSAXHandler(struct srcsax_context* context = nullptr) : is_archive(false), unit_count(0), encoding(0), context(context) {}
 
     /**
      * increment_unit_count
@@ -110,13 +80,14 @@ public:
     }
 
     /**
-     * get_controller
+     * set_context
+     * @param context underlying srcsax context
      *
-     * Get the control handler.
+     * Set context (used for stopping).
      */
-    srcSAXController& get_controller() {
-        return *controller;
-    }
+    void set_context(struct srcsax_context* context) {
+        this->context = context;
+    } 
 
     /**
      * stop_parser
@@ -124,7 +95,8 @@ public:
      * Stop the srcML parser.
      */
     void stop_parser() {
-        srcsax_stop_parser(controller->getContext());
+        if(!context) return;
+        srcsax_stop_parser(context);
     } 
 
     /**
@@ -319,6 +291,24 @@ public:
     virtual void processingInstruction(const char* target, const char* data) {}
 
 #pragma GCC diagnostic pop
+
+private:
+protected:
+
+    /** is the document an archive */
+    bool is_archive;
+
+    /** the current unit count */
+    int unit_count;
+
+    /** open srcML element stack */
+    std::vector<std::string> element_stack;
+
+    /** the xml documents encoding */
+    const char* encoding;
+
+    /** internal srcsax_context */
+    struct srcsax_context* context;
 
 };
 
