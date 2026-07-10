@@ -18,6 +18,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#ifndef INCLUDED_CPP_CALLBACK_ADAPTER_HPP
+#define INCLUDED_CPP_CALLBACK_ADAPTER_HPP
+
 #include <stack>
 
 /**
@@ -358,3 +361,5 @@ private:
     std::stack<srcSAXHandler*> handlers;
 
 };
+
+#endif

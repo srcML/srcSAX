@@ -29,6 +29,8 @@
 #include <algorithm>
 #include <cstring>
 
+class cppCallbackAdapter;
+
 /**
  * srcSAXHandler
  *
@@ -78,6 +80,17 @@ public:
     std::vector<std::string>& get_stack() {
         return element_stack;
     }
+
+    /**
+     * get_adapter
+     * @param adapter get underlying c -> cpp adapter
+     *
+     * Set adapter (used for stopping).
+     */
+    cppCallbackAdapter* get_adapter() {
+        if(!context) throw std::string("srcsax context not set");
+        return (cppCallbackAdapter*)context->data;
+    } 
 
     /**
      * set_context
