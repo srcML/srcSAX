@@ -134,9 +134,6 @@ public:
         this->is_archive = is_archive;
     }
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
-
     /**
      * startDocument
      *
@@ -166,9 +163,9 @@ public:
      * SAX handler function for start of the root element.
      * Override for desired behaviour.
      */
-    virtual void startRoot(const char* localname, const char* prefix, const char* URI,
-                           int num_namespaces, const struct srcsax_namespace* namespaces, int num_attributes,
-                           const struct srcsax_attribute* attributes) {}
+    virtual void startRoot(const char* localname [[maybe_unused]], const char* prefix [[maybe_unused]], const char* URI [[maybe_unused]],
+                           int num_namespaces [[maybe_unused]], const struct srcsax_namespace* namespaces [[maybe_unused]], int num_attributes [[maybe_unused]],
+                           const struct srcsax_attribute* attributes [[maybe_unused]]) {}
 
     /**
      * startUnit
@@ -183,9 +180,9 @@ public:
      * SAX handler function for start of an unit.
      * Override for desired behaviour.
      */
-    virtual void startUnit(const char* localname, const char* prefix, const char* URI,
-                           int num_namespaces, const struct srcsax_namespace* namespaces, int num_attributes,
-                           const struct srcsax_attribute* attributes) {}
+    virtual void startUnit(const char* localname [[maybe_unused]], const char* prefix [[maybe_unused]], const char* URI [[maybe_unused]],
+                           int num_namespaces [[maybe_unused]], const struct srcsax_namespace* namespaces [[maybe_unused]], int num_attributes [[maybe_unused]],
+                           const struct srcsax_attribute* attributes [[maybe_unused]]) {}
 
     /**
      * startElement
@@ -200,9 +197,9 @@ public:
      * SAX handler function for start of an element.
      * Override for desired behaviour.
      */
-    virtual void startElement(const char* localname, const char* prefix, const char* URI,
-                                int num_namespaces, const struct srcsax_namespace* namespaces, int num_attributes,
-                                const struct srcsax_attribute* attributes) {}
+    virtual void startElement(const char* localname [[maybe_unused]], const char* prefix [[maybe_unused]], const char* URI [[maybe_unused]],
+                                int num_namespaces [[maybe_unused]], const struct srcsax_namespace* namespaces [[maybe_unused]], int num_attributes [[maybe_unused]],
+                                const struct srcsax_attribute* attributes [[maybe_unused]]) {}
 
     /**
      * endRoot
@@ -270,9 +267,9 @@ public:
      * SAX handler function for a meta tags.
      * Override for desired behaviour.
      */
-    virtual void metaTag(const char* localname, const char* prefix, const char* URI,
-                           int num_namespaces, const struct srcsax_namespace* namespaces, int num_attributes,
-                           const struct srcsax_attribute* attributes) {}
+    virtual void metaTag(const char* localname [[maybe_unused]], const char* prefix [[maybe_unused]], const char* URI [[maybe_unused]],
+                           int num_namespaces [[maybe_unused]], const struct srcsax_namespace* namespaces [[maybe_unused]], int num_attributes [[maybe_unused]],
+                           const struct srcsax_attribute* attributes [[maybe_unused]]) {}
 
     /**
      * comment
@@ -302,8 +299,6 @@ public:
      * Override for desired behaviour.
      */
     virtual void processingInstruction(const char* target, const char* data) {}
-
-#pragma GCC diagnostic pop
 
 private:
 protected:
