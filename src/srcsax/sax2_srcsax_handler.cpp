@@ -55,9 +55,6 @@ xmlSAXHandler srcsax_sax2_factory() {
     return sax;
 }
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
-
 /**
  * libxml2_namespaces2srcsax_namespaces
  * @param number_namespaces the number of namespaces
@@ -1019,5 +1016,3 @@ void processing_instruction(void* ctx, const xmlChar* target, const xmlChar* dat
 #endif
 
 }
-
-#pragma GCC diagnostic pop

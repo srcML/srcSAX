@@ -26,9 +26,6 @@
 
 #include <string>
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
-
 /**
  * srcSAXController
  * @param filename name of a file
