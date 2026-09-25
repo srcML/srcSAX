@@ -1,20 +1,11 @@
+// SPDX-License-Identifier: GPL-3.0-only
 /**
- * @file nameCheck.cpp
+ * @file name_collector.cpp
  *
+ * @copyright Copyright (C) 2023-2026 srcML, LLC. (www.srcML.org)
  *
- *To Compile:
- *clang++ nameCheck.cpp  -I /usr/local/include/srcsax -lsrcsax -o nameCheck
- *
- *You will need to replace -I with location of srcSAX includes
- ** -I /usr/local/include/srcsax
- *
- *Need to build srcSAX:
- *First install libxml2 - via brew
- *Then (in srcSAX folder):
- *cmake CMakeLists.txt
- *make
- *sudo make install
-*/
+ * This file is part of the srcML Infrastructure.
+ */
 
 #include "name_collector_handler.hpp"
 #include <srcSAXController.hpp>

@@ -1,3 +1,12 @@
+## SPDX-License-Identifier: GPL-3.0-only
+#
+# @file CMakeLists.txt
+#
+# @copyright Copyright (C) 2015-2026 srcML, LLC. (www.srcML.org)
+#
+# This file is part of the srcML Infrastructure.
+#
+
 file(GLOB HANDLER_SOURCE srcsax/*.cpp cpp/*.cpp)
 file(GLOB HANDLER_INCLUDE srcsax/*.h srcsax/*.hpp cpp/*.hpp)
 

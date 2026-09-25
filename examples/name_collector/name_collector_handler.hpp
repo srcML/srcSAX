@@ -1,7 +1,12 @@
+// SPDX-License-Identifier: GPL-3.0-only
 /**
- * @file nameColloctorHandler.hpp
+ * @file name_collector_handler.hpp
  *
+ * @copyright Copyright (C) 2023-2026 srcML, LLC. (www.srcML.org)
+ *
+ * This file is part of the srcML Infrastructure.
  */
+
 
 #ifndef INCLUDED_NAME_COLLECTOR_HANDLER_HPP
 #define INCLUDED_NAME_COLLECTOR_HANDLER_HPP
@@ -11,7 +16,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
 
 /**
  * name_collector_handler
