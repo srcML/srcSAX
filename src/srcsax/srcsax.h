@@ -18,6 +18,14 @@
 extern "C" {
 #endif
 
+/* Function export macro */
+#if defined(WIN32) && !defined(__MINGW32__)
+#define SRCSAX_EXPORT __declspec(dllexport)
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+#else
+#define SRCSAX_EXPORT
+#endif
 /**
  * srcsax_context
  *
@@ -66,22 +74,22 @@ struct srcsax_context {
 };
 
 /* srcSAX context creation/open functions */
-struct srcsax_context* srcsax_create_context_filename(const char* filename, const char* encoding);
-struct srcsax_context* srcsax_create_context_memory(const char* buffer, size_t buffer_size, const char* encoding);
-struct srcsax_context* srcsax_create_context_FILE(FILE * srcml_file, const char* encoding);
-struct srcsax_context* srcsax_create_context_fd(int srcml_fd, const char* encoding);
-struct srcsax_context* srcsax_create_context_io(void* srcml_context, int (*read_callback)(void* context, char* buffer, int len), int (*close_callback)(void* context), const char* encoding);
-struct srcsax_context* srcsax_create_context_parser_input_buffer(xmlParserInputBufferPtr input);
+SRCSAX_EXPORT struct srcsax_context* srcsax_create_context_filename(const char* filename, const char* encoding);
+SRCSAX_EXPORT struct srcsax_context* srcsax_create_context_memory(const char* buffer, size_t buffer_size, const char* encoding);
+SRCSAX_EXPORT struct srcsax_context* srcsax_create_context_FILE(FILE * srcml_file, const char* encoding);
+SRCSAX_EXPORT struct srcsax_context* srcsax_create_context_fd(int srcml_fd, const char* encoding);
+SRCSAX_EXPORT struct srcsax_context* srcsax_create_context_io(void* srcml_context, int (*read_callback)(void* context, char* buffer, int len), int (*close_callback)(void* context), const char* encoding);
+SRCSAX_EXPORT struct srcsax_context* srcsax_create_context_parser_input_buffer(xmlParserInputBufferPtr input);
 
 /* srcSAX free function */
-void srcsax_free_context(struct srcsax_context* context);
+SRCSAX_EXPORT void srcsax_free_context(struct srcsax_context* context);
 
 /* srcSAX parse function */
-int srcsax_parse(struct srcsax_context* context);
-int srcsax_parse_handler(struct srcsax_context* context, struct srcsax_handler* handler);
+SRCSAX_EXPORT int srcsax_parse(struct srcsax_context* context);
+SRCSAX_EXPORT int srcsax_parse_handler(struct srcsax_context* context, struct srcsax_handler* handler);
 
 /* srcSAX terminate parse function */
-void srcsax_stop_parser(struct srcsax_context* context);
+SRCSAX_EXPORT void srcsax_stop_parser(struct srcsax_context* context);
 
 #ifdef __cplusplus
 }
