@@ -12,7 +12,7 @@ get_filename_component(SRCSAX_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
 get_filename_component(SRCSAX_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR} DIRECTORY)
 
 # Compiler options
-add_definitions("-std=c++11")
+add_definitions("-std=c++20")
 
 set(SRCSAX_INCLUDE_DIR ${SRCSAX_SOURCE_DIR}/src/srcsax
                        ${SRCSAX_SOURCE_DIR}/src/cpp

@@ -7,7 +7,4 @@
 # This file is part of the srcML Infrastructure.
 #
 
-if(NOT WIN32)
-set(CMAKE_INSTALL_PREFIX "/usr/local")
-endif()
-
+include(GNUInstallDirs)

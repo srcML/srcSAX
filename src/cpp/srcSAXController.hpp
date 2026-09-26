@@ -39,7 +39,7 @@ struct SAXError {
  * Provides execution of sax with
  * given hooks.
  */
-class srcSAXController {
+class SRCSAX_EXPORT srcSAXController {
 
 private :
 

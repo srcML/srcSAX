@@ -21,8 +21,6 @@ extern "C" {
 /* Function export macro */
 #if defined(WIN32) && !defined(__MINGW32__)
 #define SRCSAX_EXPORT __declspec(dllexport)
-#include <BaseTsd.h>
-typedef SSIZE_T ssize_t;
 #else
 #define SRCSAX_EXPORT
 #endif
