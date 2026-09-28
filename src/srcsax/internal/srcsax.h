@@ -10,7 +10,7 @@
 #ifndef INCLUDED_SRCSAX_H
 #define INCLUDED_SRCSAX_H
 
-#include <srcsax_handler.h>
+#include <internal/srcsax_handler.h>
 
 #include <libxml/parser.h>
 

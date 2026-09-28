@@ -8,7 +8,9 @@
 #
 
 file(GLOB HANDLER_SOURCE srcsax/*.cpp cpp/*.cpp)
-file(GLOB HANDLER_INCLUDE srcsax/*.h srcsax/*.hpp cpp/*.hpp)
+file(GLOB HANDLER_INCLUDE srcsax/*.hpp cpp/*.hpp)
+
+file(GLOB HANDLER_INTERNAL_INCLUDE srcsax/internal/*.h)
 
 file(GLOB WINDOWS_SOURCE windows/*.cpp)
 file(GLOB WINDOWS_INCLUDE windows/*.hpp)
@@ -20,7 +22,7 @@ file(GLOB WINDOWS_INCLUDE windows/*.hpp)
 # 
 macro(build_lib LIB_NAME LIB_TYPE)
 
-    add_library(${LIB_NAME} ${LIB_TYPE} ${HANDLER_SOURCE} ${HANDLER_INCLUDE} ${WINDOWS_SOURCE} ${WINDOWS_INCLUDE})
+    add_library(${LIB_NAME} ${LIB_TYPE} ${HANDLER_SOURCE} ${HANDLER_INCLUDE} ${HANDLER_INTERNAL_INCLUDE} ${WINDOWS_SOURCE} ${WINDOWS_INCLUDE})
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
     if("${LIB_TYPE}" STREQUAL "STATIC")
@@ -50,3 +52,4 @@ install(TARGETS srcsax_shared srcsax_static
         ARCHIVE DESTINATION ${CMAKE_INSTALL_BINDIR}
        )
 install(FILES ${HANDLER_INCLUDE} DESTINATION include/srcsax)
+install(FILES ${HANDLER_INTERNAL_INCLUDE} DESTINATION include/srcsax/internal)

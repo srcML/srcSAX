@@ -11,7 +11,7 @@
 #include <srcsax_handler_test.hpp>
 #include <cppCallbackAdapter.hpp>
 
-#include <srcsax.h>
+#include <internal/srcsax.h>
 
 #include <stdio.h>
 #include <string.h>

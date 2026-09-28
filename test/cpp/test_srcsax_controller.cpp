@@ -11,7 +11,7 @@
 #include <srcSAXHandler.hpp>
 #include <cppCallbackAdapter.hpp>
 
-#include <srcsax.h>
+#include <internal/srcsax.h>
 
 #include <stdio.h>
 #include <fcntl.h>

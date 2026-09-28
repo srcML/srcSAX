@@ -10,7 +10,7 @@
 #include <sax2_srcsax_handler.hpp>
 #include <srcsax_handler_test.hpp>
 
-#include <srcsax.h>
+#include <internal/srcsax.h>
 
 #include <stdio.h>
 #include <string.h>

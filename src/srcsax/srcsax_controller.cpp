@@ -6,7 +6,7 @@
  *
  * This file is part of the srcML Infrastructure.
  */
-#include <srcsax.h>
+#include <internal/srcsax.h>
 #include <sax2_srcsax_handler.hpp>
 
 #include <libxml/parserInternals.h>

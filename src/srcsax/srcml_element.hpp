@@ -17,7 +17,7 @@
 #define STRDUP _strdup
 #endif
 
-#include <srcsax.h>
+#include <internal/srcsax.h>
 
 #include <libxml/parser.h>
 

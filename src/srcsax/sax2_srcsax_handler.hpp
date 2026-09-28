@@ -11,7 +11,7 @@
 #define INCLUDED_SAX2_SRCSAX_HANDLER_HPP
 
 #include <srcml_element.hpp>
-#include <srcsax.h>
+#include <internal/srcsax.h>
 
 #include <libxml/parser.h>
 

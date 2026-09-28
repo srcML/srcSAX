@@ -7,7 +7,7 @@
  * This file is part of the srcML Infrastructure.
  */
 
-#include <srcsax.h>
+#include <internal/srcsax.h>
 #include <srcsax_handler_test.hpp>
 
 #include <stdio.h>
