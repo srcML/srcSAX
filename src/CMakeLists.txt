@@ -47,7 +47,7 @@ foreach(kind IN ITEMS static shared)
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cpp>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/srcsax>)
     target_link_libraries(srcsax_${kind} PUBLIC LibXml2::LibXml2)
-    target_compile_features(srcsax_${kind} PUBLIC cxx_std_20)
+    target_compile_features(srcsax_${kind} PUBLIC cxx_std_17)
 endforeach()
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/../CMake/srcsax_install.cmake)
