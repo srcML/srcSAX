@@ -437,6 +437,11 @@ void srcsax_stop_parser(struct srcsax_context* context) {
     ctxt->sax->comment = 0;
     ctxt->sax->ignorableWhitespace = 0;
 
+    // Keep input-buffer ownership with srcSAX (or its caller). LibXml2 may
+    // free the attached buffer when stopping, before srcsax_free_context().
+    if (ctxt->input)
+        ctxt->input->buf = nullptr;
+
     xmlStopParser(ctxt);
     
 }

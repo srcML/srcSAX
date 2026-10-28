@@ -596,6 +596,21 @@ int main() {
 
   }
 
+  // Stopping must preserve a caller-owned input buffer.
+  {
+
+    const char * srcml_buffer = "<unit/>";
+    xmlParserInputBufferPtr input = xmlParserInputBufferCreateMem(srcml_buffer, strlen(srcml_buffer), XML_CHAR_ENCODING_NONE);
+    assert(input != 0);
+    srcsax_context * context = srcsax_create_context_parser_input_buffer(input);
+    assert(context != 0);
+
+    srcsax_stop_parser(context);
+    srcsax_free_context(context);
+    xmlFreeParserInputBuffer(input);
+
+  }
+
   return 0;
 
 }
