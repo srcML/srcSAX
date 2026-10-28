@@ -29,7 +29,7 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
         set_target_properties(${LIB_NAME} PROPERTIES OUTPUT_NAME libsrcsax)
     endif()
 elseif(APPLE)
-    set_target_properties(${LIB_NAME} PROPERTIES OUTPUT_NAME srcsax MACOSX_RPATH OFF)
+    set_target_properties(${LIB_NAME} PROPERTIES OUTPUT_NAME srcsax MACOSX_RPATH ON)
 else()
     set_target_properties(${LIB_NAME} PROPERTIES OUTPUT_NAME srcsax)
 endif()
@@ -39,14 +39,15 @@ endmacro()
 find_package(LibXml2 REQUIRED)
 
 build_lib(srcsax_static STATIC)
-target_link_libraries(srcsax_static PRIVATE LibXml2::LibXml2)
-
 build_lib(srcsax_shared SHARED)
-target_link_libraries(srcsax_shared PRIVATE LibXml2::LibXml2)
 
-install(TARGETS srcsax_shared srcsax_static 
-        RUNTIME DESTINATION bin
-        LIBRARY DESTINATION ${CMAKE_INSTALL_BINDIR}
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_BINDIR}
-       )
-install(FILES ${HANDLER_INCLUDE} DESTINATION include/srcsax)
+foreach(kind IN ITEMS static shared)
+    target_include_directories(srcsax_${kind} PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/srcsax>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cpp>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/srcsax>)
+    target_link_libraries(srcsax_${kind} PUBLIC LibXml2::LibXml2)
+    target_compile_features(srcsax_${kind} PUBLIC cxx_std_20)
+endforeach()
+
+include(${CMAKE_CURRENT_SOURCE_DIR}/../CMake/srcsax_install.cmake)

@@ -7,10 +7,15 @@
 # This file is part of the srcML Infrastructure.
 #
 
+cmake_minimum_required(VERSION 3.28)
+project(name_collector LANGUAGES CXX)
+
 file(GLOB NAME_COLLECTOR_COPY_SOURCE *.cpp)
 file(GLOB NAME_COLLECTOR_COPY_HEADER *.hpp)
 
-find_package(LibXml2 REQUIRED)
+# Use the installed srcSAX package; shared is the default.
+# For static linking: find_package(srcSAX REQUIRED COMPONENTS static)
+find_package(srcSAX REQUIRED)
 
 add_executable(name_collector ${NAME_COLLECTOR_COPY_SOURCE} ${NAME_COLLECTOR_COPY_HEADER})
-target_link_libraries(name_collector srcsax_static LibXml2::LibXml2)
+target_link_libraries(name_collector PRIVATE srcSAX::LibsrcSAX)

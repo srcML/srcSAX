@@ -19,10 +19,15 @@
 #  along with the srcSAX; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+cmake_minimum_required(VERSION 3.28)
+project(print_callbacks LANGUAGES CXX)
+
 file(GLOB PRINT_CALLBACKS_SOURCE *.cpp)
 file(GLOB PRINT_CALLBACKS_HEADER *.hpp)
 
-find_package(LibXml2 REQUIRED)
+# Use the installed srcSAX package; shared is the default.
+# For static linking: find_package(srcSAX REQUIRED COMPONENTS static)
+find_package(srcSAX REQUIRED)
 
 add_executable(print_callbacks ${PRINT_CALLBACKS_SOURCE} ${PRINT_CALLBACKS_HEADER})
-target_link_libraries(print_callbacks srcsax_static LibXml2::LibXml2)
+target_link_libraries(print_callbacks PRIVATE srcSAX::LibsrcSAX)

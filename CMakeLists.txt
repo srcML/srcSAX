@@ -10,6 +10,8 @@
 cmake_minimum_required(VERSION 3.28)
 project(srcSAX)
 
+include(GNUInstallDirs)
+
 enable_testing()
 
 # project options

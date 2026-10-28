@@ -7,10 +7,15 @@
 # This file is part of the srcML Infrastructure.
 #
 
+cmake_minimum_required(VERSION 3.28)
+project(identity_copy LANGUAGES CXX)
+
 file(GLOB IDENTITY_COPY_SOURCE *.cpp)
 file(GLOB IDENTITY_COPY_HEADER *.hpp)
 
-find_package(LibXml2 REQUIRED)
+# Use the installed srcSAX package; shared is the default.
+# For static linking: find_package(srcSAX REQUIRED COMPONENTS static)
+find_package(srcSAX REQUIRED)
 
 add_executable(identity_copy ${IDENTITY_COPY_SOURCE} ${IDENTITY_COPY_HEADER})
-target_link_libraries(identity_copy srcsax_static LibXml2::LibXml2)
+target_link_libraries(identity_copy PRIVATE srcSAX::LibsrcSAX)

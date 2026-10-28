@@ -7,6 +7,11 @@
 # This file is part of the srcML Infrastructure.
 #
 
+cmake_minimum_required(VERSION 3.28)
+project(srcSAX-Examples LANGUAGES CXX)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 add_subdirectory(print_callbacks)
 add_subdirectory(identity_copy)
 add_subdirectory(element_count)

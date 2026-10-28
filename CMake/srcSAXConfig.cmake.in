@@ -1,0 +1,38 @@
+@PACKAGE_INIT@
+
+cmake_minimum_required(VERSION 3.11)
+
+# Like srcML, default to shared and allow exactly one library component.
+set(srcSAX_library_component shared)
+foreach(component IN LISTS ${CMAKE_FIND_PACKAGE_NAME}_FIND_COMPONENTS)
+    if(NOT component STREQUAL "static" AND NOT component STREQUAL "shared")
+        set(${CMAKE_FIND_PACKAGE_NAME}_NOT_FOUND_MESSAGE
+            "srcSAX does not recognize component `${component}`.")
+        set(${CMAKE_FIND_PACKAGE_NAME}_FOUND FALSE)
+        return()
+    endif()
+    set(srcSAX_library_component "${component}")
+endforeach()
+if("static" IN_LIST ${CMAKE_FIND_PACKAGE_NAME}_FIND_COMPONENTS AND
+   "shared" IN_LIST ${CMAKE_FIND_PACKAGE_NAME}_FIND_COMPONENTS)
+    set(${CMAKE_FIND_PACKAGE_NAME}_NOT_FOUND_MESSAGE
+        "srcSAX components `static` and `shared` are mutually exclusive.")
+    set(${CMAKE_FIND_PACKAGE_NAME}_FOUND FALSE)
+    return()
+endif()
+
+set(srcSAX_targets "${CMAKE_CURRENT_LIST_DIR}/srcSAX-${srcSAX_library_component}-targets.cmake")
+if(NOT EXISTS "${srcSAX_targets}")
+    set(${CMAKE_FIND_PACKAGE_NAME}_NOT_FOUND_MESSAGE
+        "srcSAX `${srcSAX_library_component}` libraries were requested but not found.")
+    set(${CMAKE_FIND_PACKAGE_NAME}_FOUND FALSE)
+    return()
+endif()
+
+include(CMakeFindDependencyMacro)
+find_dependency(LibXml2)
+include("${srcSAX_targets}")
+set(srcSAX_${srcSAX_library_component}_FOUND TRUE)
+if(NOT TARGET srcSAX::LibsrcSAX)
+    add_library(srcSAX::LibsrcSAX ALIAS srcSAX::srcsax_${srcSAX_library_component})
+endif()
