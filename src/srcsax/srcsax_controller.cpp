@@ -24,42 +24,24 @@ static void libxml_error(void* /*ctx*/, const char* /*msg*/, ...) {}
 static xmlParserCtxtPtr srcsax_create_parser_context(xmlParserInputBufferPtr buffer_input);
 
 #ifdef LIBXML2_NEW_BUFFER
-struct _xmlBuf {
-    xmlChar *content;           /* The buffer content UTF8 */
-    unsigned int compat_use;    /* for binary compatibility */
-    unsigned int compat_size;   /* for binary compatibility */
-    xmlBufferAllocationScheme alloc; /* The realloc method */
-    xmlChar *contentIO;         /* in IO mode we may have a different base */
-    size_t use;                 /* The buffer size used */
-    size_t size;                /* The buffer size */
-    xmlBufferPtr buffer;        /* wrapper for an old buffer */
-    int error;                  /* an error code if a failure occured */
-};
-
-#define _CHECK_COMPAT(buf)                      \
-    if (buf->size != (size_t) buf->compat_size) \
-        if (buf->compat_size < INT_MAX)         \
-            buf->size = buf->compat_size;       \
-    if (buf->use != (size_t) buf->compat_use)   \
-        if (buf->compat_use < INT_MAX)          \
-            buf->use = buf->compat_use;
-
 /**
  * xmlBufResetInput
  * @param buf XML buffer
  * @param input XML parser input
  *
- * Function is taken from libxml2.
+ * Use public buffer accessors so this works across LibXml2 versions.
  *
  * @returns 0 on success and -1 on error.
  */
 static int
 _xmlBufResetInput(xmlBuf* buf, xmlParserInputPtr input) {
-    if ((input == NULL) || (buf == NULL) || (buf->error))
+    if ((input == NULL) || (buf == NULL))
         return(-1);
-    _CHECK_COMPAT(buf)
-        input->base = input->cur = buf->content;
-    input->end = &buf->content[buf->use];
+    xmlChar* content = xmlBufContent(buf);
+    if (content == NULL)
+        return(-1);
+    input->base = input->cur = content;
+    input->end = content + xmlBufUse(buf);
     return(0);
 
 }
