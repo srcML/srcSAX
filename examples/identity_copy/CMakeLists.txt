@@ -15,7 +15,9 @@ file(GLOB IDENTITY_COPY_HEADER *.hpp)
 
 # Use the installed srcSAX package; shared is the default.
 # For static linking: find_package(srcSAX REQUIRED COMPONENTS static)
-find_package(srcSAX REQUIRED)
+if(NOT TARGET srcSAX::LibsrcSAX)
+    find_package(srcSAX REQUIRED)
+endif()
 
 add_executable(identity_copy ${IDENTITY_COPY_SOURCE} ${IDENTITY_COPY_HEADER})
 target_link_libraries(identity_copy PRIVATE srcSAX::LibsrcSAX)

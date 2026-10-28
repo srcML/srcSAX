@@ -15,7 +15,9 @@ file(GLOB ELEMENT_COUNT_HEADER *.hpp)
 
 # Use the installed srcSAX package; shared is the default.
 # For static linking: find_package(srcSAX REQUIRED COMPONENTS static)
-find_package(srcSAX REQUIRED)
+if(NOT TARGET srcSAX::LibsrcSAX)
+    find_package(srcSAX REQUIRED)
+endif()
 
 add_executable(element_count ${ELEMENT_COUNT_SOURCE} ${ELEMENT_COUNT_HEADER})
 target_link_libraries(element_count PRIVATE srcSAX::LibsrcSAX)

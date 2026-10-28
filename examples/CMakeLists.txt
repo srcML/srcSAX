@@ -12,6 +12,10 @@ project(srcSAX-Examples LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+if(TARGET srcsax_shared AND NOT TARGET srcSAX::LibsrcSAX)
+    add_library(srcSAX::LibsrcSAX ALIAS srcsax_shared)
+endif()
+
 add_subdirectory(print_callbacks)
 add_subdirectory(identity_copy)
 add_subdirectory(element_count)

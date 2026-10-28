@@ -15,7 +15,9 @@ file(GLOB NAME_COLLECTOR_COPY_HEADER *.hpp)
 
 # Use the installed srcSAX package; shared is the default.
 # For static linking: find_package(srcSAX REQUIRED COMPONENTS static)
-find_package(srcSAX REQUIRED)
+if(NOT TARGET srcSAX::LibsrcSAX)
+    find_package(srcSAX REQUIRED)
+endif()
 
 add_executable(name_collector ${NAME_COLLECTOR_COPY_SOURCE} ${NAME_COLLECTOR_COPY_HEADER})
 target_link_libraries(name_collector PRIVATE srcSAX::LibsrcSAX)
