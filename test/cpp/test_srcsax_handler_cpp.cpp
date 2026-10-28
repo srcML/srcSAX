@@ -42,7 +42,7 @@ int main() {
     cppCallbackAdapter cpp_adapter(&handler);
     srcsax_handler srcsax_sax = cppCallbackAdapter::factory();
 
-    srcsax_context context;
+    srcsax_context context{};
     context.data = &cpp_adapter;
     context.handler = &srcsax_sax;
 
@@ -138,7 +138,7 @@ int main() {
     cppCallbackAdapter cpp_adapter(&handler);
     srcsax_handler srcsax_sax = cppCallbackAdapter::factory();
 
-    srcsax_context context;
+    srcsax_context context{};
     context.data = &cpp_adapter;
     context.handler = &srcsax_sax;
 
@@ -195,7 +195,7 @@ int main() {
     cppCallbackAdapter cpp_adapter(&handler);
     srcsax_handler srcsax_sax = cppCallbackAdapter::factory();
 
-    srcsax_context context;
+    srcsax_context context{};
     context.data = &cpp_adapter;
     context.handler = &srcsax_sax;
 
@@ -263,7 +263,7 @@ int main() {
     cppCallbackAdapter cpp_adapter(&handler);
     srcsax_handler srcsax_sax = cppCallbackAdapter::factory();
 
-    srcsax_context context;
+    srcsax_context context{};
     context.data = &cpp_adapter;
     context.handler = &srcsax_sax;
 
